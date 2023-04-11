@@ -3,7 +3,7 @@ ini_set('max_execution_time', -1);
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Report extends MY_Controller
+class Report extends Admin_Controller
 {
 
 	public function __construct()

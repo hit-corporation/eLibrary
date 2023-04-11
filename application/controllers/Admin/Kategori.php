@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Kategori extends MY_Controller
+class Kategori extends Admin_Controller
 {
 
 	public function __construct()

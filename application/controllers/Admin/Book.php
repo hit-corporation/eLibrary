@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 require 'vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
-class Book extends MY_Controller
+class Book extends Admin_Controller
 {
 
 	public function __construct()
@@ -22,7 +22,7 @@ class Book extends MY_Controller
 	 */
 	public function index()
 	{
-		echo $this->template->render('index', [], 'admin');
+		$this->render('index');
 	}
 	
 	/**
@@ -67,7 +67,6 @@ class Book extends MY_Controller
 			'recordsTotal' => $this->db->count_all_results('books'),
 			'recordsFiltered' => $this->book_model->count_all($filters)
 		];
-
 
 		echo json_encode($response, JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_HEX_TAG);
 	}

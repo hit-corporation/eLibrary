@@ -91,7 +91,7 @@ class Order extends Admin_Controller {
         {
             $resp = ['errors' => $this->form_validation->error_array(), 'old' => $_POST];
             $this->session->set_flashdata('error', $resp);
-            redirect('order');
+            redirect('admin/order');
             return;
         }
 
@@ -147,13 +147,13 @@ class Order extends Admin_Controller {
         {
             $resp = ['message' => 'Data gagal di input !!!', 'old' => $_POST];
             $this->session->set_flashdata('error', $resp);
-            redirect('order');
+            redirect('admin/order');
             return;
         }
 
         $resp = ['message' => 'Data berhasil di input !!!'];
         $this->session->set_flashdata('success', $resp);
-        redirect('order/return_order');
+        redirect('admin/order/return_order');
     }
 
     /**
@@ -274,7 +274,7 @@ class Order extends Admin_Controller {
         $this->template->registerFunction('set_value', function($field, $value = NULL) {
             return set_value($field, $value);
         });
-        echo $this->template->render('return_order');
+        $this->render('return_order');
     }
 
 	/**
@@ -350,7 +350,7 @@ class Order extends Admin_Controller {
             return set_value($field, $value);
         });
 
-        echo $this->template->render('daily_order');
+        $this->render('daily_order');
 	}
 
 	/**

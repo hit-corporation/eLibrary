@@ -104,8 +104,8 @@
 
             <!-- Nav Item - Dashboard -->
             <li
-                class="nav-item <?=$CI->uri->segment(1) == 'dashboard' ? 'active' : '' ?>">
-                <a class="nav-link" href="<?=base_url('dashboard')?>">
+                class="nav-item <?=$CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'dashboard' ? 'active' : '' ?>">
+                <a class="nav-link" href="<?=base_url('admin/dashboard')?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -119,7 +119,7 @@
             </div> -->
 
             <!-- Nav Item - Pages Collapse Menu Pendaftaran-->
-            <li class="nav-item <?=$CI->uri->segment(1) == 'member' ? 'active' : '' ?>">
+            <li class="nav-item <?=$CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'member' ? 'active' : '' ?>">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBooks"
                     aria-expanded="true" aria-controls="collapseBooks">
                     <i class="fa-solid fa fa-user-plus"></i>
@@ -155,28 +155,28 @@
 
             <!-- Nav Item - Peminjaman -->
 			<li class="nav-item <?=($CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'order' && $CI->uri->segment(3) == null) ? 'active bg-dark-2' : '' ?>">
-                <a class="nav-link" href="<?=base_url('order')?>">
+                <a class="nav-link" href="<?=base_url('admin/order')?>">
                     <i class="fa fa-share-square" aria-hidden="true"></i>
                     <span>Peminjaman</span></a>
             </li>
 
 			<!-- Nav Item - Pengembalian -->
 			<li class="nav-item <?=($CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'order' && $CI->uri->segment(3) == 'return_order') ? 'active bg-dark-2' : '' ?>">
-                <a class="nav-link" href="<?=base_url('order/return_order')?>">
+                <a class="nav-link" href="<?=base_url('admin/order/return_order')?>">
                     <i class="fa fa-reply-all" aria-hidden="true"></i>
                     <span>Pengembalian</span></a>
             </li>
 
             <!-- Nav Item - Book -->
             <li class="nav-item <?=$CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'book' ? 'active bg-dark-2' : '' ?>">
-                <a class="nav-link" href="<?=base_url('book')?>">
+                <a class="nav-link" href="<?=base_url('admin/book')?>">
                     <i class="fa fa-book" aria-hidden="true"></i>
                     <span>Buku</span></a>
             </li>
 
 			<!-- Nav Item - Peminjaman buku harian -->
 			<li class="nav-item <?=($CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'order' && $CI->uri->segment(3) == 'daily_order') ? 'active bg-dark-2' : '' ?>">
-                <a class="nav-link" href="<?=base_url('order/daily_order')?>">
+                <a class="nav-link" href="<?=base_url('admin/order/daily_order')?>">
                     <i class="fa fa-clipboard-list" aria-hidden="true"></i>
                     <span>Peminjaman Buku Harian</span></a>
             </li>
@@ -188,7 +188,7 @@
 
 
 			<!-- Nav Item - Pages Collapse Menu Laporan-->
-            <li class="nav-item <?=$CI->uri->segment(1) == 'report' ? 'active' : '' ?>">
+            <li class="nav-item <?=$CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'report' ? 'active' : '' ?>">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLaporan"
                     aria-expanded="true" aria-controls="collapseLaporan">
                     <i class="fa fa-file" aria-hidden="true"></i>
@@ -199,17 +199,17 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
 
-                        <a class="collapse-item <?=$CI->uri->segment(2) == '' ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('report')?>">
+                        <a class="collapse-item <?=$CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == '' ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('admin/report')?>">
 							<i class="fa fa-file-alt" aria-hidden="true"> </i>
 							<span>Peminjaman</span>
 						</a>
                         
-						<a class="collapse-item <?=($CI->uri->segment(1) == 'report' && $CI->uri->segment(2) == 'book') ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('report/book')?>">
+						<a class="collapse-item <?=($CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'report' && $CI->uri->segment(3) == 'book') ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('admin/report/book')?>">
 							<i class="fa fa-file-alt" aria-hidden="true"> </i>
 							<span>Buku</span>
 						</a>
 						
-						<a class="collapse-item <?=($CI->uri->segment(1) == 'report' && $CI->uri->segment(2) == 'penalty') ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('report/penalty')?>">
+						<a class="collapse-item <?=($CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'report' && $CI->uri->segment(3) == 'penalty') ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('admin/report/penalty')?>">
 							<i class="fa fa-file-alt" aria-hidden="true"> </i>
 							<span>Denda</span>
 						</a>

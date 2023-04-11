@@ -1,6 +1,6 @@
 <?php
 
-class Setting extends MY_Controller {
+class Setting extends Admin_Controller {
 
     public function __construct() {
         parent::__construct();
