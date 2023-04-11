@@ -37,4 +37,5 @@ application/views/book/index copy.php
 application/session/
 assets/node_modules
 assets/img/books
-
+phinx.php
+application/config/database.php
