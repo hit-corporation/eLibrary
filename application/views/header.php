@@ -19,20 +19,20 @@
 	<link rel="profile" href="#">
 
     <!--Google Font-->
-    <link rel="stylesheet" href='assets/landing-pages/fonts/googleapis.css?family=Dosis:400,700,500|Nunito:300,400,600' />
+    <link rel="stylesheet" href='<?=base_url()?>assets/landing-pages/fonts/googleapis.css?family=Dosis:400,700,500|Nunito:300,400,600' />
 	<!-- Mobile specific meta -->
 	<meta name=viewport content="width=device-width, initial-scale=1">
 	<meta name="format-detection" content="telephone-no">
 
 	<!-- CSS files -->
-	<link rel="stylesheet" href="assets/landing-pages/css/plugins.css">
-	<link rel="stylesheet" href="assets/landing-pages/css/style.css">
+	<link rel="stylesheet" href="<?=base_url()?>assets/landing-pages/css/plugins.css">
+	<link rel="stylesheet" href="<?=base_url()?>assets/landing-pages/css/style.css">
 
 </head>
 <body>
 <!--preloading-->
 <div id="preloader">
-    <img class="logo" src="assets/landing-pages/images/logo1.png" alt="" width="100" height="100">
+    <img class="logo" src="<?=base_url()?>assets/landing-pages/images/logo1.png" alt="" width="100" height="100">
     <div id="status">
         <span></span>
         <span></span>
@@ -133,7 +133,7 @@
 							<span></span>
 						</div>
 				    </div>
-				    <a href="index-2.html"><img class="logo" src="assets/landing-pages/images/logo1.png" alt="" width="70" height="70"></a>
+				    <a href="index-2.html"><img class="logo" src="<?=base_url()?>assets/landing-pages/images/logo1.png" alt="" width="70" height="70"></a>
 			    </div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">

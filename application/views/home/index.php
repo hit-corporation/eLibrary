@@ -102,7 +102,7 @@
 		<div class="col-md-12">
 			<div class="title-hd">
 				<h2>Terbaru</h2>
-				<a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+				<a href="home/newest_book" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
 			</div>
 			<div class="tabs">
 				<ul class="tab-links">

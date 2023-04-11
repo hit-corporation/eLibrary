@@ -15,4 +15,10 @@ class Home extends MY_Controller {
 		$this->load->view('home/index');
 		$this->load->view('footer');
 	}
+
+	public function newest_book(){
+		$this->load->view('header');
+		$this->load->view('home/newest_book');
+		$this->load->view('footer');
+	}
 }
