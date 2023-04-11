@@ -1,0 +1,10 @@
+{
+    "actual_return": "2023-03-21 16:46:58",
+    "late_days": null,
+    "fines_amount": 10000,
+    "fines_period": "1 weeks",
+    "fines_total": "30000",
+    "fines_payment": "30000",
+    "notes": "",
+    "updated_at": "2023-03-21 16:46:58.284204"
+}

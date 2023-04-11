@@ -1,0 +1,20 @@
+JALANKAN MIGRASI
+vendor/bin/phinx migrate -e development 
+
+ROLEBACK MIGRASI
+vendor/bin/phinx rollback -e development
+
+ROLLBACK ALL
+vendor/bin/phinx rollback -e development -t 0
+
+MENJALANKAN SEEDER
+vendor/bin/phinx seed:run -e development
+
+MENJALANKAN MULTIPLE SEEDER
+vendor/bin/phinx seed:run -s RoleSeeder -s CategorySeeder -s PublisherSeeder -s UserSeeder -s MemberSeeder -s BookSeeder -s SettingSeeder -s StockSeeder
+
+RUN SERVER
+php -S localhost:8000
+
+MEMBUAT MIGRASI
+vendor/bin/phinx create MyNewMigration

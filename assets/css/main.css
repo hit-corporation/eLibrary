@@ -1,0 +1,8 @@
+.dataTables_length,
+.dataTables_filter {
+    display: none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
