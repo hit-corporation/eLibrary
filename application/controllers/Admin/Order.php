@@ -3,7 +3,7 @@
 use SebastianBergmann\Environment\Console;
 use SebastianBergmann\Type\NullType;
 
-class Order extends MY_Controller {
+class Order extends Admin_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -22,7 +22,7 @@ class Order extends MY_Controller {
         $this->template->registerFunction('set_value', function($field, $value = NULL) {
             return set_value($field, $value);
         });
-        echo $this->template->render('index');
+        $this->render('index');
 
     }
 
