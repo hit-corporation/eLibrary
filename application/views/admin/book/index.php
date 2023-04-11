@@ -346,7 +346,7 @@
     </div>
 </div>
 
-<?php $this->insert('book/modal_stock', ['book_id' => 14, 'is_readonly' => TRUE]) ?>
+<?php $this->insert('admin/book/modal_stock', ['book_id' => 14, 'is_readonly' => TRUE]) ?>
 
 <?php $this->stop() ?>
 
@@ -404,6 +404,6 @@
 
 <script src="<?=$this->e(base_url('assets/js/pages/book.js'))?>"></script>
 
-<?php $this->insert('book/modal_stock_js', ['is_readonly' => true]) ?>
+<?php $this->insert('admin/book/modal_stock_js', ['is_readonly' => true]) ?>
 
 <?php $this->stop() ?>
