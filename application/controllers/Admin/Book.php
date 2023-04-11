@@ -13,7 +13,6 @@ class Book extends MY_Controller
 		parent::__construct();
 		$this->load->model(['book_model', 'kategori_model', 'publisher_model']);
 		$this->load->library('form_validation');
-
 	}
 
 	/**
@@ -23,7 +22,7 @@ class Book extends MY_Controller
 	 */
 	public function index()
 	{
-		echo $this->template->render('index');
+		echo $this->template->render('index', [], 'admin');
 	}
 	
 	/**

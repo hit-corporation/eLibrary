@@ -11,10 +11,10 @@ class MY_Controller extends CI_Controller
     {
         parent::__construct();
 
-        if (!isset($_SESSION['user'])) {
-            redirect(base_url('login'));
-            return;
-        }
+        // if (!isset($_SESSION['user'])) {
+        //     redirect(base_url('login'));
+        //     return;
+        // }
 
         $this->template->registerFunction('base_url', function () {
             return base_url();
@@ -35,7 +35,8 @@ class Admin_Controller extends MY_Controller {
         parent::__construct();
     }
 
-    protected function render($page, $data = []) {
-        echo $this->template->render($page, $data);
+    protected function render($page, $data = [], $folder = NULL) {
+        $f = empty($folder) ? 'admin/'.$this->router->class : $folder;
+        echo $this->template->render($page, $data, $f);
     }
 }

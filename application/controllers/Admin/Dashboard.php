@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends MY_Controller {
+class Dashboard extends Admin_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model(['user_model', 'member_model', 'book_model', 'dashboard_model']);
@@ -22,7 +22,7 @@ class Dashboard extends MY_Controller {
 		$data['daily_borrow'] = $this->book_model->get_daily_borrow();
 
 		// MENGGUNAKAN TEMPLATE ENGINE PLATES
-		echo $this->template->render('index', $data);
+		$this->render('index', $data);
 	}
 
 	public function dashboard2(){
