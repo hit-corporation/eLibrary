@@ -259,15 +259,15 @@
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="sidebar">
 					<div class="searh-form">
-						<h4 class="sb-title">Search for movie</h4>
+						<h4 class="sb-title">Cari Buku</h4>
 						<form class="form-style-1" action="#">
 							<div class="row">
 								<div class="col-md-12 form-it">
-									<label>Movie name</label>
+									<label>Nama Buku</label>
 									<input type="text" placeholder="Enter keywords">
 								</div>
 								<div class="col-md-12 form-it">
-									<label>Genres & Subgenres</label>
+									<label>Kategori</label>
 									<div class="group-ip">
 										<select
 											name="skills" multiple="" class="ui fluid dropdown">
@@ -281,14 +281,14 @@
 									</div>	
 								</div>
 								<div class="col-md-12 form-it">
-									<label>Rating Range</label>
+									<label>Pengarang</label>
 									<select>
 									  <option value="range">-- Select the rating range below --</option>
 									  <option value="saab">-- Select the rating range below --</option>
 									</select>
 								</div>
 								<div class="col-md-12 form-it">
-									<label>Release Year</label>
+									<label>Tahun Terbit</label>
 									<div class="row">
 										<div class="col-md-6">
 											<select>
