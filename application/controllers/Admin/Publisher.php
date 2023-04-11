@@ -10,7 +10,7 @@ class Publisher extends Admin_Controller{
 
 	public function index(): void
 	{
-		echo $this->template->render('index');
+		$this->render('index');
 	}
 
     /**
