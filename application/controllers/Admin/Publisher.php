@@ -1,8 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Publisher extends Admin_Controller{
-	public function __construct(){
+class Publisher extends Admin_Controller {
+    
+	public function __construct() {
 		parent::__construct();
 		$this->load->model('publisher_model');
 		$this->load->library('form_validation');

@@ -7,7 +7,7 @@ const formSearch = document.forms['form-search'];
 const getAll = async () => {
     try
     {
-        const f = await fetch(BASE_URL + '/publisher/get_all');
+        const f = await fetch(BASE_URL + 'admin/publisher/get_all');
         const j = await f.json();
 
         return j;
@@ -27,7 +27,7 @@ const getAll = async () => {
         serverSide: true,
         processing: true,
         ajax: {
-            url: BASE_URL + '/publisher/get_all_paginated'
+            url: BASE_URL + 'admin/publisher/get_all_paginated'
         },
         pageLength: 10,
         columns: [
@@ -66,7 +66,7 @@ const getAll = async () => {
 	// store
     document.getElementById('btn-add').addEventListener('click', e => {
         form.reset();
-        form.action = BASE_URL + 'publisher/store';
+        form.action = BASE_URL + 'admin/publisher/store';
 
     });
 
@@ -103,7 +103,7 @@ const getAll = async () => {
 
             let row = tableMain.row($(e.target).parents('tr')[0]).data();
             loading();
-            window.location.href = BASE_URL + 'publisher/erase/' + row.id;
+            window.location.href = BASE_URL + 'admin/publisher/erase/' + row.id;
         });
     });
 	// Search submit
