@@ -1,4 +1,4 @@
-<?php $this->layout('layouts::main_template', ['title' => 'Kategori'])?>
+<?php $this->layout('layouts::admin_template', ['title' => 'Kategori'])?>
 
 <!-- SECTION CSS -->
 <?php $this->start('css') ?>

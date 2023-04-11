@@ -1,4 +1,4 @@
-<?php $this->layout('layouts::main_template', ['title' => 'Dashboard'])?>
+<?php $this->layout('layouts::admin_template', ['title' => 'Dashboard'])?>
 
 <!-- SECTION CSS -->
 <?php $this->start('css') ?>

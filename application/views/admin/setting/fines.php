@@ -1,4 +1,4 @@
-<?php $this->layout('setting::index', ['title' => 'Denda']) ?>
+<?php $this->layout('admin::setting::index', ['title' => 'Denda']) ?>
 
 <?php $this->start('child_css') ?>
 <?php $this->stop() ?>

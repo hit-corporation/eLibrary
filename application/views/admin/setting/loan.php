@@ -1,4 +1,4 @@
-<?php $this->layout('setting::index', ['title' => 'Pengaturan']) ?>
+<?php $this->layout('admin::setting::index', ['title' => 'Pengaturan']) ?>
 
 
 <?php $this->start('setting_pages') ?>

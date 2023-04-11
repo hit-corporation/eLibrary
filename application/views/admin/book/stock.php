@@ -1,4 +1,4 @@
-<?php $this->layout('layouts::main_template', ['title' => 'Stok Buku'])?>
+<?php $this->layout('layouts::admin_template', ['title' => 'Stok Buku'])?>
 
 <?php $this->start('css') ?>
 <link rel="stylesheet" href="<?=$this->e(base_url('assets/node_modules/sweetalert2/dist/sweetalert2.min.css'))?>">

@@ -1,16 +1,15 @@
-<?php $this->layout('setting::index', ['title' => 'Pengaturan']) ?>
+<?php $this->layout('admin::setting::index', ['title' => 'Pengaturan']) ?>
 
 
 <?php $this->start('setting_pages') ?>
 
-<div class="row justify-content-center mt-5">
-    <div class="col-12 col-md-8 col-lg-6 pt-5">
+<form class="row pt-3">
+    <div class="col-12 col-md-8 col-lg-4">
         <div class="card">
             <div class="card-header bg-primary">
                 <h4 class="text-white font-weight-bold text-shadow mb-0">Jatuh Tempo Pengembalian</h4>
             </div>
-            <form name="form-input" class="card-body" method="POST">
-                <?= validation_errors() ?>
+            <div name="form-input" class="card-body" method="POST">
                 <div class="form-row mb-5">
                     <div class="col-4">
                         <label class="form-label mb-0">Nilai <span class="text-danger">*</span></label>
@@ -41,11 +40,20 @@
                     <button type="reset" class="btn btn-secondary"><i class="fas fa-sync"></i> Ulangi</button>
                     <button type="submit" class="btn btn-primary ml-2"><i class="fas fa-save"></i> Simpan</button>
                 </div>
-            </form>
+            </div>
         </div>
-
     </div>
-</div>
+    <div class="col-12 col-md-4 col-lg-4">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <h4 class="text-white font-weight-bold text-shadow mb-0">Maximum Peminjaman</h4>
+            </div>
+            <div class="card-body">
+                
+            </div>
+        </div>
+    </div>
+</form>
 <?php $this->stop() ?>
 
 <?php $this->start('child_js') ?>

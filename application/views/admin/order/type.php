@@ -1,4 +1,4 @@
-<?php $this->layout('layouts::main_template', ['title' => 'Book Order'])?>
+<?php $this->layout('layouts::admin_template', ['title' => 'Book Order'])?>
 
 <!-- CSS SECTION -->
 <?php $this->start('css') ?>
