@@ -11,7 +11,8 @@ class Dashboard extends Admin_Controller {
 	}
 
 	public function index(){
-		$data['user'] = $this->user_model->get_user($this->session->userdata('user')['id']);
+		//$data['user'] = $this->user_model->get_user($this->session->userdata('user')['id']) ?? $this->user_model->get_user(1) ?? [];
+		$data['user'] = $this->user_model->get_user(1) ?? [];
 		$data['total_member'] = count($this->member_model->get_all());
 		$data['total_book'] = count($this->book_model->get_all());
 		$data['total_borrow_book']	= count($this->book_model->get_all_borrow());

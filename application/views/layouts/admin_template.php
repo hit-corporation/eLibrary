@@ -125,27 +125,27 @@
                     <i class="fa-solid fa fa-user-plus"></i>
                     <span>Pendaftaran</span>
                 </a>
-                <div id="collapseBooks" class="collapse <?=($CI->uri->segment(1) == 'member' || $CI->uri->segment(1) == 'publisher' || $CI->uri->segment(1) == 'kategori' || $CI->uri->segment(1) == 'user') ? 'show' : '' ?>" 
+                <div id="collapseBooks" class="collapse <?=$CI->uri->segment(1) == 'admin' && ($CI->uri->segment(2) == 'member' || $CI->uri->segment(2) == 'publisher' || $CI->uri->segment(2) == 'kategori' || $CI->uri->segment(2) == 'user') ? 'show' : '' ?>" 
 					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
 
-                        <a class="collapse-item <?=$CI->uri->segment(1) == 'member' ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('member')?>">
+                        <a class="collapse-item <?=$CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'member' ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('admin/member')?>">
 							<i class="fa fa-users" aria-hidden="true"> </i>
 							<span>Member</span>
 						</a>
 
-                        <a class="collapse-item <?=$CI->uri->segment(1) == 'publisher' ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('publisher')?>">
+                        <a class="collapse-item <?=$CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'publisher' ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('admin/publisher')?>">
 							<i class="fa fa-building" aria-hidden="true"></i>
 							<span>Penerbit</span>
 						</a>
 
-						<a class="collapse-item <?=$CI->uri->segment(1) == 'kategori' ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('kategori')?>">
+						<a class="collapse-item <?=$CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'kategori' ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('admin/kategori')?>">
 							<i class="fas fa-tags"></i>
 							<span>Kategori</span>
 						</a>
 
-						<a class="collapse-item <?=$CI->uri->segment(1) == 'user' ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('user')?>">
+						<a class="collapse-item <?=$CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'user' ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('admin/user')?>">
 							<i class="fas fa-users"></i>
 							<span>User</span>
 						</a>
@@ -154,28 +154,28 @@
             </li>
 
             <!-- Nav Item - Peminjaman -->
-			<li class="nav-item <?=($CI->uri->segment(1) == 'order' && $CI->uri->segment(2) == null) ? 'active bg-dark-2' : '' ?>">
+			<li class="nav-item <?=($CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'order' && $CI->uri->segment(3) == null) ? 'active bg-dark-2' : '' ?>">
                 <a class="nav-link" href="<?=base_url('order')?>">
                     <i class="fa fa-share-square" aria-hidden="true"></i>
                     <span>Peminjaman</span></a>
             </li>
 
 			<!-- Nav Item - Pengembalian -->
-			<li class="nav-item <?=($CI->uri->segment(1) == 'order' && $CI->uri->segment(2) == 'return_order') ? 'active bg-dark-2' : '' ?>">
+			<li class="nav-item <?=($CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'order' && $CI->uri->segment(3) == 'return_order') ? 'active bg-dark-2' : '' ?>">
                 <a class="nav-link" href="<?=base_url('order/return_order')?>">
                     <i class="fa fa-reply-all" aria-hidden="true"></i>
                     <span>Pengembalian</span></a>
             </li>
 
             <!-- Nav Item - Book -->
-            <li class="nav-item <?=$CI->uri->segment(1) == 'book' ? 'active bg-dark-2' : '' ?>">
+            <li class="nav-item <?=$CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'book' ? 'active bg-dark-2' : '' ?>">
                 <a class="nav-link" href="<?=base_url('book')?>">
                     <i class="fa fa-book" aria-hidden="true"></i>
                     <span>Buku</span></a>
             </li>
 
 			<!-- Nav Item - Peminjaman buku harian -->
-			<li class="nav-item <?=($CI->uri->segment(1) == 'order' && $CI->uri->segment(2) == 'daily_order') ? 'active bg-dark-2' : '' ?>">
+			<li class="nav-item <?=($CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'order' && $CI->uri->segment(3) == 'daily_order') ? 'active bg-dark-2' : '' ?>">
                 <a class="nav-link" href="<?=base_url('order/daily_order')?>">
                     <i class="fa fa-clipboard-list" aria-hidden="true"></i>
                     <span>Peminjaman Buku Harian</span></a>

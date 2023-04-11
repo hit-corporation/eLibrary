@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Member extends MY_Controller
+class Member extends Admin_Controller
 {
 	public function __construct(){
 		parent::__construct();
@@ -15,9 +15,14 @@ class Member extends MY_Controller
      * @return void
      */
 	public function index(): void {
-		echo $this->template->render('index');
+		$this->render('index');
 	}
 
+    /**
+     * Get List With Pagination
+     *
+     * @return void
+     */
 	public function get_all_paginated(): void {
 		$limit  = $this->input->get('length');
 		$offset = $this->input->get('start');
