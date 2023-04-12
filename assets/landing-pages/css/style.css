@@ -5607,6 +5607,20 @@ ul {
     flex-direction: column;
   }
 }
+
+@media (min-width: 991px) {
+	.latestnewv2 img {
+		height: 150px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.latestnewv2 img {
+		height: 200px;
+	}
+}
+
+
 .hero {
   background-position: center;
   text-align: center;
