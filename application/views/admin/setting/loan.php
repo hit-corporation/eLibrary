@@ -49,7 +49,13 @@
                 <div class="form-row align-items-center mt-3">
                     <label class="form-label col-12 col-md-4 col-lg-3">Durasi ketika menganggur</label>
                     <div class="col-12 col-md-8 col-lg-8">
-                        
+                        <div class="row">
+                            <div class="col-4">
+                                
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="col-7"></div>
+                        </dov>
                     </div>
                 </div>
                 <hr class="mt-5">
