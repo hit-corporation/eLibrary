@@ -22,6 +22,7 @@ final class CreateMembersTable extends AbstractMigration
 		$table->addColumn('member_name', 'string', ['limit' => 100])
 			    ->addColumn('no_induk', 'string', ['limit' => 100])
 			    ->addColumn('card_number', 'string', ['limit' => 100])
+          ->addColumn('kelas', 'string', ['limit' => 100])
           ->addColumn('username', 'string', ['limit' => 120])
           ->addColumn('password', 'string', ['limit' => 225])
 			    ->addColumn('email', 'string', ['limit' => 100, 'null' => true])

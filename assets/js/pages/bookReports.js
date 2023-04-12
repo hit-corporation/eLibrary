@@ -5,7 +5,7 @@ const formSearchName = document.forms['form-search-name'];
 // get all book pa
 const getAll = async () => {
 	try {
-		const f = await fetch(BASE_URL + '/report/get_all_book');
+		const f = await fetch(BASE_URL + 'admin/report/get_all_book');
 		const j = await f.json();
 
 		return j;
@@ -24,7 +24,7 @@ const getAll = async () => {
 		serverSide: true,
 		processing: true,
 		ajax: {
-			url: BASE_URL + '/report/get_all_book_paginated'
+			url: BASE_URL + 'admin/report/get_all_book_paginated'
 		},
 		pageLength: 10,
 		columns: [
@@ -131,7 +131,7 @@ const downloadFile = async ext  => {
 	{
 		const config = Object.assign({type: ext}, formObj);
 		const uriParam = new URLSearchParams(config).toString();
-		const url = new URL(BASE_URL + 'report/download_book?' + uriParam);
+		const url = new URL(BASE_URL + 'admin/report/download_book?' + uriParam);
 		// ajax
 		window.location.href = url.href;
 	}

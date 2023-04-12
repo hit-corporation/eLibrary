@@ -21,6 +21,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 application/views/book/index copy.php
 
+
 # IDE Files
 #-------------------------
 # /nbproject/
@@ -37,5 +38,5 @@ application/views/book/index copy.php
 application/session/
 assets/node_modules
 assets/img/books
-phinx.php
+/phinx.php
 application/config/database.php
