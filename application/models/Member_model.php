@@ -72,4 +72,14 @@ class Member_model extends CI_Model {
 		$query = $this->db->get('members m');
 		return $query->result_array();
 	}
+
+	public function login($data){
+		$this->db->select('*');
+		$this->db->from('members');
+		$this->db->where('member_name', $data['user_name']);
+		$this->db->where('status', 'active');
+		$this->db->where('deleted_at', null);
+		$query = $this->db->get();
+		return $query->row_array();
+	}
 }
