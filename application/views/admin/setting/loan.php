@@ -33,6 +33,8 @@
                             <div class="col-1 d-flex flex-nowrap justify-content-center align-items-center"><span>-</span></div>
                             <div class="col-7">
                                 <select name="due_date[unit]" class="form-control <?=empty($_SESSION['error']['errors']['due_date[unit]']) ?: 'is-invalid' ?>">
+                                    <option value="hourss">Jam</option>
+                                    <option value="months">Bulan</option>
                                     <option value="days">Hari</option>
                                     <option value="weeks" selected>Minggu</option>
                                     <option value="months">Bulan</option>
