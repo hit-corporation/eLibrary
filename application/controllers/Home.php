@@ -50,4 +50,24 @@ class Home extends MY_Controller {
 		$this->load->view('home/book_detail', $data);
 		$this->load->view('footer');
 	}
+
+	public function login(){
+
+
+		$this->load->view('header');
+		$this->load->view('home/user_profile');
+		$this->load->view('footer');
+	}
+
+	public function profile(){
+		$this->load->view('header');
+		$this->load->view('home/user_profile');
+		$this->load->view('footer');
+	}
+
+	public function user_favorite_list(){
+		$this->load->view('header');
+		$this->load->view('home/user_favorite_list');
+		$this->load->view('footer');
+	}
 }
