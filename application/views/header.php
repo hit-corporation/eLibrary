@@ -1,14 +1,5 @@
 <!DOCTYPE html>
-<!--[if IE 7]>
-<html class="ie ie7 no-js" lang="en-US">
-<![endif]-->
-<!--[if IE 8]>
-<html class="ie ie8 no-js" lang="en-US">
-<![endif]-->
-<!--[if !(IE 7) | !(IE 8)  ]><!-->
 <html lang="en" class="no-js">
-
-<!-- homev206:52-->
 <head>
 	<!-- Basic need -->
 	<title>eLibrary</title>
@@ -112,13 +103,7 @@
 							Buku<i class="fa fa-angle-down" aria-hidden="true"></i>
 							</a>
 							<ul class="dropdown-menu level1">
-								<!-- <li class="dropdown">
-									<a href="#">about us <i class="fa fa-caret-right" aria-hidden="true"></i></a>
-									<ul class="dropdown-menu level2">
-										<li><a href="aboutv1.html">About Us 01</a></li>
-										<li><a href="aboutv2.html">About Us 02</a></li>
-									</ul>
-								</li> -->
+					
 								<li><a href="moviegrid.html">Pendidikan</a></li>
 								<li><a href="moviegridfw.html">Novel</a></li>
 								<li><a href="movielist.html">Majalah</a></li>
