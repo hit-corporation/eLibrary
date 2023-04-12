@@ -32,4 +32,12 @@ class Home_model extends CI_Model {
 		return $query->row_array();
 	}
 
+	public function get_recomend_books(){
+		$this->db->where('deleted_at IS NULL');
+		$this->db->order_by('title', 'DESC');
+		$this->db->limit(4);
+		$query = $this->db->get('books');
+		return $query->result_array();
+	}
+
 }

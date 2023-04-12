@@ -11,8 +11,9 @@ class Home extends MY_Controller {
 	}
 
 	public function index(){
-		$data['newBooks'] = $this->home_model->get_new_books();
-		$data['popularBooks'] = $this->home_model->get_popular_books();
+		$data['newBooks'] 		= $this->home_model->get_new_books();
+		$data['popularBooks'] 	= $this->home_model->get_popular_books();
+		$data['recomendBooks'] 	= $this->home_model->get_recomend_books();
 		
 		$this->load->view('header');
 		$this->load->view('home/index', $data);
@@ -23,9 +24,12 @@ class Home extends MY_Controller {
 		if(isset($_GET['name']) && $_GET['name'] == 'newest'){
 			$data['books'] = $this->home_model->get_new_books();
 			$data['title'] = 'Newest Books';
-		} else {
+		} elseif (isset($_GET['name']) && $_GET['name'] == 'popular'){
 			$data['books'] = $this->home_model->get_popular_books();
 			$data['title'] = 'Popular Books';
+		} else {
+			$data['books'] = $this->home_model->get_recomend_books();
+			$data['title'] = 'Recomended Books';
 		}
 			
 
