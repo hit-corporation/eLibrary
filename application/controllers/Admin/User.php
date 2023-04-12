@@ -19,7 +19,7 @@ class User extends Admin_Controller {
      * @return void
      */
 	public function index(): void {
-		echo $this->template->render('index');
+		$this->render('index');
 	}
 
 	public function get_all_paginated(): void {

@@ -7,7 +7,7 @@ const formSearch = document.forms['form-search'];
 const getAll = async () => {
     try
     {
-        const f = await fetch(BASE_URL + '/user/get_all');
+        const f = await fetch(BASE_URL + 'admin/user/get_all');
         const j = await f.json();
 
         return j;
@@ -27,7 +27,7 @@ const getAll = async () => {
         serverSide: true,
         processing: true,
         ajax: {
-            url: BASE_URL + '/user/get_all_paginated'
+            url: BASE_URL + 'admin/user/get_all_paginated'
         },
         pageLength: 10,
         columns: [
@@ -83,7 +83,7 @@ const getAll = async () => {
 		// CREATE OPTION USER ROLE
 		$.ajax({
 			type: "GET",
-			url: BASE_URL + "user/get_role",
+			url: BASE_URL + "admin/user/get_role",
 			dataType: "JSON",
 			success: function (response) {
 				// CLEAR OPTION
@@ -121,7 +121,7 @@ const getAll = async () => {
 		// CREATE OPTION USER ROLE
 		$.ajax({
 			type: "GET",
-			url: BASE_URL + "user/get_role",
+			url: BASE_URL + "admin/user/get_role",
 			dataType: "JSON",
 			success: function (response) {
 				$.each(response, function (i, val) {
