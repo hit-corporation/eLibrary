@@ -105,7 +105,7 @@
 							<a href="#page-top"></a>
 						</li>
 						<li class="dropdown first">
-							<a href="#" class="btn btn-default">Home</a>
+							<a href="<?=base_url()?>" class="btn btn-default">Home</a>
 						</li>	
 						<li class="dropdown first">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
