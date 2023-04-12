@@ -55,7 +55,7 @@
 		<div class="col-md-12">
 			<div class="title-hd">
 				<h2>Terbaru</h2>
-				<a href="home/newest_book" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+				<a href="<?=base_url('home/list_book?name=newest')?>" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
 			</div>
 			<div class="tabs">
 				<ul class="tab-links">
@@ -96,7 +96,7 @@
 			</div>
 			<div class="title-hd">
 				<h2>Popular</h2>
-				<a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+				<a href="<?=base_url('home/list_book?name=popular')?>" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
 			</div>
 			<div class="tabs">
 				<ul class="tab-links-2">
