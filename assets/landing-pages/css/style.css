@@ -4127,6 +4127,7 @@ ul {
   color: #ffffff;
   font-weight: bold;
   text-transform: uppercase;
+	text-shadow: 5px 1px 5px black;
 }
 .movie-items .movie-item .title-in p {
   font-size: 12px;
