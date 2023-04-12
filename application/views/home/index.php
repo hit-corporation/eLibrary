@@ -133,20 +133,26 @@
 			        <div id="tab21-h2" class="tab active">
 			            <div class="row">
 			            	<div class="slick-multiItem2">
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="assets/landing-pages/images/uploads/mv-it7.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Interstellar</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
+
+								<?php foreach ($popularBooks as $key => $popularBook) : ?>
+
+									<div class="slide-it">
+										<div class="movie-item">
+											<div class="mv-img">
+												<img src="<?=base_url('assets/img/books/').$popularBook['cover_img']?>" alt="">
+											</div>
+											<div class="hvr-inner">
+												<a  href="<?=base_url('/home/book_detail/').$popularBook['id']?>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+											</div>
+											<div class="title-in">
+												<h6><a href="<?=base_url('/home/book_detail/').$popularBook['id']?>"><?=$popularBook['title']?></a></h6>
+												<p><i class="ion-android-star"></i><span>4</span> /5</p>
+											</div>
+										</div>
+									</div>
+								
+								<?php endforeach; ?>
+								
 								<div class="slide-it">
 									<div class="movie-item">
 				            			<div class="mv-img">

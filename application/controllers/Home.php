@@ -12,6 +12,7 @@ class Home extends MY_Controller {
 
 	public function index(){
 		$data['newBooks'] = $this->home_model->get_new_books();
+		$data['popularBooks'] = $this->home_model->get_popular_books();
 		
 		$this->load->view('header');
 		$this->load->view('home/index', $data);
