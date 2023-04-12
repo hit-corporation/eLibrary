@@ -22,4 +22,14 @@ class Home_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function get_book_by_id($id){
+		$this->db->select('books.*, publishers.publisher_name, categories.category_name');
+		$this->db->from('books');
+		$this->db->where('books.id', $id);
+		$this->db->join('publishers', 'books.publisher_id = publishers.id');
+		$this->db->join('categories', 'books.category_id = categories.id');
+		$query = $this->db->get();
+		return $query->row_array();
+	}
+
 }

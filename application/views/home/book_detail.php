@@ -16,22 +16,22 @@
 		<div class="row ipad-width2">
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="movie-img sticky-sb">
-					<img src="<?=base_url()?>assets/landing-pages/images/uploads/movie-single.jpg" alt="">
+					<img src="<?=base_url('assets/img/books/').$book['cover_img']?>" alt="">
 					<div class="movie-btn">	
 						<div class="btn-transform transform-vertical red">
-							<div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Watch Trailer</a></div>
-							<div><a href="https://www.youtube.com/embed/o-0hcF97wy0" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
+							<div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Read</a></div>
+							<div><a href="#" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
 						</div>
-						<div class="btn-transform transform-vertical">
+						<!-- <div class="btn-transform transform-vertical">
 							<div><a href="#" class="item item-1 yellowbtn"> <i class="ion-card"></i> Buy ticket</a></div>
 							<div><a href="#" class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div class="movie-single-ct main-content">
-					<h1 class="bd-hd">Skyfall: Quantum of Spectre <span>2015</span></h1>
+					<h1 class="bd-hd"><?=$book['title']?> <span><?=$book['publish_year']?></span></h1>
 					
 					
 					<div class="movie-tabs">
@@ -44,117 +44,38 @@
 						        <div id="overview" class="tab active">
 						            <div class="row">
 						            	<div class="col-md-8 col-sm-12 col-xs-12">
-						            		<p>Tony Stark creates the Ultron Program to protect the world, but when the peacekeeping program becomes hostile, The Avengers go into action to try and defeat a virtually impossible enemy together. Earth's mightiest heroes must come together once again to protect the world from global extinction.</p>
-						            		<div class="title-hd-sm">
-												<h4>Videos & Photos</h4>
-												<a href="#" class="time">All 5 Videos & 245 Photos <i class="ion-ios-arrow-right"></i></a>
-											</div>
-											<div class="mvsingle-item ov-item">
-												<a class="img-lightbox"  data-fancybox-group="gallery" href="<?=base_url()?>assets/landing-pages/images/uploads/image11.jpg" ><img src="<?=base_url()?>assets/landing-pages/images/uploads/image1.jpg" alt=""></a>
-												<a class="img-lightbox"  data-fancybox-group="gallery" href="<?=base_url()?>assets/landing-pages/images/uploads/image21.jpg" ><img src="<?=base_url()?>assets/landing-pages/images/uploads/image2.jpg" alt=""></a>
-												<a class="img-lightbox"  data-fancybox-group="gallery" href="<?=base_url()?>assets/landing-pages/images/uploads/image31.jpg" ><img src="<?=base_url()?>assets/landing-pages/images/uploads/image3.jpg" alt=""></a>
-												<div class="vd-it">
-													<img class="vd-img" src="<?=base_url()?>assets/landing-pages/images/uploads/image4.jpg" alt="">
-													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="<?=base_url()?>assets/landing-pages/images/uploads/play-vd.png" alt=""></a>
-												</div>
-											</div>
-											<div class="title-hd-sm">
-												<h4>cast</h4>
-												<a href="#" class="time">Full Cast & Crew  <i class="ion-ios-arrow-right"></i></a>
-											</div>
-											<!-- movie cast -->
-											<div class="mvcast-item">											
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="<?=base_url()?>assets/landing-pages/images/uploads/cast1.jpg" alt="">
-														<a href="#">Robert Downey Jr.</a>
-													</div>
-													<p>...  Robert Downey Jr.</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="<?=base_url()?>assets/landing-pages/images/uploads/cast2.jpg" alt="">
-														<a href="#">Chris Hemsworth</a>
-													</div>
-													<p>...  Thor</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="<?=base_url()?>assets/landing-pages/images/uploads/cast3.jpg" alt="">
-														<a href="#">Mark Ruffalo</a>
-													</div>
-													<p>...  Bruce Banner/ Hulk</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="<?=base_url()?>assets/landing-pages/images/uploads/cast4.jpg" alt="">
-														<a href="#">Chris Evans</a>
-													</div>
-													<p>...  Steve Rogers/ Captain America</p>
-												</div>
-											</div>
-											<div class="title-hd-sm">
-												<h4>User reviews</h4>
-												<a href="#" class="time">See All 56 Reviews <i class="ion-ios-arrow-right"></i></a>
-											</div>
-											<!-- movie user review -->
-											<div class="mv-user-review-item">
-												<h3>Best Marvel movie in my opinion</h3>
-												<div class="no-star">
-													<i class="ion-android-star"></i>
-													<i class="ion-android-star"></i>
-													<i class="ion-android-star"></i>
-													<i class="ion-android-star"></i>
-													<i class="ion-android-star last"></i>
-												</div>
-												<p class="time">
-													17 December 2016 by <a href="#"> hawaiipierson</a>
-												</p>
-												<p>This is by far one of my favorite movies from the MCU. The introduction of new Characters both good and bad also makes the movie more exciting. giving the characters more of a back story can also help audiences relate more to different characters better, and it connects a bond between the audience and actors or characters. Having seen the movie three times does not bother me here as it is as thrilling and exciting every time I am watching it. In other words, the movie is by far better than previous movies (and I do love everything Marvel), the plotting is splendid (they really do out do themselves in each film, there are no problems watching it more than once.</p>
-											</div>
+						            		<p style="white-space: pre-line"><?=$book['description']?></p>
+						            		
+										
 						            	</div>
 						            	<div class="col-md-4 col-xs-12 col-sm-12">
 						            		<div class="sb-it">
-						            			<h6>Director: </h6>
-						            			<p><a href="#">Joss Whedon</a></p>
+						            			<h6>Penulis: </h6>
+						            			<p><a href="#"><?=$book['author']?></a></p>
 						            		</div>
 						            		<div class="sb-it">
-						            			<h6>Writer: </h6>
-						            			<p><a href="#">Joss Whedon,</a> <a href="#">Stan Lee</a></p>
+						            			<h6>Penerbit: </h6>
+						            			<p><a href="#"><?=$book['publisher_name']?></a></p>
 						            		</div>
 						            		<div class="sb-it">
-						            			<h6>Stars: </h6>
-						            			<p><a href="#">Robert Downey Jr,</a> <a href="#">Chris Evans,</a> <a href="#">Mark Ruffalo,</a><a href="#"> Scarlett Johansson</a></p>
+						            			<h6>Isbn: </h6>
+						            			<p><a href="#"><?=$book['isbn']?></a></p>
 						            		</div>
 						            		<div class="sb-it">
-						            			<h6>Genres:</h6>
-						            			<p><a href="#">Action, </a> <a href="#"> Sci-Fi,</a> <a href="#">Adventure</a></p>
+						            			<h6>Tahun Terbit: </h6>
+						            			<p><a href="#"><?=$book['publish_year']?></a></p>
 						            		</div>
 						            		<div class="sb-it">
-						            			<h6>Release Date:</h6>
+						            			<h6>Release Date: </h6>
 						            			<p>May 1, 2015 (U.S.A)</p>
 						            		</div>
 						            		<div class="sb-it">
-						            			<h6>Run Time:</h6>
-						            			<p>141 min</p>
+						            			<h6>Kategori: </h6>
+						            			<p><?=$book['category_name']?></p>
 						            		</div>
-						            		<div class="sb-it">
-						            			<h6>MMPA Rating:</h6>
-						            			<p>PG-13</p>
-						            		</div>
-						            		<div class="sb-it">
-						            			<h6>Plot Keywords:</h6>
-						            			<p class="tags">
-						            				<span class="time"><a href="#">superhero</a></span>
-													<span class="time"><a href="#">marvel universe</a></span>
-													<span class="time"><a href="#">comic</a></span>
-													<span class="time"><a href="#">blockbuster</a></span>
-													<span class="time"><a href="#">final battle</a></span>
-						            			</p>
-						            		</div>
-						            		<div class="ads">
-												<img src="<?=base_url()?>assets/landing-pages/images/uploads/ads1.png" alt="">
-											</div>
+						            		
+						            		
+						            		
 						            	</div>
 						            </div>
 						        </div>
@@ -162,9 +83,8 @@
 						           <div class="row">
 						            	<div class="rv-hd">
 						            		<div class="div">
-							            		<h3>Related Movies To</h3>
-						       	 				<h2>Skyfall: Quantum of Spectre</h2>
 							            	</div>
+											
 							            	<a href="#" class="redbtn">Write Review</a>
 						            	</div>
 						            	<div class="topbar-filter">

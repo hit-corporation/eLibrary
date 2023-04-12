@@ -26,8 +26,15 @@ class Home extends MY_Controller {
 	}
 
 	public function book_detail(){
+		$id = $_GET['id'];
+
+		if (isset($id)) {
+			$this->load->model('home_model');
+			$data['book'] = $this->home_model->get_book_by_id($id);
+		}
+
 		$this->load->view('header');
-		$this->load->view('home/book_detail');
+		$this->load->view('home/book_detail', $data);
 		$this->load->view('footer');
 	}
 }

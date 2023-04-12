@@ -11,9 +11,9 @@
 								<div class="col-md-8 col-sm-12 col-xs-12">
 									<div class="title-in">
 										<div class="cate">
-											<span class="blue"><a href="#">Sci-fi</a></span>
-											<span class="yell"><a href="#">Action</a></span>
-											<span class="orange"><a href="#">advanture</a></span>
+											<span class="blue"><a href="#">Education</a></span>
+											<span class="yell"><a href="#">Culture</a></span>
+											<!-- <span class="orange"><a href="#">advanture</a></span> -->
 										</div>
 										<h1><a href="#"><?=$newBook['title']?> <span><?=$newBook['publish_year']?></span></a></h1>
 										<!-- <div class="social-btn">
@@ -28,8 +28,8 @@
 											</ul>
 										</div>
 										<div class="btn-transform transform-vertical">
-											<div><a href="#" class="item item-1 redbtn">more detail</a></div>
-											<div><a href= "#" class="item item-2 redbtn hvrbtn">more detail</a></div>
+											<div><a href="<?=base_url('/home/book_detail?id=').$newBook['id']?>" class="item item-1 redbtn">more detail</a></div>
+											<div><a href= "<?=base_url('/home/book_detail?id=').$newBook['id']?>" class="item item-2 redbtn hvrbtn">more detail</a></div>
 										</div>		
 									</div>
 								</div>
@@ -74,10 +74,10 @@
 												<img src="<?=base_url('assets/img/books/').$newBook['cover_img']?>" alt="">
 											</div>
 											<div class="hvr-inner">
-												<a  href="<?=base_url('/home/book_detail/').$newBook['id']?>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+												<a  href="<?=base_url('/home/book_detail?id=').$newBook['id']?>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 											</div>
 											<div class="title-in">
-												<h6><a href="<?=base_url('/home/book_detail/').$newBook['id']?>"><?=$newBook['title']?></a></h6>
+												<h6><a href="<?=base_url('/home/book_detail?id=').$newBook['id']?>"><?=$newBook['title']?></a></h6>
 												<p><i class="ion-android-star"></i><span>4</span> /5</p>
 											</div>
 										</div>
@@ -115,10 +115,10 @@
 												<img src="<?=base_url('assets/img/books/').$popularBook['cover_img']?>" alt="">
 											</div>
 											<div class="hvr-inner">
-												<a  href="<?=base_url('/home/book_detail/').$popularBook['id']?>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+												<a  href="<?=base_url('/home/book_detail?id=').$popularBook['id']?>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 											</div>
 											<div class="title-in">
-												<h6><a href="<?=base_url('/home/book_detail/').$popularBook['id']?>"><?=$popularBook['title']?></a></h6>
+												<h6><a href="<?=base_url('/home/book_detail?id=').$popularBook['id']?>"><?=$popularBook['title']?></a></h6>
 												<p><i class="ion-android-star"></i><span>4</span> /5</p>
 											</div>
 										</div>
