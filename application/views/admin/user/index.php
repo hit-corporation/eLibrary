@@ -1,4 +1,4 @@
-<?php $this->layout('layouts::main_template', ['title' => 'Publisher'])?>
+<?php $this->layout('layouts::admin_template', ['title' => 'Publisher'])?>
 
 <!-- SECTION CSS -->
 <?php $this->start('css') ?>
