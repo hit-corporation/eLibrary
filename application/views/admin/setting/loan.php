@@ -33,10 +33,10 @@
                             <div class="col-1 d-flex flex-nowrap justify-content-center align-items-center"><span>-</span></div>
                             <div class="col-7">
                                 <select name="due_date[unit]" class="form-control <?=empty($_SESSION['error']['errors']['due_date[unit]']) ?: 'is-invalid' ?>">
-                                    <option value="hourss">Jam</option>
+                                    <option value="hours" selected>Jam</option>
                                     <option value="months">Bulan</option>
                                     <option value="days">Hari</option>
-                                    <option value="weeks" selected>Minggu</option>
+                                    <option value="weeks">Minggu</option>
                                     <option value="months">Bulan</option>
                                 </select>
                                 <?php if(!empty($_SESSION['error']['errors']['due_date[unit]'])): ?>
@@ -44,6 +44,12 @@
                                 <?php endif ?>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="form-row align-items-center mt-3">
+                    <label class="form-label col-12 col-md-4 col-lg-3">Durasi ketika menganggur</label>
+                    <div class="col-12 col-md-8 col-lg-8">
+                        
                     </div>
                 </div>
                 <hr class="mt-5">
