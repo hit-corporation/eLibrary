@@ -5,7 +5,7 @@
 				<div class="hero-ct">
 					<h1><?=$title?></h1>
 					<ul class="breadcumb">
-						<li class="active"><a href="#">Home</a></li>
+						<li class="active"><a href="<?=base_url()?>">Home</a></li>
 						<li> <span class="ion-ios-arrow-right"></span> Book listing</li>
 					</ul>
 				</div>
