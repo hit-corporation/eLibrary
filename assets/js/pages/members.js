@@ -7,7 +7,7 @@ const formSearch = document.forms['form-search'];
 const getAll = async () => {
     try
     {
-        const f = await fetch(BASE_URL + '/member/get_all');
+        const f = await fetch(BASE_URL + 'admin/member/get_all');
         const j = await f.json();
 
         return j;
@@ -27,7 +27,7 @@ const getAll = async () => {
         serverSide: true,
         processing: true,
         ajax: {
-            url: BASE_URL + '/member/get_all_paginated'
+            url: BASE_URL + 'admin/member/get_all_paginated'
         },
         pageLength: 10,
         columns: [
@@ -73,7 +73,7 @@ const getAll = async () => {
     // store
     document.getElementById('btn-add').addEventListener('click', e => {
         form.reset();
-        form.action = BASE_URL + 'member/store';
+        form.action = BASE_URL + 'admin/member/store';
 
     });
 
@@ -90,7 +90,7 @@ const getAll = async () => {
         form['address'].value = row.address;
         form['phone'].value = row.phone;
 
-        form.action = BASE_URL + 'member/edit';
+        form.action = BASE_URL + 'admin/member/edit';
 
         $('#modal-input').modal('show');
     });
@@ -114,7 +114,7 @@ const getAll = async () => {
 
             let row = tableMain.row($(e.target).parents('tr')[0]).data();
             loading();
-            window.location.href = BASE_URL + 'member/erase/' + row.id;
+            window.location.href = BASE_URL + 'admin/member/erase/' + row.id;
         });
     });
 

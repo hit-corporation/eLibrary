@@ -10,7 +10,7 @@ imgCover = document.getElementById('img-cover');
 const getCategories = async () => {
     try
     {
-        const f = await fetch(BASE_URL + 'kategori/get_all');
+        const f = await fetch(BASE_URL + 'admin/kategori/get_all');
         const j = await f.json();
 
         return j;
@@ -25,7 +25,7 @@ const getCategories = async () => {
 const getPublisher = async () => {
     try
     {
-        const f = await fetch(BASE_URL + 'publisher/get_all');
+        const f = await fetch(BASE_URL + 'admin/publisher/get_all');
         const j = await f.json();
 
         return j;
@@ -40,7 +40,7 @@ const getBooks = async () => {
 
     try
     {
-        const f = await fetch(`${BASE_URL}book/get_all`);
+        const f = await fetch(`${BASE_URL}/admin/book/get_all`);
         const j = await f.json();
 
         return j;
@@ -128,7 +128,7 @@ const getBooks = async () => {
 			serverSide: true,
 			processing: true,
 			ajax: {
-				url: BASE_URL + 'book/get_all_paginated'
+				url: BASE_URL + 'admin/book/get_all_paginated'
 			},
 			columns: [
 				{

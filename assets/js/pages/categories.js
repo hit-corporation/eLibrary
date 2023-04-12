@@ -7,7 +7,7 @@ const form = document.forms['form-input'],
 const getAll = async () => {
     try
     {
-        const f = await fetch(BASE_URL + '/kategori/get_all');
+        const f = await fetch(BASE_URL + 'admin/kategori/get_all');
         const j = await f.json();
 
         return j;
@@ -27,7 +27,7 @@ const getAll = async () => {
         serverSide: true,
         processing: true,
         ajax: {
-            url: BASE_URL + '/kategori/get_all_paginated'
+            url: BASE_URL + 'admin/kategori/get_all_paginated'
         },
         pageLength: 7,
         columns: [
@@ -98,7 +98,7 @@ const getAll = async () => {
     // store
     document.getElementById('btn-add').addEventListener('click', e => {
         form.reset();
-        form.action = BASE_URL + 'kategori/store';
+        form.action = BASE_URL + 'admin/kategori/store';
 
         $('#tree-container').jstree(true).deselect_all();
     });
@@ -114,7 +114,7 @@ const getAll = async () => {
         $('#tree-container').jstree(true).deselect_all();
         $('#tree-container').jstree(true).select_node(form['category_parent'].value);
 
-        form.action = BASE_URL + 'kategori/edit';
+        form.action = BASE_URL + 'admin/kategori/edit';
 
         $('#modal-input').modal('show');
     });
@@ -138,7 +138,7 @@ const getAll = async () => {
 
             let row = tableMain.row($(e.target).parents('tr')[0]).data();
             loading();
-            window.location.href = BASE_URL + 'kategori/erase/' + row.id;
+            window.location.href = BASE_URL + 'admin/kategori/erase/' + row.id;
         });
     });
 

@@ -20,16 +20,17 @@ final class CreateMembersTable extends AbstractMigration
     {
 		$table = $this->table('members');
 		$table->addColumn('member_name', 'string', ['limit' => 100])
-			  ->addColumn('no_induk', 'string', ['limit' => 100])
-			  ->addColumn('kelas', 'string', ['limit' => 50])
-			  ->addColumn('card_number', 'string', ['limit' => 100])
-			  ->addColumn('email', 'string', ['limit' => 100, 'null' => true])
-			  ->addColumn('address', 'text', ['null' => true])
-			  ->addColumn('phone', 'string', ['limit' => 100, 'null' => true])
-        ->addTimestamps()
-			  ->addColumn('deleted_at', 'datetime', ['null' => true])
+			    ->addColumn('no_induk', 'string', ['limit' => 100])
+			    ->addColumn('card_number', 'string', ['limit' => 100])
+          ->addColumn('username', 'string', ['limit' => 120])
+          ->addColumn('password', 'string', ['limit' => 225])
+			    ->addColumn('email', 'string', ['limit' => 100, 'null' => true])
+			    ->addColumn('address', 'text', ['null' => true])
+			    ->addColumn('phone', 'string', ['limit' => 100, 'null' => true])
+          ->addTimestamps()
+			    ->addColumn('deleted_at', 'datetime', ['null' => true])
 
-			  ->addIndex(['no_induk', 'deleted_at'], ['unique' => true])
-			  ->create();
+			    ->addIndex(['no_induk', 'deleted_at'], ['unique' => true])
+			    ->create();
     }
 }

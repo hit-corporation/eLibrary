@@ -22,7 +22,7 @@ class Report extends Admin_Controller
      */
 	public function index(): void
 	{
-		echo $this->template->render('report/order_report');
+		$this->render('admin/report/order_report');
 	}
 
     /**
@@ -78,7 +78,7 @@ class Report extends Admin_Controller
      */
 	public function book(): void
 	{
-		echo $this->template->render('report/book_report');
+		$this->render('report/book_report');
 	}
 
 	/**
@@ -121,7 +121,7 @@ class Report extends Admin_Controller
      * @return void
      */
 	public function penalty(): void{
-		echo $this->template->render('report/penalty_report');
+		$this->render('report/penalty_report');
 	}
 
 	/**
