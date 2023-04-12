@@ -20,7 +20,7 @@ class Setting extends Admin_Controller {
      * @return void
      */
     public function index(): void {
-        echo $this->template->render('index');
+        $this->render('index');
     }
 
     /**
@@ -30,7 +30,7 @@ class Setting extends Admin_Controller {
      */
     public function loan(): void {
 
-        echo $this->template->render('loan');
+        $this->render('loan');
     }
 
 	/**
@@ -51,7 +51,7 @@ class Setting extends Admin_Controller {
 		{
 			$errors = ['errors' => $this->form_validation->error_array(), 'old' => $_POST];
 			$this->session->set_flashdata('error', $errors);
-			redirect('setting/loan');
+			redirect('admin/setting/loan');
 			return;
 		}
 
@@ -69,7 +69,7 @@ class Setting extends Admin_Controller {
 			return;
 		}
 		$this->session->set_flashdata('success', ['message' => 'Data berhasil di simpan']);
-		redirect('setting/loan');
+		redirect('admin/setting/loan');
 
 	}
 
