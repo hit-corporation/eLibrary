@@ -15,16 +15,6 @@
 								galaxy <span>2015</span></a></h1>
 								<div class="social-btn">
 									<a href="#" class="parent-btn"><i class="ion-play"></i> Watch Trailer</a>
-									<a href="#" class="parent-btn"><i class="ion-heart"></i> Add to Favorite</a>
-									<div class="hover-bnt">
-										<a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>share</a>
-										<div class="hvr-item">
-											<a href="#" class="hvr-grow"><i class="ion-social-facebook"></i></a>
-											<a href="#" class="hvr-grow"><i class="ion-social-twitter"></i></a>
-											<a href="#" class="hvr-grow"><i class="ion-social-googleplus"></i></a>
-											<a href="#" class="hvr-grow"><i class="ion-social-youtube"></i></a>
-										</div>
-									</div>		
 								</div>
 			    				<div class="mv-details">
 			    					<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
@@ -60,16 +50,6 @@
 								galaxy <span>2015</span></a></h1>
 								<div class="social-btn">
 									<a href="#" class="parent-btn"><i class="ion-play"></i> Watch Trailer</a>
-									<a href="#" class="parent-btn"><i class="ion-heart"></i> Add to Favorite</a>
-									<div class="hover-bnt">
-										<a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>share</a>
-										<div class="hvr-item">
-											<a href="#" class="hvr-grow"><i class="ion-social-facebook"></i></a>
-											<a href="#" class="hvr-grow"><i class="ion-social-twitter"></i></a>
-											<a href="#" class="hvr-grow"><i class="ion-social-googleplus"></i></a>
-											<a href="#" class="hvr-grow"><i class="ion-social-youtube"></i></a>
-										</div>
-									</div>		
 								</div>
 			    				<div class="mv-details">
 			    					<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
@@ -118,7 +98,7 @@
 				            				<img src="assets/landing-pages/images/uploads/mv-it1.jpg" alt="">
 				            			</div>
 				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 				            			</div>
 				            			<div class="title-in">
 				            				<h6><a href="#">Interstellar</a></h6>
@@ -132,7 +112,7 @@
 				            				<img src="assets/landing-pages/images/uploads/mv-it2.jpg" alt="">
 				            			</div>
 				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 				            			</div>
 				            			<div class="title-in">
 				            				<h6><a href="#">The revenant</a></h6>
@@ -146,7 +126,7 @@
 				            				<img src="assets/landing-pages/images/uploads/mv-it3.jpg" alt="">
 				            			</div>
 				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 				            			</div>
 				            			<div class="title-in">
 				            				<h6><a href="#">Die hard</a></h6>
@@ -160,7 +140,7 @@
 				            				<img src="assets/landing-pages/images/uploads/mv-it4.jpg" alt="">
 				            			</div>
 				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 				            			</div>
 				            			<div class="title-in">
 				            				<h6><a href="#">The walk</a></h6>
@@ -174,7 +154,7 @@
 				            				<img src="assets/landing-pages/images/uploads/mv-it5.jpg" alt="">
 				            			</div>
 				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 				            			</div>
 				            			<div class="title-in">
 				            				<h6><a href="#">Die hard</a></h6>
@@ -188,7 +168,7 @@
 				            				<img src="assets/landing-pages/images/uploads/mv-it6.jpg" alt="">
 				            			</div>
 				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 				            			</div>
 				            			<div class="title-in">
 				            				<h6><a href="#">Interstellar</a></h6>
@@ -202,7 +182,7 @@
 				            				<img src="assets/landing-pages/images/uploads/mv-it7.jpg" alt="">
 				            			</div>
 				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 				            			</div>
 				            			<div class="title-in">
 				            				<h6><a href="#">Die hard</a></h6>
@@ -216,7 +196,7 @@
 				            				<img src="assets/landing-pages/images/uploads/mv-it8.jpg" alt="">
 				            			</div>
 				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 				            			</div>
 				            			<div class="title-in">
 				            				<h6><a href="#">Die hard</a></h6>
