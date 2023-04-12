@@ -19,14 +19,14 @@
 										<!-- <div class="social-btn">
 											<a href="#" class="parent-btn"><i class="ion-play"></i> Watch Trailer</a>
 										</div> -->
-										<div class="mv-details">
+										<!-- <div class="mv-details">
 											<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
 											<ul class="mv-infor">
 												<li>  Run Time: 2h21’ </li>
 												<li>  Rated: PG-13  </li>
 												<li>  Release: 1 May 2015</li>
 											</ul>
-										</div>
+										</div> -->
 										<div class="btn-transform transform-vertical">
 											<div><a href="<?=base_url('/home/book_detail?id=').$newBook['id']?>" class="item item-1 redbtn">more detail</a></div>
 											<div><a href= "<?=base_url('/home/book_detail?id=').$newBook['id']?>" class="item item-2 redbtn hvrbtn">more detail</a></div>
@@ -78,7 +78,7 @@
 											</div>
 											<div class="title-in">
 												<h6><a href="<?=base_url('/home/book_detail?id=').$newBook['id']?>"><?=$newBook['title']?></a></h6>
-												<p><i class="ion-android-star"></i><span>4</span> /5</p>
+												<!-- <p><i class="ion-android-star"></i><span>4</span> /5</p> -->
 											</div>
 										</div>
 									</div>
@@ -119,7 +119,7 @@
 											</div>
 											<div class="title-in">
 												<h6><a href="<?=base_url('/home/book_detail?id=').$popularBook['id']?>"><?=$popularBook['title']?></a></h6>
-												<p><i class="ion-android-star"></i><span>4</span> /5</p>
+												<!-- <p><i class="ion-android-star"></i><span>4</span> /5</p> -->
 											</div>
 										</div>
 									</div>
