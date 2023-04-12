@@ -7,12 +7,14 @@ class Home extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		$this->load->model('home_model');
 	}
 
 	public function index(){
+		$data['newBooks'] = $this->home_model->get_new_books();
 		
 		$this->load->view('header');
-		$this->load->view('home/index');
+		$this->load->view('home/index', $data);
 		$this->load->view('footer');
 	}
 

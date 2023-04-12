@@ -92,118 +92,28 @@
 			        <div id="tab1-h2" class="tab active">
 			            <div class="row">
 			            	<div class="slick-multiItem2">
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="assets/landing-pages/images/uploads/mv-it1.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Interstellar</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-								<div class="slide-it">
-									<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="assets/landing-pages/images/uploads/mv-it2.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">The revenant</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-								</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="assets/landing-pages/images/uploads/mv-it3.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Die hard</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="assets/landing-pages/images/uploads/mv-it4.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">The walk</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="assets/landing-pages/images/uploads/mv-it5.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Die hard</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="assets/landing-pages/images/uploads/mv-it6.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Interstellar</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="assets/landing-pages/images/uploads/mv-it7.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Die hard</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="assets/landing-pages/images/uploads/mv-it8.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="<?=base_url()?>/home/book_detail"> Read more <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Die hard</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
+
+								<?php foreach ($newBooks as $key => $newBook) : ?>
+									
+									<div class="slide-it">
+										<div class="movie-item">
+											<div class="mv-img">
+												<img src="<?=base_url('assets/img/books/').$newBook['cover_img']?>" alt="">
+											</div>
+											<div class="hvr-inner">
+												<a  href="<?=base_url('/home/book_detail/').$newBook['id']?>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+											</div>
+											<div class="title-in">
+												<h6><a href="<?=base_url('/home/book_detail/').$newBook['id']?>"><?=$newBook['title']?></a></h6>
+												<p><i class="ion-android-star"></i><span>4</span> /5</p>
+											</div>
+										</div>
+									</div>
+								
+								<?php endforeach; ?>
+
+						
+			            		
 			            	</div>
 			            </div>
 			        </div>
