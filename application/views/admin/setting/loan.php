@@ -51,10 +51,16 @@
                     <div class="col-12 col-md-8 col-lg-8">
                         <div class="row">
                             <div class="col-4">
-                                
+                                <select class="form-control" name="idle_duration[nilai]"></select>
                             </div>
                             <div class="col-1"></div>
-                            <div class="col-7"></div>
+                            <div class="col-7">
+                                <select class="form-control" name="idle_duration[unit]">
+                                    <option value="">-------------------------</option>
+                                    <option value="menit">Menit</option>
+                                    <option value="jam">Jam</option>
+                                </select>
+                            </div>
                         </dov>
                     </div>
                 </div>
