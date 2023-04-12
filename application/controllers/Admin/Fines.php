@@ -1,6 +1,6 @@
 <?php
 
-class Fines extends MY_Controller {
+class Fines extends Admin_Controller {
 	
 	public function __construct() {
 		parent::__construct();
@@ -13,7 +13,7 @@ class Fines extends MY_Controller {
 	 * @return void
 	 */
 	public function index(): void {
-		echo $this->template->render('fines', [], 'setting');
+		$this->render('fines', [], 'admin/setting');
 	}
 
 	/**
