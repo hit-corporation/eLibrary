@@ -1,17 +1,8 @@
 <!DOCTYPE html>
-<!--[if IE 7]>
-<html class="ie ie7 no-js" lang="en-US">
-<![endif]-->
-<!--[if IE 8]>
-<html class="ie ie8 no-js" lang="en-US">
-<![endif]-->
-<!--[if !(IE 7) | !(IE 8)  ]><!-->
 <html lang="en" class="no-js">
-
-<!-- homev206:52-->
 <head>
 	<!-- Basic need -->
-	<title>Open Pediatrics</title>
+	<title>eLibrary</title>
 	<meta charset="UTF-8">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
@@ -80,44 +71,7 @@
     </div>
 </div>
 <!--end of login form popup-->
-<!--signup form popup-->
-<div class="login-wrapper"  id="signup-content">
-    <div class="login-content">
-        <a href="#" class="close">x</a>
-        <h3>sign up</h3>
-        <form method="post" action="#">
-            <div class="row">
-                 <label for="username-2">
-                    Username:
-                    <input type="text" name="username" id="username-2" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
-                </label>
-            </div>
-           
-            <div class="row">
-                <label for="email-2">
-                    your email:
-                    <input type="password" name="email" id="email-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-             <div class="row">
-                <label for="password-2">
-                    Password:
-                    <input type="password" name="password" id="password-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-             <div class="row">
-                <label for="repassword-2">
-                    re-type Password:
-                    <input type="password" name="password" id="repassword-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-           <div class="row">
-             <button type="submit">sign up</button>
-           </div>
-        </form>
-    </div>
-</div>
-<!--end of signup form popup-->
+
 
 <!-- BEGIN | Header -->
 <header class="ht-header full-width-hd">
@@ -142,20 +96,14 @@
 							<a href="#page-top"></a>
 						</li>
 						<li class="dropdown first">
-							<a href="#" class="btn btn-default">Home</a>
+							<a href="<?=base_url()?>" class="btn btn-default">Home</a>
 						</li>	
 						<li class="dropdown first">
 							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
 							Buku<i class="fa fa-angle-down" aria-hidden="true"></i>
 							</a>
 							<ul class="dropdown-menu level1">
-								<!-- <li class="dropdown">
-									<a href="#">about us <i class="fa fa-caret-right" aria-hidden="true"></i></a>
-									<ul class="dropdown-menu level2">
-										<li><a href="aboutv1.html">About Us 01</a></li>
-										<li><a href="aboutv2.html">About Us 02</a></li>
-									</ul>
-								</li> -->
+					
 								<li><a href="moviegrid.html">Pendidikan</a></li>
 								<li><a href="moviegridfw.html">Novel</a></li>
 								<li><a href="movielist.html">Majalah</a></li>
@@ -196,7 +144,6 @@
 						</li>                
 						<li><a href="#">Profile</a></li>
 						<li class="loginLink"><a href="#">LOG In</a></li>
-						<li class="btn signupLink"><a href="#">sign up</a></li>
 					</ul>
 				</div>
 			<!-- /.navbar-collapse -->
