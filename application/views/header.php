@@ -87,7 +87,7 @@
 							<span></span>
 						</div>
 				    </div>
-				    <a href="index-2.html"><img class="logo" src="<?=base_url()?>assets/landing-pages/images/logo1.png" alt="" width="70" height="70"></a>
+				    <a href="<?=base_url()?>"><img class="logo" src="<?=base_url()?>assets/landing-pages/images/logo1.png" alt="" width="70" height="70"></a>
 			    </div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
