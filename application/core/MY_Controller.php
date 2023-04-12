@@ -36,7 +36,7 @@ class Admin_Controller extends MY_Controller {
     }
 
     protected function render($page, $data = [], $folder = NULL) {
-        $f = empty($folder) ? 'admin/'.$this->router->class : $folder;
+        $f = empty($folder) ? 'admin/'.strtolower($this->router->class) : strtolower($folder);
         echo $this->template->render($page, $data, $f);
     }
 }
