@@ -148,6 +148,20 @@
 					<a href="bloggrid.html" class="viewall">see all news <i class="ion-ios-arrow-right"></i></a>
 				</div>
 				<div class="latestnewv2">
+					
+					<?php foreach ($recomendBooks as $key => $recomendBook) : ?>
+						
+						<div class="blog-item-style-1 blog-item-style-3">
+							<img src="<?=base_url('assets/img/books/').$recomendBook['cover_img']?>" alt="">
+							<div class="blog-it-infor">
+								<h3><a href="<?=base_url('/home/book_detail?id=').$recomendBook['id']?>"><?=$recomendBook['title']?></a></h3>
+								<span class="time">27 Mar 2017</span>
+								<p><?=substr($recomendBook['description'],1, 100)?> </p>
+							</div>
+						</div>
+
+					<?php endforeach; ?>
+
 					<div class="blog-item-style-2">
 						<a href="blogdetail.html"><img src="assets/landing-pages/images/uploads/blogv21.jpg" alt=""></a>
 						<div class="blog-it-infor">
