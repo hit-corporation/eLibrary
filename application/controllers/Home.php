@@ -5,7 +5,7 @@ class Home extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model(['home_model','member_model']);
+		$this->load->model(['home_model','member_model', 'user_model']);
 	}
 
 	public function index(){
@@ -62,16 +62,65 @@ class Home extends MY_Controller {
 	 */
 	public function login(): void
 	{
+		$this->load->library('form_validation');
 		try
 		{
 			$username = $this->input->post('username', TRUE);
 			$password = $this->input->post('password', TRUE);
 
-			
+			$this->form_validation->set_rules('username', 'required|callback_is_exists', [
+				'is_exists'	=> 'ID Pengguna tidak di temukan'
+			]);
+			$this->form_validation->set_rules('password', 'required|callback_valid_password', [
+				'valid_password' => 'Password tidak sama'
+			]);
+
+			if(!$this->form_validation->run())
+			{
+				$return = ['success' => false, 'errors' => $this->form_validation->error_array(), 'old' => $_POST];
+				$this->session->set_flashdata('error', $return);
+				redirect($_SERVER['HTTP_REFERER']);
+			}
+
+			$return = ['success' => true, 'message' =>  'Data Berhasil Di Simpan'];
+			$this->session->set_flashdata('success', $return);
+			redirect($_SERVER['HTTP_REFERER']);
 		}
 		catch(Exception $e)
 		{
 			log_message('error', $e->__toString());
 		}
+	}
+
+
+	/**
+	 * ******************************************************************************
+	 * 							CUSTOM VALIDATION
+	 * ******************************************************************************
+	 */
+
+	 /**
+	  * Custom Validation for user in validation
+	  *
+	  * @param mixed $str
+	  * @return boolean
+	  */
+	 public function is_exists($str): bool {
+		$members = $this->user_model->members_login($str);
+		if(!isset($members['username']))
+			return false;
+		return true;
+	}
+
+	/**
+	 * Custom valiation for check password
+	 *
+	 * @return boolean
+	 */
+	public function valid_password($str): bool {
+		$members = $this->user_model->members_login($str);
+		if(isset($membes['username']) && password_verify($str, $members['password']))
+			return false;
+		return true;
 	}
 }

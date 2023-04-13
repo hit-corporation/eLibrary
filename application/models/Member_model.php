@@ -73,10 +73,17 @@ class Member_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function login($data){
+	/**
+	 * Get membe by username
+	 *
+	 * @param mixed $username
+	 * @return array
+	 */
+	public function login($username): array
+	{
 		$this->db->select('*');
 		$this->db->from('members');
-		$this->db->where('member_name', $data['user_name']);
+		$this->db->where('member_name', $username);
 		$this->db->where('status', 'active');
 		$this->db->where('deleted_at', null);
 		$query = $this->db->get();
