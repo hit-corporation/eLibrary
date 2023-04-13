@@ -88,7 +88,8 @@ class Home extends MY_Controller {
 				'user_name'	=> $members['username'],
 				'full_name'	=> $members['member_name'],
 				'email'		=> $members['email'],
-				'role'		=> 'member'
+				'role'		=> 'member',
+				'is_logged_in'	=> TRUE
 			];
 
 			$return = ['success' => true, 'message' =>  'Data Berhasil Di Simpan'];
