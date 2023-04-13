@@ -6,7 +6,7 @@ class Home_model extends CI_Model {
         parent::__construct();
     }
 
-	public function get_books($limit, $offset, $sortBy = null){
+	public function get_books($limit = null, $offset = null, $sortBy = null){
 		$this->db->where('deleted_at IS NULL');
 		$this->db->order_by('title', 'ASC');
 		$this->db->limit($limit, $offset);
