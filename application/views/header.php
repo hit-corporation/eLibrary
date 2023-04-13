@@ -1,5 +1,3 @@
-<?php print_r($_SESSION['user']) ?>
-
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
@@ -145,7 +143,7 @@
 							</ul>
 						</li>                
 						<?php if(isset($_SESSION['user']['user_name'])): ?>
-						<li><a href="<?=base_url('user/profile')?>">Profile</a></li>
+						<li><a href="<?=base_url('user')?>">Profile</a></li>
 						<?php else: ?>
 						<li class="loginLink"><a href="#">Login</a></li>
 						<?php endif ?>
