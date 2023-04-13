@@ -18,24 +18,6 @@ class Home extends MY_Controller {
 		$this->load->view('footer');
 	}
 
-	public function list_book(){
-		if(isset($_GET['name']) && $_GET['name'] == 'newest'){
-			$data['books'] = $this->home_model->get_new_books();
-			$data['title'] = 'Newest Books';
-		} elseif (isset($_GET['name']) && $_GET['name'] == 'popular'){
-			$data['books'] = $this->home_model->get_popular_books();
-			$data['title'] = 'Popular Books';
-		} else {
-			$data['books'] = $this->home_model->get_recomend_books();
-			$data['title'] = 'Recomended Books';
-		}
-			
-
-		$this->load->view('header');
-		$this->load->view('home/list_book', $data);
-		$this->load->view('footer');
-	}
-
 	public function book_detail(){
 		$id = $_GET['id'];
 
