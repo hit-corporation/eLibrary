@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="hero-ct">
-					<h1><?=$title?></h1>
+					<h1><?//=$title?></h1>
 					<ul class="breadcumb">
 						<li class="active"><a href="<?=base_url()?>">Home</a></li>
 						<li> <span class="ion-ios-arrow-right"></span> Book listing</li>
@@ -18,7 +18,7 @@
 		<div class="row ipad-width">
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div class="topbar-filter">
-					<p>Found <span><?=$total?> Books</span> in total</p>
+					<p>Found <span><?//=$total?> Books</span> in total</p>
 					<label>Sort by:</label>
 					<select name="sortBy">
 						<option value="title-asc">Title Descending</option>
@@ -29,20 +29,20 @@
 				</div>
 				<div class="flex-wrap-movielist">
 
-					<?php foreach ($books as $book): ?>
+					<!-- <?php foreach ($books as $book): ?>
 
 						<div class="movie-item-style-2 movie-item-style-1">
-							<img src="<?=base_url('assets/img/books/').$book['cover_img']?>" alt="">
+							<img src="<? // =base_url('assets/img/books/').$book['cover_img']?>" alt="">
 							<div class="hvr-inner">
-	            				<a  href="<?=base_url('/home/book_detail?id=').$book['id']?>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+	            				<a  href="<? // =base_url('/home/book_detail?id=').$book['id']?>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 	            			</div>
 							<div class="mv-item-infor">
-								<h6><a href="<?=base_url('/home/book_detail?id=').$book['id']?>"><?=$book['title']?></a></h6>
-								<!-- <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p> -->
+								<h6><a href="<? // =base_url('/home/book_detail?id=').$book['id']?>"><? // =$book['title']?></a></h6>
+								<p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
 							</div>
 						</div>
 
-					<?php endforeach; ?>
+					<?php endforeach; ?> -->
 
 						
 				</div>		
@@ -51,22 +51,24 @@
 					<select name="book-per-pages">
 						<option value="10" <?=(isset($limit) && $limit == 10) ? 'selected' : '' ?> >10 Books</option>
 						<option value="20" <?=(isset($limit) && $limit == 20) ? 'selected' : '' ?>>20 Books</option>
+						<option value="50" <?=(isset($limit) && $limit == 50) ? 'selected' : '' ?>>50 Books</option>
+						<option value="100" <?=(isset($limit) && $limit == 100) ? 'selected' : '' ?>>100 Books</option>
 					</select>
 
 					<!-- create pagination codeigniter -->
-					<?php echo $this->pagination->create_links(); ?>
+
 
 					
-					<!-- <div class="pagination2">
-						<span>Page 1 of 2:</span>
+					<div class="pagination2">
+						<!-- <span>Page 1 of 2:</span>
 						<a class="active" href="#">1</a>
 						<a href="#">2</a>
 						<a href="#">3</a>
 						<a href="#">...</a>
 						<a href="#">78</a>
 						<a href="#">79</a>
-						<a href="#"><i class="ion-arrow-right-b"></i></a>
-					</div> -->
+						<a href="#"><i class="ion-arrow-right-b"></i></a> -->
+					</div>
 				</div>
 			</div>
 			<div class="col-md-4 col-sm-12 col-xs-12">
@@ -132,27 +134,60 @@
 <!-- import cdn jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-	// jika user mengganti limit
-	$('select[name="book-per-pages"]').on('change', function(){
-		// ambil value dari option yang dipilih
-		var limit = $(this).val();
+	$(document).ready(function () {
 
-		// get data sort by
-		var sortBy = $('select[name="sortBy"]').val();
+		// data awal di load
+		load_data();
 
-		// redirect ke halaman yang sama dengan mengirimkan data limit
-		window.location.href = '<?=base_url('book/list_book/'.$this->uri->segment(3).'?limit=')?>' + limit + '&sortBy=' + sortBy;
-	});
+		function load_data(page, limit = 10) {
+			$.ajax({
+				type: "GET",
+				url: "<?=base_url('book/get_all')?>",
+				data: {
+					page: page,
+					limit: limit
+				},
+				success: function (data) {
+					// console.log(data.total_page);
+					
+					$.each(data.books, function (key, value) {
+						$('.flex-wrap-movielist').append(`<div class="movie-item-style-2 movie-item-style-1">
+							<img loading="lazy" src="<?=base_url('assets/img/books/')?>${value.cover_img}" alt="">
+							<div class="hvr-inner">
+	            				<a  href="<?=base_url('/home/book_detail?id=')?>${value.id}"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+	            			</div>
+							<div class="mv-item-infor">
+								<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title}</a></h6>
+								<!-- <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p> -->
+							</div>`);
+					});
 
-	// jika user mengganti sort by
-	$('select[name="sortBy"]').on('change', function(){
-		// ambil value dari option yang dipilih
-		var sortBy = $(this).val();
+					for(let i = 0; i < data.total_pages; i++){
+						$('.pagination2').append(`<a class="halaman" id="halaman_${i+1}" href="#">${i+1}</a>`);
 
-		// get data limit
-		var limit = $('select[name="book-per-pages"]').val();
+						$(`#halaman_${i+1}`).on('click', e => {
+							e.preventDefault();
 
-		// redirect ke halaman yang sama dengan mengirimkan data sort by
-		window.location.href = '<?=base_url('book/list_book/'.$this->uri->segment(3).'?sortBy=')?>' + sortBy + '&limit=' + limit;
+							$('.flex-wrap-movielist').empty();
+							$('.pagination2').empty();
+							load_data(i+1);	
+						});
+					}
+
+				}
+			});
+		}
+
+		// select book-per-pages di ubah
+		$('select[name="book-per-pages"]').on('change', function (e) {
+			e.preventDefault();
+
+			$('.flex-wrap-movielist').empty();
+			$('.pagination2').empty();
+
+			limit = $(this).val();
+			load_data(1, limit);
+		});
+
 	});
 </script>

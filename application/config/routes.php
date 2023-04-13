@@ -54,3 +54,5 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 // admin
 $route['admin'] = 'admin/dashboard';
+// $route['book/(:any)'] = 'book';
+// $route['book/(:any)/(:any)'] = 'book';
