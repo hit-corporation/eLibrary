@@ -96,7 +96,7 @@
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 									Total Member</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800"><?=$total_member?></div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800">18000</div>
 							</div>
 							<div class="col-auto">
 								<i class="fas fa-users fa-2x text-gray-300"></i>
@@ -114,7 +114,7 @@
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
 									Total Buku</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800"><?=$total_book?></div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800">20</div>
 							</div>
 							<div class="col-auto">
 								<i class="fas fa-book fa-2x text-gray-300"></i>
@@ -134,7 +134,7 @@
 								</div>
 								<div class="row no-gutters align-items-center">
 									<div class="col-auto">
-										<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?=$total_borrow_book?></div>
+										<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">123</div>
 									</div>
 								</div>
 							</div>
@@ -154,7 +154,7 @@
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
 									Telat Pengembalian</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800"><?=$late_borrow?></div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
 							</div>
 							<div class="col-auto">
 								<i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -230,21 +230,21 @@
 	<script src="./assets/js/dashboard/topTenMemberBorrow.js"></script>
 
 	<script>
-		percentage_book_borrow(<?= json_encode($percentage_book_borrow) ?>);
-		top_book_borrow(<?= json_encode(array_column($top_book_borrow , 'total')) ?>, <?= json_encode(array_column($top_book_borrow , 'title')) ?>);
+		// percentage_book_borrow(<?= json_encode($percentage_book_borrow) ?>);
+		// top_book_borrow(<?= json_encode(array_column($top_book_borrow , 'total')) ?>, <?= json_encode(array_column($top_book_borrow , 'title')) ?>);
 		
-		// create data for chart top ten member borrow
-		var dataTopMember = [];
-		<?php foreach($top_member_borrow as $key => $value) : ?>
-			dataTopMember.push({
-				name: '<?= $value['member_name'] ?>',
-				y: <?= $value['total'] ?>
-			});
-		<?php endforeach; ?>
+		// // create data for chart top ten member borrow
+		// var dataTopMember = [];
+		// <?php foreach($top_member_borrow as $key => $value) : ?>
+		// 	dataTopMember.push({
+		// 		name: '<?= $value['member_name'] ?>',
+		// 		y: <?= $value['total'] ?>
+		// 	});
+		// <?php endforeach; ?>
 
-		topTenMemberBorrow(dataTopMember);
+		// topTenMemberBorrow(dataTopMember);
 
-		// set temout for change font
+		// // set temout for change font
 		setTimeout(() => {
 			// change font
 			let SvgjsText1005 = document.querySelector('#SvgjsText1005');
