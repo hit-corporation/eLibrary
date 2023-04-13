@@ -142,8 +142,11 @@
 								<li class="it-last"><a href="comingsoon.html">Coming soon</a></li>
 							</ul>
 						</li>                
+						<?php if(isset($_SESSION['user']['user_name'])): ?>
 						<li><a href="<?=base_url('user/profile')?>">Profile</a></li>
-						<li class="loginLink"><a href="#">LOG In</a></li>
+						<?php else: ?>
+						<li class="loginLink"><a href="#">Login</a></li>
+						<?php endif ?>
 					</ul>
 				</div>
 			<!-- /.navbar-collapse -->

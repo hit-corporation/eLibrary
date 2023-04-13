@@ -26,7 +26,7 @@ class Login extends CI_Controller {
 			if(!$this->form_validation->run()) 
 			{
 				$this->session->set_flashdata('error', ['errors' => $this->form_validation->error_array(),'old' => $_POST]);
-				redirect('login');
+				redirect($_SERVER['HTTP_REFERER']);
 			}
 
 			$user = $this->user_model->login($data);
@@ -34,12 +34,12 @@ class Login extends CI_Controller {
 			if(!password_verify($post['password'], $user['user_pass']))
 			{
 				$this->session->set_flashdata('error', ['message' => 'Username atau password tidak valid','old' => $_POST]);
-				redirect('login');
+				redirect($_SERVER['HTTP_REFERER']);
 			}
 
 			unset($user['user_pass']);
 			$this->session->set_userdata('user', $user);
-			redirect('dashboard');
+			redirect('admin/dashboard');
 		}
 
 		$this->load->view('login/index');
