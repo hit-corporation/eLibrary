@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
-
 class Home extends MY_Controller {
 
 	public function __construct(){
@@ -51,16 +49,29 @@ class Home extends MY_Controller {
 		$this->load->view('footer');
 	}
 
-
-	public function profile(){
-		$this->load->view('header');
-		$this->load->view('home/user_profile');
-		$this->load->view('footer');
-	}
-
 	public function user_favorite_list(){
 		$this->load->view('header');
 		$this->load->view('home/user_favorite_list');
 		$this->load->view('footer');
+	}
+
+	/**
+	 * User login
+	 *
+	 * @return void
+	 */
+	public function login(): void
+	{
+		try
+		{
+			$username = $this->input->post('username', TRUE);
+			$password = $this->input->post('password', TRUE);
+
+			
+		}
+		catch(Exception $e)
+		{
+			log_message('error', $e->__toString());
+		}
 	}
 }
