@@ -1,3 +1,5 @@
+<?php print_r($_SESSION['user']) ?>
+
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>

@@ -75,12 +75,14 @@ class Home extends MY_Controller {
 			];
 
 			$insert = [
-				'member_name'	=> $members['member_name'],
-				'member_email'	=> $members['email'],
-				'login_time'	=> date('Y-m-d H:i:s.u')
+				'fullname'		=> $members['member_name'],
+				'username'		=> $members['username'],
+				'email'			=> $members['email'],
+				'login_time'	=> date('Y-m-d H:i:s.u'),
+				'ip_address'	=> $_SERVER['REMOTE_ADDR']
 			];
 
-			$this->db->insert('members', $insert);
+			$this->db->insert('member_logs', $insert);
 
 			$return = ['success' => true, 'message' =>  'Data Berhasil Di Simpan'];
 			$this->session->set_flashdata('success', $return);
