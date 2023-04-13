@@ -19,11 +19,12 @@ final class CreateMemberLogs extends AbstractMigration
     public function change(): void
     {
         $table = $this->table('member_logs');
-        $table->addColumn('member_name', 'string', ['limit' => 200]);
-        $table->addColumn('member_email', 'string', ['limit' => 200]);
+        $table->addColumn('fullname', 'string', ['limit' => 200]);
+        $table->addColumn('username', 'string', ['limit' => 200]);
+        $table->addColumn('email', 'string', ['limit' => 200]);
         $table->addColumn('login_time', 'timestamp');
-        $table->addColumn('logout_time', 'timestamp');
-        $table->addColumn('login_duration', 'string', ['limit' => 200, 'null' => true]);
+        $table->addColumn('logout_time', 'timestamp', ['default' => NULL, 'null' => TRUE]);
+        $table->addColumn('ip_address', 'string', ['limit' => 24]);
         
         $table->addTimestamps();
         $table->create();

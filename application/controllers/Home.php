@@ -74,6 +74,14 @@ class Home extends MY_Controller {
 				'is_logged_in'	=> TRUE
 			];
 
+			$insert = [
+				'member_name'	=> $members['member_name'],
+				'member_email'	=> $members['email'],
+				'login_time'	=> date('Y-m-d H:i:s.u')
+			];
+
+			$this->db->insert('members', $insert);
+
 			$return = ['success' => true, 'message' =>  'Data Berhasil Di Simpan'];
 			$this->session->set_flashdata('success', $return);
 			redirect('/');
