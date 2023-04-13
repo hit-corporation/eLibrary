@@ -7,7 +7,7 @@ class Home extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('home_model');
+		$this->load->model(['home_model','member_model']);
 	}
 
 	public function index(){
@@ -48,49 +48,6 @@ class Home extends MY_Controller {
 
 		$this->load->view('header');
 		$this->load->view('home/book_detail', $data);
-		$this->load->view('footer');
-	}
-
-	public function login(){
-		if(isset($post['submit'])) {
-			$data = [
-				'user_name' => $post['userName']
-			];
-
-			$this->form_validation->set_rules('username', 'Username', 'required|callback_is_exists', [
-				'is_exists' => 'Username tidak di kenali !!!'
-			]);
-			
-			$this->form_validation->set_rules('password', 'Password', 'required');
-
-
-			if(!$this->form_validation->run()) 
-			{
-				$this->session->set_flashdata('error', ['errors' => $this->form_validation->error_array(),'old' => $_POST]);
-				redirect('login');
-			}
-
-			$user = $this->user_model->login($data);
-
-			if(!password_verify($post['password'], $user['user_pass']))
-			{
-				$this->session->set_flashdata('error', ['message' => 'Username atau password tidak valid','old' => $_POST]);
-				redirect('login');
-			}
-
-			unset($user['user_pass']);
-			$this->session->set_userdata('user', $user);
-			redirect('dashboard');
-		}
-
-		$this->load->view('header');
-		$this->load->view('home/user_profile');
-		$this->load->view('footer');
-	}
-
-	public function profile(){
-		$this->load->view('header');
-		$this->load->view('home/user_profile');
 		$this->load->view('footer');
 	}
 

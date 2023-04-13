@@ -32,6 +32,7 @@ class User_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('users');
 		$this->db->where('user_name', $data['user_name']);
+		$this->db->or_where('email', $data['user_name']);
 		$this->db->where('status', 'active');
 		$this->db->where('deleted_at', null);
 		$query = $this->db->get();
