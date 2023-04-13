@@ -65,7 +65,7 @@ class Setting extends Admin_Controller {
 		if(!$this->db->update('settings', $data, ['id' => 1])) 
 		{
 			$this->session->set_flashdata('error', ['message' => 'Data gagal di simpan']);
-			redirect('setting/loan');
+			redirect('admin/setting/loan');
 			return;
 		}
 		$this->session->set_flashdata('success', ['message' => 'Data berhasil di simpan']);
