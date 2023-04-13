@@ -18,15 +18,11 @@
 		<div class="row ipad-width">
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div class="topbar-filter">
-					<p>Found <span>1,608 movies</span> in total</p>
+					<p>Found <span><?=$total?> Books</span> in total</p>
 					<label>Sort by:</label>
 					<select>
-						<option value="popularity">Popularity Descending</option>
-						<option value="popularity">Popularity Ascending</option>
-						<option value="rating">Rating Descending</option>
-						<option value="rating">Rating Ascending</option>
-						<option value="date">Release date Descending</option>
-						<option value="date">Release date Ascending</option>
+						<option value="title-asc">Title Descending</option>
+						<option value="title-desc">Title Ascending</option>
 					</select>
 					<a href="movielist.html" class="list"><i class="ion-ios-list-outline "></i></a>
 					<a  href="moviegrid.html" class="grid"><i class="ion-grid active"></i></a>
@@ -51,13 +47,17 @@
 						
 				</div>		
 				<div class="topbar-filter">
-					<label>Movies per page:</label>
-					<select>
-						<option value="range">20 Movies</option>
-						<option value="saab">10 Movies</option>
+					<label>Books per page:</label>
+					<select name="book-per-pages">
+						<option value="10" <?=(isset($limit) && $limit == 10) ? 'selected' : '' ?> >10 Books</option>
+						<option value="20" <?=(isset($limit) && $limit == 20) ? 'selected' : '' ?>>20 Books</option>
 					</select>
+
+					<!-- create pagination codeigniter -->
+					<?php echo $this->pagination->create_links(); ?>
+
 					
-					<div class="pagination2">
+					<!-- <div class="pagination2">
 						<span>Page 1 of 2:</span>
 						<a class="active" href="#">1</a>
 						<a href="#">2</a>
@@ -66,7 +66,7 @@
 						<a href="#">78</a>
 						<a href="#">79</a>
 						<a href="#"><i class="ion-arrow-right-b"></i></a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<div class="col-md-4 col-sm-12 col-xs-12">
@@ -129,4 +129,15 @@
 		</div>
 	</div>
 </div>
+<!-- import cdn jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+	// jika user mengganti limit
+	$('select[name="book-per-pages"]').on('change', function(){
+		// ambil value dari option yang dipilih
+		var limit = $(this).val();
 
+		// redirect ke halaman yang sama dengan mengirimkan data limit
+		window.location.href = '<?=base_url('home/list_book/'.$this->uri->segment(3).'?limit=')?>' + limit;
+	});
+</script>
