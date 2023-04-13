@@ -20,7 +20,7 @@
 				<div class="topbar-filter">
 					<p>Found <span><?=$total?> Books</span> in total</p>
 					<label>Sort by:</label>
-					<select>
+					<select name="sortBy">
 						<option value="title-asc">Title Descending</option>
 						<option value="title-desc">Title Ascending</option>
 					</select>
@@ -137,7 +137,22 @@
 		// ambil value dari option yang dipilih
 		var limit = $(this).val();
 
+		// get data sort by
+		var sortBy = $('select[name="sortBy"]').val();
+
 		// redirect ke halaman yang sama dengan mengirimkan data limit
-		window.location.href = '<?=base_url('book/list_book/'.$this->uri->segment(3).'?limit=')?>' + limit;
+		window.location.href = '<?=base_url('book/list_book/'.$this->uri->segment(3).'?limit=')?>' + limit + '&sortBy=' + sortBy;
+	});
+
+	// jika user mengganti sort by
+	$('select[name="sortBy"]').on('change', function(){
+		// ambil value dari option yang dipilih
+		var sortBy = $(this).val();
+
+		// get data limit
+		var limit = $('select[name="book-per-pages"]').val();
+
+		// redirect ke halaman yang sama dengan mengirimkan data sort by
+		window.location.href = '<?=base_url('book/list_book/'.$this->uri->segment(3).'?sortBy=')?>' + sortBy + '&limit=' + limit;
 	});
 </script>
