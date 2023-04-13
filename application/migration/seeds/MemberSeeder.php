@@ -29,6 +29,7 @@ class MemberSeeder extends AbstractSeed
                 'username'    => $email,
                 'password'    => password_hash('123456', PASSWORD_DEFAULT),
                 'kelas'       => rand(1, 12),
+                'status'      => 'active',
                 'email'       => $email,
                 'address'     => $faker->unique()->address(),
                 'phone'       => $faker->unique()->phoneNumber()

@@ -28,6 +28,7 @@ final class CreateMembersTable extends AbstractMigration
 			    ->addColumn('email', 'string', ['limit' => 100, 'null' => true])
 			    ->addColumn('address', 'text', ['null' => true])
 			    ->addColumn('phone', 'string', ['limit' => 100, 'null' => true])
+          ->addColumn('status', 'string', ['default' => 'active'])
           ->addTimestamps()
 			    ->addColumn('deleted_at', 'datetime', ['null' => true])
 

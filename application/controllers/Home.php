@@ -5,7 +5,7 @@ class Home extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model(['home_model','member_model', 'user_model']);
+		$this->load->model(['home_model','member_model']);
 	}
 
 	public function index(){
@@ -68,10 +68,10 @@ class Home extends MY_Controller {
 			$username = $this->input->post('username', TRUE);
 			$password = $this->input->post('password', TRUE);
 
-			$this->form_validation->set_rules('username', 'required|callback_is_exists', [
+			$this->form_validation->set_rules('username', 'Usernmae', 'required|callback_is_exists', [
 				'is_exists'	=> 'ID Pengguna tidak di temukan'
 			]);
-			$this->form_validation->set_rules('password', 'required|callback_valid_password', [
+			$this->form_validation->set_rules('password', 'Password', 'required|callback_valid_password', [
 				'valid_password' => 'Password tidak sama'
 			]);
 
@@ -82,9 +82,18 @@ class Home extends MY_Controller {
 				redirect($_SERVER['HTTP_REFERER']);
 			}
 
+			$members = $this->member_model->login($username);
+
+			$_SESSION['user'] = [
+				'user_name'	=> $members['username'],
+				'full_name'	=> $members['member_name'],
+				'email'		=> $members['email'],
+				'role'		=> 'member'
+			];
+
 			$return = ['success' => true, 'message' =>  'Data Berhasil Di Simpan'];
 			$this->session->set_flashdata('success', $return);
-			redirect($_SERVER['HTTP_REFERER']);
+			redirect('/');
 		}
 		catch(Exception $e)
 		{
@@ -106,7 +115,7 @@ class Home extends MY_Controller {
 	  * @return boolean
 	  */
 	 public function is_exists($str): bool {
-		$members = $this->user_model->members_login($str);
+		$members = $this->member_model->login($str);
 		if(!isset($members['username']))
 			return false;
 		return true;
@@ -118,7 +127,7 @@ class Home extends MY_Controller {
 	 * @return boolean
 	 */
 	public function valid_password($str): bool {
-		$members = $this->user_model->members_login($str);
+		$members = $this->member_model->login($str);
 		if(isset($membes['username']) && password_verify($str, $members['password']))
 			return false;
 		return true;
