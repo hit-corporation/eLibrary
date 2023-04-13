@@ -138,6 +138,6 @@
 		var limit = $(this).val();
 
 		// redirect ke halaman yang sama dengan mengirimkan data limit
-		window.location.href = '<?=base_url('home/list_book/'.$this->uri->segment(3).'?limit=')?>' + limit;
+		window.location.href = '<?=base_url('book/list_book/'.$this->uri->segment(3).'?limit=')?>' + limit;
 	});
 </script>
