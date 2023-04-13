@@ -35,7 +35,7 @@
     <div class="login-content">
         <a href="#" class="close">x</a>
         <h3>Login</h3>
-        <form method="post" action="<?=base_url('user')?>">
+        <form name="form-login" method="post" action="<?=html_escape(base_url('home/login'))?>">
         	<div class="row">
         		 <label for="username">
                     Username:

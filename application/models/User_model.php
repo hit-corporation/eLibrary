@@ -75,4 +75,18 @@ class User_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	/**
+	 * Get Membe By name
+	 *
+	 * @param string $username
+	 * @return void
+	 */
+	public function member_login(string $username): array {
+		$this->db->where('username', $username)
+				 ->or_where('email', $username);
+		$res = $this->db->get('members');
+
+		return $res->row_array();
+	}
+
 }

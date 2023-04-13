@@ -33,7 +33,8 @@
                             <div class="col-1 d-flex flex-nowrap justify-content-center align-items-center"><span>-</span></div>
                             <div class="col-7">
                                 <select name="due_date[unit]" class="form-control <?=empty($_SESSION['error']['errors']['due_date[unit]']) ?: 'is-invalid' ?>">
-                                    <option value="hours" selected>Jam</option>
+                                    <option value="">-------------------------------</option>
+                                    <option value="hours">Jam</option>
                                     <option value="months">Bulan</option>
                                     <option value="days">Hari</option>
                                     <option value="weeks">Minggu</option>
@@ -51,14 +52,14 @@
                     <div class="col-12 col-md-8 col-lg-8">
                         <div class="row">
                             <div class="col-4">
-                                <select class="form-control" name="idle_duration[nilai]"></select>
+                                <input type="number" class="form-control" name="idle_duration[value]" min="1" max="100" value="15">
                             </div>
-                            <div class="col-1"></div>
+                            <div class="col-1 d-flex flex-nowrap justify-content-center align-items-center"><span>-</span></div>
                             <div class="col-7">
                                 <select class="form-control" name="idle_duration[unit]">
                                     <option value="">-------------------------</option>
-                                    <option value="menit">Menit</option>
-                                    <option value="jam">Jam</option>
+                                    <option value="minutes" selected>Menit</option>
+                                    <option value="hours">Jam</option>
                                 </select>
                             </div>
                         </dov>
