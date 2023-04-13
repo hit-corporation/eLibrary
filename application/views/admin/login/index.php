@@ -40,7 +40,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
                                     </div>
-                                    <form class="user" method="POST" action="<?=base_url('login')?>">
+                                    <form class="user" method="POST" action="<?=base_url('admin/login')?>">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user <?php if(isset($_SESSION['error']['errors']['userName'])): ?> is-invalid <?php endif ?>"
                                                 id="userName" name="userName" value="<?=$_SESSION['error']['old']['userName'] ?? '' ?>"

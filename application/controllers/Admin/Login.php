@@ -38,11 +38,12 @@ class Login extends CI_Controller {
 			}
 
 			unset($user['user_pass']);
+			$user['role'] = 'admin';
 			$this->session->set_userdata('user', $user);
 			redirect('admin/dashboard');
 		}
 
-		$this->load->view('login/index');
+		$this->load->view('admin/login/index');
 	}
 
 	public function register(){

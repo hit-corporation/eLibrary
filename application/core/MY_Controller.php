@@ -33,6 +33,11 @@ class Admin_Controller extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
+
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+            redirect(base_url('admin/login'));
+            return;
+        }
     }
 
     protected function render($page, $data = [], $folder = NULL) {
