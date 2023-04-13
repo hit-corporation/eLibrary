@@ -35,7 +35,7 @@
     <div class="login-content">
         <a href="#" class="close">x</a>
         <h3>Login</h3>
-        <form method="post" action="<?=base_url('home/login')?>">
+        <form method="post" action="<?=base_url('user')?>">
         	<div class="row">
         		 <label for="username">
                     Username:
@@ -142,7 +142,7 @@
 								<li class="it-last"><a href="comingsoon.html">Coming soon</a></li>
 							</ul>
 						</li>                
-						<li><a href="#">Profile</a></li>
+						<li><a href="<?=base_url('user/profile')?>">Profile</a></li>
 						<li class="loginLink"><a href="#">LOG In</a></li>
 					</ul>
 				</div>
