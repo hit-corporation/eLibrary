@@ -26,9 +26,17 @@ final class CreateTransactionTable extends AbstractMigration
         $table->addColumn('trans_code', 'string', ['limit' => 225, 'default' => bin2hex(random_bytes(8))]);
         $table->addColumn('trans_timestamp', 'timestamp', ['default' => 'CURRENT_TIMESTAMP']);
         $table->addColumn('member_id', 'integer', ['null' => true]);
-
+        $table->addColumn('book_id', 'integer');
+        $table->addColumn('start_time', 'timestamp');
+        $table->addColumn('end_time', 'timestamp');
+        $table->addColumn('config_idle', 'string', ['limit' => 160]);
+        $table->addColumn('config_borrow_limit', 'string', ['limit' => 160]);
+        $table->addColumn('note', 'text', ['null' => true]);
+        // non column
         $table->addIndex('trans_code', ['unique' => true]);
         $table->addForeignKey('member_id', 'members', 'id', ['update' => 'CASCADE', 'delete' => 'CASCADE']);
+        $table->addForeignKey('book_id', 'books', 'id', ['update' => 'CASCADE', 'delete' => 'CASCADE']);
+
         $table->addTimestamps();
         $table->create();
     }

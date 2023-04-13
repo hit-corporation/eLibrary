@@ -13,4 +13,21 @@ class User extends MY_Controller {
 		$this->load->view('home/user_profile');
 		$this->load->view('footer');
 	}
+
+	/**
+	 * User login
+	 *
+	 * @return void
+	 */
+	public function login(): void
+	{
+		try
+		{
+			
+		}
+		catch(Exception $e)
+		{
+			log_message('error', $e->__toString());
+		}
+	}
 }
