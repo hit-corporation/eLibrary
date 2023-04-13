@@ -17,6 +17,10 @@ class Book extends MY_Controller {
 		else
 			$limit = 10;
 
+		if(isset($_GET['sort']))
+			$sortBy = $_GET['sort'];
+		else
+			$sortBy = null;
 
 		$offset = $this->uri->segment(4);
 		$this->load->library('pagination');
@@ -47,15 +51,15 @@ class Book extends MY_Controller {
 		$config['attributes'] = array('class' => 'page-link');
 		
 		if($this->uri->segment(3) == 'newest'){
-			$data['books'] = $this->home_model->get_new_books($limit, $offset);
+			$data['books'] = $this->home_model->get_new_books($limit, $offset, $sortBy);
 			$data['title'] = 'Newest Books';
 			$config['total_rows'] = $this->home_model->get_new_book_count();
 		} elseif ($this->uri->segment(3) == 'popular'){
-			$data['books'] = $this->home_model->get_popular_books($limit, $offset);
+			$data['books'] = $this->home_model->get_popular_books($limit, $offset, $sortBy);
 			$data['title'] = 'Popular Books';
 			$config['total_rows'] = $this->home_model->get_popular_book_count();
 		} elseif ($this->uri->segment(3) == 'recomend') {
-			$data['books'] = $this->home_model->get_recomend_books($limit, $offset);
+			$data['books'] = $this->home_model->get_recomend_books($limit, $offset, $sortBy);
 			$data['title'] = 'Recomend Books';
 			$config['total_rows'] = $this->home_model->get_recomend_book_count();
 		}
