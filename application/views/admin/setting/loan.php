@@ -51,13 +51,13 @@
                     <div class="col-12 col-md-8 col-lg-8">
                         <div class="row">
                             <div class="col-4">
-                                <select class="form-control" name="idle_duration[nilai]"></select>
+                                <input type="number" class="form-control" name="idle_duration[nilai]" min="1" max="100" value="15">
                             </div>
-                            <div class="col-1"></div>
+                            <div class="col-1 d-flex flex-nowrap justify-content-center align-items-center"><span>-</span></div>
                             <div class="col-7">
                                 <select class="form-control" name="idle_duration[unit]">
                                     <option value="">-------------------------</option>
-                                    <option value="menit">Menit</option>
+                                    <option value="menit" selected>Menit</option>
                                     <option value="jam">Jam</option>
                                 </select>
                             </div>
