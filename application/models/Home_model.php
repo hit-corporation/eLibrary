@@ -6,7 +6,7 @@ class Home_model extends CI_Model {
         parent::__construct();
     }
 
-	public function get_books($limit, $offset){
+	public function get_books($limit, $offset, $sortBy = null){
 		$this->db->where('deleted_at IS NULL');
 		$this->db->order_by('title', 'ASC');
 		$this->db->limit($limit, $offset);
@@ -14,9 +14,13 @@ class Home_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function get_new_books($limit = 10, $offset = null){
+	public function get_new_books($limit = 10, $offset = null, $sortBy = null){
 		$this->db->where('deleted_at IS NULL');
-		$this->db->order_by('created_at', 'DESC');
+		if ($sortBy == 'title-asc')
+			$this->db->order_by('title', 'ASC');
+		elseif ($sortBy == 'title-desc')
+			$this->db->order_by('title', 'DESC');
+
 		$this->db->limit($limit, $offset);
 		$query = $this->db->get('books');
 		return $query->result_array();
@@ -30,7 +34,7 @@ class Home_model extends CI_Model {
 	}
 	
 
-	public function get_popular_books($limit = 10, $offset = null){
+	public function get_popular_books($limit = 10, $offset = null, $sortBy = null){
 		$this->db->where('deleted_at IS NULL');
 		$this->db->order_by('title', 'DESC');
 		$this->db->limit($limit, $offset);
@@ -45,7 +49,7 @@ class Home_model extends CI_Model {
 		return $query->num_rows();
 	}
 
-	public function get_recomend_books($limit = 4, $offset = null){
+	public function get_recomend_books($limit = 4, $offset = null, $sortBy = null){
 		$this->db->where('deleted_at IS NULL');
 		$this->db->order_by('title', 'DESC');
 		$this->db->limit($limit, $offset);
