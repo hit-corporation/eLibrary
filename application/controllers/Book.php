@@ -37,10 +37,11 @@ class Book extends MY_Controller {
 		$title 			= isset($_GET['title']) ? $_GET['title'] : '';
 		$publisher_id 	= isset($_GET['publisher_id']) ? $_GET['publisher_id'] : '';
 		$author 		= isset($_GET['author']) ? $_GET['author'] : '';
+		$categori_ids 	= isset($_GET['category_ids']) ? ($_GET['category_ids']) : '';
 
 		$page = ($page - 1) * $limit;
 
-		$data['books'] 	= $this->home_model->get_books($limit, $page, $title, $publisher_id, $author);
+		$data['books'] 	= $this->home_model->get_books($limit, $page, $title, $publisher_id, $author, $categori_ids);
 		$data['total_records'] = $this->home_model->get_total_books();
 		$data['total_pages'] = ceil($data['total_records'] / $limit);
 		
