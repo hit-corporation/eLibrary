@@ -148,10 +148,11 @@
 		var limit = $('select[name="book-per-pages"]').val();
 		var publisher_id = $('select[name="publisher"]').val();
 		var author = $('input[name="author"]').val();
+		var category_ids = $('select[name="category_id"]').val();
 
-		load_data(1, limit, title, publisher_id, author);
+		load_data(1, limit, title, publisher_id, author, category_ids);
 
-		function load_data(page, limit = null, title = '', publisher_id = '', author = '') {
+		function load_data(page, limit = null, title = '', publisher_id = '', author = '', category_ids = null) {
 			$.ajax({
 				type: "GET",
 				url: "<?=base_url('book/get_all')?>",
@@ -160,7 +161,8 @@
 					limit: limit,
 					title: title,
 					publisher_id: publisher_id,
-					author: author
+					author: author,
+					category_ids: category_ids
 				},
 				success: function (data) {
 					// console.log(data.total_page);
@@ -186,7 +188,7 @@
 
 							$('.flex-wrap-movielist').empty();
 							$('.pagination2').empty();
-							load_data(i+1, limit, title, publisher_id, author);	
+							load_data(i+1, limit, title, publisher_id, author, category_ids);	
 						});
 					}
 
@@ -202,7 +204,7 @@
 			$('.pagination2').empty();
 
 			limit = $(this).val();
-			load_data(1, limit, title, publisher_id, author);
+			load_data(1, limit, title, publisher_id, author, category_ids);
 		});
 
 		// submit di klik
@@ -215,8 +217,9 @@
 			title = $('input[name="title"]').val();
 			publisher_id = $('select[name="publisher"]').val();
 			author = $('input[name="author"]').val();
+			category_ids = $('select[name="category_id"]').val();
 
-			load_data(1, limit, title, publisher_id, author);
+			load_data(1, limit, title, publisher_id, author, category_ids);
 		});
 
 	});
