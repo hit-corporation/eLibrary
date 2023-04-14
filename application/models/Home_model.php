@@ -6,7 +6,10 @@ class Home_model extends CI_Model {
         parent::__construct();
     }
 
-	public function get_books($limit = null, $offset = null, $sortBy = null){
+	public function get_books($limit = null, $offset = null, $title = null){
+		if(!empty($title))
+			$this->db->where('LOWER(title) LIKE \'%'.trim(strtolower($title)).'%\'', NULL, FALSE);
+
 		$this->db->where('deleted_at IS NULL');
 		$this->db->order_by('title', 'ASC');
 		$this->db->limit($limit, $offset);
@@ -14,7 +17,7 @@ class Home_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function get_new_books($limit = 10, $offset = null, $sortBy = null){
+	public function get_new_books($limit = 10, $offset = null, $title = null, $sortBy = null){
 		$this->db->where('deleted_at IS NULL');
 		if ($sortBy == 'title-asc')
 			$this->db->order_by('title', 'ASC');

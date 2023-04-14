@@ -81,7 +81,7 @@
 							<div class="row">
 								<div class="col-md-12 form-it">
 									<label>Nama Buku</label>
-									<input type="text" placeholder="Enter keywords">
+									<input type="text" placeholder="Enter keywords" name="title">
 								</div>
 								<div class="col-md-12 form-it">
 									<label>Kategori</label>
@@ -122,7 +122,7 @@
 									</div>
 								</div>
 								<div class="col-md-12 ">
-									<input class="submit" type="submit" value="submit">
+									<input class="submit" type="submit" value="submit" name="submit">
 								</div>
 							</div>
 						</form>
@@ -134,20 +134,25 @@
 	</div>
 </div>
 <!-- import cdn jquery -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <script>
 	$(document).ready(function () {
 
 		// data awal di load
-		load_data();
+		var title = $('input[name="title"]').val();
+		var limit = $('select[name="book-per-pages"]').val();
 
-		function load_data(page, limit = 10) {
+
+		load_data(1, limit, title);
+
+		function load_data(page, limit = null, title = '') {
 			$.ajax({
 				type: "GET",
 				url: "<?=base_url('book/get_all')?>",
 				data: {
 					page: page,
-					limit: limit
+					limit: limit,
+					title: title
 				},
 				success: function (data) {
 					// console.log(data.total_page);
@@ -173,7 +178,7 @@
 
 							$('.flex-wrap-movielist').empty();
 							$('.pagination2').empty();
-							load_data(i+1);	
+							load_data(i+1, limit, title);	
 						});
 					}
 
@@ -189,7 +194,19 @@
 			$('.pagination2').empty();
 
 			limit = $(this).val();
-			load_data(1, limit);
+			load_data(1, limit, title);
+		});
+
+		// submit di klik
+		$('input[name="submit"]').on('click', function (e) {
+			e.preventDefault();
+
+			$('.flex-wrap-movielist').empty();
+			$('.pagination2').empty();
+
+			title = $('input[name="title"]').val();
+
+			load_data(1, limit, title);
 		});
 
 	});
