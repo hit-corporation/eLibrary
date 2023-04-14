@@ -41,9 +41,11 @@ class Home_model extends CI_Model {
 		}
 
 
-		$this->db->where('deleted_at IS NULL');
+		$this->db->where('b.deleted_at IS NULL');
 		$this->db->limit($limit, $offset);
-		$query = $this->db->get('books');
+		$this->db->join('publishers p', 'p.id = b.publisher_id');
+		$this->db->join('categories c', 'c.id = b.category_id');
+		$query = $this->db->get('books b');
 		return $query->result_array();
 	}
 
