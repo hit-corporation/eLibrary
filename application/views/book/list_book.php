@@ -138,12 +138,13 @@
 	$(document).ready(function () {
 
 		// data awal di load
-		var title = $('input[name="title"]').val();
-		var limit = $('select[name="book-per-pages"]').val();
-		var publisher_id = $('select[name="publisher"]').val();
-		var author = $('input[name="author"]').val();
-		var category_ids = $('select[name="category_id"]').val();
-		var year = $('input[name="start_year"]').val() + '-' + $('input[name="end_year"]').val();
+		var view_group 		= '<?=$viewGroup?>';
+		var title 			= $('input[name="title"]').val();
+		var limit 			= $('select[name="book-per-pages"]').val();
+		var publisher_id 	= $('select[name="publisher"]').val();
+		var author 			= $('input[name="author"]').val();
+		var category_ids 	= $('select[name="category_id"]').val();
+		var year 			= $('input[name="start_year"]').val() + '-' + $('input[name="end_year"]').val();
 
 		load_data(1, limit, title, publisher_id, author, category_ids, year);
 
@@ -152,6 +153,7 @@
 				type: "GET",
 				url: "<?=base_url('book/get_all')?>",
 				data: {
+					view_group: view_group,
 					page: page,
 					limit: limit,
 					title: title,
