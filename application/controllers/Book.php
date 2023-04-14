@@ -7,7 +7,7 @@ class Book extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model(['home_model', 'publisher_model']);
+		$this->load->model(['home_model', 'publisher_model', 'kategori_model']);
 	}
 
 	public function index(){
@@ -24,6 +24,7 @@ class Book extends MY_Controller {
 		// $data['newBooks'] 	= $this->home_model->get_new_books();
 
 		$data['publishers'] = $this->publisher_model->get_all();
+		$data['categories'] = $this->kategori_model->get_all();
 
 		$this->load->view('header');
 		$this->load->view('book/list_book', $data);
