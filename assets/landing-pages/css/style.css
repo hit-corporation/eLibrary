@@ -5610,13 +5610,15 @@ ul {
 
 @media (min-width: 991px) {
 	.latestnewv2 img {
-		height: 150px;
+		height: 120px;
+		width: fit-content;
 	}
 }
 
 @media (min-width: 1200px) {
 	.latestnewv2 img {
-		height: 200px;
+		height: 150px;
+		width: fit-content;
 	}
 }
 

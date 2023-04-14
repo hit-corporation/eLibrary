@@ -20,14 +20,14 @@
 		<div class="row ipad-width">
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div class="topbar-filter">
-					<p>Found <span><?//=$total?> Books</span> in total</p>
+					<p>Found <span class="total-found"> </span></p>
 					<label>Sort by:</label>
-					<select name="sortBy">
-						<option value="title-asc">Title Descending</option>
-						<option value="title-desc">Title Ascending</option>
+					<select name="sort-by">
+						<option value="title-asc">Title Ascending</option>
+						<option value="title-desc">Title Descending</option>
 					</select>
-					<a href="movielist.html" class="list"><i class="ion-ios-list-outline "></i></a>
-					<a  href="moviegrid.html" class="grid"><i class="ion-grid active"></i></a>
+					<!-- <a href="movielist.html" class="list"><i class="ion-ios-list-outline "></i></a>
+					<a  href="moviegrid.html" class="grid"><i class="ion-grid active"></i></a> -->
 				</div>
 				<div class="flex-wrap-movielist">
 
@@ -145,10 +145,11 @@
 		var author 			= $('input[name="author"]').val();
 		var category_ids 	= $('select[name="category_id"]').val();
 		var year 			= $('input[name="start_year"]').val() + '-' + $('input[name="end_year"]').val();
+		var sort_by 		= $('select[name="sort-by"]').val();
 
-		load_data(1, limit, title, publisher_id, author, category_ids, year);
+		load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
 
-		function load_data(page, limit = null, title = '', publisher_id = '', author = '', category_ids = null, year = '') {
+		function load_data(page, limit = null, title = '', publisher_id = '', author = '', category_ids = null, year = '', sort_by = '') {
 			$.ajax({
 				type: "GET",
 				url: "<?=base_url('book/get_all')?>",
@@ -160,7 +161,8 @@
 					publisher_id: publisher_id,
 					author: author,
 					category_ids: category_ids,
-					year: year
+					year: year,
+					sort_by: sort_by
 				},
 				success: function (data) {
 					// console.log(data.total_page);
@@ -186,9 +188,13 @@
 
 							$('.flex-wrap-movielist').empty();
 							$('.pagination2').empty();
-							load_data(i+1, limit, title, publisher_id, author, category_ids, year);	
+							load_data(i+1, limit, title, publisher_id, author, category_ids, year, sort_by);	
 						});
 					}
+
+					// append total-found
+					$('.total-found').empty();
+					$('.total-found').append(`${data.total_records} Buku`);
 
 				}
 			});
@@ -202,7 +208,7 @@
 			$('.pagination2').empty();
 
 			limit = $(this).val();
-			load_data(1, limit, title, publisher_id, author, category_ids, year);
+			load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
 		});
 
 		// submit di klik
@@ -220,6 +226,18 @@
 
 			load_data(1, limit, title, publisher_id, author, category_ids, year);
 		});
+
+		// select sort-by di ubah
+		$('select[name="sort-by"]').on('change', function (e) {
+			e.preventDefault();
+
+			$('.flex-wrap-movielist').empty();
+			$('.pagination2').empty();
+
+			sort_by = $(this).val();
+			load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
+		});
+		
 
 	});
 </script>
