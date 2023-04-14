@@ -26,28 +26,13 @@
 						<option value="title-asc">Title Ascending</option>
 						<option value="title-desc">Title Descending</option>
 					</select>
-					<!-- <a href="movielist.html" class="list"><i class="ion-ios-list-outline "></i></a>
-					<a  href="moviegrid.html" class="grid"><i class="ion-grid active"></i></a> -->
+					<a href="#" class="list"><i class="ion-ios-list-outline "></i></a>
+					<a  href="#" class="grid"><i class="ion-grid active"></i></a>
 				</div>
-				<div class="flex-wrap-movielist">
-
-					<!-- <?php foreach ($books as $book): ?>
-
-						<div class="movie-item-style-2 movie-item-style-1">
-							<img src="<? // =base_url('assets/img/books/').$book['cover_img']?>" alt="">
-							<div class="hvr-inner">
-	            				<a  href="<? // =base_url('/home/book_detail?id=').$book['id']?>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
-	            			</div>
-							<div class="mv-item-infor">
-								<h6><a href="<? // =base_url('/home/book_detail?id=').$book['id']?>"><? // =$book['title']?></a></h6>
-								<p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
-							</div>
-						</div>
-
-					<?php endforeach; ?> -->
-
-						
-				</div>		
+				<div class="flex-wrap-movielist"></div>
+				
+				<div class="flex-wrap-movielist-2"></div>
+				
 				<div class="topbar-filter">
 					<label>Books per page:</label>
 					<select name="book-per-pages">
@@ -139,6 +124,7 @@
 
 		// data awal di load
 		var view_group 		= '<?=$viewGroup?>';
+		var view_style 		= '<?=$viewStyle?>';
 		var title 			= $('input[name="title"]').val();
 		var limit 			= $('select[name="book-per-pages"]').val();
 		var publisher_id 	= $('select[name="publisher"]').val();
@@ -155,6 +141,7 @@
 				url: "<?=base_url('book/get_all')?>",
 				data: {
 					view_group: view_group,
+					view_style: view_style,
 					page: page,
 					limit: limit,
 					title: title,
@@ -165,20 +152,42 @@
 					sort_by: sort_by
 				},
 				success: function (data) {
-					// console.log(data.total_page);
 					
-					$.each(data.books, function (key, value) {
-						$('.flex-wrap-movielist').append(`
-							<div class="movie-item-style-2 movie-item-style-1">
-								<img loading="lazy" src="<?=base_url('assets/img/books/')?>${value.cover_img}" onload="this.style.opacity = 1;" alt="">
-							<div class="hvr-inner">
-	            				<a  href="<?=base_url('/home/book_detail?id=')?>${value.id}"> Read more <i class="ion-android-arrow-dropright"></i> </a>
-	            			</div>
-							<div class="mv-item-infor">
-								<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title}</a></h6>
-								<!-- <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p> -->
-							</div>`);
-					});
+					// jika view style list
+					if(view_style == 'list'){
+						$.each(data.books, function (key, value){
+							let desc = value.description;
+							if(desc.length > 100){
+								desc = desc.substring(0, 300) + ' ...';
+							}
+							$('.flex-wrap-movielist-2').append(`
+								<div class="movie-item-style-2">
+									<img src="<?=base_url('assets/img/books/')?>${value.cover_img}" alt="">
+									<div class="mv-item-infor">
+										<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title} <span>(${value.publish_year})</span></a></h6>
+										<p class="describe">${desc}</p>
+										<p class="run-time">Pengarang: ${value.author}.</p>
+										<p>Kategori: <a href="#">${value.category_name}</a></p>
+										<p>Penerbit: <a href="#">${value.publisher_name}</a></p>
+									</div>
+								</div>
+							`);
+						});
+					}else{
+						$.each(data.books, function (key, value) {
+							$('.flex-wrap-movielist').append(`
+								<div class="movie-item-style-2 movie-item-style-1">
+									<img loading="lazy" src="<?=base_url('assets/img/books/')?>${value.cover_img}" onload="this.style.opacity = 1;" alt="">
+								<div class="hvr-inner">
+									<a  href="<?=base_url('/home/book_detail?id=')?>${value.id}"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+								</div>
+								<div class="mv-item-infor">
+									<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title}</a></h6>
+									<!-- <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p> -->
+								</div>`);
+						});
+					}
+
 
 					for(let i = 0; i < data.total_pages; i++){
 						$('.pagination2').append(`<a class="halaman" id="halaman_${i+1}" href="#">${i+1}</a>`);
@@ -187,6 +196,7 @@
 							e.preventDefault();
 
 							$('.flex-wrap-movielist').empty();
+							$('.flex-wrap-movielist-2').empty();
 							$('.pagination2').empty();
 							load_data(i+1, limit, title, publisher_id, author, category_ids, year, sort_by);	
 						});
@@ -205,6 +215,7 @@
 			e.preventDefault();
 
 			$('.flex-wrap-movielist').empty();
+			$('.flex-wrap-movielist-2').empty();
 			$('.pagination2').empty();
 
 			limit = $(this).val();
@@ -216,6 +227,7 @@
 			e.preventDefault();
 
 			$('.flex-wrap-movielist').empty();
+			$('.flex-wrap-movielist-2').empty();
 			$('.pagination2').empty();
 
 			title = $('input[name="title"]').val();
@@ -232,12 +244,38 @@
 			e.preventDefault();
 
 			$('.flex-wrap-movielist').empty();
+			$('.flex-wrap-movielist-2').empty();
 			$('.pagination2').empty();
 
 			sort_by = $(this).val();
 			load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
 		});
 		
+		// tampilan list di klik
+		$('.list').on('click', function (e) {
+			e.preventDefault();
+
+			$('.flex-wrap-movielist').empty();
+			$('.flex-wrap-movielist-2').empty();
+			$('.pagination2').empty();
+
+			view_style = 'list';
+			load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
+		});
+
+		// tampilan grid di klik
+		$('.grid').on('click', function (e) {
+			e.preventDefault();
+
+			$('.flex-wrap-movielist').empty();
+			$('.flex-wrap-movielist-2').empty();
+			$('.pagination2').empty();
+
+			view_style = 'grid';
+			load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
+		});
+
+
 
 	});
 </script>
