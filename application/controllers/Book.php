@@ -25,6 +25,7 @@ class Book extends MY_Controller {
 		$view_group 	= $_GET['view_group'];
 		$page 			= isset($_GET['page']) ? $_GET['page'] : 1;
 		$limit 			= isset($_GET['limit']) ? $_GET['limit'] : 3;
+		$sort_by 		= isset($_GET['sort_by']) ? $_GET['sort_by'] : 'id';
 
 		$title 			= isset($_GET['title']) ? $_GET['title'] : '';
 		$publisher_id 	= isset($_GET['publisher_id']) ? $_GET['publisher_id'] : '';
@@ -34,8 +35,8 @@ class Book extends MY_Controller {
 
 		$page = ($page - 1) * $limit;
 
-		$data['books'] 	= $this->home_model->get_books($view_group, $limit, $page, $title, $publisher_id, $author, $categori_ids, $year);
-		$data['total_records'] = $this->home_model->get_total_books();
+		$data['books'] 	= $this->home_model->get_books($view_group, $limit, $page, $title, $publisher_id, $author, $categori_ids, $year, $sort_by);
+		$data['total_records'] = $this->home_model->get_total_books($view_group, $title, $publisher_id, $author, $categori_ids, $year);
 		$data['total_pages'] = ceil($data['total_records'] / $limit);
 		
 		// create json header	
