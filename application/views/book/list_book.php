@@ -1,3 +1,5 @@
+
+
 <div class="hero common-hero">
 	<div class="container">
 		<div class="row">
@@ -151,8 +153,9 @@
 					// console.log(data.total_page);
 					
 					$.each(data.books, function (key, value) {
-						$('.flex-wrap-movielist').append(`<div class="movie-item-style-2 movie-item-style-1">
-							<img loading="lazy" src="<?=base_url('assets/img/books/')?>${value.cover_img}" alt="">
+						$('.flex-wrap-movielist').append(`
+							<div class="movie-item-style-2 movie-item-style-1">
+								<img loading="lazy" src="<?=base_url('assets/img/books/')?>${value.cover_img}" onload="this.style.opacity = 1;" alt="">
 							<div class="hvr-inner">
 	            				<a  href="<?=base_url('/home/book_detail?id=')?>${value.id}"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 	            			</div>
