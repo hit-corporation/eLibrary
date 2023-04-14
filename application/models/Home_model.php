@@ -6,7 +6,7 @@ class Home_model extends CI_Model {
         parent::__construct();
     }
 
-	public function get_books($view_group = null, $limit = null, $offset = null, $title = null, $publisher_id = null, $author = null, $category_ids = null, $year = null){
+	public function get_books($view_group = null, $limit = null, $offset = null, $title = null, $publisher_id = null, $author = null, $category_ids = null, $year = null, $sort_by = null){
 		if ($view_group == 'newest'){
 			$this->db->order_by('created_at', 'DESC');
 		} elseif ($view_group == 'popular'){
@@ -14,6 +14,12 @@ class Home_model extends CI_Model {
 		} elseif ($view_group == 'recomend'){
 			$this->db->order_by('title', 'DESC');
 		}
+
+		if ($sort_by == 'title-asc')
+			$this->db->order_by('title', 'ASC');
+
+		if ($sort_by == 'title-desc')
+			$this->db->order_by('title', 'DESC');
 
 		if(!empty($title))
 			$this->db->where('LOWER(title) LIKE \'%'.trim(strtolower($title)).'%\'', NULL, FALSE);
@@ -103,7 +109,34 @@ class Home_model extends CI_Model {
 
 	
 
-	public function get_total_books(){
+	public function get_total_books($view_group = null, $title = null, $publisher_id = null, $author = null, $category_ids = null, $year = null){
+		if ($view_group == 'newest'){
+			$this->db->order_by('created_at', 'DESC');
+		} elseif ($view_group == 'popular'){
+			$this->db->order_by('title', 'DESC');
+		} elseif ($view_group == 'recomend'){
+			$this->db->order_by('title', 'DESC');
+		}
+
+		if(!empty($title))
+			$this->db->where('LOWER(title) LIKE \'%'.trim(strtolower($title)).'%\'', NULL, FALSE);
+
+		if(!empty($publisher_id))
+			$this->db->where('publisher_id', $publisher_id);
+
+		if(!empty($author))
+			$this->db->where('LOWER(author) LIKE \'%'.trim(strtolower($author)).'%\'', NULL, FALSE);
+
+		if(!empty($category_ids))
+			$this->db->where_in('category_id', $category_ids);	
+
+		// parse year
+		if(!empty($year)){
+			$year = explode('-', $year);
+			$this->db->where('publish_year >=', $year[0]);
+			$this->db->where('publish_year <=', $year[1]);
+		}
+
 		$this->db->where('deleted_at IS NULL');
 		$query = $this->db->get('books');
 		return $query->num_rows();
