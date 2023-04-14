@@ -8,7 +8,7 @@ class Home_model extends CI_Model {
 
 	public function get_books($view_group = null, $limit = null, $offset = null, $title = null, $publisher_id = null, $author = null, $category_ids = null, $year = null, $sort_by = null){
 		if ($view_group == 'newest'){
-			$this->db->order_by('created_at', 'DESC');
+			$this->db->order_by('b.created_at', 'DESC');
 		} elseif ($view_group == 'popular'){
 			$this->db->order_by('title', 'DESC');
 		} elseif ($view_group == 'recomend'){
