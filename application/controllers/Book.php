@@ -12,6 +12,7 @@ class Book extends MY_Controller {
 
 	public function index(){
 		$data['viewGroup'] = $_GET['viewGroup'];
+		$data['viewStyle'] = $_GET['viewStyle'];
 
 		$data['publishers'] = $this->publisher_model->get_all();
 		$data['categories'] = $this->kategori_model->get_all();
