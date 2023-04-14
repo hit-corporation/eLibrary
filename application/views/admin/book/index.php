@@ -119,7 +119,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name="form-input" action="<?=$this->e(base_url('book/store'))?>" class="modal-body" method="POST" enctype="multipart/form-data">
+            <form name="form-input" action="<?=$this->e(base_url('admin/book/store'))?>" class="modal-body" method="POST" enctype="multipart/form-data">
                 <fieldset class="row">
                     <div class="col-12 col-lg-8">
                         <div class="form-group row">
@@ -219,6 +219,15 @@
                                 <?php if(!empty($_SESSION['error']['errors']['book-description'])): ?>
                                     <small data-error="book-description" class="text-danger"><?=$_SESSION['error']['errors']['book-description']?></small>
                             <?php endif ?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-4 col-form-label">Berkas PDF</label>
+                            <div class="col-8">
+                                <span class="custom-file">
+                                    <input type="file" class="custom-file-input" name="input-file1" id="input-file1">
+                                    <label class="custom-file-label" for="input-file1" aria-describedby="input-file1">Pilih File</label>
+                                </span>
                             </div>
                         </div>
                         <input type="text" name="book-id" class="d-none">
@@ -363,8 +372,7 @@
             icon: 'success',
             title: '<h4 class="text-success"></h4>',
             html: '<h5 class="text-success"><?=$_SESSION['success']['message']?></h5>',
-            confirmButtonText: 'Tambah Stok',
-            showDenyButton: true
+            timer: 2000
         })
         .then(t => {
             if(t.isConfirmed)
@@ -394,11 +402,7 @@
             timer: 2000
         });
     <?php endif ?>
-    <?php if($_SESSION['error']['is_stockform']): ?>
-        $('#modal_stock').modal('show');
-    <?php else: ?>
-        $('#modal-input').modal('show');
-    <?php endif ?>
+    $('#modal-input').modal('show');
 </script>
 <?php endif ?>
 

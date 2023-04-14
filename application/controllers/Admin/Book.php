@@ -12,7 +12,7 @@ class Book extends Admin_Controller
 	{
 		parent::__construct();
 		$this->load->model(['book_model', 'kategori_model', 'publisher_model']);
-		$this->load->library('form_validation');
+		$this->load->library(['form_validation', 'upload']);
 	}
 
 	/**
@@ -88,6 +88,31 @@ class Book extends Admin_Controller
 		$description = $this->input->post('book-description', TRUE);
 		$qty		= $this->input->post('book-qty', TRUE) ?? 0;
 		$img 	   	= $_FILES['book-image'];
+		$file_1		= $_FILES['input-file1'];
+
+		$filepdf = NULL;
+		if(intval($file_1['size']) > 0)
+		{
+			$ext = pathinfo(basename($file_1['name']), PATHINFO_EXTENSION);
+				
+			$conf = [
+				'upload_path'	=> 'assets/files/books/',
+				'allowed_types'	=> 'pdf|epub',
+				'file_name'		=> str_replace(' ', '_', $title).'_'.$category.'.'.$ext,
+				'file_ext_tolower'	=> true,
+				'encrypt_name'	=> true
+			];
+
+			$this->upload->initialize($conf);
+			if(!$this->upload->do_upload('input-file1'))
+			{
+				$resp = ['success' => false, 'message' => $this->upload->display_errors(), 'old' => $_POST];
+				$this->session->set_flashdata('error', $resp);
+				redirect($_SERVER['HTTP_REFERER']);
+			}
+
+			$filepdf = $this->upload->data('file_name');
+		}
 
 		$category_data = $this->kategori_model->get_all();
 		$publisher_data = $this->publisher_model->get_all();
@@ -118,13 +143,16 @@ class Book extends Admin_Controller
 			
 			$img_conf = [
 				'upload_path'	=> 'assets/img/books/',
-				'allowed_types'	=> 'jpg|png|jpeg',
+				'allowed_types'	=> ['jpg','jpeg','png'],
 				'file_name'		=> str_replace(' ', '_', $title).'_'.$category.'.jpg',
 				'file_ext_tolower'	=> true,
 				'encrypt_name'	=> true
 			];
 
-			$this->load->library('upload', $img_conf);
+			$this->upload->initialize($img_conf);
+
+			file_put_contents('assets/files/text.txt', $this->upload->file_type);
+
 			if(!$this->upload->do_upload('book-image'))
 			{
 				$resp = ['success' => false, 'message' => $this->upload->display_errors(), 'old' => $_POST];
@@ -160,6 +188,7 @@ class Book extends Admin_Controller
 			'publisher_id'	=> $publisher,
 			'description'	=> $description,
 			'cover_img'		=> $filename,
+			'file_1'		=> $filepdf,
 			'qty'			=> $qty
 		];
 
