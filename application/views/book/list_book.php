@@ -92,14 +92,11 @@
 								<div class="col-md-12 form-it">
 									<label>Kategori</label>
 									<div class="group-ip">
-										<select
-											name="skills" multiple="" class="ui fluid dropdown">
+										<select name="category_id" multiple="" class="ui fluid dropdown">
 											<option value="">Enter to filter genres</option>
-											<option value="Action1">Action 1</option>
-					                        <option value="Action2">Action 2</option>
-					                        <option value="Action3">Action 3</option>
-					                        <option value="Action4">Action 4</option>
-					                        <option value="Action5">Action 5</option>
+											<?php foreach ($categories as $category): ?>
+												<option value="<?=$category['id']?>"><?=$category['category_name']?></option>
+											<?php endforeach; ?>
 										</select>
 									</div>	
 								</div>
