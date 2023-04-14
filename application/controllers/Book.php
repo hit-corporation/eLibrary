@@ -44,4 +44,15 @@ class Book extends MY_Controller {
 		echo json_encode($data);
 	}
 
+	/**
+	 * Read a Book
+	 *
+	 * @return void
+	 */
+	public function read_book(): void {
+		$id = $this->input->get('id');
+
+		$this->load->view('book/read', );
+	}
+
 }

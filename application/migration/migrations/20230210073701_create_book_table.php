@@ -35,6 +35,9 @@ final class CreateBookTable extends AbstractMigration
         $table->addColumn('description', 'text', ['null' => true]);
         $table->addColumn('qty', 'integer', ['default' => 0]);
         $table->addColumn('rack_no', 'string', ['limit' => 50]);
+        $table->addColumn('file_1', 'text', ['null' => TRUE]);
+        $table->addColumn('file_2', 'text', ['null' => TRUE]);
+        $table->addColumn('file_3', 'text', ['null' => TRUE]);
         $table->addColumn('deleted_at', 'datetime', ['default' => NULL, 'null' => TRUE]);
         $table->addTimestamps();
         //$table->addIndex(['title', 'category_id', 'deleted_at'], ['unique' => true, 'name' => 'title_category_unq']);
