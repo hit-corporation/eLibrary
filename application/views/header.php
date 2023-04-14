@@ -19,6 +19,9 @@
 	<link rel="stylesheet" href="<?=base_url()?>assets/landing-pages/css/plugins.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/landing-pages/css/style.css">
 
+	<!-- JQUERY -->
+	<script src="<?=base_url()?>assets/js/jquery-3.5.1.min.js"></script>
+
 </head>
 <body>
 <!--preloading-->
