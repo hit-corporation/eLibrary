@@ -233,6 +233,13 @@ const getBooks = async () => {
         $('#modal-show').modal('show');
     });
 
+    // file
+    document.getElementById('input-file1').addEventListener('change', e => {
+        const berkas = new Object(e.target.files[0]);
+        
+        document.querySelector('label[for="input-file1"]').innerText = berkas.name;
+    });
+
     // reset
     form.addEventListener('reset', e => {
         e.preventDefault();
@@ -242,7 +249,7 @@ const getBooks = async () => {
     // add data
     document.getElementById('btn-add').addEventListener('click', e => {
          // reset form
-         form.action = BASE_URL + 'book/store';
+         form.action = BASE_URL + 'admin/book/store';
          resetForm();
     });
 
@@ -251,7 +258,7 @@ const getBooks = async () => {
         var row = table.row(e.target.parentNode.closest('tr')).data();
 
         // reset form
-        form.action = BASE_URL + 'book/edit';
+        form.action = BASE_URL + 'admin/book/edit';
         resetForm();
 
         form['book-id'].value = row.id;
