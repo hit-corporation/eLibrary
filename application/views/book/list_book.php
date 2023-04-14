@@ -113,16 +113,10 @@
 									<label>Tahun Terbit</label>
 									<div class="row">
 										<div class="col-md-6">
-											<select>
-											  <option value="range">From</option>
-											  <option value="number">10</option>
-											</select>
+											<input type="number" min="1900" max="<?=date('Y', time())?>" value="2000" placeholder="From" name="start_year">
 										</div>
 										<div class="col-md-6">
-											<select>
-											  <option value="range">To</option>
-											  <option value="number">20</option>
-											</select>
+											<input type="number" min="1900" max="<?=date('Y', time())?>" value="<?=date('Y', time())?>" placeholder="To" name="end_year">
 										</div>
 									</div>
 								</div>
@@ -149,10 +143,11 @@
 		var publisher_id = $('select[name="publisher"]').val();
 		var author = $('input[name="author"]').val();
 		var category_ids = $('select[name="category_id"]').val();
+		var year = $('input[name="start_year"]').val() + '-' + $('input[name="end_year"]').val();
 
-		load_data(1, limit, title, publisher_id, author, category_ids);
+		load_data(1, limit, title, publisher_id, author, category_ids, year);
 
-		function load_data(page, limit = null, title = '', publisher_id = '', author = '', category_ids = null) {
+		function load_data(page, limit = null, title = '', publisher_id = '', author = '', category_ids = null, year = '') {
 			$.ajax({
 				type: "GET",
 				url: "<?=base_url('book/get_all')?>",
@@ -162,7 +157,8 @@
 					title: title,
 					publisher_id: publisher_id,
 					author: author,
-					category_ids: category_ids
+					category_ids: category_ids,
+					year: year
 				},
 				success: function (data) {
 					// console.log(data.total_page);
@@ -188,7 +184,7 @@
 
 							$('.flex-wrap-movielist').empty();
 							$('.pagination2').empty();
-							load_data(i+1, limit, title, publisher_id, author, category_ids);	
+							load_data(i+1, limit, title, publisher_id, author, category_ids, year);	
 						});
 					}
 
@@ -204,7 +200,7 @@
 			$('.pagination2').empty();
 
 			limit = $(this).val();
-			load_data(1, limit, title, publisher_id, author, category_ids);
+			load_data(1, limit, title, publisher_id, author, category_ids, year);
 		});
 
 		// submit di klik
@@ -218,8 +214,9 @@
 			publisher_id = $('select[name="publisher"]').val();
 			author = $('input[name="author"]').val();
 			category_ids = $('select[name="category_id"]').val();
+			year = $('input[name="start_year"]').val() + '-' + $('input[name="end_year"]').val();
 
-			load_data(1, limit, title, publisher_id, author, category_ids);
+			load_data(1, limit, title, publisher_id, author, category_ids, year);
 		});
 
 	});
