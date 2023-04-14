@@ -30,11 +30,12 @@ class Book extends MY_Controller {
 
 	public function get_all(){
 		$page = isset($_GET['page']) ? $_GET['page'] : 1;
-		$limit = isset($_GET['limit']) ? $_GET['limit'] : 10;
+		$limit = isset($_GET['limit']) ? $_GET['limit'] : 3;
+		$title = isset($_GET['title']) ? $_GET['title'] : '';
 
 		$page = ($page - 1) * $limit;
 
-		$data['books'] 	= $this->home_model->get_books($limit, $page);
+		$data['books'] 	= $this->home_model->get_books($limit, $page, $title);
 		$data['total_records'] = $this->home_model->get_total_books();
 		$data['total_pages'] = ceil($data['total_records'] / $limit);
 		
