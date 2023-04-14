@@ -135,6 +135,12 @@
 
 		load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
 
+		const empty_data = () => {
+			$('.flex-wrap-movielist').empty();
+			$('.flex-wrap-movielist-2').empty();
+			$('.pagination2').empty();
+		}
+
 		function load_data(page, limit = null, title = '', publisher_id = '', author = '', category_ids = null, year = '', sort_by = '') {
 			$.ajax({
 				type: "GET",
@@ -195,9 +201,7 @@
 						$(`#halaman_${i+1}`).on('click', e => {
 							e.preventDefault();
 
-							$('.flex-wrap-movielist').empty();
-							$('.flex-wrap-movielist-2').empty();
-							$('.pagination2').empty();
+							empty_data();
 							load_data(i+1, limit, title, publisher_id, author, category_ids, year, sort_by);	
 						});
 					}
@@ -214,9 +218,7 @@
 		$('select[name="book-per-pages"]').on('change', function (e) {
 			e.preventDefault();
 
-			$('.flex-wrap-movielist').empty();
-			$('.flex-wrap-movielist-2').empty();
-			$('.pagination2').empty();
+			empty_data();
 
 			limit = $(this).val();
 			load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
@@ -226,9 +228,7 @@
 		$('input[name="submit"]').on('click', function (e) {
 			e.preventDefault();
 
-			$('.flex-wrap-movielist').empty();
-			$('.flex-wrap-movielist-2').empty();
-			$('.pagination2').empty();
+			empty_data();
 
 			title = $('input[name="title"]').val();
 			publisher_id = $('select[name="publisher"]').val();
@@ -243,9 +243,7 @@
 		$('select[name="sort-by"]').on('change', function (e) {
 			e.preventDefault();
 
-			$('.flex-wrap-movielist').empty();
-			$('.flex-wrap-movielist-2').empty();
-			$('.pagination2').empty();
+			empty_data();
 
 			sort_by = $(this).val();
 			load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
@@ -255,9 +253,7 @@
 		$('.list').on('click', function (e) {
 			e.preventDefault();
 
-			$('.flex-wrap-movielist').empty();
-			$('.flex-wrap-movielist-2').empty();
-			$('.pagination2').empty();
+			empty_data();
 
 			view_style = 'list';
 			load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
@@ -267,9 +263,7 @@
 		$('.grid').on('click', function (e) {
 			e.preventDefault();
 
-			$('.flex-wrap-movielist').empty();
-			$('.flex-wrap-movielist-2').empty();
-			$('.pagination2').empty();
+			empty_data();
 
 			view_style = 'grid';
 			load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
