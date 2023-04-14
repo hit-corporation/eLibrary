@@ -133,7 +133,15 @@
 		var year 			= $('input[name="start_year"]').val() + '-' + $('input[name="end_year"]').val();
 		var sort_by 		= $('select[name="sort-by"]').val();
 
-		load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
+		var filter = {
+			title: title,
+			publisher_id: publisher_id,
+			author: author,
+			category_ids: category_ids,
+			year: year
+		}
+
+		load_data(1, limit, filter, sort_by);
 
 		const empty_data = () => {
 			$('.flex-wrap-movielist').empty();
@@ -141,7 +149,7 @@
 			$('.pagination2').empty();
 		}
 
-		function load_data(page, limit = null, title = '', publisher_id = '', author = '', category_ids = null, year = '', sort_by = '') {
+		function load_data(page, limit = null, filter, sort_by = '') {
 			$.ajax({
 				type: "GET",
 				url: "<?=base_url('book/get_all')?>",
@@ -150,11 +158,7 @@
 					view_style: view_style,
 					page: page,
 					limit: limit,
-					title: title,
-					publisher_id: publisher_id,
-					author: author,
-					category_ids: category_ids,
-					year: year,
+					filter: filter,
 					sort_by: sort_by
 				},
 				success: function (data) {
@@ -202,7 +206,7 @@
 							e.preventDefault();
 
 							empty_data();
-							load_data(i+1, limit, title, publisher_id, author, category_ids, year, sort_by);	
+							load_data(i+1, limit, filter, sort_by);	
 						});
 					}
 
@@ -221,7 +225,7 @@
 			empty_data();
 
 			limit = $(this).val();
-			load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
+			load_data(1, limit, filter, sort_by);
 		});
 
 		// submit di klik
@@ -230,13 +234,13 @@
 
 			empty_data();
 
-			title = $('input[name="title"]').val();
-			publisher_id = $('select[name="publisher"]').val();
-			author = $('input[name="author"]').val();
-			category_ids = $('select[name="category_id"]').val();
-			year = $('input[name="start_year"]').val() + '-' + $('input[name="end_year"]').val();
+			filter.title = $('input[name="title"]').val();
+			filter.publisher_id = $('select[name="publisher"]').val();
+			filter.author = $('input[name="author"]').val();
+			filter.category_ids = $('select[name="category_id"]').val();
+			filter.year = $('input[name="start_year"]').val() + '-' + $('input[name="end_year"]').val();
 
-			load_data(1, limit, title, publisher_id, author, category_ids, year);
+			load_data(1, limit, filter, sort_by);
 		});
 
 		// select sort-by di ubah
@@ -246,7 +250,7 @@
 			empty_data();
 
 			sort_by = $(this).val();
-			load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
+			load_data(1, limit, filter, sort_by);
 		});
 		
 		// tampilan list di klik
@@ -256,7 +260,7 @@
 			empty_data();
 
 			view_style = 'list';
-			load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
+			load_data(1, limit, filter, sort_by);
 		});
 
 		// tampilan grid di klik
@@ -266,7 +270,7 @@
 			empty_data();
 
 			view_style = 'grid';
-			load_data(1, limit, title, publisher_id, author, category_ids, year, sort_by);
+			load_data(1, limit, filter, sort_by);
 		});
 
 
