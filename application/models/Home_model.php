@@ -6,7 +6,7 @@ class Home_model extends CI_Model {
         parent::__construct();
     }
 
-	public function get_books($view_group = null, $limit = null, $offset = null, $title = null, $publisher_id = null, $author = null, $category_ids = null, $year = null, $sort_by = null){
+	public function get_books($view_group = null, $limit = null, $offset = null, $filter = null, $sort_by = null){
 		if ($view_group == 'newest'){
 			$this->db->order_by('b.created_at', 'DESC');
 		} elseif ($view_group == 'popular'){
@@ -21,21 +21,21 @@ class Home_model extends CI_Model {
 		if ($sort_by == 'title-desc')
 			$this->db->order_by('title', 'DESC');
 
-		if(!empty($title))
-			$this->db->where('LOWER(title) LIKE \'%'.trim(strtolower($title)).'%\'', NULL, FALSE);
+		if(!empty($filter['title']))
+			$this->db->where('LOWER(title) LIKE \'%'.trim(strtolower($filter['title'])).'%\'', NULL, FALSE);
 
-		if(!empty($publisher_id))
-			$this->db->where('publisher_id', $publisher_id);
+		if(!empty($filter['publisher_id']))
+			$this->db->where('publisher_id', $filter['publisher_id']);
 
-		if(!empty($author))
-			$this->db->where('LOWER(author) LIKE \'%'.trim(strtolower($author)).'%\'', NULL, FALSE);
+		if(!empty($filter['author']))
+			$this->db->where('LOWER(author) LIKE \'%'.trim(strtolower($filter['author'])).'%\'', NULL, FALSE);
 
-		if(!empty($category_ids))
-			$this->db->where_in('category_id', $category_ids);
+		if(!empty($filter['category_ids']))
+			$this->db->where_in('category_id', $filter['category_ids']);
 
 		// parse year
-		if(!empty($year)){
-			$year = explode('-', $year);
+		if(!empty($filter['year'])){
+			$year = explode('-', $filter['year']);
 			$this->db->where('publish_year >=', $year[0]);
 			$this->db->where('publish_year <=', $year[1]);
 		}
@@ -111,7 +111,7 @@ class Home_model extends CI_Model {
 
 	
 
-	public function get_total_books($view_group = null, $title = null, $publisher_id = null, $author = null, $category_ids = null, $year = null){
+	public function get_total_books($view_group = null, $filter = null){
 		if ($view_group == 'newest'){
 			$this->db->order_by('created_at', 'DESC');
 		} elseif ($view_group == 'popular'){
@@ -120,21 +120,21 @@ class Home_model extends CI_Model {
 			$this->db->order_by('title', 'DESC');
 		}
 
-		if(!empty($title))
-			$this->db->where('LOWER(title) LIKE \'%'.trim(strtolower($title)).'%\'', NULL, FALSE);
+		if(!empty($filter['title']))
+			$this->db->where('LOWER(title) LIKE \'%'.trim(strtolower($filter['title'])).'%\'', NULL, FALSE);
 
-		if(!empty($publisher_id))
-			$this->db->where('publisher_id', $publisher_id);
+		if(!empty($filter['publisher_id']))
+			$this->db->where('publisher_id', $filter['publisher_id']);
 
-		if(!empty($author))
-			$this->db->where('LOWER(author) LIKE \'%'.trim(strtolower($author)).'%\'', NULL, FALSE);
+		if(!empty($filter['author']))
+			$this->db->where('LOWER(author) LIKE \'%'.trim(strtolower($filter['author'])).'%\'', NULL, FALSE);
 
-		if(!empty($category_ids))
-			$this->db->where_in('category_id', $category_ids);	
+		if(!empty($filter['category_ids']))
+			$this->db->where_in('category_id', $filter['category_ids']);	
 
 		// parse year
-		if(!empty($year)){
-			$year = explode('-', $year);
+		if(!empty($filter['year'])){
+			$year = explode('-', $filter['year']);
 			$this->db->where('publish_year >=', $year[0]);
 			$this->db->where('publish_year <=', $year[1]);
 		}
