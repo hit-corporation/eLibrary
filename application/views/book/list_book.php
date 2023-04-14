@@ -79,8 +79,14 @@
 							<div class="row">
 								<div class="col-md-12 form-it">
 									<label>Nama Buku</label>
-									<input type="text" placeholder="Enter keywords" name="title">
+									<input type="text" placeholder="Masukan Nama Buku" name="title">
 								</div>
+
+								<div class="col-md-12 form-it">
+									<label>Pengarang</label>
+									<input type="text" placeholder="Masukan Nama Pengarang" name="author">
+								</div>
+
 								<div class="col-md-12 form-it">
 									<label>Kategori</label>
 									<div class="group-ip">
@@ -96,10 +102,12 @@
 									</div>	
 								</div>
 								<div class="col-md-12 form-it">
-									<label>Pengarang</label>
-									<select>
-									  <option value="range">-- Select the rating range below --</option>
-									  <option value="saab">-- Select the rating range below --</option>
+									<label>Penerbit</label>
+									<select name="publisher">
+										<option value="">Pilih Penerbit</option>
+										<?php foreach ($publishers as $publisher): ?>
+											<option value="<?=$publisher['id']?>"><?=$publisher['publisher_name']?></option>
+										<?php endforeach; ?>
 									</select>
 								</div>
 								<div class="col-md-12 form-it">
@@ -139,18 +147,21 @@
 		// data awal di load
 		var title = $('input[name="title"]').val();
 		var limit = $('select[name="book-per-pages"]').val();
+		var publisher_id = $('select[name="publisher"]').val();
+		var author = $('input[name="author"]').val();
 
+		load_data(1, limit, title, publisher_id, author);
 
-		load_data(1, limit, title);
-
-		function load_data(page, limit = null, title = '') {
+		function load_data(page, limit = null, title = '', publisher_id = '', author = '') {
 			$.ajax({
 				type: "GET",
 				url: "<?=base_url('book/get_all')?>",
 				data: {
 					page: page,
 					limit: limit,
-					title: title
+					title: title,
+					publisher_id: publisher_id,
+					author: author
 				},
 				success: function (data) {
 					// console.log(data.total_page);
@@ -175,7 +186,7 @@
 
 							$('.flex-wrap-movielist').empty();
 							$('.pagination2').empty();
-							load_data(i+1, limit, title);	
+							load_data(i+1, limit, title, publisher_id, author);	
 						});
 					}
 
@@ -191,7 +202,7 @@
 			$('.pagination2').empty();
 
 			limit = $(this).val();
-			load_data(1, limit, title);
+			load_data(1, limit, title, publisher_id, author);
 		});
 
 		// submit di klik
@@ -202,8 +213,10 @@
 			$('.pagination2').empty();
 
 			title = $('input[name="title"]').val();
+			publisher_id = $('select[name="publisher"]').val();
+			author = $('input[name="author"]').val();
 
-			load_data(1, limit, title);
+			load_data(1, limit, title, publisher_id, author);
 		});
 
 	});
