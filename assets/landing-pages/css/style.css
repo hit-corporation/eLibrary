@@ -4233,13 +4233,13 @@ ul {
 .movie_list .movie-item-style-2 img,
 .movie_single .movie-item-style-2 img,
 .userfav_list .movie-item-style-2 img {
-  width: 30%;
+  width: 200px;
 }
 @media (max-width: 767px) {
   .movie_list .movie-item-style-2 img,
   .movie_single .movie-item-style-2 img,
   .userfav_list .movie-item-style-2 img {
-    width: auto;
+    width: 200px;
   }
 }
 .movie-item-style-2 {
@@ -4259,6 +4259,7 @@ ul {
   }
 }
 .movie-item-style-2 img {
+	width: 200px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -4270,6 +4271,7 @@ ul {
 }
 @media (max-width: 767px) {
   .movie-item-style-2 img {
+		width: 200px;
     margin-right: 0;
     margin-bottom: 15px;
   }
