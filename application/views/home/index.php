@@ -55,7 +55,7 @@
 		<div class="col-md-12">
 			<div class="title-hd">
 				<h2>Terbaru</h2>
-				<a href="<?=base_url('book/list_book/newest')?>" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+				<a href="<?=base_url('book?viewGroup=newest')?>" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
 			</div>
 			<div class="tabs">
 				<ul class="tab-links">
@@ -96,7 +96,7 @@
 			</div>
 			<div class="title-hd">
 				<h2>Popular</h2>
-				<a href="<?=base_url('book/list_book/popular')?>" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+				<a href="<?=base_url('book?viewGroup=popular')?>" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
 			</div>
 			<div class="tabs">
 				<ul class="tab-links-2">
@@ -145,7 +145,7 @@
 				
 				<div class="title-hd">
 					<h2>Recomended</h2>
-					<a href="<?=base_url('book/list_book/recomend')?>" class="viewall">see all <i class="ion-ios-arrow-right"></i></a>
+					<a href="<?=base_url('book?viewGroup=recomend')?>" class="viewall">see all <i class="ion-ios-arrow-right"></i></a>
 				</div>
 				<div class="latestnewv2">
 					

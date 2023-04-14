@@ -81,43 +81,42 @@
 							<div class="row">
 								<div class="col-md-12 form-it">
 									<label>Nama Buku</label>
-									<input type="text" placeholder="Enter keywords" name="title">
+									<input type="text" placeholder="Masukan Nama Buku" name="title">
 								</div>
+
+								<div class="col-md-12 form-it">
+									<label>Pengarang</label>
+									<input type="text" placeholder="Masukan Nama Pengarang" name="author">
+								</div>
+
 								<div class="col-md-12 form-it">
 									<label>Kategori</label>
 									<div class="group-ip">
-										<select
-											name="skills" multiple="" class="ui fluid dropdown">
+										<select name="category_id" multiple="" class="ui fluid dropdown">
 											<option value="">Enter to filter genres</option>
-											<option value="Action1">Action 1</option>
-					                        <option value="Action2">Action 2</option>
-					                        <option value="Action3">Action 3</option>
-					                        <option value="Action4">Action 4</option>
-					                        <option value="Action5">Action 5</option>
+											<?php foreach ($categories as $category): ?>
+												<option value="<?=$category['id']?>"><?=$category['category_name']?></option>
+											<?php endforeach; ?>
 										</select>
 									</div>	
 								</div>
 								<div class="col-md-12 form-it">
-									<label>Pengarang</label>
-									<select>
-									  <option value="range">-- Select the rating range below --</option>
-									  <option value="saab">-- Select the rating range below --</option>
+									<label>Penerbit</label>
+									<select name="publisher">
+										<option value="">Pilih Penerbit</option>
+										<?php foreach ($publishers as $publisher): ?>
+											<option value="<?=$publisher['id']?>"><?=$publisher['publisher_name']?></option>
+										<?php endforeach; ?>
 									</select>
 								</div>
 								<div class="col-md-12 form-it">
 									<label>Tahun Terbit</label>
 									<div class="row">
 										<div class="col-md-6">
-											<select>
-											  <option value="range">From</option>
-											  <option value="number">10</option>
-											</select>
+											<input type="number" min="1900" max="<?=date('Y', time())?>" value="2000" placeholder="From" name="start_year">
 										</div>
 										<div class="col-md-6">
-											<select>
-											  <option value="range">To</option>
-											  <option value="number">20</option>
-											</select>
+											<input type="number" min="1900" max="<?=date('Y', time())?>" value="<?=date('Y', time())?>" placeholder="To" name="end_year">
 										</div>
 									</div>
 								</div>
@@ -139,20 +138,29 @@
 	$(document).ready(function () {
 
 		// data awal di load
-		var title = $('input[name="title"]').val();
-		var limit = $('select[name="book-per-pages"]').val();
+		var view_group 		= '<?=$viewGroup?>';
+		var title 			= $('input[name="title"]').val();
+		var limit 			= $('select[name="book-per-pages"]').val();
+		var publisher_id 	= $('select[name="publisher"]').val();
+		var author 			= $('input[name="author"]').val();
+		var category_ids 	= $('select[name="category_id"]').val();
+		var year 			= $('input[name="start_year"]').val() + '-' + $('input[name="end_year"]').val();
 
+		load_data(1, limit, title, publisher_id, author, category_ids, year);
 
-		load_data(1, limit, title);
-
-		function load_data(page, limit = null, title = '') {
+		function load_data(page, limit = null, title = '', publisher_id = '', author = '', category_ids = null, year = '') {
 			$.ajax({
 				type: "GET",
 				url: "<?=base_url('book/get_all')?>",
 				data: {
+					view_group: view_group,
 					page: page,
 					limit: limit,
-					title: title
+					title: title,
+					publisher_id: publisher_id,
+					author: author,
+					category_ids: category_ids,
+					year: year
 				},
 				success: function (data) {
 					// console.log(data.total_page);
@@ -178,7 +186,7 @@
 
 							$('.flex-wrap-movielist').empty();
 							$('.pagination2').empty();
-							load_data(i+1, limit, title);	
+							load_data(i+1, limit, title, publisher_id, author, category_ids, year);	
 						});
 					}
 
@@ -194,7 +202,7 @@
 			$('.pagination2').empty();
 
 			limit = $(this).val();
-			load_data(1, limit, title);
+			load_data(1, limit, title, publisher_id, author, category_ids, year);
 		});
 
 		// submit di klik
@@ -205,8 +213,12 @@
 			$('.pagination2').empty();
 
 			title = $('input[name="title"]').val();
+			publisher_id = $('select[name="publisher"]').val();
+			author = $('input[name="author"]').val();
+			category_ids = $('select[name="category_id"]').val();
+			year = $('input[name="start_year"]').val() + '-' + $('input[name="end_year"]').val();
 
-			load_data(1, limit, title);
+			load_data(1, limit, title, publisher_id, author, category_ids, year);
 		});
 
 	});
