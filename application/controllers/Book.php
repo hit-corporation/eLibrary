@@ -7,7 +7,7 @@ class Book extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model(['home_model', 'publisher_model', 'kategori_model']);
+		$this->load->model(['home_model', 'publisher_model', 'kategori_model', 'book_model']);
 	}
 
 	public function index(){
@@ -52,8 +52,8 @@ class Book extends MY_Controller {
 	 */
 	public function read_book(): void {
 		$id = $this->input->get('id');
-
-		$this->load->view('book/read', );
+		$data['book'] = $this->book_model->get_one($id);
+		$this->load->view('book/read', $data);
 	}
 
 }
