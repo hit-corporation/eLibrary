@@ -29,6 +29,8 @@
         #main-canvas {
             height: inherit;
             width: inherit;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         #main-content {
