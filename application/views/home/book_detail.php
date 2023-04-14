@@ -65,10 +65,7 @@
 						            			<h6>Tahun Terbit: </h6>
 						            			<p><a href="#"><?=$book['publish_year']?></a></p>
 						            		</div>
-						            		<div class="sb-it">
-						            			<h6>Release Date: </h6>
-						            			<p>May 1, 2015 (U.S.A)</p>
-						            		</div>
+
 						            		<div class="sb-it">
 						            			<h6>Kategori: </h6>
 						            			<p><?=$book['category_name']?></p>
