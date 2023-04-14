@@ -6,7 +6,7 @@ class Home_model extends CI_Model {
         parent::__construct();
     }
 
-	public function get_books($limit = null, $offset = null, $title = null, $publisher_id = null, $author = null){
+	public function get_books($limit = null, $offset = null, $title = null, $publisher_id = null, $author = null, $category_ids = null){
 		if(!empty($title))
 			$this->db->where('LOWER(title) LIKE \'%'.trim(strtolower($title)).'%\'', NULL, FALSE);
 
@@ -15,6 +15,9 @@ class Home_model extends CI_Model {
 
 		if(!empty($author))
 			$this->db->where('LOWER(author) LIKE \'%'.trim(strtolower($author)).'%\'', NULL, FALSE);
+
+		if(!empty($category_ids))
+			$this->db->where_in('category_id', $category_ids);
 
 		$this->db->where('deleted_at IS NULL');
 		$this->db->order_by('title', 'ASC');
