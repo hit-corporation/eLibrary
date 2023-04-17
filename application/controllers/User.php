@@ -33,7 +33,7 @@ class User extends MY_Controller {
 			// validate form input
 			if ($this->form_validation->run() == FALSE) {
 				// validation fails
-				$resp = ['success' => false, 'message' => 'Data gagal di simpan', 'old' => $post];
+				$resp = ['success' => false, 'message' => $this->form_validation->error_array(), 'old' => $post];
 				$this->session->set_flashdata('error', $resp);
 				redirect($_SERVER['HTTP_REFERER']);
 			} else {
