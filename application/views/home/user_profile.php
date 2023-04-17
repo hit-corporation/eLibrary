@@ -33,39 +33,40 @@
 						<p>Others</p>
 						<ul>
 							<li><a href="#">Change password</a></li>
-							<li><a href="#">Log out</a></li>
+							<li><a href="<?=base_url('user/logout')?>">Log out</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="form-style-1 user-pro" action="#">
-					<form action="#" class="user">
+					<form action="<?=base_url('user')?>" method="POST" class="user">
 						<h4>01. Profile details</h4>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Nama Lengkap</label>
-								<input type="text" placeholder="Masukan Nama Lengkap" value="<?=$user['member_name']?>">
+								<input type="text" name="id" value="<?=$user['id']?>">
+								<input type="text" placeholder="Masukan Nama Lengkap" name="member_name" value="<?=$user['member_name']?>">
 							</div>
 							<div class="col-md-6 form-it">
 								<label>Username</label>
-								<input type="text" placeholder="Masukan Username" value="<?=$user['username']?>">
+								<input type="text" placeholder="Masukan Username" name="username" value="<?=$user['username']?>">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Nomor Induk</label>
-								<input type="text" placeholder="Masukan Nomor Induk" value="<?=$user['no_induk']?>">
+								<input type="text" placeholder="Masukan Nomor Induk" name="no_induk" value="<?=$user['no_induk']?>">
 							</div>
 							<div class="col-md-6 form-it">
 								<label>Nomor Kartu</label>
-								<input type="text" placeholder="Masukan Nomor Kartu" value="<?=$user['card_number']?>">
+								<input type="text" placeholder="Masukan Nomor Kartu" name="card_number" value="<?=$user['card_number']?>">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Kelas</label>
-								<select>
+								<select name="kelas">
 								  <option value="">-- Pilih --</option>
 								  <?php for($i=1; $i<=12; $i++): ?>
 								  	<option value="<?=$i?>" <?=($user['kelas'] == $i) ? 'selected' : ''?>><?=$i?></option>
@@ -74,22 +75,22 @@
 							</div>
 							<div class="col-md-6 form-it">
 								<label>Email</label>
-								<input type="text" placeholder="Masukan Email" value="<?=$user['email']?>">
+								<input type="text" placeholder="Masukan Email" name="email" value="<?=$user['email']?>">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Telp</label>
-								<input type="text" placeholder="Masukan Nomor Telepon" value="<?=$user['phone']?>">
+								<input type="text" placeholder="Masukan Nomor Telepon" name="phone" value="<?=$user['phone']?>">
 							</div>
 							<div class="col-md-6 form-it">
 								<label>Alamat</label>
-								<textarea type="text" rows="3" placeholder="Masukan Alamat" value="<?=$user['address']?>"><?=$user['address']?></textarea>
+								<textarea type="text" rows="3" placeholder="Masukan Alamat" name="address"><?=$user['address']?></textarea>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-2">
-								<input class="submit" type="submit" value="save">
+								<input class="submit" type="submit" name="save_profile">
 							</div>
 						</div>	
 					</form>
