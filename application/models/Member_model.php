@@ -121,4 +121,17 @@ class Member_model extends CI_Model {
 
 		return $query->row_array();
 	}
+	
+	/**
+	 * Update member
+	 * 
+	 * @param mixed $data
+	 * @param mixed $id
+	 * @return void
+	 */
+	public function update($data, $id){
+		$this->db->where('id', $id);
+		$this->db->update('members', $data);
+		return true;
+	}
 }
