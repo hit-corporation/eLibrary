@@ -40,7 +40,7 @@ class Home_model extends CI_Model {
 			$this->db->where('publish_year <=', $year[1]);
 		}
 
-
+		$this->db->select('b.*, p.publisher_name, c.category_name');
 		$this->db->where('b.deleted_at IS NULL');
 		$this->db->limit($limit, $offset);
 		$this->db->join('publishers p', 'p.id = b.publisher_id');
