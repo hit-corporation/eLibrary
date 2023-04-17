@@ -51,7 +51,7 @@ class Book extends MY_Controller {
 		$id = $this->input->get('id');
 
 		// only active member that can read the book
-		if(!isset($_SESSION['user']) && empty($_SESSION['user']['username']))
+		if(!isset($_SESSION['user']) && empty($_SESSION['user']['user_name']))
 		{
 			$data['heading'] = 'PERINGATAN';
 			$data['message'] = '<p>Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!'.
@@ -61,7 +61,7 @@ class Book extends MY_Controller {
 		}
 		
 		// set cookie for reading time limit and idle time limit
-		$cookie = ['e_key' => $_SESSION['user']['username'], 'time' => date('Y-m-d H:i:s')];
+		$cookie = ['e_key' => $_SESSION['user']['user_name'], 'time' => date('Y-m-d H:i:s')];
 		$cookie_option = [
 			'expires'	=> strtotime('+'.$this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit']),
 			'path'		=> '/book/read_book',
@@ -72,13 +72,6 @@ class Book extends MY_Controller {
 		$data['book'] = $this->book_model->get_one($id);
 		$data['setting'] = $this->settings;
 		$this->load->view('book/read', $data);
-	}
-
-	public function before_read_book() {
-		$id = $this->input->get('id');
-		
-
-		redirect('book/read_book?id='.$id);
 	}
 
 }
