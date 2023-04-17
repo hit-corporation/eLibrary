@@ -91,4 +91,34 @@ class Member_model extends CI_Model {
 
 		return $query->row_array();
 	}
+
+	/**
+	 * Get member by id
+	 *
+	 * @param mixed $id
+	 * @return array
+	 */
+	public function get_user($id){
+		$this->db->select('*');
+		$this->db->from('members');
+		$this->db->where('id', $id);
+		$query = $this->db->get();
+
+		return $query->row_array();
+	}
+
+	/**
+	 * Get member by username
+	 * 
+	 * @param mixed $username
+	 * @return array
+	 */
+	public function get_user_by_username($username){
+		$this->db->select('*');
+		$this->db->from('members');
+		$this->db->where('username', $username);
+		$query = $this->db->get();
+
+		return $query->row_array();
+	}
 }
