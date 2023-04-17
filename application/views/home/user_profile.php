@@ -94,29 +94,29 @@
 							</div>
 						</div>	
 					</form>
-					<form action="#" class="password">
+					<form action="<?=base_url('user/change_password')?>" method="POST" class="password">
 						<h4>02. Change password</h4>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Old Password</label>
-								<input type="text" placeholder="**********">
+								<input type="password" name="old_password" placeholder="Masukan Password Lama">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>New Password</label>
-								<input type="text" placeholder="***************">
+								<input type="password" name="new_password" placeholder="***************">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Confirm New Password</label>
-								<input type="text" placeholder="*************** ">
+								<input type="password" name="confirm_password" placeholder="*************** ">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-2">
-								<input class="submit" type="submit" value="change">
+								<input class="submit" type="submit" name="change_password">
 							</div>
 						</div>	
 					</form>
@@ -146,5 +146,5 @@
 			timer: 5000
 		});
 	<?php endif; ?>
-	
+
 </script>
