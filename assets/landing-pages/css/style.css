@@ -5839,6 +5839,11 @@ ul {
 }
 .user-information .user-img img {
   margin-bottom: 30px;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	width: 125px;
+	height: 125px;
 }
 .user-information ul {
   padding: 0 25px;
