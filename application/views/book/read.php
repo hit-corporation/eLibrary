@@ -35,7 +35,6 @@
     </style>
 </head>
 <body>
-    
 <div id="main-content">
 </div>
     <!-- async -->
@@ -95,15 +94,32 @@
 
         // timer
         const idleLogout = () => {
+            let time;
+            let timeUnit = "<?=$setting['limit_idle_unit']?>";
+            let timeValue = <?=$setting['limit_idle_value']?>;
+            let seconds = 0;
+            // convert to secnds
+            switch(timeUnit)
+            {
+                case 'minutes':
+                    seconds = timeValue * 60;
+                    break;
+                case 'hours':
+                    seconds = timeValue * 60 * 60;
+                case 'week':
+                    seconds = timeValue * 7 * 24 * 60 * 60;
+                    break;
+            }
+            // reset time 
             window.addEventListener('load', resetTimer, true);
-                var events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
-                events.forEach(function(name) {
+            var events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+            events.forEach(function(name) {
                 document.addEventListener(name, resetTimer, true);
             });
 
             function resetTimer() {
                 clearTimeout(time);
-                time = setTimeout(() => console.log('logout' + new Date()), 3000)
+                time = setTimeout(() => console.log('logout' + new Date()), seconds * 1000)
             }
         }
 

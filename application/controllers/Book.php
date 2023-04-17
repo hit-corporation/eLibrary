@@ -60,7 +60,7 @@ class Book extends MY_Controller {
 
 		$id = $this->input->get('id');
 		$data['book'] = $this->book_model->get_one($id);
-		$data['idle_time'] = trim($this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit']);
+		$data['setting'] = $this->settings;
 		$this->load->view('book/read', $data);
 	}
 
