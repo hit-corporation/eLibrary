@@ -48,6 +48,16 @@ class Book extends MY_Controller {
 	 * @return void
 	 */
 	public function read_book(): void {
+
+		// if(!isset($_SESSION['user']) && empty($_SESSION['user']['username']))
+		// {
+		// 	$data['heading'] = 'PERINGATAN';
+		// 	$data['message'] = '<p>Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!'.
+		// 					   '<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+		// 	$this->load->view('errors/html/error_general', $data);
+		// 	return;
+		// }	
+
 		$id = $this->input->get('id');
 		$data['book'] = $this->book_model->get_one($id);
 		$this->load->view('book/read', $data);
