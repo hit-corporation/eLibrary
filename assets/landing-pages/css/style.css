@@ -1776,7 +1776,8 @@ select[multiple].input-lg {
   }
 }
 .fade {
-  opacity: 0;
+  /* opacity: 0; */
+	margin-top: 50px;
   -webkit-transition: opacity 0.15s linear;
   -o-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
@@ -2791,7 +2792,7 @@ button.close {
 }
 .modal {
   display: none;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: fixed;
   top: 0;
   right: 0;
