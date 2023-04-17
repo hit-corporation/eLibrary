@@ -27,7 +27,7 @@
         }
 
         #main-content {
-            max-width: 80vw;
+            max-width: 80vw !important;
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -37,7 +37,6 @@
 <body>
     
 <div id="main-content">
-    
 </div>
     <!-- async -->
 
@@ -52,7 +51,7 @@
            
             const embed = document.createElement('embed');
 
-            embed.src = "<?=html_escape(base_url('assets/files/books/'.$book['file_1']))?>#toolbar=0";
+            embed.src = "<?=html_escape(base_url('assets/files/books/'.$book['file_1']))?>#toolbar=1&navpanes=1";
             embed.style.height = '100vh';
             embed.style.width = '100vw';
 
@@ -94,7 +93,21 @@
             });
         }
 
-       
+        // timer
+        const idleLogout = () => {
+            window.addEventListener('load', resetTimer, true);
+                var events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+                events.forEach(function(name) {
+                document.addEventListener(name, resetTimer, true);
+            });
+
+            function resetTimer() {
+                clearTimeout(time);
+                time = setTimeout(() => console.log('logout' + new Date()), 3000)
+            }
+        }
+
+        window.addEventListener('load', e => idleLogout());
     </script>
 </body>
 </html>
