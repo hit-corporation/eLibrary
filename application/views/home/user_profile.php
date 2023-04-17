@@ -100,6 +100,10 @@
 							<div class="col-md-6 form-it">
 								<label>Old Password</label>
 								<input type="password" name="old_password" placeholder="Masukan Password Lama">
+								<!-- error -->
+								<?php if(!empty($_SESSION['error'])) : ?>
+									<span class="text-danger-input"><?= isset($_SESSION['error']['message']['old_password']) ? $_SESSION['error']['message']['old_password'] : null ?></span>
+								<?php endif; ?>
 							</div>
 						</div>
 						<div class="row">
@@ -112,6 +116,10 @@
 							<div class="col-md-6 form-it">
 								<label>Confirm New Password</label>
 								<input type="password" name="confirm_password" placeholder="*************** ">
+								<!-- error -->
+								<?php if(!empty($_SESSION['error'])) : ?>
+									<span class="text-danger-input"><?= isset($_SESSION['error']['message']['confirm_password']) ? $_SESSION['error']['message']['confirm_password'] : null ?></span>
+								<?php endif; ?>
 							</div>
 						</div>
 						<div class="row">
@@ -142,7 +150,7 @@
 		Swal.fire({
 			icon: 'error',
 			title: '<h4 class="text-danger"></h4>',
-			html: '<span class="text-danger"><?= $_SESSION['error']['message'] ?></span>',
+			html: '<span class="text-danger">Data Gagal di ubah!</span>',
 			timer: 5000
 		});
 	<?php endif; ?>
