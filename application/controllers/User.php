@@ -29,15 +29,13 @@ class User extends MY_Controller {
 			$this->form_validation->set_rules('no_induk', 'Nomor Induk', 'required');
 			$this->form_validation->set_rules('card_number', 'Nomor Kartu', 'required');
 			$this->form_validation->set_rules('kelas', 'Kelas', 'required');
-			$this->form_validation->set_rules('email', 'Email', 'required');
-			$this->form_validation->set_rules('phone', 'Nomor Telepon', 'required');
-			$this->form_validation->set_rules('address', 'Alamat', 'required');
 
 			// validate form input
 			if ($this->form_validation->run() == FALSE) {
 				// validation fails
-				$this->session->set_flashdata('error', validation_errors());
-				redirect('user');
+				$resp = ['success' => false, 'message' => 'Data gagal di simpan', 'old' => $post];
+				$this->session->set_flashdata('error', $resp);
+				redirect($_SERVER['HTTP_REFERER']);
 			} else {
 				// validation succeeds
 				$data = [
@@ -52,12 +50,23 @@ class User extends MY_Controller {
 				];
 
 				// update user data
-				$this->member_model->update_user($data, $post['id']);
+				$update = $this->member_model->update($data, $post['id']);
+
+				if($update){
+					// update session data
+					$this->session->set_userdata('user', [
+						'user_name' => $post['username'],
+						'full_name' => $post['member_name'],
+						'email'		=> $post['email'],
+						'role'		=> 'member',
+						'is_logged_in' => true
+					]);
+				}
 
 				// set success message
-				$this->session->set_flashdata('success', 'Data berhasil disimpan');
-
-				redirect('user');
+				$resp = ['success' => true, 'message' => 'Data berhasil disimpan.'];
+				$this->session->set_flashdata('success', $resp);
+				redirect($_SERVER['HTTP_REFERER']);
 			}
 			
 		}
