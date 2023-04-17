@@ -113,6 +113,12 @@ class User extends MY_Controller {
 		}
 	}
 
+	/**
+	 * ******************************************************************************
+	 * 							LOGOUT
+	 * ******************************************************************************
+	 */
+
 	public function logout(){
 		// remove session data
 		$this->session->unset_userdata('user');
@@ -142,6 +148,36 @@ class User extends MY_Controller {
 		  }else{
 			  return false;
 		  }
+	}
+
+	public function change_avatar(){
+		$post = $this->input->post();
+
+		if(isset($post['change_avatar'])){
+			// set validation rules
+			$this->form_validation->set_rules('avatar', 'Avatar', 'required');
+
+			// validate form input
+			if($this->form_validation->run() == false){
+				// validation fails
+				$resp = ['success' => false, 'message' => $this->form_validation->error_array(), 'old' => $post];
+				$this->session->set_flashdata('error', $resp);
+				redirect($_SERVER['HTTP_REFERER']);
+			}else{
+				// validation succeeds
+				$data = [
+					'avatar' => $post['avatar']
+				];
+
+				// update user data
+				$this->member_model->update($data, $post['id']);
+
+				// set success message
+				$resp = ['success' => true, 'message' => 'Avatar berhasil diubah.'];
+				$this->session->set_flashdata('success', $resp);
+				redirect($_SERVER['HTTP_REFERER']);
+			}
+		}
 	}
 
 }
