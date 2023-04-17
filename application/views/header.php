@@ -22,6 +22,11 @@
 	<!-- JQUERY -->
 	<script src="<?=base_url()?>assets/js/jquery-3.5.1.min.js"></script>
 
+	<!-- Sweetalert -->
+	<!-- import from node_modules -->
+	<link rel="stylesheet" href="<?=base_url()?>assets/node_modules/sweetalert2/dist/sweetalert2.min.css">
+	<script src="<?=base_url()?>assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
 </head>
 <body>
 <!--preloading-->
