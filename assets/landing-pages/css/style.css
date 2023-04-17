@@ -8313,3 +8313,7 @@ footer.full-width-ft .ft-copyright {
   font-family: 'Dosis', sans-serif;
   font-weight: 700;
 }
+
+.text-danger-input {
+	color: #dcf836 !important;
+}

@@ -13,6 +13,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="page-single">
 	<div class="container">
 		<div class="row ipad-width">
@@ -25,14 +26,14 @@
 					<div class="user-fav">
 						<p>Account Details</p>
 						<ul>
-							<li  class="active"><a href="userprofile.html">Profile</a></li>
+							<li  class="active"><a href="<?=base_url('user')?>#user-profile">Profile</a></li>
 							<li><a href="<?=base_url('home/user_favorite_list')?>">Favorite movies</a></li>
 						</ul>
 					</div>
 					<div class="user-fav">
 						<p>Others</p>
 						<ul>
-							<li><a href="#">Change password</a></li>
+							<li><a href="<?=base_url('user')?>#change-password">Change password</a></li>
 							<li><a href="<?=base_url('user/logout')?>">Log out</a></li>
 						</ul>
 					</div>
@@ -40,27 +41,43 @@
 			</div>
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="form-style-1 user-pro" action="#">
-					<form action="<?=base_url('user')?>" method="POST" class="user">
+					<form action="<?=base_url('user')?>" method="POST" class="user" id="user-profile">
 						<h4>01. Profile details</h4>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Nama Lengkap</label>
 								<input type="hidden" name="id" value="<?=$user['id']?>">
 								<input type="text" placeholder="Masukan Nama Lengkap" name="member_name" value="<?=$user['member_name']?>">
+								<!-- error -->
+								<?php if(!empty($_SESSION['error'])) : ?>
+									<span class="text-danger-input"><?= isset($_SESSION['error']['message']['member_name']) ? $_SESSION['error']['message']['member_name'] : null ?></span>
+								<?php endif; ?>
 							</div>
 							<div class="col-md-6 form-it">
 								<label>Username</label>
 								<input type="text" placeholder="Masukan Username" name="username" value="<?=$user['username']?>">
+								<!-- error -->
+								<?php if(!empty($_SESSION['error'])) : ?>
+									<span class="text-danger-input"><?= isset($_SESSION['error']['message']['username']) ? $_SESSION['error']['message']['username'] : null ?></span>
+								<?php endif; ?>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Nomor Induk</label>
 								<input type="text" placeholder="Masukan Nomor Induk" name="no_induk" value="<?=$user['no_induk']?>">
+								<!-- error -->
+								<?php if(!empty($_SESSION['error'])) : ?>
+									<span class="text-danger-input"><?= isset($_SESSION['error']['message']['no_induk']) ? $_SESSION['error']['message']['no_induk'] : null ?></span>
+								<?php endif; ?>
 							</div>
 							<div class="col-md-6 form-it">
 								<label>Nomor Kartu</label>
 								<input type="text" placeholder="Masukan Nomor Kartu" name="card_number" value="<?=$user['card_number']?>">
+								<!-- error -->
+								<?php if(!empty($_SESSION['error'])) : ?>
+									<span class="text-danger-input"><?= isset($_SESSION['error']['message']['card_number']) ? $_SESSION['error']['message']['card_number'] : null ?></span>
+								<?php endif; ?>
 							</div>
 						</div>
 						<div class="row">
@@ -72,6 +89,10 @@
 								  	<option value="<?=$i?>" <?=($user['kelas'] == $i) ? 'selected' : ''?>><?=$i?></option>
 								  <?php endfor; ?>
 								</select>
+								<!-- error -->
+								<?php if(!empty($_SESSION['error'])) : ?>
+									<span class="text-danger-input"><?= isset($_SESSION['error']['message']['kelas']) ? $_SESSION['error']['message']['kelas'] : null ?></span>
+								<?php endif; ?>
 							</div>
 							<div class="col-md-6 form-it">
 								<label>Email</label>
@@ -94,12 +115,17 @@
 							</div>
 						</div>	
 					</form>
-					<form action="<?=base_url('user/change_password')?>" method="POST" class="password">
+					<form action="<?=base_url('user/change_password')?>" method="POST" class="password" id="change-password">
 						<h4>02. Change password</h4>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Old Password</label>
+								<input type="hidden" name="id" value="<?=$user['id']?>">
 								<input type="password" name="old_password" placeholder="Masukan Password Lama">
+								<!-- error -->
+								<?php if(!empty($_SESSION['error'])) : ?>
+									<span class="text-danger-input"><?= isset($_SESSION['error']['message']['old_password']) ? $_SESSION['error']['message']['old_password'] : null ?></span>
+								<?php endif; ?>
 							</div>
 						</div>
 						<div class="row">
@@ -112,6 +138,10 @@
 							<div class="col-md-6 form-it">
 								<label>Confirm New Password</label>
 								<input type="password" name="confirm_password" placeholder="*************** ">
+								<!-- error -->
+								<?php if(!empty($_SESSION['error'])) : ?>
+									<span class="text-danger-input"><?= isset($_SESSION['error']['message']['confirm_password']) ? $_SESSION['error']['message']['confirm_password'] : null ?></span>
+								<?php endif; ?>
 							</div>
 						</div>
 						<div class="row">
@@ -142,7 +172,7 @@
 		Swal.fire({
 			icon: 'error',
 			title: '<h4 class="text-danger"></h4>',
-			html: '<span class="text-danger"><?= $_SESSION['error']['message'] ?></span>',
+			html: '<span class="text-danger">Data Gagal di ubah!</span>',
 			timer: 5000
 		});
 	<?php endif; ?>
