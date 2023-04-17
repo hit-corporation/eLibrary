@@ -67,7 +67,9 @@ class Book extends MY_Controller {
 			'path'		=> '/book/read_book',
 			'samesite'	=> 'Lax'
 		];
-		setcookie('read_book', base64_encode(implode(',', $cookie)), $cookie_option);
+		
+		if(!isset($_COOKIE['read_book']))
+			setcookie('read_book', base64_encode(implode(',', $cookie)), $cookie_option);
 
 		$data['book'] = $this->book_model->get_one($id);
 		$data['setting'] = $this->settings;
