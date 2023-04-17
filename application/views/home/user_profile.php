@@ -14,6 +14,38 @@
 	</div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="modal-change-avatar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<form action="<?=base_url('home/change_avatar')?>" method="post" enctype="multipart/form-data">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ubah Gambar Profile</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<!-- create form input change image profile -->
+					
+					<div class="form-group">
+						<label for="avatar"></label>
+						<input type="file" class="form-control-file" name="avatar" id="avatar">
+					</div>
+
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
 <div class="page-single">
 	<div class="container">
 		<div class="row ipad-width">
@@ -21,7 +53,7 @@
 				<div class="user-information">
 					<div class="user-img">
 						<a href="#"><img src="<?=base_url()?>assets/landing-pages/images/uploads/user-img.png" alt=""><br></a>
-						<a href="#" class="redbtn">Change avatar</a>
+						<a href="#" class="redbtn" id="change-avatar">Change avatar</a>
 					</div>
 					<div class="user-fav">
 						<p>Account Details</p>
@@ -176,5 +208,19 @@
 			timer: 5000
 		});
 	<?php endif; ?>
+
+	// change avatar
+	$('#change-avatar').on('click', function(e){
+		e.preventDefault();
+		// show modal
+		$('#modal-change-avatar').modal('show');
+
+	});
+
+	// input file change show modal
+	$('input[type=file]').change(function(){
+		$('#modal-change-avatar').modal('show');
+	});
+
 
 </script>
