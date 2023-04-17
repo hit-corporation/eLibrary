@@ -45,7 +45,7 @@
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Nama Lengkap</label>
-								<input type="text" name="id" value="<?=$user['id']?>">
+								<input type="hidden" name="id" value="<?=$user['id']?>">
 								<input type="text" placeholder="Masukan Nama Lengkap" name="member_name" value="<?=$user['member_name']?>">
 							</div>
 							<div class="col-md-6 form-it">
@@ -126,3 +126,25 @@
 	</div>
 </div>
 
+<script>
+	// create swall alert
+	<?php if(!empty($_SESSION['success'])) : ?>
+		Swal.fire({
+            icon: 'success',
+            title: '<h4 class="text-success"></h4>',
+            html: '<span class="text-success"><?= $_SESSION['success']['message'] ?></span>',
+            timer: 5000
+        });
+
+	<?php endif; ?>
+
+	<?php if(!empty($_SESSION['error'])) : ?>
+		Swal.fire({
+			icon: 'error',
+			title: '<h4 class="text-danger"></h4>',
+			html: '<span class="text-danger"><?= $_SESSION['error']['message'] ?></span>',
+			timer: 5000
+		});
+	<?php endif; ?>
+	
+</script>
