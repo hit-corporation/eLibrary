@@ -48,20 +48,37 @@ class Book extends MY_Controller {
 	 * @return void
 	 */
 	public function read_book(): void {
-
-		// if(!isset($_SESSION['user']) && empty($_SESSION['user']['username']))
-		// {
-		// 	$data['heading'] = 'PERINGATAN';
-		// 	$data['message'] = '<p>Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!'.
-		// 					   '<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
-		// 	$this->load->view('errors/html/error_general', $data);
-		// 	return;
-		// }	
-
 		$id = $this->input->get('id');
+
+		// only active member that can read the book
+		if(!isset($_SESSION['user']) && empty($_SESSION['user']['username']))
+		{
+			$data['heading'] = 'PERINGATAN';
+			$data['message'] = '<p>Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!'.
+							   '<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+			$this->load->view('errors/html/error_general', $data);
+			return;
+		}
+		
+		// set cookie for reading time limit and idle time limit
+		$cookie = ['e_key' => $_SESSION['user']['username'], 'time' => date('Y-m-d H:i:s')];
+		$cookie_option = [
+			'expires'	=> strtotime('+'.$this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit']),
+			'path'		=> '/book/read_book',
+			'samesite'	=> 'Lax'
+		];
+		setcookie('read_book', base64_encode(implode(',', $cookie)), $cookie_option);
+
 		$data['book'] = $this->book_model->get_one($id);
-		$data['idle_time'] = trim($this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit']);
+		$data['setting'] = $this->settings;
 		$this->load->view('book/read', $data);
+	}
+
+	public function before_read_book() {
+		$id = $this->input->get('id');
+		
+
+		redirect('book/read_book?id='.$id);
 	}
 
 }
