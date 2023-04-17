@@ -48,6 +48,7 @@ class Book extends MY_Controller {
 	 * @return void
 	 */
 	public function read_book(): void {
+		$id = $this->input->get('id');
 
 		// if(!isset($_SESSION['user']) && empty($_SESSION['user']['username']))
 		// {
@@ -56,12 +57,30 @@ class Book extends MY_Controller {
 		// 					   '<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
 		// 	$this->load->view('errors/html/error_general', $data);
 		// 	return;
-		// }	
+		// }
+		
+		$cookie = ['e_key' => base64_encode('localhost'), 'time' => date('Y-m-d H:i:s')];
+		$cookie_option = [
+			'expires'	=> strtotime('+'.$this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit']),
+			'path'		=> '/book/read_book',
+			'samesite'	=> 'Lax'
+		];
 
-		$id = $this->input->get('id');
+		setcookie('read_book', implode(', ', $cookie), $cookie_option);
+
+		print_r($_COOKIE);
+
+		
 		$data['book'] = $this->book_model->get_one($id);
 		$data['setting'] = $this->settings;
 		$this->load->view('book/read', $data);
+	}
+
+	public function before_read_book() {
+		$id = $this->input->get('id');
+		
+
+		redirect('book/read_book?id='.$id);
 	}
 
 }

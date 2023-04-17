@@ -119,7 +119,11 @@
 
             function resetTimer() {
                 clearTimeout(time);
-                time = setTimeout(() => console.log('logout' + new Date()), seconds * 1000)
+                time = setTimeout(() => {
+                    
+                    console.log(document.cookie);
+
+                }, 2 * 1000);
             }
         }
 
