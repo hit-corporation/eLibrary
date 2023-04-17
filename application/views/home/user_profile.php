@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="hero-ct">
-					<h1>Edward kennedy’s profile</h1>
+					<h1><?=$user['member_name']?></h1>
 					<ul class="breadcumb">
 						<li class="active"><a href="<?=base_url()?>">Home</a></li>
 						<li> <span class="ion-ios-arrow-right"></span>Profile</li>
@@ -44,38 +44,47 @@
 						<h4>01. Profile details</h4>
 						<div class="row">
 							<div class="col-md-6 form-it">
+								<label>Nama Lengkap</label>
+								<input type="text" placeholder="Masukan Nama Lengkap" value="<?=$user['member_name']?>">
+							</div>
+							<div class="col-md-6 form-it">
 								<label>Username</label>
-								<input type="text" placeholder="edwardkennedy">
-							</div>
-							<div class="col-md-6 form-it">
-								<label>Email Address</label>
-								<input type="text" placeholder="edward@kennedy.com">
+								<input type="text" placeholder="Masukan Username" value="<?=$user['username']?>">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>First Name</label>
-								<input type="text" placeholder="Edward ">
+								<label>Nomor Induk</label>
+								<input type="text" placeholder="Masukan Nomor Induk" value="<?=$user['no_induk']?>">
 							</div>
 							<div class="col-md-6 form-it">
-								<label>Last Name</label>
-								<input type="text" placeholder="Kennedy">
+								<label>Nomor Kartu</label>
+								<input type="text" placeholder="Masukan Nomor Kartu" value="<?=$user['card_number']?>">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>Country</label>
+								<label>Kelas</label>
 								<select>
-								  <option value="united">United States</option>
-								  <option value="saab">Others</option>
+								  <option value="">-- Pilih --</option>
+								  <?php for($i=1; $i<=12; $i++): ?>
+								  	<option value="<?=$i?>" <?=($user['kelas'] == $i) ? 'selected' : ''?>><?=$i?></option>
+								  <?php endfor; ?>
 								</select>
 							</div>
 							<div class="col-md-6 form-it">
-								<label>State</label>
-								<select>
-								  <option value="united">New York</option>
-								  <option value="saab">Others</option>
-								</select>
+								<label>Email</label>
+								<input type="text" placeholder="Masukan Email" value="<?=$user['email']?>">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>Telp</label>
+								<input type="text" placeholder="Masukan Nomor Telepon" value="<?=$user['phone']?>">
+							</div>
+							<div class="col-md-6 form-it">
+								<label>Alamat</label>
+								<textarea type="text" rows="3" placeholder="Masukan Alamat" value="<?=$user['address']?>"><?=$user['address']?></textarea>
 							</div>
 						</div>
 						<div class="row">
