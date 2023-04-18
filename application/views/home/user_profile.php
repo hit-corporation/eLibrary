@@ -60,7 +60,7 @@
 						<p>Account Details</p>
 						<ul>
 							<li  class="active"><a href="<?=base_url('user')?>#user-profile">Profile</a></li>
-							<li><a href="<?=base_url('home/user_favorite_list')?>">Favorite movies</a></li>
+							<li><a href="<?=base_url('user/user_favorite_list')?>">Favorite Books</a></li>
 						</ul>
 					</div>
 					<div class="user-fav">
