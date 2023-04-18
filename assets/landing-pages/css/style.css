@@ -5618,6 +5618,8 @@ ul {
 		height: 120px;
 		width: fit-content;
 	}
+
+	
 }
 
 @media (min-width: 1200px) {
@@ -5700,14 +5702,15 @@ ul {
   background-color: rgba(0, 0, 0, 0.4);
 }
 .user-hero {
-  height: 385px;
+  height: 350px;
   background: url('../images/uploads/user-hero-bg.jpg') repeat;
 }
 .user-hero .hero-ct {
-  padding-top: 225px;
+  padding-top: 133px;
 }
 .user-hero .hero-ct h1 {
-  margin-left: -120px;
+  /* margin-left: -120px; */
+	margin-left: -260px;
 }
 .user-hero ul.breadcumb {
   text-align: left;
@@ -5876,7 +5879,7 @@ ul {
 }
 .page-single {
   background-color: #020d18;
-  padding: 75px 0;
+  padding: 25px 0;
 }
 .social-btn {
   margin-bottom: 40px;
