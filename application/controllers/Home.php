@@ -31,11 +31,7 @@ class Home extends MY_Controller {
 		$this->load->view('footer');
 	}
 
-	public function user_favorite_list(){
-		$this->load->view('header');
-		$this->load->view('home/user_favorite_list');
-		$this->load->view('footer');
-	}
+	
 
 	/**
 	 * User login
