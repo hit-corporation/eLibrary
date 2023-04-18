@@ -124,6 +124,7 @@
                     Array.from(document.cookie.split(';'), item => {
                         var entry = item.trim().split('=');
                         Object.assign(newObj, {[entry[0]]:decodeURIComponent(entry[1])});
+                        window.location.href = BASE_URL + 'book/book_detail?id=<?=$_GET['id']?>'; 
                     });
                     
                     console.log(newObj);
