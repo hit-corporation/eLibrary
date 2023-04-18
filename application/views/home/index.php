@@ -16,17 +16,7 @@
 											<!-- <span class="orange"><a href="#">advanture</a></span> -->
 										</div>
 										<h1><a href="#"><?=$newBook['title']?> <span><?=$newBook['publish_year']?></span></a></h1>
-										<!-- <div class="social-btn">
-											<a href="#" class="parent-btn"><i class="ion-play"></i> Watch Trailer</a>
-										</div> -->
-										<!-- <div class="mv-details">
-											<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-											<ul class="mv-infor">
-												<li>  Run Time: 2h21’ </li>
-												<li>  Rated: PG-13  </li>
-												<li>  Release: 1 May 2015</li>
-											</ul>
-										</div> -->
+										
 										<div class="btn-transform transform-vertical">
 											<div><a href="<?=base_url('/home/book_detail?id=').$newBook['id']?>" class="item item-1 redbtn">more detail</a></div>
 											<div><a href= "<?=base_url('/home/book_detail?id=').$newBook['id']?>" class="item item-2 redbtn hvrbtn">more detail</a></div>
@@ -71,7 +61,7 @@
 									<div class="slide-it">
 										<div class="movie-item">
 											<div class="mv-img">
-												<img src="<?=base_url('assets/img/books/').$newBook['cover_img']?>" alt="">
+												<img src="<?=isset($newBook['cover_img']) ? base_url('assets/img/books/').$newBook['cover_img'] : base_url('assets/img/books/default.png')?>" alt="">
 											</div>
 											<div class="hvr-inner">
 												<a  href="<?=base_url('/home/book_detail?id=').$newBook['id']?>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
@@ -112,7 +102,7 @@
 									<div class="slide-it">
 										<div class="movie-item">
 											<div class="mv-img">
-												<img src="<?=base_url('assets/img/books/').$popularBook['cover_img']?>" alt="">
+												<img src="<?=isset($popularBook['cover_img']) ? base_url('assets/img/books/').$popularBook['cover_img'] : base_url('assets/img/books/default.png')?>" alt="">
 											</div>
 											<div class="hvr-inner">
 												<a  href="<?=base_url('/home/book_detail?id=').$popularBook['id']?>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
@@ -152,7 +142,7 @@
 					<?php foreach ($recomendBooks as $key => $recomendBook) : ?>
 						
 						<div class="blog-item-style-1 blog-item-style-3">
-							<img src="<?=base_url('assets/img/books/').$recomendBook['cover_img']?>" alt="">
+							<img src="<?=isset($recomendBook['cover_img']) ? base_url('assets/img/books/').$recomendBook['cover_img'] : base_url('assets/img/books/default.png')?>" alt="">
 							<div class="blog-it-infor">
 								<h3><a href="<?=base_url('/home/book_detail?id=').$recomendBook['id']?>"><?=$recomendBook['title']?></a></h3>
 								<span class="time">27 Mar 2017</span>
