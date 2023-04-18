@@ -5709,8 +5709,7 @@ ul {
   padding-top: 133px;
 }
 .user-hero .hero-ct h1 {
-  /* margin-left: -120px; */
-	margin-left: -260px;
+  margin-left: -120px;
 }
 .user-hero ul.breadcumb {
   text-align: left;
