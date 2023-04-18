@@ -22,7 +22,7 @@ final class CreateFavoriteBooksTable extends AbstractMigration
 		$table->addColumn('member_id', 'integer');
 		$table->addColumn('book_id', 'integer');
 		$table->addTimestamps();
-		$table->addForeignKey('member_id', 'users', ['id'], ['delete' => 'CASCADE']);
+		$table->addForeignKey('member_id', 'members', ['id'], ['delete' => 'CASCADE']);
 		$table->addForeignKey('book_id', 'books', ['id'], ['delete' => 'CASCADE']);
 		$table->addIndex(['member_id', 'book_id'], ['unique' => true]);
 		$table->create();
