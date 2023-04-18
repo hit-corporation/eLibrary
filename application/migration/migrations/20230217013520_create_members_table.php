@@ -31,6 +31,7 @@ final class CreateMembersTable extends AbstractMigration
           ->addColumn('status', 'string', ['default' => 'active'])
           ->addTimestamps()
 			    ->addColumn('deleted_at', 'datetime', ['null' => true])
+					->addColumn('profile_img', 'string', ['limit' => 225, 'null' => true])
 
 			    ->addIndex(['no_induk', 'deleted_at'], ['unique' => true])
 			    ->create();
