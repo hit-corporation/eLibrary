@@ -5701,7 +5701,7 @@ ul {
 }
 .user-hero {
   height: 385px;
-  background: url('../images/uploads/user-hero-bg.jpg') no-repeat;
+  background: url('../images/uploads/user-hero-bg.jpg') repeat;
 }
 .user-hero .hero-ct {
   padding-top: 225px;
