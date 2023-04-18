@@ -149,6 +149,35 @@
 			$('.pagination2').empty();
 		}
 
+		var coverImage = null;
+		var linkImage = null;
+		const check_image = (img) => {
+			// check img is null
+			if (img == null) {
+				coverImage = 'default.png';
+				linkImage = '<?=base_url('assets/img/books/default.png')?>';
+			}else{
+				
+				// check file exist
+				$.ajax({
+					url: '<?=base_url('assets/img/books/')?>' + img,
+					type:'HEAD',
+					error: function()
+					{
+						coverImage = 'default.png';
+						linkImage = '<?=base_url('assets/img/books/default.png')?>';
+					},
+					success: function()
+					{
+						coverImage = img;
+						linkImage = '<?=base_url('assets/img/books/')?>' + img;
+					},
+					async: false
+				});
+			}
+			
+		}
+
 		function load_data(page, limit = null, filter, sort_by = '') {
 			$.ajax({
 				type: "GET",
@@ -162,6 +191,8 @@
 					sort_by: sort_by
 				},
 				success: function (data) {
+
+					var defaultImg = '<?=base_url('assets/img/books/default.png')?>';
 					
 					// jika view style list
 					if(view_style == 'list'){
@@ -170,9 +201,14 @@
 							if(desc.length > 100){
 								desc = desc.substring(0, 300) + ' ...';
 							}
+
+							check_image(value.cover_img);
+
 							$('.flex-wrap-movielist-2').append(`
 								<div class="movie-item-style-2">
-									<img src="<?=base_url('assets/img/books/')?>${value.cover_img}" alt="">
+
+									<img src="${linkImage}" alt="">
+				
 									<div class="mv-item-infor">
 										<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title} <span>(${value.publish_year})</span></a></h6>
 										<p class="describe">${desc}</p>
@@ -185,9 +221,14 @@
 						});
 					}else{
 						$.each(data.books, function (key, value) {
+
+							check_image(value.cover_img);
+
 							$('.flex-wrap-movielist').append(`
 								<div class="movie-item-style-2 movie-item-style-1">
-									<img loading="lazy" src="<?=base_url('assets/img/books/')?>${value.cover_img}" onload="this.style.opacity = 1;" alt="">
+
+									<img loading="lazy" src="${linkImage}" onload="this.style.opacity = 1;" alt="">
+									
 								<div class="hvr-inner">
 									<a  href="<?=base_url('/home/book_detail?id=')?>${value.id}"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 								</div>
