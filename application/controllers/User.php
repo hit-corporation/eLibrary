@@ -153,66 +153,77 @@ class User extends MY_Controller {
 	public function change_avatar(){
 		$post = $this->input->post();
 
+		// load file helper
+		$this->load->helper('file');
+
 		if(isset($post['change_avatar'])){
 			// set validation rules
-			$this->form_validation->set_rules('avatar', 'Avatar', 'required');
+			if (empty($_FILES['avatar']['name'])){
+				$this->form_validation->set_rules('avatar', 'Avatar', 'required');
 
-			// validate form input
-			if($this->form_validation->run() == false){
-				// validation fails
-				$resp = ['success' => false, 'message' => $this->form_validation->error_array(), 'old' => $post];
-				$this->session->set_flashdata('error', $resp);
-				redirect($_SERVER['HTTP_REFERER']);
-			}else{
-				// upload images
-				$config['upload_path']          = './assets/landing-pages/images/avatar/';
-				$config['allowed_types']        = 'gif|jpg|png';
-				$config['max_size']             = 2048;
-				$config['encrypt_name']         = true;
-
-				$this->load->library('upload', $config);
-
-				if ( ! $this->upload->do_upload('avatar')){
-					// upload fails
-					$resp = ['success' => false, 'message' => $this->upload->display_errors()];
+				if($this->form_validation->run() == false){
+					// validation fails
+					$resp = ['success' => false, 'message' => $this->form_validation->error_array(), 'old' => $post];
 					$this->session->set_flashdata('error', $resp);
 					redirect($_SERVER['HTTP_REFERER']);
-
-				}else{
-
-					// upload success
-					$upload_data = $this->upload->data();
-
-					$fileName = base64_encode($upload_data['file_name']);
-
-					// resize image
-					$config['image_library'] = 'gd2';
-					$config['source_image'] = './assets/landing-pages/images/avatar/'.$fileName;
-					$config['create_thumb'] = FALSE;
-					$config['maintain_ratio'] = FALSE;
-					$config['width']         = 300;
-					$config['height']       = 300;
-
-					$this->load->library('image_lib', $config);
-
-					$this->image_lib->resize();
-
-					// update user data
-					$data = [
-						'profile_img' => $upload_data['file_name']
-					];
-
-					// update user data
-					$this->member_model->update($data, $post['id']);
-
-					// set success message
-					$resp = ['success' => true, 'message' => 'Avatar berhasil diubah.'];
-					$this->session->set_flashdata('success', $resp);
-					redirect($_SERVER['HTTP_REFERER']);
 				}
+			}
+
+			// upload images
+			$config['upload_path']          = './assets/landing-pages/images/avatar/';
+			$config['allowed_types']        = 'gif|jpg|png';
+			$config['max_size']             = 2048;
+			$config['encrypt_name']         = true;
+
+			$this->load->library('upload', $config);
+
+			if ( ! $this->upload->do_upload('avatar')){
+				// upload fails
+				$resp = ['success' => false, 'message' => $this->upload->display_errors()];
+				$this->session->set_flashdata('error', $resp);
+				redirect($_SERVER['HTTP_REFERER']);
+
+			}else{
+
+				// upload success
+				$upload_data = $this->upload->data();
+
+				// resize image
+				$config['image_library'] = 'gd2';
+				$config['source_image'] = './assets/landing-pages/images/avatar/'.$upload_data['file_name'];
+				$config['create_thumb'] = FALSE;
+				$config['maintain_ratio'] = FALSE;
+				$config['width']         = 300;
+				$config['height']       = 300;
+
+				$this->load->library('image_lib', $config);
+
+				$this->image_lib->resize();
 
 				
+				// remove old image
+				$old_image = $this->member_model->get_user($post['id'])['profile_img'];
+				if($old_image != '' || $old_image != null){
+					unlink('./assets/landing-pages/images/avatar/'.$old_image);
+				}
+				
+				// update user data
+				$data = [
+					'profile_img' => $upload_data['file_name']
+				];
+				
+				// update user data
+				$this->member_model->update($data, $post['id']);
+
+				
+
+				// set success message
+				$resp = ['success' => true, 'message' => 'Avatar berhasil diubah.'];
+				$this->session->set_flashdata('success', $resp);
+				redirect($_SERVER['HTTP_REFERER']);
 			}
+	
+			
 		}
 	}
 
