@@ -18,7 +18,7 @@
 <!-- Modal -->
 <div class="modal fade" id="modal-change-avatar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		<form action="<?=base_url('home/change_avatar')?>" method="post" enctype="multipart/form-data">
+		<form action="<?=base_url('user/change_avatar')?>" method="post" enctype="multipart/form-data">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Ubah Gambar Profile</h5>
@@ -31,6 +31,7 @@
 					
 					<div class="form-group">
 						<label for="avatar"></label>
+						<input type="hidden" name="id" value="<?=$user['id']?>">
 						<input type="file" class="form-control-file" name="avatar" id="avatar">
 					</div>
 
@@ -38,7 +39,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Save changes</button>
+					<button type="submit" class="btn btn-primary" name="change_avatar">Save changes</button>
 				</div>
 			</div>
 		</form>
@@ -52,7 +53,7 @@
 			<div class="col-md-3 col-sm-12 col-xs-12">
 				<div class="user-information">
 					<div class="user-img">
-						<a href="#"><img src="<?=base_url()?>assets/landing-pages/images/uploads/user-img.png" alt=""><br></a>
+						<a href="#"><img src="<?= isset($user['profile_img']) ? base_url('assets/landing-pages/images/avatar/'.$user['profile_img']) : base_url('assets/landing-pages/images/uploads/user-img.png') ?>" alt=""><br></a>
 						<a href="#" class="redbtn" id="change-avatar">Change avatar</a>
 					</div>
 					<div class="user-fav">
