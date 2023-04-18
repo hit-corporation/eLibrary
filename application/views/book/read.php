@@ -120,8 +120,13 @@
             function resetTimer() {
                 clearTimeout(time);
                 time = setTimeout(() => {
+                    let newObj = {};
+                    Array.from(document.cookie.split(';'), item => {
+                        var entry = item.trim().split('=');
+                        Object.assign(newObj, {[entry[0]]:decodeURIComponent(entry[1])});
+                    });
                     
-                    console.log(document.cookie);
+                    console.log(newObj);
 
                 }, 2 * 1000);
             }
