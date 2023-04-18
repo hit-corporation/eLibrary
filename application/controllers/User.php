@@ -133,21 +133,20 @@ class User extends MY_Controller {
 	 * ******************************************************************************
 	 */
 
-	 /**
-	  * Custom Validation for user in validation
-	  *
-	  * @param mixed $str
-	  * @return boolean
-	  */
-	  public function check_password($str): bool
-	  {
-		  $member = $this->member_model->get_user_by_username($this->session->userdata('user')['user_name']);
+		/**
+		 * Custom Validation for user in validation
+		*
+		* @param mixed $str
+		* @return boolean
+		*/
+	public function check_password($str): bool{
+		$member = $this->member_model->get_user_by_username($this->session->userdata('user')['user_name']);
 
-		  if(isset($member) &&  password_verify($str, $member['password'])){
-			  return true;
-		  }else{
-			  return false;
-		  }
+		if(isset($member) &&  password_verify($str, $member['password'])){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public function change_avatar(){
@@ -211,7 +210,7 @@ class User extends MY_Controller {
 				$data = [
 					'profile_img' => $upload_data['file_name']
 				];
-				
+
 				// update user data
 				$this->member_model->update($data, $post['id']);
 
@@ -225,6 +224,16 @@ class User extends MY_Controller {
 	
 			
 		}
+	}
+
+	public function user_favorite_list(){
+		// get user data
+		$userId 		= $this->member_model->get_user_by_username($this->session->userdata('user')['user_name'])['id'];
+		$data['user'] 	= $this->member_model->get_user($userId);
+
+		$this->load->view('header');
+		$this->load->view('home/user_favorite_list', $data);
+		$this->load->view('footer');
 	}
 
 }
