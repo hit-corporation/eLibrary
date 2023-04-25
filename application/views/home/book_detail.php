@@ -16,11 +16,11 @@
 		<div class="row ipad-width2">
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="movie-img sticky-sb">
-					<img src="<?=base_url('assets/img/books/').$book['cover_img']?>" alt="">
+					<img src="<?=isset($book['cover_img']) ? file_exists(base_url('assets/img/books/').$book['cover_img']) ? base_url('assets/img/books/').$book['cover_img'] : base_url('assets/img/books/default.png') : base_url('assets/img/books/default.png')?>" alt="">
 					<div class="movie-btn">	
 						<div class="btn-transform transform-vertical red">
-							<div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Read</a></div>
-							<div><a href="<?=base_url('book/read_book?id='.trim($_GET['id']))?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
+							<div><a href="#" class="item item-1 redbtn"> <i class="ion-eye"></i> Read</a></div>
+							<div><a href="<?=base_url('book/read_book?id='.trim($_GET['id']))?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class=""></i>Click To Read</a></div>
 						</div>
 						<!-- <div class="btn-transform transform-vertical">
 							<div><a href="#" class="item item-1 yellowbtn"> <i class="ion-card"></i> Buy ticket</a></div>
