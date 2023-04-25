@@ -14,7 +14,7 @@ class User extends MY_Controller {
 		$this->load->library('session');
 
 		// check if user is logged in
-		if (!$this->session->userdata('user')['is_logged_in']) {
+		if (empty($this->session->userdata('user')['user_name'])) {
 			redirect('home');
 		}
 	}
@@ -228,8 +228,9 @@ class User extends MY_Controller {
 
 	public function user_favorite_list(){
 		// get user data
-		$userId 		= $this->member_model->get_user_by_username($this->session->userdata('user')['user_name'])['id'];
-		$data['user'] 	= $this->member_model->get_user($userId);
+		$userId 				= $this->member_model->get_user_by_username($this->session->userdata('user')['user_name'])['id'];
+		$data['user'] 			= $this->member_model->get_user($userId);
+		$data['favorite_books'] = $this->member_model->get_favorite_books($userId);
 
 		$this->load->view('header');
 		$this->load->view('home/user_favorite_list', $data);
