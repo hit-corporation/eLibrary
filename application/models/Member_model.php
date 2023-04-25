@@ -134,4 +134,21 @@ class Member_model extends CI_Model {
 		$this->db->update('members', $data);
 		return true;
 	}
+
+	/**
+	 * Get get_favorite_books
+	 * 
+	 * @param mixed $id
+	 * @return void
+	 */
+	public function get_favorite_books($id) : array {
+		$this->db->select('fb.*');
+		$this->db->from('favorite_books fb');
+		$this->db->join('books b', 'b.id=fb.book_id');
+		$this->db->where('fb.member_id', $id);
+		$this->db->where('b.deleted_at', null);
+		$query = $this->db->get();
+		
+		return $query->result_array();
+	}
 }
