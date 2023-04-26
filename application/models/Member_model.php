@@ -153,4 +153,17 @@ class Member_model extends CI_Model {
 		
 		return $query->result_array();
 	}
+
+	/**
+	 * delete favorite book
+	 * 
+	 * 
+	 * @param mixed $id
+	 * @return void
+	 */
+	public function delete_favorite_book($id){
+		$this->db->where('id', $id);
+		$this->db->delete('favorite_books');
+		return true;
+	}
 }
