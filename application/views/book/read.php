@@ -223,19 +223,7 @@
                     Array.from(document.cookie.split(';'), item => {
                         var entry = item.trim().split('=');
                         Object.assign(newObj, {[entry[0]]:decodeURIComponent(entry[1])});
-                        fetch(window.location.href, {
-                            method: 'DELETE',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        }) 
-                        .then(res => res.json())
-                        .then(res => {
-                            window.location.reload();
-                        })
-                        .catch(err => {
-                            window.location.reload();
-                        });
+                        window.location.href = BASE_URL + 'book/close_book?id=<?=$_GET['id']?>';
                     });
                     
                     console.log(newObj);

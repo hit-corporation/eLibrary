@@ -73,6 +73,19 @@ class Book extends MY_Controller {
 	}
 
 	/**
+	 * Closing after read book
+	 *
+	 * @return void
+	 */
+	public function close_book(): void {
+		$id = $this->input->get('id');
+
+		setcookie('read_book', NULL, time() - 1000);
+		echo json_encode(['message' => 'Idle time out']);
+		redirect('book/read_book?id='.$id);
+	}
+
+	/**
 	 * Read a Book
 	 *
 	 * @return void
@@ -85,13 +98,6 @@ class Book extends MY_Controller {
 			echo '<script>';
 			echo 'window.location.href="'.base_url('home/book_detail?id='.$id).'"';
 			echo '</script>';
-			return;
-		}
-
-		if($_SERVER['REQUEST_METHOD'] === 'DELETE')
-		{
-			unset($_COOKIE['read_book']);
-			echo json_encode(['message' => 'Idle time out']);
 			return;
 		}
 
