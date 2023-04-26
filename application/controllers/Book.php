@@ -100,4 +100,20 @@ class Book extends MY_Controller {
 		$this->load->view('book/read', $data);
 	}
 
+	public function get_favorite_books(){
+		$page 			= isset($_GET['page']) ? $_GET['page'] : 1;
+		$limit 			= isset($_GET['limit']) ? $_GET['limit'] : 3;
+		$sort_by = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'id';
+
+		$page = ($page - 1) * $limit;
+
+		$data['books'] 	= $this->home_model->get_favorite_books($limit, $page, $sort_by);
+		$data['total_records'] = $this->home_model->get_total_favorite_books();
+		$data['total_pages'] = ceil($data['total_records'] / $limit);
+		
+		// create json header	
+		header('Content-Type: application/json');
+		echo json_encode($data);
+	}
+
 }
