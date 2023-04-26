@@ -4538,7 +4538,7 @@ ul {
   }
 }
 .topbar-filter p {
-  padding-right: 200px;
+  padding-right: 150px;
   margin-bottom: 0;
 }
 @media (max-width: 991px) {
@@ -4650,7 +4650,7 @@ ul {
   }
 }
 .topbar-filter.user p {
-  padding-right: 300px;
+  padding-right: 200px;
 }
 .title-hd {
   display: -webkit-flex;
@@ -8484,7 +8484,7 @@ input[type=file] {
     text-overflow: ellipsis;
     position: relative;
     z-index: 1;
-    margin-right: 90px;
+    /* margin-right: 90px; */
     margin-bottom: 0px;
     cursor: text;
   }
