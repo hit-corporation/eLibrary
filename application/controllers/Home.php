@@ -63,6 +63,7 @@ class Home extends MY_Controller {
 			$members = $this->member_model->login($username);
 
 			$_SESSION['user'] = [
+				'id'		=> $members['id'],
 				'user_name'	=> $members['username'],
 				'full_name'	=> $members['member_name'],
 				'email'		=> $members['email'],

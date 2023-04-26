@@ -58,16 +58,28 @@ class Book extends MY_Controller {
 			$this->load->view('errors/html/error_general', $data);
 			return;
 		}
+		// set transaction code
+		$transcode = strtoupper(bin2hex(random_bytes(8)));
 		// set cookie for reading time limit and idle time limit
-		$cookie = ['e_key' => $_SESSION['user']['user_name'], 'time' => date('Y-m-d H:i:s')];
 		$cookie_option = [
 			'expires'	=> strtotime('+'.$this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit']),
 			'path'		=> '/book/read_book',
 			'samesite'	=> 'Lax'
 		];
-		
+
 		if(!isset($_COOKIE['read_book']))
-			setcookie('read_book', base64_encode(implode(',', $cookie)), $cookie_option);
+			setcookie('read_book', $transcode, $cookie_option);
+
+		$insert = [
+			'trans_code' 	=> $transcode,
+			'start_time' 	=> date('Y-m-d H:i:s.u'),
+			'member_id' 	=> $_SESSION['user']['id'],
+			'book_id'		=> $id,
+			'config_idle'	=> $this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit'],
+			'config_borrow_limit' => $this->settings['max_allowed']
+		];
+
+		$this->db->insert('transactions', $insert);
 		
 		redirect('book/read_book?id='.$id);
 	}
@@ -79,6 +91,13 @@ class Book extends MY_Controller {
 	 */
 	public function close_book(): void {
 		$id = $this->input->get('id');
+
+		$update = [
+			'end_time' => date('Y-m-d H:i:s.u'),
+			'updated_at' => date('Y-m-d H:i:s.u')
+		];
+
+		$this->db->update('transactions', $update, ['trans_code' => $_COOKIE['read_book']]);
 
 		setcookie('read_book', NULL, time() - 1000);
 		echo json_encode(['message' => 'Idle time out']);
