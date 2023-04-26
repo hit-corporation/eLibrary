@@ -73,7 +73,7 @@
 				</div>
 				<div class="col-md-9 col-sm-12 col-xs-12">
 					<div class="topbar-filter user">
-						<p>Found <span><?=count($favorite_books)?> movies</span> in total</p>
+						<p>Found <span><?=count($favorite_books)?> books</span> in total</p>
 						<label>Sort by:</label>
 						<select>
 							<option value="range">-- Choose option --</option>
@@ -90,6 +90,8 @@
 							<div class="mv-item-infor">
 								<h6><a href="#"><?=$val['title']?> <span>(<?=$val['publish_year']?>)</span></a></h6>
 								<p class="describe"><?=substr($val['description'], 0, 300)?>...</p>
+
+								<a class="btn btn-xs btn-primary" href="<?=base_url('User/delete_favorite_book?id=').$val['id']?>">Delete Favorite</a>
 								
 								<p>Penulis: <a href="#"><?=$val['author']?></a></p>
 								<p>ISBN: <a href="#"><?=$val['isbn']?></a></p>
