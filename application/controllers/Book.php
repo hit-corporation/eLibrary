@@ -43,23 +43,21 @@ class Book extends MY_Controller {
 	}
 
 	/**
-	 * Read a Book
+	 * Set Config Befor reading a book
 	 *
 	 * @return void
 	 */
-	public function read_book(): void {
+	public function set_book(): void {
 		$id = $this->input->get('id');
-
 		// only active member that can read the book
 		if(!isset($_SESSION['user']) && empty($_SESSION['user']['user_name']))
 		{
 			$data['heading'] = 'PERINGATAN';
 			$data['message'] = '<p>Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!'.
-							   '<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
 			$this->load->view('errors/html/error_general', $data);
 			return;
 		}
-		
 		// set cookie for reading time limit and idle time limit
 		$cookie = ['e_key' => $_SESSION['user']['user_name'], 'time' => date('Y-m-d H:i:s')];
 		$cookie_option = [
@@ -70,6 +68,32 @@ class Book extends MY_Controller {
 		
 		if(!isset($_COOKIE['read_book']))
 			setcookie('read_book', base64_encode(implode(',', $cookie)), $cookie_option);
+		
+		redirect('book/read_book?id='.$id);
+	}
+
+	/**
+	 * Read a Book
+	 *
+	 * @return void
+	 */
+	public function read_book(): void {
+		$id = $this->input->get('id');	
+		
+		if(!isset($_COOKIE['read_book']))
+		{
+			echo '<script>';
+			echo 'window.location.href="'.base_url('home/book_detail?id='.$id).'"';
+			echo '</script>';
+			return;
+		}
+
+		if($_SERVER['REQUEST_METHOD'] === 'DELETE')
+		{
+			unset($_COOKIE['read_book']);
+			echo json_encode(['message' => 'Idle time out']);
+			return;
+		}
 
 		$data['book'] = $this->book_model->get_one($id);
 		$data['setting'] = $this->settings;

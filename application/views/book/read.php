@@ -27,7 +27,6 @@
         }
 
         #main-content {
-            max-width: 80vw !important;
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -42,15 +41,15 @@
     <!--<script src="<?=html_escape('assets/node_modules/pdfjs-dist/build/pdf.min.js')?>"></script>-->
     <!-- <script src="<?=html_escape('assets/node_modules/pdfjs-dist/web/pdf_viewer.js')?>"></script> -->
     <script defer>
-
-        const main = document.getElementById('main-content');
+        const main = document.getElementById('main-content'),
+              BASE_URL = document.querySelector('base').href;
 
         // if browser is chrome
         if(window.navigator.userAgent.indexOf('Chrome') != -1) {
            
             const embed = document.createElement('embed');
 
-            embed.src = "<?=html_escape(base_url('assets/files/books/'.$book['file_1']))?>#toolbar=1&navpanes=1";
+            embed.src = "<?=html_escape(base_url('assets/files/books/'.$book['file_1']))?>#toolbar=0&navpanes=1";
             embed.style.height = '100vh';
             embed.style.width = '100vw';
 
@@ -124,7 +123,19 @@
                     Array.from(document.cookie.split(';'), item => {
                         var entry = item.trim().split('=');
                         Object.assign(newObj, {[entry[0]]:decodeURIComponent(entry[1])});
-                        window.location.href = BASE_URL + 'book/book_detail?id=<?=$_GET['id']?>'; 
+                        fetch(window.location.href, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }) 
+                        .then(res => res.json())
+                        .then(res => {
+                            window.location.reload();
+                        })
+                        .catch(err => {
+                            window.location.reload();
+                        });
                     });
                     
                     console.log(newObj);
