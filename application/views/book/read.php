@@ -24,6 +24,7 @@
             margin: 0;
             padding: 0;
             display: block;
+            background-color: whitesmoke;
         }
 
         #main-content {
@@ -31,6 +32,8 @@
             margin-left: auto;
             margin-right: auto;
             margin-top: 75px;
+            max-width: 80vh;
+            background-color: whitesmoke;
         }
 
         nav {
@@ -56,15 +59,16 @@
             border-radius: 4px;
             border: none;
             outline: 1px;
+            background-color: #21BA45;
+            color: white;
+            cursor: pointer;
         }
 
         #current-page {
             margin-left: .25rem;
             margin-right: .25rem;
             padding: .25rem;
-            border-radius: .7rem;
             background-color: white;
-            width: 2.5rem;
         }
     </style>
 </head>
@@ -72,7 +76,7 @@
 <nav>
     <div></div>
     <button id="previous">&lt;</button>
-    <input type="text" id="current-page" disabled>
+    <span id="current-page"></span>
     <button id="next">&gt;</button>
 </nav>
 <div id="main-content">
@@ -84,6 +88,7 @@
     <script defer>
         const main = document.getElementById('main-content'),
               BASE_URL = document.querySelector('base').href;
+        let pdf = null;
 
         // if browser is chrome
         // if(window.navigator.userAgent.indexOf('Chrome') != -1) {
@@ -100,22 +105,21 @@
         //if(window.navigator.userAgent.indexOf('Firefox') != -1) {
 
             var canvas = document.createElement('canvas');
-            main.appendChild(canvas);
-
+          
             pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/node_modules/pdfjs-dist/build/pdf.worker.min.js';
 
             const pdfLoad = pdfjsLib.getDocument("<?=html_escape(base_url('assets/files/books/'.$book['file_1']))?>");
 
-            pdfLoad.promise.then(pdf => {
-                var pageNum = 1;
+            // render pdf by pages
+            const PdfPage = numPage => {
+                var context = canvas.getContext('2d');
 
-                pdf.getPage(pageNum).then(page => {
+                pdf.getPage(numPage).then(page => {
 
                     var scale = 1;
                     var viewport = page.getViewport({scale: scale});
 
-                   
-                    var context = canvas.getContext('2d');
+                    
                     canvas.height = viewport.height;
                     canvas.width = viewport.width;
 
@@ -129,8 +133,48 @@
                         
                     });
                 });
+            }
+
+            // render text current page / total pages
+            const navPages = (curr, total) => {
+                var container = document.getElementById('current-page');
+                container.innerText = curr + '/' + total;
+            }
+
+            pdfLoad.promise.then(_pdf => {
+               pdf = _pdf;
+               numPage = 1;
+               PdfPage(1);
+               navPages(1, pdf.numPages);
+
+               // previous page button
+               document.getElementById('previous').addEventListener('click', e => {
+                    // if page <= 1 then current page = 1
+                    if(numPage <= 1) 
+                    {
+                        numPage = 1;
+                        return;
+                    }
+                    numPage--;
+                    PdfPage(numPage);
+                    navPages(numPage, pdf.numPages);
+               });
+
+               // next button
+               document.getElementById('next').addEventListener('click', e => {
+                      // if page >= total pages then current page = total pages
+                    if(numPage >= pdf.numPages) 
+                    {
+                        numPage = pdf.numPages;
+                        return;
+                    }
+                    numPage++;
+                    PdfPage(numPage);
+                    navPages(numPage, pdf.numPages);
+               });
             });
         //}
+        main.appendChild(canvas);
 
         // timer
         const idleLogout = () => {
