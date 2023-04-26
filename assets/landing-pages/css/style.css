@@ -8490,3 +8490,10 @@ label {
 	cursor: text;
 }
 
+.btn-xs {
+	padding: 0.5rem 0.5rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	border-radius: 0.2rem;
+	margin-bottom: 20px;
+}
