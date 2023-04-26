@@ -97,7 +97,7 @@ class Book extends MY_Controller {
 			'updated_at' => date('Y-m-d H:i:s.u')
 		];
 
-		$this->db->update('transactions', $update, ['trans_code' => $_COOKIE['read_book']]);
+		$this->db->update('transactions', $update, ['trans_code' => trim($_COOKIE['read_book'])]);
 
 		setcookie('read_book', NULL, time() - 1000);
 		echo json_encode(['message' => 'Idle time out']);
