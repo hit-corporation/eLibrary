@@ -45,7 +45,7 @@
 						<div class="tabs">
 							<ul class="tab-links tabs-mv">
 								<li class="active"><a href="#overview">Overview</a></li>
-								<li><a href="#reviews"> Reviews</a></li>               
+								<!-- <li><a href="#reviews"> Reviews</a></li>                -->
 							</ul>
 						    <div class="tab-content">
 						        <div id="overview" class="tab active">
