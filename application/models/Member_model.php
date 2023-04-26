@@ -142,9 +142,11 @@ class Member_model extends CI_Model {
 	 * @return void
 	 */
 	public function get_favorite_books($id) : array {
-		$this->db->select('fb.*');
+		$this->db->select('b.*, p.publisher_name, c.category_name');
 		$this->db->from('favorite_books fb');
 		$this->db->join('books b', 'b.id=fb.book_id');
+		$this->db->join('publishers p', 'p.id=b.publisher_id');
+		$this->db->join('categories c', 'c.id=b.category_id');
 		$this->db->where('fb.member_id', $id);
 		$this->db->where('b.deleted_at', null);
 		$query = $this->db->get();
