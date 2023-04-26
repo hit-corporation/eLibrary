@@ -82,7 +82,7 @@ class Book extends MY_Controller {
 
 		setcookie('read_book', NULL, time() - 1000);
 		echo json_encode(['message' => 'Idle time out']);
-		redirect('book/read_book?id='.$id);
+		redirect('book/book_detail?id='.$id);
 	}
 
 	/**
