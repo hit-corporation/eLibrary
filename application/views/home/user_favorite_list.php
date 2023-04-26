@@ -21,19 +21,19 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Ubah Gambar Profile</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
-					</button>
+					</button> -->
 				</div>
 				<div class="modal-body">
 					<!-- create form input change image profile -->
-					
-					<div class="form-group">
-						<label for="avatar"></label>
-						<input type="hidden" name="id" value="<?=$user['id']?>">
-						<input type="file" class="form-control-file" name="avatar" id="avatar">
-					</div>
 
+					<!--file input example -->
+					<span class="control-fileupload">
+						<input type="hidden" name="id" value="<?=$user['id']?>">
+						<label for="avatar">Choose a file :</label>
+						<input type="file" class="form-control-file" name="avatar" id="avatar">
+					</span>
 					
 				</div>
 				<div class="modal-footer">
@@ -163,3 +163,43 @@
 	</div>
 </div>
 
+<script>
+	// create swall alert
+	<?php if(!empty($_SESSION['success'])) : ?>
+		Swal.fire({
+            icon: 'success',
+            title: '<h4 class="text-success"></h4>',
+            html: '<span class="text-success"><?= $_SESSION['success']['message'] ?></span>',
+            timer: 5000
+        });
+
+	<?php endif; ?>
+
+	<?php if(!empty($_SESSION['error'])) : ?>
+		Swal.fire({
+			icon: 'error',
+			title: '<h4 class="text-danger"></h4>',
+			html: '<span class="text-danger">Data Gagal di ubah!</span>',
+			timer: 5000
+		});
+	<?php endif; ?>
+
+	// change avatar
+	$('#change-avatar').on('click', function(e){
+		e.preventDefault();
+		// show modal
+		$('#modal-change-avatar').modal('show');
+
+	});
+
+	// input file change show modal
+	$('input[type=file]').change(function(){
+		$('#modal-change-avatar').modal('show');
+
+		var t = $(this).val();
+		var labelText = 'File : ' + t.substr(12, t.length);
+		$(this).prev('label').text(labelText);
+	});
+
+
+</script>
