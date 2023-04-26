@@ -226,9 +226,7 @@
                         window.location.href = BASE_URL + 'book/close_book?id=<?=$_GET['id']?>';
                     });
                     
-                    console.log(newObj);
-
-                }, 15 * 1000);
+                }, seconds * 1000);
             }
         }
 
