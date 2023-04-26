@@ -73,7 +73,7 @@
 				</div>
 				<div class="col-md-9 col-sm-12 col-xs-12">
 					<div class="topbar-filter user">
-						<p>Found <span>1,608 movies</span> in total</p>
+						<p>Found <span><?=count($favorite_books)?> movies</span> in total</p>
 						<label>Sort by:</label>
 						<select>
 							<option value="range">-- Choose option --</option>
@@ -83,61 +83,22 @@
 						<a  href="userfavoritegrid.html" class="grid"><i class="ion-grid "></i></a>
 					</div>
 					<div class="flex-wrap-movielist user-fav-list">
+
+						<?php foreach($favorite_books as $key => $val):?>
 						<div class="movie-item-style-2">
-							<img src="<?=base_url()?>assets/landing-pages/images/uploads/mv1.jpg" alt="">
+							<img src="<?=base_url('assets/img/books/').$val['cover_img']?>" alt="">
 							<div class="mv-item-infor">
-								<h6><a href="#">oblivion <span>(2012)</span></a></h6>
-								<p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
-								<p class="describe">Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity...</p>
-								<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-								<p>Director: <a href="#">Joss Whedon</a></p>
-								<p>Stars: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">  Chris Hemsworth</a></p>
+								<h6><a href="#"><?=$val['title']?> <span>(<?=$val['publish_year']?>)</span></a></h6>
+								<p class="describe"><?=substr($val['description'], 0, 300)?>...</p>
+								
+								<p>Penulis: <a href="#"><?=$val['author']?></a></p>
+								<p>ISBN: <a href="#"><?=$val['isbn']?></a></p>
+								<p>Penerbit: <a href="#"><?=$val['publisher_name']?></a></p>
+								<p>Kategori: <a href="#"><?=$val['category_name']?></a></p>
 							</div>
 						</div>
-						<div class="movie-item-style-2">
-							<img src="<?=base_url()?>assets/landing-pages/images/uploads/mv2.jpg" alt="">
-							<div class="mv-item-infor">
-								<h6><a href="#">into the wild <span>(2014)</span></a></h6>
-								<p class="rate"><i class="ion-android-star"></i><span>7.8</span> /10</p>
-								<p class="describe">As Steve Rogers struggles to embrace his role in the modern world, he teams up with a fellow Avenger and S.H.I.E.L.D agent, Black Widow, to battle a new threat...</p>
-								<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-								<p>Director: <a href="#">Anthony Russo,</a><a href="#">Joe Russo</a></p>
-								<p>Stars: <a href="#">Chris Evans,</a> <a href="#">Samuel L. Jackson,</a> <a href="#">  Scarlett Johansson</a></p>
-							</div>
-						</div>
-						<div class="movie-item-style-2">
-							<img src="<?=base_url()?>assets/landing-pages/images/uploads/mv3.jpg" alt="">
-							<div class="mv-item-infor">
-								<h6><a href="#">blade runner  <span>(2015)</span></a></h6>
-								<p class="rate"><i class="ion-android-star"></i><span>7.3</span> /10</p>
-								<p class="describe">Armed with a super-suit with the astonishing ability to shrink in scale but increase in strength, cat burglar Scott Lang must embrace his inner hero and help...</p>
-								<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-								<p>Director: <a href="#">Peyton Reed</a></p>
-								<p>Stars: <a href="#">Paul Rudd,</a> <a href="#"> Michael Douglas</a></p>
-							</div>
-						</div>
-						<div class="movie-item-style-2">
-							<img src="<?=base_url()?>assets/landing-pages/images/uploads/mv4.jpg" alt="">
-							<div class="mv-item-infor">
-								<h6><a href="#">Mulholland pride<span> (2013)  </span></a></h6>
-								<p class="rate"><i class="ion-android-star"></i><span>7.2</span> /10</p>
-								<p class="describe">When Tony Stark's world is torn apart by a formidable terrorist called the Mandarin, he starts an odyssey of rebuilding and retribution.</p>
-								<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-								<p>Director: <a href="#">Shane Black</a></p>
-								<p>Stars: <a href="#">Robert Downey Jr., </a> <a href="#">  Guy Pearce,</a><a href="#">Don Cheadle</a></p>
-							</div>
-						</div>
-						<div class="movie-item-style-2">
-							<img src="<?=base_url()?>assets/landing-pages/images/uploads/mv5.jpg" alt="">
-							<div class="mv-item-infor">
-								<h6><a href="#">skyfall: evil of boss<span> (2013)  </span></a></h6>
-								<p class="rate"><i class="ion-android-star"></i><span>7.0</span> /10</p>
-								<p class="describe">When Tony Stark's world is torn apart by a formidable terrorist called the Mandarin, he starts an odyssey of rebuilding and retribution.</p>
-								<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-								<p>Director: <a href="#">Alan Taylor</a></p>
-								<p>Stars: <a href="#">Chris Hemsworth,  </a> <a href="#">  Natalie Portman,</a><a href="#">Tom Hiddleston</a></p>
-							</div>
-						</div>
+						<?php endforeach;?>
+
 					</div>		
 					<div class="topbar-filter">
 						<label>Movies per page:</label>
