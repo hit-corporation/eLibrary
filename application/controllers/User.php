@@ -237,4 +237,15 @@ class User extends MY_Controller {
 		$this->load->view('footer');
 	}
 
+	public function delete_favorite_book(){
+		$id = $_GET['id'];
+
+		$this->member_model->delete_favorite_book($id);
+
+		// set success message
+		$resp = ['success' => true, 'message' => 'Buku berhasil dihapus dari daftar favorit.'];
+		$this->session->set_flashdata('success', $resp);
+		redirect($_SERVER['HTTP_REFERER']);
+	}
+
 }
