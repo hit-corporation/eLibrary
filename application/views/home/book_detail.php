@@ -16,16 +16,23 @@
 		<div class="row ipad-width2">
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="movie-img sticky-sb">
-					<img src="<?=isset($book['cover_img']) ? file_exists(base_url('assets/img/books/').$book['cover_img']) ? base_url('assets/img/books/').$book['cover_img'] : base_url('assets/img/books/default.png') : base_url('assets/img/books/default.png')?>" alt="">
+					<img src="<?php
+						if (isset($book['cover_img'])){
+							if(file_exists($_SERVER['DOCUMENT_ROOT'].'/assets/img/books/'.$book['cover_img'])){
+								echo base_url('assets/img/books/').$book['cover_img'];
+							}else{
+								echo base_url('assets/img/books/default.png');
+							}
+						}else{
+							echo base_url('assets/img/books/default.png');
+						}
+					?>" alt="">
 					<div class="movie-btn">	
 						<div class="btn-transform transform-vertical red">
 							<div><a href="#" class="item item-1 redbtn"> <i class="ion-eye"></i> Read</a></div>
 							<div><a href="<?=base_url('book/read_book?id='.trim($_GET['id']))?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class=""></i>Click To Read</a></div>
 						</div>
-						<!-- <div class="btn-transform transform-vertical">
-							<div><a href="#" class="item item-1 yellowbtn"> <i class="ion-card"></i> Buy ticket</a></div>
-							<div><a href="#" class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
-						</div> -->
+						
 					</div>
 				</div>
 			</div>
