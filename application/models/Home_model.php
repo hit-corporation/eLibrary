@@ -122,4 +122,34 @@ class Home_model extends CI_Model {
 		return $query->num_rows();
 	}
 
+	public function get_favorite_books($limit = null, $page = null, $sort_by = null){
+
+		if($sort_by == 'title-asc')
+			$this->db->order_by('title', 'ASC');
+
+		if($sort_by == 'title-desc')
+			$this->db->order_by('title', 'DESC');
+
+		// $this->db->select('fb.id, b.title, b.cover_img, b.author, b.isbn, b.publish_year, b.description, p.publisher_name, c.category_name');
+		$this->db->select('fb.*');
+		$this->db->from('favorite_books fb');
+		$this->db->where('fb.member_id', $this->get_user_id()['id']);
+		$this->db->limit($limit, $page);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function get_total_favorite_books(){
+		$this->db->where('deleted_at IS NULL');
+		$query = $this->db->get('books');
+		return $query->num_rows();
+	}
+
+	public function get_user_id(){
+		$this->db->select('id');
+		$this->db->where('username', $this->session->userdata('user')['user_name']);
+		$query = $this->db->get('members');
+		return $query->row_array();
+	}
+
 }
