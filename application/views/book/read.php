@@ -104,75 +104,89 @@
         // if browser is firefox
         //if(window.navigator.userAgent.indexOf('Firefox') != -1) {
 
-            var canvas = document.createElement('canvas');
-          
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/node_modules/pdfjs-dist/build/pdf.worker.min.js';
+        var canvas = document.createElement('canvas');
+        
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/node_modules/pdfjs-dist/build/pdf.worker.min.js';
 
-            const pdfLoad = pdfjsLib.getDocument("<?=html_escape(base_url('assets/files/books/'.$book['file_1']))?>");
+        const pdfLoad = pdfjsLib.getDocument("<?=html_escape(base_url('assets/files/books/'.$book['file_1']))?>");
 
-            // render pdf by pages
-            const PdfPage = numPage => {
-                var context = canvas.getContext('2d');
+        // render pdf by pages
+        const PdfPage = numPage => {
+            var context = canvas.getContext('2d');
 
-                pdf.getPage(numPage).then(page => {
+            pdf.getPage(numPage).then(page => {
 
-                    var scale = 1;
-                    var viewport = page.getViewport({scale: scale});
+                var scale = 1;
+                var viewport = page.getViewport({scale: scale});
 
+                
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                var renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                var renderTask = page.render(renderContext);
+
+                renderTask.promise.then(function () {
                     
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-
-                    var renderContext = {
-                        canvasContext: context,
-                        viewport: viewport
-                    };
-                    var renderTask = page.render(renderContext);
-
-                    renderTask.promise.then(function () {
-                        
-                    });
                 });
-            }
-
-            // render text current page / total pages
-            const navPages = (curr, total) => {
-                var container = document.getElementById('current-page');
-                container.innerText = curr + '/' + total;
-            }
-
-            pdfLoad.promise.then(_pdf => {
-               pdf = _pdf;
-               numPage = 1;
-               PdfPage(1);
-               navPages(1, pdf.numPages);
-
-               // previous page button
-               document.getElementById('previous').addEventListener('click', e => {
-                    // if page <= 1 then current page = 1
-                    if(numPage <= 1) 
-                    {
-                        numPage = 1;
-                        return;
-                    }
-                    numPage--;
-                    PdfPage(numPage);
-                    navPages(numPage, pdf.numPages);
-               });
-
-               // next button
-               document.getElementById('next').addEventListener('click', e => {
-                      // if page >= total pages then current page = total pages
-                    if(numPage >= pdf.numPages) 
-                    {
-                        numPage = pdf.numPages;
-                        return;
-                    }
-                    numPage++;
-                    PdfPage(numPage);
-                    navPages(numPage, pdf.numPages);
-               });
             });
+        }
+
+        // render text current page / total pages
+        const navPages = (curr, total) => {
+            var container = document.getElementById('current-page');
+            container.innerText = curr + '/' + total;
+        }
+
+        pdfLoad.promise.then(_pdf => {
+            pdf = _pdf;
+            numPage = 1;
+            PdfPage(1);
+            navPages(1, pdf.numPages);
+
+            // previous page button
+            document.getElementById('previous').addEventListener('click', e => {
+                // if page <= 1 then current page = 1
+                if(numPage <= 1) 
+                {
+                    numPage = 1;
+                    return;
+                }
+                numPage--;
+                PdfPage(numPage);
+                navPages(numPage, pdf.numPages);
+            });
+
+            // next button
+            document.getElementById('next').addEventListener('click', e => {
+                    // if page >= total pages then current page = total pages
+                if(numPage >= pdf.numPages) 
+                {
+                    numPage = pdf.numPages;
+                    return;
+                }
+                numPage++;
+                PdfPage(numPage);
+                navPages(numPage, pdf.numPages);
+            });
+        });
+
+        // arrow listeer
+        window.addEventListener('keydown', e => {
+            const event = new Event('click');
+            if(e.keyCode === 39)
+            {
+                document.getElementById('next').dispatchEvent(event);
+            }
+            if(e.keyCode === 37)
+            {
+                document.getElementById('previous').dispatchEvent(event);
+            }
+        });
+          
         //}
         main.appendChild(canvas);
 
@@ -196,7 +210,7 @@
             }
             // reset time 
             window.addEventListener('load', resetTimer, true);
-            var events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+            var events = ['mousedown', 'mousemove', 'keypress', 'keydown', 'scroll', 'touchstart'];
             events.forEach(function(name) {
                 document.addEventListener(name, resetTimer, true);
             });
@@ -209,24 +223,24 @@
                     Array.from(document.cookie.split(';'), item => {
                         var entry = item.trim().split('=');
                         Object.assign(newObj, {[entry[0]]:decodeURIComponent(entry[1])});
-                        // fetch(window.location.href, {
-                        //     method: 'DELETE',
-                        //     headers: {
-                        //         'Content-Type': 'application/json'
-                        //     }
-                        // }) 
-                        // .then(res => res.json())
-                        // .then(res => {
-                        //     window.location.reload();
-                        // })
-                        // .catch(err => {
-                        //     window.location.reload();
-                        // });
+                        fetch(window.location.href, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }) 
+                        .then(res => res.json())
+                        .then(res => {
+                            window.location.reload();
+                        })
+                        .catch(err => {
+                            window.location.reload();
+                        });
                     });
                     
                     console.log(newObj);
 
-                }, 2 * 1000);
+                }, 15 * 1000);
             }
         }
 
