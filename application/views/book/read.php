@@ -30,33 +30,74 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
+            margin-top: 75px;
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: .5rem 1rem;
+            top: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, .4);
+            box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.12), 0px 1px 2px 0px rgba(0,0,0,0.24);
+            display: flex;
+            flex-wrap: nowrap;
+            flex-grow: 0;
+            justify-content: end;
+            align-items: center;
+        }
+
+        button#previous,
+        button#next {
+            padding: .25rem .5rem;
+            display: inline-block;
+            vertical-align: baseline;
+            border-radius: 4px;
+            border: none;
+            outline: 1px;
+        }
+
+        #current-page {
+            margin-left: .25rem;
+            margin-right: .25rem;
+            padding: .25rem;
+            border-radius: .7rem;
+            background-color: white;
+            width: 2.5rem;
         }
     </style>
 </head>
 <body>
+<nav>
+    <div></div>
+    <button id="previous">&lt;</button>
+    <input type="text" id="current-page" disabled>
+    <button id="next">&gt;</button>
+</nav>
 <div id="main-content">
 </div>
     <!-- async -->
 
-    <!--<script src="<?=html_escape('assets/node_modules/pdfjs-dist/build/pdf.min.js')?>"></script>-->
-    <!-- <script src="<?=html_escape('assets/node_modules/pdfjs-dist/web/pdf_viewer.js')?>"></script> -->
+    <script src="<?=html_escape('assets/node_modules/pdfjs-dist/build/pdf.min.js')?>"></script>
+    <script src="<?=html_escape('assets/node_modules/pdfjs-dist/web/pdf_viewer.js')?>"></script>
     <script defer>
         const main = document.getElementById('main-content'),
               BASE_URL = document.querySelector('base').href;
 
         // if browser is chrome
-        if(window.navigator.userAgent.indexOf('Chrome') != -1) {
+        // if(window.navigator.userAgent.indexOf('Chrome') != -1) {
            
-            const embed = document.createElement('embed');
+        //     const embed = document.createElement('embed');
 
-            embed.src = "<?=html_escape(base_url('assets/files/books/'.$book['file_1']))?>#toolbar=0&navpanes=1";
-            embed.style.height = '100vh';
-            embed.style.width = '100vw';
+        //     embed.src = "<?=html_escape(base_url('assets/files/books/'.$book['file_1']))?>#toolbar=0&navpanes=1";
+        //     embed.style.height = '100vh';
+        //     embed.style.width = '100vw';
 
-            main.appendChild(embed);
-        }
+        //     main.appendChild(embed);
+        // }
         // if browser is firefox
-        if(window.navigator.userAgent.indexOf('Firefox') != -1) {
+        //if(window.navigator.userAgent.indexOf('Firefox') != -1) {
 
             var canvas = document.createElement('canvas');
             main.appendChild(canvas);
@@ -89,7 +130,7 @@
                     });
                 });
             });
-        }
+        //}
 
         // timer
         const idleLogout = () => {
@@ -117,25 +158,26 @@
             });
 
             function resetTimer() {
+                document.activeElement.focus();
                 clearTimeout(time);
                 time = setTimeout(() => {
                     let newObj = {};
                     Array.from(document.cookie.split(';'), item => {
                         var entry = item.trim().split('=');
                         Object.assign(newObj, {[entry[0]]:decodeURIComponent(entry[1])});
-                        fetch(window.location.href, {
-                            method: 'DELETE',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        }) 
-                        .then(res => res.json())
-                        .then(res => {
-                            window.location.reload();
-                        })
-                        .catch(err => {
-                            window.location.reload();
-                        });
+                        // fetch(window.location.href, {
+                        //     method: 'DELETE',
+                        //     headers: {
+                        //         'Content-Type': 'application/json'
+                        //     }
+                        // }) 
+                        // .then(res => res.json())
+                        // .then(res => {
+                        //     window.location.reload();
+                        // })
+                        // .catch(err => {
+                        //     window.location.reload();
+                        // });
                     });
                     
                     console.log(newObj);
@@ -144,7 +186,10 @@
             }
         }
 
-        window.addEventListener('load', e => idleLogout());
+        window.addEventListener('load', e => { 
+            document.activeElement.focus();
+            idleLogout() 
+        });
     </script>
 </body>
 </html>
