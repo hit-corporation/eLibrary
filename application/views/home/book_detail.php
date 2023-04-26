@@ -30,7 +30,7 @@
 					<div class="movie-btn">	
 						<div class="btn-transform transform-vertical red">
 							<div><a href="#" class="item item-1 redbtn"> <i class="ion-eye"></i> Read</a></div>
-							<div><a href="<?=base_url('book/read_book?id='.trim($_GET['id']))?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class=""></i>Click To Read</a></div>
+							<div><a href="<?=base_url('book/set_book?id='.trim($_GET['id']))?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class=""></i>Click To Read</a></div>
 						</div>
 						
 					</div>

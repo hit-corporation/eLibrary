@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
+	<base href="<?=base_url()?>">
 	<!-- Basic need -->
 	<title>eLibrary</title>
 	<meta charset="UTF-8">
@@ -21,7 +22,9 @@
 
 	<!-- JQUERY -->
 	<script src="<?=base_url()?>assets/js/jquery-3.5.1.min.js"></script>
-
+	<script>
+		BASE_URL = document.querySelector('base').href;
+	</script>
 	<!-- Sweetalert -->
 	<!-- import from node_modules -->
 	<link rel="stylesheet" href="<?=base_url()?>assets/node_modules/sweetalert2/dist/sweetalert2.min.css">
