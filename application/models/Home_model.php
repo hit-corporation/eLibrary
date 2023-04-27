@@ -144,8 +144,10 @@ class Home_model extends CI_Model {
 	}
 
 	public function get_total_favorite_books(){
-		$this->db->where('deleted_at IS NULL');
-		$query = $this->db->get('books');
+		$user_id = $this->get_user_id()['id'];
+
+		$this->db->where('member_id', $user_id);
+		$query = $this->db->get('favorite_books');
 		return $query->num_rows();
 	}
 
