@@ -28,7 +28,7 @@ class BookSeeder extends AbstractSeed
 					'author'       	=> 'Sri Wahyuni',
 					'isbn'			=> '9786020310001',
 					'publish_year'	=> '2018',
-					'category_id'	=> 6,
+					'category_id'	=> 8,
 					'publisher_id'	=> 1,
 					'description'	=> 'Buku ini merupakan buku pelajaran yang dikhususkan untuk siswa kelas 6 SD yang mengikuti kurikulum 2013 revisi. Buku ini berisi materi-materi yang dibagi menjadi 10 bab, yaitu: 1. Kata Kerja, 2. Kata Sifat, 3. Kata Benda, 4. Kata Ganti, 5. Kalimat, 6. Kalimat Tanya, 7. Kalimat Perintah, 8. Kalimat Sifat, 9. Kalimat Tanya Sifat, dan 10. Kalimat Perintah Sifat. Setiap bab diawali dengan materi yang berisi penjelasan tentang materi yang akan dipelajari, contoh-contoh, dan latihan soal. Setelah itu, siswa akan diberikan latihan soal yang lebih banyak dan lebih rumit. Setiap bab diakhiri dengan latihan soal yang lebih rumit lagi. Buku ini juga dilengkapi dengan kunci jawaban yang dapat digunakan untuk memeriksa jawaban siswa. Buku ini dapat digunakan oleh siswa kelas 6 SD yang mengikuti kurikulum 2013 revisi.',
 					'qty'			=> 5
@@ -40,7 +40,7 @@ class BookSeeder extends AbstractSeed
 					'author'       	=> 'E.B Devitta Ekawati, Indah Wukir Setiarini',
 					'isbn'			=> '9786020310002',
 					'publish_year'	=> '2022',
-					'category_id'	=> 5,
+					'category_id'	=> 9,
 					'publisher_id'	=> 1,
 					'description'	=> 'Buku ini merupakan buku pelajaran yang dikhususkan untuk siswa kelas 7 SMP/MTs yang mengikuti kurikulum 2013 revisi. Buku ini berisi materi-materi yang dibagi menjadi 10 bab, yaitu: 1. Kata Kerja, 2. Kata Sifat, 3. Kata Benda, 4. Kata Ganti, 5. Kalimat, 6. Kalimat Tanya, 7. Kalimat Perintah, 8. Kalimat Sifat, 9. Kalimat Tanya Sifat, dan 10. Kalimat Perintah Sifat. Setiap bab diawali dengan materi yang berisi penjelasan tentang materi yang akan dipelajari, contoh-contoh, dan latihan soal. Setelah itu, siswa akan diberikan latihan soal yang lebih banyak dan lebih rumit. Setiap bab diakhiri dengan latihan soal yang lebih rumit lagi. Buku ini juga dilengkapi dengan kunci jawaban yang dapat digunakan untuk memeriksa jawaban siswa. Buku ini dapat digunakan oleh siswa kelas 7 SMP/MTs yang mengikuti kurikulum 2013 revisi.',
 					'qty'			=> 4
@@ -52,7 +52,7 @@ class BookSeeder extends AbstractSeed
 					'author'       	=> 'Sri Wahyuni',
 					'isbn'			=> '9786020310003',
 					'publish_year'	=> '2021',
-					'category_id'	=> 6,
+					'category_id'	=> 8,
 					'publisher_id'	=> 1,
 					'description'	=> 'Buku ini merupakan buku pelajaran yang dikhususkan untuk siswa kelas 6 SD yang mengikuti kurikulum 2013 revisi. Buku ini berisi materi-materi yang dibagi menjadi 10 bab, yaitu: 1. Kata Kerja, 2. Kata Sifat, 3. Kata Benda, 4. Kata Ganti, 5. Kalimat, 6. Kalimat Tanya, 7. Kalimat Perintah, 8. Kalimat Sifat, 9. Kalimat Tanya Sifat, dan 10. Kalimat Perintah Sifat. Setiap bab diawali dengan materi yang berisi penjelasan tentang materi yang akan dipelajari, contoh-contoh, dan latihan soal. Setelah itu, siswa akan diberikan latihan soal yang lebih banyak dan lebih rumit. Setiap bab diakhiri dengan latihan soal yang lebih rumit lagi. Buku ini juga dilengkapi dengan kunci jawaban yang dapat digunakan untuk memeriksa jawaban siswa. Buku ini dapat digunakan oleh siswa kelas 6 SD yang mengikuti kurikulum 2013 revisi.',
 					'qty'			=> 3
@@ -64,7 +64,7 @@ class BookSeeder extends AbstractSeed
 					'author'		=> 'Dina Kurniawati dkk.',
 					'isbn'			=> '9786020310004',
 					'publish_year'	=> '2020',
-					'category_id'	=> 5,
+					'category_id'	=> 9,
 					'publisher_id'	=> 1,
 					'description'	=> 'Buku ini merupakan buku pelajaran yang dikhususkan untuk siswa kelas 7 SMP/MTs yang mengikuti kurikulum 2013 revisi. Buku ini berisi materi-materi yang dibagi menjadi 10 bab, yaitu: 1. Kata Kerja, 2. Kata Sifat, 3. Kata Benda, 4. Kata Ganti, 5. Kalimat, 6. Kalimat Tanya, 7. Kalimat Perintah, 8. Kalimat Sifat, 9. Kalimat Tanya Sifat, dan 10. Kalimat Perintah Sifat. Setiap bab diawali dengan materi yang berisi penjelasan tentang materi yang akan dipelajari, contoh-contoh, dan latihan soal. Setelah itu, siswa akan diberikan latihan soal yang lebih banyak dan lebih rumit. Setiap bab diakhiri dengan latihan soal yang lebih rumit lagi. Buku ini juga dilengkapi dengan kunci jawaban yang dapat digunakan untuk memeriksa jawaban siswa. Buku ini dapat digunakan oleh siswa kelas 7 SMP/MTs yang mengikuti kurikulum 2013 revisi.',
 					'qty'			=> 2
@@ -76,7 +76,7 @@ class BookSeeder extends AbstractSeed
 					'author'		=> 'Dian Oki Valerina',
 					'isbn'			=> '9786020310005',
 					'publish_year'	=> '2019',
-					'category_id'	=> 6,
+					'category_id'	=> 8,
 					'publisher_id'	=> 1,
 					'description'	=> 'Buku ini merupakan buku pelajaran yang dikhususkan untuk siswa kelas 6 SD yang mengikuti kurikulum 2013 revisi. Buku ini berisi materi-materi yang dibagi menjadi 10 bab, yaitu: 1. Kata Kerja, 2. Kata Sifat, 3. Kata Benda, 4. Kata Ganti, 5. Kalimat, 6. Kalimat Tanya, 7. Kalimat Perintah, 8. Kalimat Sifat, 9. Kalimat Tanya Sifat, dan 10. Kalimat Perintah Sifat. Setiap bab diawali dengan materi yang berisi penjelasan tentang materi yang akan dipelajari, contoh-contoh, dan latihan soal. Setelah itu, siswa akan diberikan latihan soal yang lebih banyak dan lebih rumit. Setiap bab diakhiri dengan latihan soal yang lebih rumit lagi. Buku ini juga dilengkapi dengan kunci jawaban yang dapat digunakan untuk memeriksa jawaban siswa. Buku ini dapat digunakan oleh siswa kelas 6 SD yang mengikuti kurikulum 2013 revisi.',
 					'qty'			=> 1
@@ -88,7 +88,7 @@ class BookSeeder extends AbstractSeed
 					'author'		=> 'Nuki Rusiyani, Ria Nita Fatimah',
 					'isbn'			=> '-',
 					'publish_year'	=> '2023',
-					'category_id'	=> 2,
+					'category_id'	=> 3,
 					'publisher_id'	=> 4,
 					'description'	=> 'Buku siswa tematik kelas 1 ini merupakan buku panduan sekaligus buku aktivitas yang akan membantu siswa terlibat aktif dalam pembelajaran. Cara pembelajaran yang dianjurkan dalam Buku siswa tematik ini adalah berbasis kegiatan, bersifat interaktif, dan partisipatif. Buku ini juga dapat digunakan oleh orang tua secara mandiri untuk mendukung aktivitas belajar siswa di rumah. Orang tua diharapkan berdiskusi dan terlibat dalam aktivitas belajar kalian. Struktur buku siswa tematik untuk SD/MI Kelas I ini memfasilitasi pengalaman belajar yang bermakna dan diterjemahkan melalui rubrik berbasis aktivitas, sepertiayo amati, ayo bermain peran, ayo berlatih, ayo ceritakan, ayo berkreasi, ayo menulis, ayo membaca, ayo bernyanyi, ayo kerjakan, ayo berdiskusi, ayo memasangkan, ayo menghubungkan, ayo cari tahu, ayo menghitung, dan belajar bersama orang tua.',
 					'qty'			=> 3
@@ -100,7 +100,7 @@ class BookSeeder extends AbstractSeed
 					'author'		=> 'Dewi Agustina, Dwi Martini Sari, Eis Puspita',
 					'isbn'			=> '-',
 					'publish_year'	=> '2023',
-					'category_id'	=> 2,
+					'category_id'	=> 4,
 					'publisher_id'	=> 4,
 					'description'	=> 'Pembelajaran di SD sesuai dengan Kurikulum 2013 adalah pembelajaran tematik. Siswa tidak lagi belajar mata pelajaran per mata pelajaran. Oleh karena itu, siswa perlu dituntun. Salah satu sarananya adalah buku PR Tematik. PR Tematik Kelas II Tema 1: Hidup Rukun ini terdiri atas empat subtema. Pada bagian awal disajikan apersepsi berupa gambar dan percakapan. Materi dalam apersepsi akan dibahas pada buku ini. Kemudian, setiap subtema terdiri atas enam pembelajaran. Dalam setiap pembelajaran terdiri atas penanaman konsep, kegiatan, dan uji kompetensi. Pada setiap akhir pembelajaran disajikan Ulangan Harian sebagai sarana siswa untuk mengetes kemampuannya menyerap materi yang disajikan. Glosarium yang disajikan pada akhir buku dimaksudkan untuk membantu siswa memahami kata sulit atau kata-kata yang baru dikenalnya. Dengan begitu, siswa akan mudah memahami bacaan atau materi yang tersaji dalam buku ini.',
 					'qty'			=> 5
@@ -112,7 +112,7 @@ class BookSeeder extends AbstractSeed
 					'author'		=> 'Dewi Agustina, Dini Fima Udari, Dwi Martina Dewi',
 					'isbn'			=> '-',
 					'publish_year'	=> '2023',
-					'category_id'	=> 4,
+					'category_id'	=> 5,
 					'publisher_id'	=> 6,
 					'description'	=> '',
 					'qty'			=> 2
@@ -124,7 +124,7 @@ class BookSeeder extends AbstractSeed
 					'author'		=> 'Azizah Niki Purnami, Ma\'sumatul Ni\'mah',
 					'isbn'			=> '-',
 					'publish_year'	=> '2023',
-					'category_id'	=> 5,
+					'category_id'	=> 6,
 					'publisher_id'	=> 6,
 					'description'	=> '',
 					'qty' 			=> 1
@@ -136,7 +136,7 @@ class BookSeeder extends AbstractSeed
 					'author'		=> 'Erni Fitri Astuti, Faizah Nur Diana',
 					'isbn'			=> '-',
 					'publish_year'	=> '2023',
-					'category_id'	=> 5,
+					'category_id'	=> 6,
 					'publisher_id'	=> 6,
 					'description'	=> '',
 					'qty'			=> 1
@@ -148,7 +148,7 @@ class BookSeeder extends AbstractSeed
 					'author'		=> 'Amalia Fitri Ghaniem, Anggayudha A. Rasa, Ati H. Oktora, Miranda Yasella',
 					'isbn'			=> '9786022446811',
 					'publish_year'	=> '2023',
-					'category_id'	=> 2,
+					'category_id'	=> 7,
 					'publisher_id'	=> 6,
 					'description'	=> 'Deskripsi Buku
 					Pendidikan selayaknya berperan dalam membekali kalian dalam peranannya di masa yang akan datang. Untuk itu proses pembelajaran perlu dirancang agar mengasah kemampuan dan potensi dari segi akademik maupun non akademik. Semuanya bertujuan agar kalian memiliki keterampilan yang sesuai dengan kebutuhan abad 21. Hal ini selaras dengan program Merdeka Belajar dari Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi yang memberikan keleluasan bagi siswa dan guru untuk menentukan tujuan belajar sesuai dengan kebutuhan dan perkembangannya.
@@ -175,7 +175,7 @@ class BookSeeder extends AbstractSeed
 					'author'		=> 'Widjati Hartiningtyas, Eni Priyanti',
 					'isbn'			=> '9786022446309',
 					'publish_year'	=> '2023',
-					'category_id'	=> 5,
+					'category_id'	=> 4,
 					'publisher_id'	=> 7,
 					'description'	=> 'Bahasa Indonesia Keluargaku Unik
 
@@ -200,7 +200,7 @@ class BookSeeder extends AbstractSeed
 					'author'		=> 'Uly Amalia Dkk',
 					'isbn'			=> '9786026725653',
 					'publish_year'	=> '2023',
-					'category_id'	=> 5,
+					'category_id'	=> 6,
 					'publisher_id'	=> 7,
 					'description'	=> 'BANK SOAL SOAL HOTS (HIGHER ORDER
 
