@@ -123,6 +123,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function get_favorite_books($limit = null, $page = null, $sort_by = null){
+		$user_id = $this->get_user_id()['id'];
 
 		if($sort_by == 'title-asc')
 			$this->db->order_by('title', 'ASC');
@@ -130,10 +131,13 @@ class Home_model extends CI_Model {
 		if($sort_by == 'title-desc')
 			$this->db->order_by('title', 'DESC');
 
-		// $this->db->select('fb.id, b.title, b.cover_img, b.author, b.isbn, b.publish_year, b.description, p.publisher_name, c.category_name');
-		$this->db->select('fb.*');
+		$this->db->select('fb.id, b.title, b.cover_img, b.author, b.isbn, b.publish_year, b.description, p.publisher_name, c.category_name');
+		// $this->db->select('fb.*');
 		$this->db->from('favorite_books fb');
-		$this->db->where('fb.member_id', $this->get_user_id()['id']);
+		$this->db->join('books b', 'b.id = fb.book_id');
+		$this->db->join('publishers p', 'p.id = b.publisher_id');
+		$this->db->join('categories c', 'c.id = b.category_id');	
+		$this->db->where('fb.member_id', $user_id);
 		$this->db->limit($limit, $page);
 		$query = $this->db->get();
 		return $query->result_array();
@@ -146,9 +150,9 @@ class Home_model extends CI_Model {
 	}
 
 	public function get_user_id(){
-		$this->db->select('id');
-		$this->db->where('username', $this->session->userdata('user')['user_name']);
-		$query = $this->db->get('members');
+		$this->db->select('m.id');
+		$this->db->where('m.username', $this->session->userdata('user')['user_name']);
+		$query = $this->db->get('members m');
 		return $query->row_array();
 	}
 
