@@ -88,21 +88,23 @@
     <script defer>
         const main = document.getElementById('main-content'),
               BASE_URL = document.querySelector('base').href;
-        let pdf = null;
+        let pdf = null,
+            cookies = {};
 
-        // if browser is chrome
-        // if(window.navigator.userAgent.indexOf('Chrome') != -1) {
-           
-        //     const embed = document.createElement('embed');
+        // get cookies
+        Array.from(document.cookie.split(';'), item => {
+            const keyVal = item.split('=');
+            Object.assign(cookies, {[keyVal[0].trim()]: decodeURIComponent(keyVal[1])});
+        });
+        const config = JSON.parse(atob(cookies.read_book));
+        const expired = new Date(config.expired.split(' ').join('T'));
 
-        //     embed.src = "<?=html_escape(base_url('assets/files/books/'.$book['file_1']))?>#toolbar=0&navpanes=1";
-        //     embed.style.height = '100vh';
-        //     embed.style.width = '100vw';
-
-        //     main.appendChild(embed);
-        // }
-        // if browser is firefox
-        //if(window.navigator.userAgent.indexOf('Firefox') != -1) {
+         // check back button
+         window.onhashchange = () => {
+            window.localStorage.setItem('load', 'Load At: ' + Date.now());
+            //window.location.href =  BASE_URL + 'book/close_book?id=<?=$_GET['id']?>';;
+        };
+        
 
         var canvas = document.createElement('canvas');
         
@@ -187,7 +189,6 @@
             }
         });
           
-        //}
         main.appendChild(canvas);
 
         // timer
@@ -219,21 +220,27 @@
                 document.activeElement.focus();
                 clearTimeout(time);
                 time = setTimeout(() => {
-                    let newObj = {};
-                    Array.from(document.cookie.split(';'), item => {
-                        var entry = item.trim().split('=');
-                        Object.assign(newObj, {[entry[0]]:decodeURIComponent(entry[1])});
-                        window.location.href = BASE_URL + 'book/close_book?id=<?=$_GET['id']?>';
-                    });
+                    window.location.href = BASE_URL + 'book/close_book?id=<?=$_GET['id']?>';
                     
-                }, 5 * 1000);
+                }, seconds * 1000);
             }
         }
 
         window.addEventListener('load', e => { 
             document.activeElement.focus();
-            idleLogout() 
+            console.log(e);
+            // check history
+            if (window.history && window.history.pushState)
+                window.history.pushState('forward', null, './book/read_book?id=<?=$_GET['id']?>');
+            // redirect after cookie has expired
+            setTimeout(() => {
+                window.location.href = BASE_URL + 'book/close_book?id=<?=$_GET['id']?>';
+            }, (expired - Date.now()));
+            // idle time 
+            idleLogout();
         });
+
+       
     </script>
 </body>
 </html>

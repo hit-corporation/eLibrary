@@ -68,7 +68,7 @@ class Book extends MY_Controller {
 		];
 
 		if(!isset($_COOKIE['read_book']))
-			setcookie('read_book', $transcode, $cookie_option);
+			setcookie('read_book', base64_encode(json_encode(['key' => $transcode, 'expired' => date('Y-m-d H:i:s', $cookie_option['expires'])])), $cookie_option);
 
 		$insert = [
 			'trans_code' 	=> $transcode,
