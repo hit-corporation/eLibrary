@@ -63,7 +63,7 @@ class Book extends MY_Controller {
 		// set cookie for reading time limit and idle time limit
 		$cookie_option = [
 			'expires'	=> strtotime('+'.$this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit']),
-			'path'		=> '/book/read_book',
+			'path'		=> '/book',
 			'samesite'	=> 'Lax'
 		];
 
@@ -100,7 +100,6 @@ class Book extends MY_Controller {
 		$this->db->update('transactions', $update, ['trans_code' => trim($_COOKIE['read_book'])]);
 
 		setcookie('read_book', NULL, time() - 1000);
-		echo json_encode(['message' => 'Idle time out']);
 		redirect('home/book_detail?id='.$id);
 	}
 
