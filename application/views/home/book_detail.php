@@ -28,10 +28,18 @@
 						}
 					?>" alt="">
 					<div class="movie-btn">	
-						<div class="btn-transform transform-vertical red">
+						<div class="btn-transform transform-vertical red">				
 							<div><a href="#" class="item item-1 redbtn"> <i class="ion-eye"></i> Read</a></div>
 							<div><a href="<?=base_url('book/set_book?id='.trim($_GET['id']))?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class=""></i>Click To Read</a></div>
 						</div>
+
+						<!-- if qty > 0 show borrow -->
+						<?php if($book['qty'] > 0):?>
+						<div class="btn-transform transform-vertical blue">				
+							<div><a href="#" class="item item-1 bluebtn">Borrow</a></div>
+							<div><a href="<?=base_url('book/borrow_book?id='.trim($_GET['id']))?>" class="item item-2 bluebtn fancybox-media hvr-grow"></i>Click To Borrow</a></div>
+						</div>
+						<?php endif;?>
 						
 					</div>
 				</div>
@@ -201,3 +209,10 @@
 	</div>
 </div>
 
+<script>
+	$(document).ready(function () {
+		// if qty 0 hide button read
+		
+		
+	});
+</script>
