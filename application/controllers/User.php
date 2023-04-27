@@ -120,6 +120,11 @@ class User extends MY_Controller {
 	 */
 
 	public function logout(){
+		$update = [
+			'logout_time' => date('Y-m-d H:i:s.u'),
+			'updated_at' => date('Y-m-d H:i:s.u')
+		];
+		$this->db->update('member_logs', $update, ['id' => $_SESSION['user']['log_id']]);
 		// remove session data
 		$this->session->unset_userdata('user');
 

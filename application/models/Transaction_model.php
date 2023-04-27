@@ -7,13 +7,5 @@ class Transaction_model extends CI_Model {
         parent::__construct();
     }
 
-	/**
-	 * Get All Transaction Data
-	 *
-	 * @return Generator
-	 */
-	public function get_all(): Generator {
-
-	}
-
+	
 }
