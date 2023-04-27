@@ -114,33 +114,53 @@
 							Buku<i class="fa fa-angle-down" aria-hidden="true"></i>
 							</a>
 							<ul class="dropdown-menu level1">
-					
-								<li><a href="moviegrid.html">Pendidikan</a></li>
-								<li><a href="moviegridfw.html">Novel</a></li>
-								<li><a href="movielist.html">Majalah</a></li>
-								<li><a href="movielist.html">Biografi</a></li>
-								<li><a href="movielist.html">Naskah</a></li>
-								<li><a href="movielist.html">Ensiklopedia</a></li>
-								<li><a href="movielist.html">Sejarah</a></li>
-								<li><a href="movielist.html">Komik</a></li>
-								<li class="it-last"><a href="moviesingle.html">Kamus</a></li>
-							</ul>
-						</li>
-						<li class="dropdown first">
-							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-							Video <i class="fa fa-angle-down" aria-hidden="true"></i>
-							</a>
-							<ul class="dropdown-menu level1">
-								<li><a href="celebritygrid01.html">Sejarah</a></li>
-								<li><a href="celebritygrid02.html">Edukasi </a></li>
-								<li><a href="celebritylist.html">Drama</a></li>
-							</ul>
-						</li>
-						<li class="dropdown first">
-							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-							Audio <i class="" aria-hidden="true"></i>
-							</a>
+
+								<!-- get data category -->
+								<?php 
+								$categories = $this->db->where('parent_category', null)->get('categories')->result_array();
+								foreach ($categories as $category) :?>
+
+									<!-- query check data has parent -->
+									<?php $check_parent = $this->db->where('parent_category', $category['id'])->get('categories')->num_rows();
+
+									if ($check_parent > 0) :?>
+										<li class="dropdown">
+											<a href="home" class="dropdown-toggle" data-toggle="dropdown" ><?=$category['category_name']?><i class="ion-ios-arrow-forward"></i></a>
+											<ul class="dropdown-menu level2">
+												<?php
+												$sub_categories = $this->db->where('parent_category', $category['id'])->get('categories')->result_array();
+												foreach ($sub_categories as $sub_category) :?>
+
+													<!-- query check data has parent -->
+													<?php $check_parent = $this->db->where('parent_category', $sub_category['id'])->get('categories')->num_rows();
+													
+													if ($check_parent > 0) :?>
+														<li class="dropdown">
+															<a href="#" class="dropdown-toggle" data-toggle="dropdown" ><?=$sub_category['category_name']?><i class="ion-ios-arrow-forward"></i></a>
+															<ul class="dropdown-menu level3">
+																<?php
+																$sub_sub_categories = $this->db->where('parent_category', $sub_category['id'])->get('categories')->result_array();
+																foreach ($sub_sub_categories as $sub_sub_category) :?>
+																	<li><a href="<?=base_url('home/category/'.$sub_sub_category['id'])?>"><?=$sub_sub_category['category_name']?></a></li>
+																<?php endforeach; ?>
+															</ul>
+														</li>
+
+													<?php else :?>
+														<li><a href="<?=base_url('home/category/'.$sub_category['id'])?>"><?=$sub_category['category_name']?></a></li>
+													<?php endif; ?>
+
+												<?php endforeach; ?>
+											</ul>
+										</li>
+
+									<?php else :?>
+										<li><a href="<?=base_url('home/category/'.$category['id'])?>"><?=$category['category_name']?></a></li>
+									<?php endif; ?>
 							
+								<?php endforeach; ?>
+								
+							</ul>
 						</li>
 						
 					</ul>
