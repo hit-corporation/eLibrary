@@ -5809,6 +5809,24 @@ ul {
 .redbtn i {
   margin-right: 10px;
 }
+
+.bluebtn {
+	font-family: 'Dosis', sans-serif;
+	font-size: 14px;
+	color: #ffffff;
+	font-weight: bold;
+	text-transform: uppercase;
+	background-color: #4280bf;
+	padding: 13px 25px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.bluebtn i {
+	margin-right: 10px;
+}
+
 .yellowbtn {
   font-family: 'Dosis', sans-serif;
   font-size: 14px;
