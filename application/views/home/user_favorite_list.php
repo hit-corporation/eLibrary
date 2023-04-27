@@ -109,6 +109,7 @@
 						<label>Books per page:</label>
 					
 						<select name="book-per-pages">
+							<option value="5" <?=(isset($limit) && $limit == 5) ? 'selected' : '' ?> >5 Books</option>
 							<option value="10" <?=(isset($limit) && $limit == 10) ? 'selected' : '' ?> >10 Books</option>
 							<option value="20" <?=(isset($limit) && $limit == 20) ? 'selected' : '' ?>>20 Books</option>
 							<option value="50" <?=(isset($limit) && $limit == 50) ? 'selected' : '' ?>>50 Books</option>
@@ -322,6 +323,16 @@
 			empty_data();
 
 			view_style = 'grid';
+			load_data(1, limit, sort_by);
+		});
+
+		// select book-per-pages di ubah
+		$('select[name="book-per-pages"]').on('change', function (e) {
+			e.preventDefault();
+
+			empty_data();
+
+			limit = $(this).val();
 			load_data(1, limit, sort_by);
 		});
 
