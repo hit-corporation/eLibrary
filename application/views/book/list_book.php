@@ -130,7 +130,7 @@
 		var limit 			= $('select[name="book-per-pages"]').val();
 		var publisher_id 	= $('select[name="publisher"]').val();
 		var author 			= $('input[name="author"]').val();
-		var category_ids 	= $('select[name="category_id"]').val();
+		var category_ids 	= '<?=$category_id?>';
 		var year 			= $('input[name="start_year"]').val() + '-' + $('input[name="end_year"]').val();
 		var sort_by 		= $('select[name="sort-by"]').val();
 
