@@ -62,15 +62,6 @@ class Home extends MY_Controller {
 
 			$members = $this->member_model->login($username);
 
-			$_SESSION['user'] = [
-				'id'		=> $members['id'],
-				'user_name'	=> $members['username'],
-				'full_name'	=> $members['member_name'],
-				'email'		=> $members['email'],
-				'role'		=> 'member',
-				'is_logged_in'	=> TRUE
-			];
-
 			$insert = [
 				'fullname'		=> $members['member_name'],
 				'username'		=> $members['username'],
@@ -80,6 +71,19 @@ class Home extends MY_Controller {
 			];
 
 			$this->db->insert('member_logs', $insert);
+			$_logId = $this->db->insert_id();
+
+			$_SESSION['user'] = [
+				'id'		=> $members['id'],
+				'user_name'	=> $members['username'],
+				'full_name'	=> $members['member_name'],
+				'email'		=> $members['email'],
+				'role'		=> 'member',
+				'log_id'	=> $_logId,
+				'is_logged_in'	=> TRUE
+			];
+
+			
 
 			$return = ['success' => true, 'message' =>  'Data Berhasil Di Simpan'];
 			$this->session->set_flashdata('success', $return);
