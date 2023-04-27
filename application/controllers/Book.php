@@ -13,6 +13,7 @@ class Book extends MY_Controller {
 	public function index(){
 		$data['viewGroup'] = $_GET['viewGroup'];
 		$data['viewStyle'] = $_GET['viewStyle'];
+		$data['category_id'] = isset($_GET['category_id']) ? $_GET['category_id'] : null;
 
 		$data['publishers'] = $this->publisher_model->get_all();
 		$data['categories'] = $this->kategori_model->get_all();
@@ -29,7 +30,6 @@ class Book extends MY_Controller {
 		$sort_by 		= isset($_GET['sort_by']) ? $_GET['sort_by'] : 'id';
 
 		$filter = $_GET['filter'];
-
 
 		$page = ($page - 1) * $limit;
 
