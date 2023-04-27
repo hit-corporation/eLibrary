@@ -23,6 +23,7 @@
 					<p>Found <span class="total-found"> </span></p>
 					<label>Sort by:</label>
 					<select name="sort-by">
+						<option value="">-- Pilih --</option>
 						<option value="title-asc">Title Ascending</option>
 						<option value="title-desc">Title Descending</option>
 					</select>
