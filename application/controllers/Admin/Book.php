@@ -222,6 +222,7 @@ class Book extends Admin_Controller
 		$description = trim($this->input->post('book-description', TRUE));
 		$qty		= trim($this->input->post('book-qty', TRUE)) ?? 0;
 		$filename	= trim($this->input->post('book-img_name', TRUE));
+		$file_1		= $_FILES['input-file1'];
 		$img 	   	= $_FILES['book-image'];
 
 		$category_data = $this->kategori_model->get_all();
@@ -246,6 +247,30 @@ class Book extends Admin_Controller
 			$resp = ['success' => false, 'errors' => $this->form_validation->error_array(), 'old' => $_POST];
 			$this->session->set_flashdata('error', $resp);
 			redirect($_SERVER['HTTP_REFERER']);
+		}
+
+		$filepdf = NULL;
+		if(intval($file_1['size']) > 0)
+		{
+			$ext = pathinfo(basename($file_1['name']), PATHINFO_EXTENSION);
+				
+			$conf = [
+				'upload_path'	=> 'assets/files/books/',
+				'allowed_types'	=> 'pdf|epub',
+				'file_name'		=> str_replace(' ', '_', $title).'_'.$category.'.'.$ext,
+				'file_ext_tolower'	=> true,
+				'encrypt_name'	=> true
+			];
+
+			$this->upload->initialize($conf);
+			if(!$this->upload->do_upload('input-file1'))
+			{
+				$resp = ['success' => false, 'message' => $this->upload->display_errors(), 'old' => $_POST];
+				$this->session->set_flashdata('error', $resp);
+				redirect($_SERVER['HTTP_REFERER']);
+			}
+
+			$filepdf = $this->upload->data('file_name');
 		}
 
 		// Image
@@ -295,6 +320,7 @@ class Book extends Admin_Controller
 			'publisher_id'	=> $publisher,
 			'description'	=> $description,
 			'cover_img'		=> $filename,
+			'file_1'		=> $filepdf,
 			'qty'			=> $qty
 		];
 
