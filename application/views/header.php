@@ -141,13 +141,13 @@
 																<?php
 																$sub_sub_categories = $this->db->where('parent_category', $sub_category['id'])->get('categories')->result_array();
 																foreach ($sub_sub_categories as $sub_sub_category) :?>
-																	<li><a href="<?=base_url('home/category/'.$sub_sub_category['id'])?>"><?=$sub_sub_category['category_name']?></a></li>
+																	<li><a href="<?=base_url('book?viewStyle=grid&viewGroup=newest&category_id='.$sub_sub_category['id'])?>"><?=$sub_sub_category['category_name']?></a></li>
 																<?php endforeach; ?>
 															</ul>
 														</li>
 
 													<?php else :?>
-														<li><a href="<?=base_url('home/category/'.$sub_category['id'])?>"><?=$sub_category['category_name']?></a></li>
+														<li><a href="<?=base_url('book?viewStyle=grid&viewGroup=newest&category_id='.$sub_category['id'])?>"><?=$sub_category['category_name']?></a></li>
 													<?php endif; ?>
 
 												<?php endforeach; ?>
@@ -155,7 +155,7 @@
 										</li>
 
 									<?php else :?>
-										<li><a href="<?=base_url('home/category/'.$category['id'])?>"><?=$category['category_name']?></a></li>
+										<li><a href="<?=base_url('book?viewStyle=grid&viewGroup=newest&category_id='.$category['id'])?>"><?=$category['category_name']?></a></li>
 									<?php endif; ?>
 							
 								<?php endforeach; ?>
