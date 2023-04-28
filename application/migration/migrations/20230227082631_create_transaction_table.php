@@ -29,6 +29,7 @@ final class CreateTransactionTable extends AbstractMigration
         $table->addColumn('book_id', 'integer');
         $table->addColumn('start_time', 'timestamp');
         $table->addColumn('end_time', 'timestamp');
+        $table->addColumn('actual_return', 'timestamp');
         $table->addColumn('config_idle', 'string', ['limit' => 160]);
         $table->addColumn('config_borrow_limit', 'string', ['limit' => 160]);
         $table->addColumn('note', 'text', ['null' => true]);
