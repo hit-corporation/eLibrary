@@ -7,7 +7,7 @@ class Book extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model(['home_model', 'publisher_model', 'kategori_model', 'book_model']);
+		$this->load->model(['home_model', 'publisher_model', 'kategori_model', 'book_model', 'transaction_model']);
 	}
 
 	public function index(){
@@ -173,30 +173,42 @@ class Book extends MY_Controller {
 		}
 
 		// check if member has reached the limit
-		// $member = $this->member_model->get_one($_SESSION['user']['id']);
-		// if($member['borrowed'] >= $this->settings['max_allowed'])
-		// {
-		// 	$data['heading'] = 'PERINGATAN';
-		// 	$data['message'] = '<p>Anda telah mencapai batas peminjaman. Silahkan kembalikan buku yang anda pinjam !!!'.
-		// 						'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
-		// 	$this->load->view('errors/html/error_general', $data);
-		// 	return;
-		// }
+		$member = $this->transaction_model->get_one($_SESSION['user']['id']);
+		if($member['borrowed'] >= $this->settings['max_allowed'])
+		{
+			$data['heading'] = 'PERINGATAN';
+			$data['message'] = '<p>Anda telah mencapai batas peminjaman. Silahkan kembalikan buku yang anda pinjam !!!'.
+								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+			$this->load->view('errors/html/error_general', $data);
+			return;
+		}
 
 		// check if member has borrowed the same book
-		// $check = $this->db->get_where('transactions', ['member_id' => $_SESSION['user']['id'], 'book_id' => $id, 'status' => 'borrowed'])->num_rows();
+		$check = $this->transaction_model->check_borrowed($id, $_SESSION['user']['id']);
 
-		// if($check > 0)
-		// {
-		// 	$data['heading'] = 'PERINGATAN';
-		// 	$data['message'] = '<p>Anda telah meminjam buku ini. Silahkan kembalikan buku yang anda pinjam !!!'.
-		// 						'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
-		// 	$this->load->view('errors/html/error_general', $data);
-		// 	return;
-		// }
+		if($check > 0)
+		{
+			$data['heading'] = 'PERINGATAN';
+			$data['message'] = '<p>Anda telah meminjam buku ini. Silahkan kembalikan buku yang anda pinjam !!!'.
+								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+			$this->load->view('errors/html/error_general', $data);
+			return;
+		}
 
+
+		
 		// set transaction code
 		$transcode = strtoupper(bin2hex(random_bytes(8)));
+		
+		// set cookie for reading time limit and idle time limit
+		$cookie_option = [
+			'expires'	=> strtotime('+'.$this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit']),
+			'path'		=> '/book',
+			'samesite'	=> 'Lax'
+		];
+
+		if(!isset($_COOKIE['read_book']))
+			setcookie('read_book', base64_encode(json_encode(['key' => $transcode, 'expired' => date('Y-m-d H:i:s', $cookie_option['expires'])])), $cookie_option);
 
 		$insert = [
 			'trans_code' 	=> $transcode,
