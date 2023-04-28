@@ -140,4 +140,81 @@ class Book extends MY_Controller {
 		echo json_encode($data);
 	}
 
+	/**
+	 * Borrow a Book
+	 * 
+	 * @return void
+	 */
+
+	 public function borrow_book(): void {
+		$id = $this->input->get('id');
+
+		// get book data
+		$book = $this->book_model->get_one($id);
+
+		// check if book is available
+		if($book['qty'] <= 0)
+		{
+			$data['heading'] = 'PERINGATAN';
+			$data['message'] = '<p>Buku yang anda pilih tidak tersedia. Silahkan pilih buku lain !!!'.
+								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+			$this->load->view('errors/html/error_general', $data);
+			return;
+		}
+
+		// check if member not login
+		if(!isset($_SESSION['user']) && empty($_SESSION['user']['user_name']))
+		{
+			$data['heading'] = 'PERINGATAN';
+			$data['message'] = '<p>Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!'.
+								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+			$this->load->view('errors/html/error_general', $data);
+			return;
+		}
+
+		// check if member has reached the limit
+		// $member = $this->member_model->get_one($_SESSION['user']['id']);
+		// if($member['borrowed'] >= $this->settings['max_allowed'])
+		// {
+		// 	$data['heading'] = 'PERINGATAN';
+		// 	$data['message'] = '<p>Anda telah mencapai batas peminjaman. Silahkan kembalikan buku yang anda pinjam !!!'.
+		// 						'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+		// 	$this->load->view('errors/html/error_general', $data);
+		// 	return;
+		// }
+
+		// check if member has borrowed the same book
+		// $check = $this->db->get_where('transactions', ['member_id' => $_SESSION['user']['id'], 'book_id' => $id, 'status' => 'borrowed'])->num_rows();
+
+		// if($check > 0)
+		// {
+		// 	$data['heading'] = 'PERINGATAN';
+		// 	$data['message'] = '<p>Anda telah meminjam buku ini. Silahkan kembalikan buku yang anda pinjam !!!'.
+		// 						'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+		// 	$this->load->view('errors/html/error_general', $data);
+		// 	return;
+		// }
+
+		// set transaction code
+		$transcode = strtoupper(bin2hex(random_bytes(8)));
+
+		$insert = [
+			'trans_code' 	=> $transcode,
+			'start_time' 	=> date('Y-m-d H:i:s.u'),
+			'member_id' 	=> $_SESSION['user']['id'],
+			'book_id'		=> $id,
+			'config_idle'	=> $this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit'],
+			'config_borrow_limit' => $this->settings['max_allowed'],
+			'end_time'		=> date('Y-m-d H:i:s.u', strtotime('+'.$this->settings['due_date_value'].' '.$this->settings['due_date_unit'])),
+		];
+
+		// insert transaction
+		$this->db->insert('transactions', $insert);
+
+		// update book qty
+		$this->db->update('books', ['qty' => $book['qty'] - 1], ['id' => $id]);
+		
+		redirect('book/read_book?id='.$id);
+	 }
+
 }
