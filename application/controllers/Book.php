@@ -70,16 +70,32 @@ class Book extends MY_Controller {
 		if(!isset($_COOKIE['read_book']))
 			setcookie('read_book', base64_encode(json_encode(['key' => $transcode, 'expired' => date('Y-m-d H:i:s', $cookie_option['expires'])])), $cookie_option);
 
+		// get latest transaction book
+		$latest_transaction = $this->transaction_model->get_latest_transaction($id, $_SESSION['user']['id']);
+
 		$insert = [
-			'trans_code' 	=> $transcode,
+			// 'trans_code' 	=> $transcode,
 			'start_time' 	=> date('Y-m-d H:i:s.u'),
 			'member_id' 	=> $_SESSION['user']['id'],
 			'book_id'		=> $id,
-			'config_idle'	=> $this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit'],
-			'config_borrow_limit' => $this->settings['max_allowed']
+			// 'config_idle'	=> $this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit'],
+			// 'config_borrow_limit' => $this->settings['max_allowed'],
+			// 'end_time'		=> isset($latest_transaction['end_time']) ? $latest_transaction['end_time'] : date('Y-m-d H:i:s.u', strtotime('+'.$this->settings['due_date_value'].' '.$this->settings['due_date_unit'])),
 		];
 
-		$this->db->insert('transactions', $insert);
+		$this->db->insert('read_log', $insert);
+
+		// jika end_time dari transaksi sebelumnya lebih besar dari waktu sekarang, maka update actual_return menjadi tanggal sekarang
+		if(isset($latest_transaction['end_time']) && strtotime($latest_transaction['end_time']) < strtotime(date('Y-m-d H:i:s.u')))
+		{
+			// $this->db->update('transactions', ['actual_return' => date('Y-m-d H:i:s.u')], ['id' => $latest_transaction['id']]);
+			$this->db->set('actual_return', date('Y-m-d H:i:s.u'));
+			$this->db->update('transactions');
+			$this->db->where('book_id', $id);
+			$this->db->where('member_id', $_SESSION['user']['id']);
+			$this->db->where('actual_return', NULL);
+			
+		}
 		
 		redirect('book/read_book?id='.$id);
 	}
@@ -146,7 +162,7 @@ class Book extends MY_Controller {
 	 * @return void
 	 */
 
-	 public function borrow_book(): void {
+	public function borrow_book(): void {
 		$id = $this->input->get('id');
 
 		// get book data
@@ -173,20 +189,20 @@ class Book extends MY_Controller {
 		}
 
 		// check if member has reached the limit
-		$member = $this->transaction_model->get_one($_SESSION['user']['id']);
-		if($member['borrowed'] >= $this->settings['max_allowed'])
-		{
-			$data['heading'] = 'PERINGATAN';
-			$data['message'] = '<p>Anda telah mencapai batas peminjaman. Silahkan kembalikan buku yang anda pinjam !!!'.
-								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
-			$this->load->view('errors/html/error_general', $data);
-			return;
-		}
+		// $member = $this->transaction_model->get_one($_SESSION['user']['id']);
+		// if($member['borrowed'] >= $this->settings['max_allowed'])
+		// {
+		// 	$data['heading'] = 'PERINGATAN';
+		// 	$data['message'] = '<p>Anda telah mencapai batas peminjaman. Silahkan kembalikan buku yang anda pinjam !!!'.
+		// 						'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+		// 	$this->load->view('errors/html/error_general', $data);
+		// 	return;
+		// }
 
 		// check if member has borrowed the same book
 		$check = $this->transaction_model->check_borrowed($id, $_SESSION['user']['id']);
 
-		if($check > 0)
+		if(isset($check['id']) && !empty($check['id']))
 		{
 			$data['heading'] = 'PERINGATAN';
 			$data['message'] = '<p>Anda telah meminjam buku ini. Silahkan kembalikan buku yang anda pinjam !!!'.
@@ -196,10 +212,10 @@ class Book extends MY_Controller {
 		}
 
 
-		
+
 		// set transaction code
 		$transcode = strtoupper(bin2hex(random_bytes(8)));
-		
+
 		// set cookie for reading time limit and idle time limit
 		$cookie_option = [
 			'expires'	=> strtotime('+'.$this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit']),
@@ -225,8 +241,29 @@ class Book extends MY_Controller {
 
 		// update book qty
 		$this->db->update('books', ['qty' => $book['qty'] - 1], ['id' => $id]);
-		
+
 		redirect('book/read_book?id='.$id);
-	 }
+	}
+
+	/**
+	* Return a Book
+	* 
+	* 
+	*/
+
+	public function return_book() {
+		$id = $this->input->get('id');
+
+		// update actual_return
+		$this->db->update('transactions', ['actual_return' => date('Y-m-d H:i:s.u')], ['book_id' => $id, 'member_id' => $_SESSION['user']['id'], 'actual_return' => null]);
+
+		// update book qty
+		$this->db->where('id', $id);
+		$this->db->set('qty', 'qty+1', FALSE);
+		$this->db->update('books');
+
+		// return to book detail
+		redirect('home/book_detail?id='.$id);
+	}
 
 }
