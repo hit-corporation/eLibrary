@@ -5,7 +5,7 @@ class Home extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model(['home_model','member_model']);
+		$this->load->model(['home_model','member_model', 'book_model']);
 	}
 
 	public function index(){
@@ -24,6 +24,14 @@ class Home extends MY_Controller {
 		if (isset($id)) {
 			$this->load->model('home_model');
 			$data['book'] = $this->home_model->get_book_by_id($id);
+		}
+
+		$user = $this->session->userdata('user');
+		$user_id = isset($user['id']) ? $user['id'] : NULL;
+
+		if(isset($user_id)){
+			// get transaction book	
+			$data['transaction'] = $this->book_model->get_transaction_book($id, $user_id);
 		}
 
 		$this->load->view('header');
