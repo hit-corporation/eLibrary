@@ -76,4 +76,23 @@ class Book_model extends CI_Model {
 		return $this->db->get_where('books', ['books.id' => $id, 'books.deleted_at' => NULL])->row_array();
 	}
 
+	/**
+	 * Get a transaction_book
+	 *
+	 * @param int $id
+	 * @param int $user_id
+	 * 
+	 * @return array
+	 */
+
+	public function get_transaction_book($id, $user_id): ?array {
+		$this->db->select('*');
+		$this->db->from('transactions');
+		$this->db->where('book_id', $id);
+		$this->db->where('member_id', $user_id);
+		$this->db->where('actual_return', null);
+
+		return $this->db->get()->row_array();
+	}
+
 }
