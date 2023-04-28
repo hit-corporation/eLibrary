@@ -11,6 +11,15 @@
 .custom-file-input:lang(en)~.custom-file-label::after {
     content: "Cari";
 }
+
+#category-tree {
+    overflow: auto;
+}
+
+#category-tree > div {
+    overflow: hidden;
+}
+
 #category-tree.show {
     width: 24em;
     height: 18em;
