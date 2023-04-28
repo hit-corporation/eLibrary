@@ -28,13 +28,24 @@
 						}
 					?>" alt="">
 					<div class="movie-btn">	
+
+						<!-- jika user telah login dan buku sudah di pinjam -->
+						<?php if(isset($transaction)):?>
+
 						<div class="btn-transform transform-vertical red">				
 							<div><a href="#" class="item item-1 redbtn"> <i class="ion-eye"></i> Read</a></div>
 							<div><a href="<?=base_url('book/set_book?id='.trim($_GET['id']))?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class=""></i>Click To Read</a></div>
 						</div>
 
-						<!-- if qty > 0 show borrow -->
-						<?php if($book['qty'] > 0):?>
+						<!-- button return book -->
+						<div class="btn-transform transform-vertical blue">				
+							<div><a href="#" class="item item-1 bluebtn">Return</a></div>
+							<div><a href="<?=base_url('book/return_book?id='.trim($_GET['id']))?>" class="item item-2 bluebtn fancybox-media hvr-grow"></i>Click To Return</a></div>
+						</div>
+
+
+						<?php else:?>
+
 						<div class="btn-transform transform-vertical blue">				
 							<div><a href="#" class="item item-1 bluebtn">Borrow</a></div>
 							<div><a href="<?=base_url('book/borrow_book?id='.trim($_GET['id']))?>" class="item item-2 bluebtn fancybox-media hvr-grow"></i>Click To Borrow</a></div>
