@@ -61,7 +61,7 @@
 							<option value="title-desc">Title Descending</option>
 						</select>
 						<a href="#" class="list"><i class="ion-ios-list-outline active"></i></a>
-						<a  href="#" class="grid"><i class="ion-grid "></i></a>
+						<a href="#" class="grid"><i class="ion-grid "></i></a>
 					</div>
 
 					<div class="flex-wrap-movielist"></div>
