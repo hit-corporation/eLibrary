@@ -54,7 +54,7 @@
 				</div>
 				<div class="col-md-9 col-sm-12 col-xs-12">
 					<div class="topbar-filter user">
-						<p>Found <span class="total-found"><?=count($favorite_books)?> books</span> in total</p>
+						<p>Found <span class="total-found"> books</span> in total</p>
 						<label>Sort by:</label>
 						<select name="sort-by">
 							<option value="title-asc">Title Ascending</option>

@@ -51,26 +51,7 @@
 	<div class="container">
 		<div class="row ipad-width">
 			<div class="col-md-3 col-sm-12 col-xs-12">
-				<div class="user-information">
-					<div class="user-img">
-						<a href="#"><img src="<?= isset($user['profile_img']) ? base_url('assets/landing-pages/images/avatar/'.$user['profile_img']) : base_url('assets/landing-pages/images/uploads/user-img.png') ?>" alt=""><br></a>
-						<a href="#" class="redbtn" id="change-avatar">Change avatar</a>
-					</div>
-					<div class="user-fav">
-						<p>Account Details</p>
-						<ul>
-							<li  class="active"><a href="<?=base_url('user')?>#user-profile">Profile</a></li>
-							<li><a href="<?=base_url('user/user_favorite_list')?>">Favorite Books</a></li>
-						</ul>
-					</div>
-					<div class="user-fav">
-						<p>Others</p>
-						<ul>
-							<li><a href="<?=base_url('user')?>#change-password">Change password</a></li>
-							<li><a href="<?=base_url('user/logout')?>">Log out</a></li>
-						</ul>
-					</div>
-				</div>
+				<?=$this->load->view('home/users/user-sidebar', [], TRUE)?>
 			</div>
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="form-style-1 user-pro" action="#">

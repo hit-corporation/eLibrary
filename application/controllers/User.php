@@ -72,15 +72,27 @@ class User extends MY_Controller {
 		}
 
 		// get user data
-		$userId 		= $this->member_model->get_user_by_username($this->session->userdata('user')['user_name'])['id'];
-		$data['user'] 	= $this->member_model->get_user($userId);
-
+		$data['user'] 	= $this->member_model->get_user($_SESSION['user']['id']);
 
 		$this->load->view('header');
 		$this->load->view('home/user_profile', $data);
 		$this->load->view('footer');
 	}
 
+	public function book_list() 
+	{
+		$data['user'] 	= $this->member_model->get_user($_SESSION['user']['id']);
+
+		$this->load->view('header');
+		$this->load->view('home/user_loan_list', $data);
+		$this->load->view('footer');
+	}
+
+	/**
+	 * Member Password Change
+	 *
+	 * @return void
+	 */
 	public function change_password(){
 		$post = $this->input->post();
 
@@ -112,6 +124,8 @@ class User extends MY_Controller {
 			}
 		}
 	}
+
+
 
 	/**
 	 * ******************************************************************************
