@@ -89,6 +89,15 @@ class User extends MY_Controller {
 	}
 
 	/**
+	 * Get all loaned books by users
+	 *
+	 * @return void
+	 */
+	public function get_user_loan(): void {
+		$data = $this->transaction_model->get_users_loan();
+	}
+
+	/**
 	 * Member Password Change
 	 *
 	 * @return void
