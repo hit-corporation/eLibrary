@@ -46,6 +46,11 @@ class Transaction_model extends CI_Model {
 		$this->db->limit(1);
 
 		$res = $this->db->get();
+
+		if($res->num_rows() == 0) {
+			return [];
+		}
+
 		return $res->row_array();
 	}
 
@@ -64,6 +69,32 @@ class Transaction_model extends CI_Model {
 
 		$res = $this->db->get();
 		return $res->num_rows();
+	}
+
+	/**
+	 * Query for get get_latest_transaction
+	 * 
+	 * @param int $book_id
+	 * @param int $member_id
+	 * 
+	 * @return array
+	 */
+
+	public function get_latest_transaction(int $book_id, int $member_id): array {
+		$this->db->from('transactions');
+		$this->db->where('book_id', $book_id);
+		$this->db->where('member_id', $member_id);
+		$this->db->where('actual_return', null);
+		$this->db->order_by('id', 'DESC');
+		$this->db->limit(1);
+
+		$res = $this->db->get();
+
+		if($res->num_rows() == 0) {
+			return [];
+		}
+		
+		return $res->row_array();
 	}
 
 }
