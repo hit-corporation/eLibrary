@@ -5,7 +5,7 @@ class User extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model(['member_model']);
+		$this->load->model(['member_model', 'transaction_model']);
 
 		// form validation library
 		$this->load->library('form_validation');
@@ -94,7 +94,18 @@ class User extends MY_Controller {
 	 * @return void
 	 */
 	public function get_user_loan(): void {
-		$data = $this->transaction_model->get_users_loan();
+		$userId 			= $_SESSION['user']['id'];
+		$filter['sort_by'] 	= $this->input->get('sort_by');
+		$filter['limit'] 	= $this->input->get('limit');
+		$page 				= $this->input->get('page');
+		$filter['offset'] 	= ($page - 1) * $filter['limit'];
+
+		$data['books'] = $this->transaction_model->get_users_loan($userId, $filter);
+		$data['total_records'] = $this->transaction_model->get_users_loan_count($userId);
+		$data['total_pages'] = ceil($data['total_records'] / $filter['limit']);
+
+		header('Content-Type: application/json');
+		echo json_encode($data);
 	}
 
 	/**
