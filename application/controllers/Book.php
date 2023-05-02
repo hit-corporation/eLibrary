@@ -246,10 +246,10 @@ class Book extends MY_Controller {
 	}
 
 	/**
-	* Return a Book
-	* 
-	* 
-	*/
+		* Return a Book
+		* 
+		* 
+		*/
 
 	public function return_book() {
 		$id = $this->input->get('id');
@@ -265,5 +265,64 @@ class Book extends MY_Controller {
 		// return to book detail
 		redirect('home/book_detail?id='.$id);
 	}
+
+	/**
+	 * Add to Favorite
+	 *
+	 */
+
+	public function add_to_favorite(){
+		$id = $this->input->get('id');
+		$member_id = $_SESSION['user']['id'];
+
+		$insert = $this->db->insert('favorite_books', ['book_id' => $id, 'member_id' => $member_id]);
+
+		// jika berhasil
+		if($insert)
+		{
+			// create flashdata
+			$this->session->set_flashdata('success', 'Buku berhasil ditambahkan ke daftar favorit');
+
+			// return to book detail
+			redirect('home/book_detail?id='.$id);
+		}else{
+			$data['heading'] = 'PERINGATAN';
+			$data['message'] = '<p>Terjadi kesalahan saat menambahkan buku ke daftar favorit !!!'.
+								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+			$this->load->view('errors/html/error_general', $data);
+			return;
+		}
+
+	}
+
+	/**
+	 * Remove from Favorite
+	 *
+	 */
+
+	public function remove_from_favorite(){
+		$id = $this->input->get('id');
+		$member_id = $_SESSION['user']['id'];
+
+		$delete = $this->db->delete('favorite_books', ['book_id' => $id, 'member_id' => $member_id]);
+
+		// jika berhasil
+		if($delete)
+		{
+			// create flashdata
+			$this->session->set_flashdata('success', 'Buku berhasil dihapus dari daftar favorit');
+
+			// return to book detail
+			redirect('home/book_detail?id='.$id);
+		}else{
+			$data['heading'] = 'PERINGATAN';
+			$data['message'] = '<p>Terjadi kesalahan saat menghapus buku dari daftar favorit !!!'.
+								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+			$this->load->view('errors/html/error_general', $data);
+			return;
+		}
+
+	}
+
 
 }
