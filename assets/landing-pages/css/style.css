@@ -8523,3 +8523,10 @@ label {
 	border-radius: 0.2rem;
 	margin-bottom: 20px;
 }
+
+.btn-add-favorite:hover {
+	color: #fff;
+	background-color: #f6c23e;
+	border-color: #f6c23e;
+	cursor: pointer;
+}
