@@ -95,4 +95,22 @@ class Book_model extends CI_Model {
 		return $this->db->get()->row_array();
 	}
 
+	/** 
+	 * get a get_favorite_book
+	 * 
+	 * @param int $id
+	 * @param int $member_id
+	 * 
+	 * @return array
+	 */
+
+	public function get_favorite_book($id, $member_id): ?array {
+		$this->db->select('*');
+		$this->db->from('favorite_books');
+		$this->db->where('book_id', $id);
+		$this->db->where('member_id', $member_id);
+
+		return $this->db->get()->row_array();
+	}
+
 }
