@@ -34,6 +34,9 @@ class Home extends MY_Controller {
 			$data['transaction'] = $this->book_model->get_transaction_book($id, $user_id);
 		}
 
+		// get favorite book
+		$data['favorite'] = $this->book_model->get_favorite_book($id, $user_id);
+
 		$this->load->view('header');
 		$this->load->view('home/book_detail', $data);
 		$this->load->view('footer');
