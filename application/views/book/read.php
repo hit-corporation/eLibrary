@@ -46,13 +46,14 @@
             box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.12), 0px 1px 2px 0px rgba(0,0,0,0.24);
             display: flex;
             flex-wrap: nowrap;
-            flex-grow: 0;
-            justify-content: end;
+            flex-grow: 1;
+            justify-content: start;
             align-items: center;
         }
 
         button#previous,
-        button#next {
+        button#next,
+        a#last-page {
             padding: .25rem .5rem;
             display: inline-block;
             vertical-align: baseline;
@@ -62,6 +63,33 @@
             background-color: #21BA45;
             color: white;
             cursor: pointer;
+        }
+
+        #page-jumper  {
+            margin-left: auto; 
+            margin-right: auto;
+        }
+
+        #page-jumper > input[type="number"] {
+            width: 2.8rem;
+            border: 1px solid silver;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            margin: 0;
+            padding: .25rem;
+            outline: none;
+        }
+
+        #page-jumper > button {
+            border: 1px solid silver;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            margin: 0;
+            margin-left: -4px;
+            padding: .25rem;
+            cursor: pointer;
+            background-color: #21BA45;
+            color: white;
         }
 
         #current-page {
@@ -74,10 +102,16 @@
 </head>
 <body>
 <nav>
-    <div></div>
-    <button id="previous">&lt;</button>
-    <span id="current-page"></span>
-    <button id="next">&gt;</button>
+    <a href="<?=$_SERVER['HTTP_REFERER']?>" id="last-page">Kembali</a>
+    <span id="page-jumper">
+        <input type="number" id="current-page-text">
+        <button type="button" id="btn-jump">Lompati</button>
+    </span>
+    <div style="margin-left: auto">
+        <button id="previous">&lt;</button>
+        <span id="current-page"></span>
+        <button id="next">&gt;</button>
+    </div>
 </nav>
 <div id="main-content">
 </div>
@@ -87,7 +121,9 @@
     <script src="<?=html_escape('assets/node_modules/pdfjs-dist/web/pdf_viewer.js')?>"></script>
     <script defer>
         const main = document.getElementById('main-content'),
-              BASE_URL = document.querySelector('base').href;
+              BASE_URL = document.querySelector('base').href,
+              currentPageText = document.querySelector('#current-page-text'),
+              jumpPage = document.querySelector('#btn-jump');
         let pdf = null,
             cookies = {};
 
@@ -141,6 +177,7 @@
         const navPages = (curr, total) => {
             var container = document.getElementById('current-page');
             container.innerText = curr + '/' + total;
+            currentPageText.value = curr;
         }
 
         pdfLoad.promise.then(_pdf => {
@@ -148,6 +185,9 @@
             numPage = 1;
             PdfPage(1);
             navPages(1, pdf.numPages);
+
+            // set current page to 1
+            currentPageText.value = numPage;
 
             // previous page button
             document.getElementById('previous').addEventListener('click', e => {
@@ -160,6 +200,7 @@
                 numPage--;
                 PdfPage(numPage);
                 navPages(numPage, pdf.numPages);
+                currentPageText.value = numPage;
             });
 
             // next button
@@ -173,7 +214,15 @@
                 numPage++;
                 PdfPage(numPage);
                 navPages(numPage, pdf.numPages);
+                
             });
+
+           // jump page
+           jumpPage.addEventListener('click', e => {
+                numPage = +currentPageText.value;
+                PdfPage(numPage);
+                navPages(numPage, pdf.numPages);
+           });
         });
 
         // arrow listeer
@@ -228,7 +277,8 @@
 
         window.addEventListener('load', e => { 
             document.activeElement.focus();
-            console.log(e);
+            // set current page to 1
+           
             // check history
             if (window.history && window.history.pushState)
                 window.history.pushState('forward', null, './book/read_book?id=<?=$_GET['id']?>');
@@ -239,6 +289,8 @@
             // idle time 
             idleLogout();
         });
+
+        // jumping page
 
        
     </script>

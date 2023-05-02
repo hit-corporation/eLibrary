@@ -58,11 +58,27 @@ class Transaction_model extends CI_Model {
 	 * Query for get user borrowed book
 	 * 
 	 * @param int $user_id
-	 *
-	 * @return int
+	 * @return array
 	 */
 	 
-	public function get_user_borrowed_book(int $user_id): int {
+	public function get_user_borrowed_book(int $user_id, int $limit=NULL, int $offset=NULL): array {
+		$this->db->from('transactions a')
+				 ->join('books b', 'a.book_id=b.id')
+				 ->where('a.member_id', $user_id)
+				 ->where('a.actual_return', null);
+
+		$res = $this->db->get();
+		return $res->result_array();
+	}
+
+	/**
+	 * Query for get user borrowed book
+	 * 
+	 * @param int $user_id
+	 * @return array
+	 */
+	 
+	public function count_user_borrowed_book(int $user_id): array {
 		$this->db->from('transactions');
 		$this->db->where('member_id', $user_id);
 		$this->db->where('actual_return', null);
