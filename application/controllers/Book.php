@@ -107,13 +107,17 @@ class Book extends MY_Controller {
 	 */
 	public function close_book(): void {
 		$id = $this->input->get('id');
+		$lastPage = $this->input->get('last-page');
+		$cookie = json_decode(base64_decode($_COOKIE['read_book']), TRUE);
 
 		$update = [
+			'trans_code' => $cookie['key'],
+			'book_id'  => $id,
 			'end_time' => date('Y-m-d H:i:s.u'),
-			'updated_at' => date('Y-m-d H:i:s.u')
+			'last_page'	=> $lastPage
 		];
 
-		$this->db->update('transactions', $update, ['trans_code' => trim($_COOKIE['read_book'])]);
+		$this->db->update('read_log', $update, ['trans_code' => trim($cookie['key'])]);
 
 		setcookie('read_book', NULL, time() - 1000);
 		redirect('home/book_detail?id='.$id);

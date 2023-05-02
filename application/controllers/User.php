@@ -94,9 +94,24 @@ class User extends MY_Controller {
 	 * @return void
 	 */
 	public function get_user_loan(): void {
+<<<<<<< HEAD
 		$data = $this->transaction_model->get_user_borrowed_book($_SESSION['user']['id']);
 
 		echo json_encode();
+=======
+		$userId 			= $_SESSION['user']['id'];
+		$filter['sort_by'] 	= $this->input->get('sort_by');
+		$filter['limit'] 	= $this->input->get('limit');
+		$page 				= $this->input->get('page');
+		$filter['offset'] 	= ($page - 1) * $filter['limit'];
+
+		$data['books'] = $this->transaction_model->get_users_loan($userId, $filter);
+		$data['total_records'] = $this->transaction_model->get_users_loan_count($userId);
+		$data['total_pages'] = ceil($data['total_records'] / $filter['limit']);
+
+		header('Content-Type: application/json');
+		echo json_encode($data);
+>>>>>>> 45cdf113fb29fbda53baea95c1650282b279c36d
 	}
 
 	/**

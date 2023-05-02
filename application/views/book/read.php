@@ -102,7 +102,7 @@
 </head>
 <body>
 <nav>
-    <a href="<?=$_SERVER['HTTP_REFERER']?>" id="last-page">Kembali</a>
+    <a id="last-page">Kembali</a>
     <span id="page-jumper">
         <input type="number" id="current-page-text">
         <button type="button" id="btn-jump">Lompati</button>
@@ -284,14 +284,16 @@
                 window.history.pushState('forward', null, './book/read_book?id=<?=$_GET['id']?>');
             // redirect after cookie has expired
             setTimeout(() => {
-                window.location.href = BASE_URL + 'book/close_book?id=<?=$_GET['id']?>';
+                window.location.href = BASE_URL + 'book/close_book?id=<?=$_GET['id']?>&last-page=' + currentPageText.value;
             }, (expired - Date.now()));
             // idle time 
             idleLogout();
         });
 
-        // jumping page
-
+        // back to page before
+        document.getElementById('last-page').addEventListener('click', e => {
+            e.target.href =  window.location.href = BASE_URL + 'book/close_book?id=<?=$_GET['id']?>&last-page=' + currentPageText.value;
+        });
        
     </script>
 </body>
