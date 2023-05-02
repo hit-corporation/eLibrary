@@ -6,9 +6,9 @@
     <div class="user-fav">
         <p>Account Details</p>
         <ul>
-            <li><a href="<?=base_url('user')?>#user-profile">Profile</a></li>
-            <li  class="active"><a href="<?=base_url('user/user_favorite_list')?>">Favorite Books</a></li>
-            <li  class="active"><a href="<?=base_url('user/book_list')?>">Books On Loan</a></li>
+            <li class="<?=(isset($active) && $active == 'profile') ? 'active' : '' ?>"><a href="<?=base_url('user')?>#user-profile">Profile</a></li>
+            <li class="<?=(isset($active) && $active == 'user_favorite') ? 'active' : '' ?>"><a href="<?=base_url('user/user_favorite_list')?>">Favorite Books</a></li>
+            <li class="<?=(isset($active) && $active == 'user_loan') ? 'active' : '' ?>"><a href="<?=base_url('user/book_list')?>">Books On Loan</a></li>
         </ul>
     </div>
     <div class="user-fav">
