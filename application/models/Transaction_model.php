@@ -97,4 +97,57 @@ class Transaction_model extends CI_Model {
 		return $res->row_array();
 	}
 
+	/**
+	 * Query for get get_users_loan
+	 *
+	 * @param int $member_id
+	 * @param array $filter
+	 *  
+	 * @return array
+	 */
+	 
+	public function get_users_loan(int $member_id, $filter): array {
+		$this->db->select('books.*');
+		$this->db->from('transactions');
+		$this->db->join('books', 'transactions.book_id = books.id');
+		$this->db->join('publishers', 'books.publisher_id = publishers.id');
+		$this->db->where('member_id', $member_id);
+		$this->db->where('actual_return', null);
+
+		// sort by
+		if ($filter['sort_by'] == 'title-asc')
+			$this->db->order_by('books.title', 'ASC');
+
+		if ($filter['sort_by'] == 'title-desc')
+			$this->db->order_by('books.title', 'DESC');
+		
+		// filter limit offset
+		$this->db->limit($filter['limit'], $filter['offset']);
+
+		$res = $this->db->get();
+
+		if($res->num_rows() == 0) {
+			return [];
+		}
+
+		return $res->result_array();
+	}
+
+	/** 
+	 * Query for get get_users_loan_count
+	 * 
+	 * @param int $member_id
+	 * 
+	 * @return int
+	 */
+
+	public function get_users_loan_count(int $member_id): int {
+		$this->db->from('transactions');
+		$this->db->where('member_id', $member_id);
+		$this->db->where('actual_return', null);
+
+		$res = $this->db->get();
+		return $res->num_rows();
+	}
+
 }
