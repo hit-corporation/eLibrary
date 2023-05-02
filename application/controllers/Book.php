@@ -74,7 +74,7 @@ class Book extends MY_Controller {
 		$latest_transaction = $this->transaction_model->get_latest_transaction($id, $_SESSION['user']['id']);
 
 		$insert = [
-			// 'trans_code' 	=> $transcode,
+			'trans_code' 	=> $transcode,
 			'start_time' 	=> date('Y-m-d H:i:s.u'),
 			'member_id' 	=> $_SESSION['user']['id'],
 			'book_id'		=> $id,

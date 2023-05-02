@@ -5,7 +5,7 @@ class User extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model(['member_model']);
+		$this->load->model(['member_model', 'transaction_model']);
 
 		// form validation library
 		$this->load->library('form_validation');
@@ -94,7 +94,9 @@ class User extends MY_Controller {
 	 * @return void
 	 */
 	public function get_user_loan(): void {
-		$data = $this->transaction_model->get_users_loan();
+		$data = $this->transaction_model->get_user_borrowed_book($_SESSION['user']['id']);
+
+		echo json_encode();
 	}
 
 	/**
