@@ -121,7 +121,10 @@
 <!-- import cdn jquery -->
 
 <script>
+	const base_url = '<?=base_url()?>';
+
 	$(document).ready(function () {
+
 
 		// data awal di load
 		var view_group 		= '<?=$viewGroup?>';
@@ -156,22 +159,22 @@
 			// check img is null
 			if (img == null) {
 				coverImage = 'default.png';
-				linkImage = '<?=base_url('assets/img/books/default.png')?>';
+				linkImage = base_url+'assets/img/books/default.png';
 			}else{
 				
 				// check file exist
 				$.ajax({
-					url: '<?=base_url('assets/img/books/')?>' + img,
+					url: base_url+'assets/img/books/'+img,
 					type:'HEAD',
 					error: function()
 					{
 						coverImage = 'default.png';
-						linkImage = '<?=base_url('assets/img/books/default.png')?>';
+						linkImage = base_url+'assets/img/books/default.png';
 					},
 					success: function()
 					{
 						coverImage = img;
-						linkImage = '<?=base_url('assets/img/books/')?>' + img;
+						linkImage = base_url+'assets/img/books/'+img;
 					},
 					async: false
 				});
@@ -182,7 +185,7 @@
 		function load_data(page, limit = null, filter, sort_by = '') {
 			$.ajax({
 				type: "GET",
-				url: "<?=base_url('book/get_all')?>",
+				url: base_url+'book/get_all',
 				data: {
 					view_group: view_group,
 					view_style: view_style,
@@ -193,7 +196,7 @@
 				},
 				success: function (data) {
 
-					var defaultImg = '<?=base_url('assets/img/books/default.png')?>';
+					var defaultImg = base_url+'assets/img/books/default.png';
 					
 					// jika view style list
 					if(view_style == 'list'){
@@ -211,7 +214,7 @@
 									<img src="${linkImage}" alt="">
 				
 									<div class="mv-item-infor">
-										<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title} <span>(${value.publish_year})</span></a></h6>
+										<h6><a href="${base_url}/home/book_detail?id=${value.id}">${value.title} <span>(${value.publish_year})</span></a></h6>
 										<p class="describe">${desc}</p>
 										<p class="run-time">Pengarang: ${value.author}.</p>
 										<p>Kategori: <a href="#">${value.category_name}</a></p>
@@ -231,10 +234,10 @@
 									<img loading="lazy" src="${linkImage}" onload="this.style.opacity = 1;" alt="">
 									
 								<div class="hvr-inner">
-									<a  href="<?=base_url('/home/book_detail?id=')?>${value.id}"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+									<a  href="${base_url}/home/book_detail?id=${value.id}"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 								</div>
 								<div class="mv-item-infor">
-									<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title}</a></h6>
+									<h6><a href="${base_url}/home/book_detail?id=${value.id}">${value.title}</a></h6>
 									<!-- <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p> -->
 								</div>`);
 						});
