@@ -51,7 +51,7 @@
 	<div class="container">
 		<div class="row ipad-width">
 			<div class="col-md-3 col-sm-12 col-xs-12">
-				<?=$this->load->view('home/users/user-sidebar', [], TRUE)?>
+				<?=$this->load->view('home/users/user-sidebar', ['active' => 'profile'], TRUE)?>
 			</div>
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="form-style-1 user-pro" action="#">
