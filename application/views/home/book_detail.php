@@ -1,3 +1,9 @@
+<style>
+	.swal-wide{
+		width:400px !important;
+	}
+</style>
+
 <div class="hero mv-single-hero">
 	<div class="container">
 		<div class="row">
@@ -77,7 +83,17 @@
 						            	<div class="col-md-4 col-xs-12 col-sm-12">
 
 											<div class="sb-it">
-												<a class="btn btn-xs bluebtn btn-primary btn-add-favorite"><i class="fa fa-plus"></i><span>Add Favorite</span></a>
+												<!-- jika user belum login maka hide button add favorite -->
+												<?php if(isset($_SESSION['user'])):?>
+													<!-- jika buku sudah ada di favorite -->
+													<?php if(isset($favorite)):?>
+														<a href="<?=base_url('book/remove_from_favorite?id=').$book['id']?>" class="btn btn-xs bluebtn btn-primary btn-add-favorite"><i class="fa fa-minus"></i><span>Delete Favorite</span></a>
+													<?php else:?>
+														<!-- jika buku belum ada di favorite -->
+														<a href="<?=base_url('book/add_to_favorite?id=').$book['id']?>" class="btn btn-xs bluebtn btn-primary btn-add-favorite"><i class="fa fa-plus"></i><span>Add Favorite</span></a>
+													<?php endif;?>
+
+												<?php endif;?>
 											</div>
 
 											<div class="sb-it">
@@ -227,8 +243,16 @@
 
 <script>
 	$(document).ready(function () {
-		// if qty 0 hide button read
+		<?php if(isset($_SESSION['success'])) : ?>
+			Swal.fire({
+            icon: 'success',
+            title: '<?=$_SESSION['success']?>',
+            timer: 2000,
+			customClass: 'swal-wide',
+        });
+
 		
-		
+		<?php unset($_SESSION['success']); ?>
+		<?php endif; ?>
 	});
 </script>
