@@ -210,7 +210,7 @@
 		function load_data(page, limit = '', sort_by = ''){
 			$.ajax({
 				type: "GET",
-				url: "<?=base_url('book/get_favorite_books')?>",
+				url: "<?=base_url('user/get_user_loan')?>",
 				data: {
 					sort_by: sort_by,
 					page: page,
