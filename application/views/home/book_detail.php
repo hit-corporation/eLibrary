@@ -75,7 +75,12 @@
 										
 						            	</div>
 						            	<div class="col-md-4 col-xs-12 col-sm-12">
-						            		<div class="sb-it">
+
+											<div class="sb-it">
+												<a class="btn btn-xs bluebtn btn-primary btn-add-favorite"><i class="fa fa-plus"></i><span>Add Favorite</span></a>
+											</div>
+
+											<div class="sb-it">
 						            			<h6>Penulis: </h6>
 						            			<p><a href="#"><?=$book['author']?></a></p>
 						            		</div>
