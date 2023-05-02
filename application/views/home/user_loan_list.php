@@ -238,7 +238,7 @@
 				
 									<div class="mv-item-infor">
 										<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title} <span>(${value.publish_year})</span></a></h6>
-										<a class="btn btn-xs btn-primary" href="<?=base_url('User/delete_favorite_book?id=')?>${value.id}">Delete Favorite</a>
+										<a class="btn btn-xs btn-primary" href="<?=base_url('book/return_book?id=')?>${value.id}">Kembalikan Buku</a>
 										<p class="describe">${desc}</p>
 										<p class="run-time">Pengarang: ${value.author}.</p>
 										<p>Kategori: <a href="#">${value.category_name}</a></p>
