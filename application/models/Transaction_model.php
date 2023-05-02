@@ -107,10 +107,11 @@ class Transaction_model extends CI_Model {
 	 */
 	 
 	public function get_users_loan(int $member_id, $filter): array {
-		$this->db->select('books.*');
+		$this->db->select('books.*, publisher_name, category_name');
 		$this->db->from('transactions');
 		$this->db->join('books', 'transactions.book_id = books.id');
 		$this->db->join('publishers', 'books.publisher_id = publishers.id');
+		$this->db->join('categories', 'books.category_id = categories.id');
 		$this->db->where('member_id', $member_id);
 		$this->db->where('actual_return', null);
 
