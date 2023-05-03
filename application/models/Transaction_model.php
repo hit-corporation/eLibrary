@@ -166,4 +166,34 @@ class Transaction_model extends CI_Model {
 		return $res->num_rows();
 	}
 
+	public function get_by_category(string $type, string $value): array {
+		$res = [];
+
+		switch($value)
+		{
+			case 'daily':
+				$res = $this->get_by_category_daily($value);
+				break;
+		}
+
+		return $res;
+	}
+
+	/**
+	 * Get Member By Book Categories Daily 
+	 *
+	 * @param string $value
+	 * @return array
+	 */
+	private function get_by_category_daily(string $value): array {
+		$query = "SELECT COUNT(a.member_id), b.category_id, c.category_name
+				  FROM read_log a, books b, categories c, members d 
+				  WHERE a.book_id=b.id AND b.category_id=c.id AND a.member_id=d.id
+				  GROUP BY b.category_id, c.category_name
+				  HAVING a.start_time::date=?";
+		$res = $this->db->query($query, [$value]);
+		return $res->result_array();
+	}
+
+
 }

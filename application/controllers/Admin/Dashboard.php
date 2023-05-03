@@ -81,8 +81,10 @@ class Dashboard extends Admin_Controller {
 		echo $this->template->render('/dashboard/dashboard_2', $data);
 	}
 
-	public function popular_book() {
-		$data = $this->transaction_model->get_popular_book();
+	public function member_by_categories() {
+		$type = $this->input->get('type');
+		$time = $this->input->get('value');
+		$data = $this->transaction_model->get_by_category();
 
 		echo json_encode(['data' => $data], JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
 	}
