@@ -154,7 +154,6 @@ class Transaction_model extends CI_Model {
 	 * Query for get get_users_loan_count
 	 * 
 	 * @param int $member_id
-	 * 
 	 * @return int
 	 */
 

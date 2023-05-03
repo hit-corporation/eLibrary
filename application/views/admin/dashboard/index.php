@@ -213,10 +213,10 @@
 	<script src="./assets/js/dashboard/topTenMemberBorrow.js"></script>
 
 	<script>
-		// percentage_book_borrow(<?= json_encode($percentage_book_borrow) ?>);
-		// top_book_borrow(<?= json_encode(array_column($top_book_borrow , 'total')) ?>, <?= json_encode(array_column($top_book_borrow , 'title')) ?>);
+		percentage_book_borrow(<?= json_encode($percentage_book_borrow) ?>);
+		top_book_borrow(<?= json_encode(array_column($top_book_borrow , 'total')) ?>, <?= json_encode(array_column($top_book_borrow , 'title')) ?>);
 		
-		// // create data for chart top ten member borrow
+		// create data for chart top ten member borrow
 		// var dataTopMember = [];
 		// <?php foreach($top_member_borrow as $key => $value) : ?>
 		// 	dataTopMember.push({
