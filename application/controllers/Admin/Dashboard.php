@@ -17,10 +17,10 @@ class Dashboard extends Admin_Controller {
 		$data['total_book'] = count($this->book_model->get_all());
 		$data['total_borrow_book']	= count($this->book_model->get_all_borrow());
 		$data['late_borrow'] = count($this->book_model->get_late_borrow());
-		// $data['top_book_borrow'] = $this->book_model->get_top_borrow();
-		// $data['percentage_book_borrow'] = $this->book_model->get_percentage_borrow();
-		// $data['top_member_borrow'] = $this->member_model->get_top_borrow();
-		// $data['daily_borrow'] = $this->book_model->get_daily_borrow();
+		$data['top_book_borrow'] = $this->book_model->get_top_borrow();
+		$data['percentage_book_borrow'] = $this->book_model->get_percentage_borrow();
+		//$data['top_member_borrow'] = $this->member_model->get_top_borrow();
+		$data['daily_borrow'] = $this->book_model->get_daily_borrow();
 
 		// MENGGUNAKAN TEMPLATE ENGINE PLATES
 		$this->render('index', $data);
@@ -79,5 +79,11 @@ class Dashboard extends Admin_Controller {
 
 		// MENGGUNAKAN TEMPLATE ENGINE PLATES
 		echo $this->template->render('/dashboard/dashboard_2', $data);
+	}
+
+	public function popular_book() {
+		$data = $this->transaction_model->get_popular_book();
+
+		echo json_encode(['data' => $data], JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
 	}
 }
