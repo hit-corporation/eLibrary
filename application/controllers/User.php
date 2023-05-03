@@ -55,6 +55,7 @@ class User extends MY_Controller {
 				if($update){
 					// update session data
 					$this->session->set_userdata('user', [
+						'id'		=> $post['id'],
 						'user_name' => $post['username'],
 						'full_name' => $post['member_name'],
 						'email'		=> $post['email'],
