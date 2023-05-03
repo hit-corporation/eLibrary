@@ -279,6 +279,18 @@ class Book extends MY_Controller {
 		$id = $this->input->get('id');
 		$member_id = $_SESSION['user']['id'];
 
+		// check favorite book
+		$check = $this->db->get_where('favorite_books', ['book_id' => $id, 'member_id' => $member_id])->row_array();
+
+		if(isset($check['id']) && !empty($check['id']))
+		{
+			$data['heading'] = 'PERINGATAN';
+			$data['message'] = '<p>Buku ini telah ada di daftar favorit !!!'.
+								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+			$this->load->view('errors/html/error_general', $data);
+			return;
+		}
+
 		$insert = $this->db->insert('favorite_books', ['book_id' => $id, 'member_id' => $member_id]);
 
 		// jika berhasil
