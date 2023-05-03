@@ -131,7 +131,7 @@ class Home_model extends CI_Model {
 		if($sort_by == 'title-desc')
 			$this->db->order_by('title', 'DESC');
 
-		$this->db->select('fb.id, b.title, b.cover_img, b.author, b.isbn, b.publish_year, b.description, p.publisher_name, c.category_name');
+		$this->db->select('fb.id, fb.book_id, b.title, b.cover_img, b.author, b.isbn, b.publish_year, b.description, p.publisher_name, c.category_name');
 		// $this->db->select('fb.*');
 		$this->db->from('favorite_books fb');
 		$this->db->join('books b', 'b.id = fb.book_id');

@@ -237,7 +237,7 @@
 									<img src="${linkImage}" alt="">
 				
 									<div class="mv-item-infor">
-										<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title} <span>(${value.publish_year})</span></a></h6>
+										<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.book_id}">${value.title} <span>(${value.publish_year})</span></a></h6>
 										<a class="btn btn-xs btn-primary" href="<?=base_url('User/delete_favorite_book?id=')?>${value.id}">Delete Favorite</a>
 										<p class="describe">${desc}</p>
 										<p class="run-time">Pengarang: ${value.author}.</p>
@@ -258,10 +258,10 @@
 									<img loading="lazy" src="${linkImage}" onload="this.style.opacity = 1;" alt="">
 									
 								<div class="hvr-inner">
-									<a  href="<?=base_url('/home/book_detail?id=')?>${value.id}"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+									<a  href="<?=base_url('/home/book_detail?id=')?>${value.book_id}"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 								</div>
 								<div class="mv-item-infor">
-									<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title}</a></h6>
+									<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.book_id}">${value.title}</a></h6>
 									<a class="btn btn-xs btn-primary" href="<?=base_url('User/delete_favorite_book?id=')?>${value.id}">Delete Favorite</a>
 									<!-- <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p> -->
 								</div>`);
