@@ -73,6 +73,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nama Member</th>
+                                <th>Jenis Kelamin</th>
                                 <th>Nomor Kartu</th>
                                 <th>Nomor Induk</th>
                                 <th>Email</th>
@@ -110,6 +111,20 @@
                         <?php if(!empty($_SESSION['error']['errors']['member_name'])): ?>
                             <small class="text-danger"><?=$_SESSION['error']['errors']['member_name']?></small>
                         <?php endif ?>
+                    </div>
+
+					<div class="form-group">
+						<label>Jenis Kelamin <span class="text-danger">*</span></label>
+						<div class="form-control border-0 p-0">
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="jenis_kelamin" id="inlineRadio1" value="l" checked>
+								<label class="form-check-label" for="inlineRadio1">Laki-laki</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="jenis_kelamin" id="inlineRadio2" value="p">
+								<label class="form-check-label" for="inlineRadio2">Perempuan</label>
+							</div>
+						</div>
                     </div>
 
 					<div class="form-group">

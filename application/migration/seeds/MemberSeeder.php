@@ -18,21 +18,22 @@ class MemberSeeder extends AbstractSeed
 
         $faker = Faker::create('id_ID');
 
-        for($i=0;$i<=500;$i++)
+        for($i=0;$i<=10;$i++)
         {
             $email = $faker->unique()->email();
 
             $data[] = [
-                'member_name' => $faker->name(),
-                'card_number' => bin2hex(random_bytes(10)),
-                'no_induk'    => $faker->unique()->nik(),
-                'username'    => $email,
-                'password'    => password_hash('123456', PASSWORD_DEFAULT),
-                'kelas'       => rand(1, 12),
-                'status'      => 'active',
-                'email'       => $email,
-                'address'     => $faker->unique()->address(),
-                'phone'       => $faker->unique()->phoneNumber()
+                'member_name' 	=> $faker->name(),
+				'jenis_kelamin' => $faker->randomElement(['l', 'p']),
+                'card_number' 	=> bin2hex(random_bytes(10)),
+                'no_induk'    	=> $faker->unique()->nik(),
+                'username'    	=> $email,
+                'password'    	=> password_hash('123456', PASSWORD_DEFAULT),
+                'kelas'       	=> rand(1, 12),
+                'status'      	=> 'active',
+                'email'       	=> $email,
+                'address'     	=> $faker->unique()->address(),
+                'phone'       	=> $faker->unique()->phoneNumber()
             ];
         }
 
