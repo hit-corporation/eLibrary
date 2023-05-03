@@ -94,7 +94,7 @@ class Book_model extends CI_Model {
 		return $this->db->get()->row_array();
 	}
 
-		/**
+	/**
 	 * Get All Borrowed Book
 	 * for Dashboard
 	 *
@@ -103,7 +103,7 @@ class Book_model extends CI_Model {
 	public function get_all_borrow(): array
 	{
 		$this->db->select('b.*');
-		$this->db->from('transaction_book tb');
+		$this->db->from('transactions tb');
 		$this->db->join('books b', 'tb.book_id=b.id');
 		$this->db->where('tb.actual_return IS NULL');
 		return $this->db->get()->result_array();
@@ -118,10 +118,9 @@ class Book_model extends CI_Model {
 	public function get_late_borrow(): array
 	{
 		$this->db->select('b.*');
-		$this->db->from('transaction_book tb');
+		$this->db->from('transactions tb');
 		$this->db->join('books b', 'tb.book_id=b.id');
 		$this->db->where('tb.actual_return IS NULL');
-		$this->db->where('tb.return_date < NOW()');
 		return $this->db->get()->result_array();
 	}
 
@@ -134,7 +133,7 @@ class Book_model extends CI_Model {
 	public function get_top_borrow(): array
 	{
 		$this->db->select('b.*, COUNT(tb.book_id) as total');
-		$this->db->from('transaction_book tb');
+		$this->db->from('transactions tb');
 		$this->db->join('books b', 'tb.book_id=b.id');
 		$this->db->group_by('b.id');
 		$this->db->order_by('total', 'DESC');
