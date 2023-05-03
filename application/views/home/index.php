@@ -114,6 +114,9 @@
 												<h6><a href="<?=base_url('/home/book_detail?id=').$popularBook['id']?>"><?=$popularBook['title']?></a></h6>
 												<!-- <p><i class="ion-android-star"></i><span>4</span> /5</p> -->
 											</div>
+											<div class="hvr-add-to-favorite">
+												<a  href="<?=base_url('book/add_to_favorite?id=').$popularBook['id']?>"> Favorite <i class="ion-heart"></i> </a>
+											</div>
 										</div>
 									</div>
 								

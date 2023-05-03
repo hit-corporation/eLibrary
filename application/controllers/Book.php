@@ -277,7 +277,17 @@ class Book extends MY_Controller {
 
 	public function add_to_favorite(){
 		$id = $this->input->get('id');
-		$member_id = $_SESSION['user']['id'];
+		$member_id = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 0;
+
+		// check if member not login
+		if(!isset($_SESSION['user']) && empty($_SESSION['user']['user_name']))
+		{
+			$data['heading'] = 'PERINGATAN';
+			$data['message'] = '<p>Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!'.
+								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+			$this->load->view('errors/html/error_general', $data);
+			return;
+		}
 
 		// check favorite book
 		$check = $this->db->get_where('favorite_books', ['book_id' => $id, 'member_id' => $member_id])->row_array();
