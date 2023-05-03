@@ -224,17 +224,18 @@ class Member extends Admin_Controller
 		foreach($excel as $x)
 		{
 			$ls = [
-				'member_name'	=> $x[0],
-				'no_induk'		=> "$x[1]",
-				'kelas'			=> $x[2],
-				'card_number'	=> "$x[3]",
-				'email'			=> $x[4],
-				'phone'			=> "$x[5]",
-				'address'		=> $x[6]
+				'member_name'	=> "$x[0]",
+				'jenis_kelamin'	=> "$x[1]",
+				'no_induk'		=> "$x[2]",
+				'kelas'			=> "$x[3]",
+				'card_number'	=> "$x[4]",
+				'email'			=> "$x[5]",
+				'phone'			=> "$x[6]",
+				'address'		=> "$x[7]"
 			];
 			
-			if($this->db->get_where('members', ['no_induk' => "$x[1]" ])->num_rows() > 0)
-				$this->db->update('members', $ls, ['no_induk' => "$x[1]"]);
+			if($this->db->get_where('members', ['no_induk' => "$x[2]" ])->num_rows() > 0)
+				$this->db->update('members', $ls, ['no_induk' => "$x[2]"]);
 			else
 				$this->db->insert('members', $ls);
 		}
