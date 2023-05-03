@@ -17,10 +17,10 @@ class Dashboard extends Admin_Controller {
 		$data['total_book'] = count($this->book_model->get_all());
 		$data['total_borrow_book']	= count($this->book_model->get_all_borrow());
 		$data['late_borrow'] = count($this->book_model->get_late_borrow());
-		$data['top_book_borrow'] = $this->book_model->get_top_borrow();
-		$data['percentage_book_borrow'] = $this->book_model->get_percentage_borrow();
-		$data['top_member_borrow'] = $this->member_model->get_top_borrow();
-		$data['daily_borrow'] = $this->book_model->get_daily_borrow();
+		// $data['top_book_borrow'] = $this->book_model->get_top_borrow();
+		// $data['percentage_book_borrow'] = $this->book_model->get_percentage_borrow();
+		// $data['top_member_borrow'] = $this->member_model->get_top_borrow();
+		// $data['daily_borrow'] = $this->book_model->get_daily_borrow();
 
 		// MENGGUNAKAN TEMPLATE ENGINE PLATES
 		$this->render('index', $data);

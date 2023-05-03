@@ -2,7 +2,12 @@
 
 <!-- SECTION CSS -->
 <?php $this->start('css') ?>
+	<!-- highchart  -->
+	<script src="<?=base_url('assets/js/dashboard/highcharts/highcharts.js')?>"></script>
+	<script src="<?=base_url('assets/js/dashboard/highcharts/accessibility.js')?>"></script>
 
+	<!-- apex charts -->
+	<script src="./assets/js/dashboard/apexcharts/apexcharts.js"></script>
 	<style>
 		.highcharts-credits {
 			display: none;
@@ -65,13 +70,6 @@
 
 <!-- SECTION CONTENT -->
 <?php $this->start('contents') ?>
-
-	<!-- highchart  -->
-	<script src="<?=base_url('assets/js/dashboard/highcharts/highcharts.js')?>"></script>
-	<script src="<?=base_url('assets/js/dashboard/highcharts/accessibility.js')?>"></script>
-
-	<!-- apex charts -->
-	<script src="./assets/js/dashboard/apexcharts/apexcharts.js"></script>
 
 	<!-- Begin Page Content -->
 
@@ -206,21 +204,6 @@
 	<!-- /.container-fluid -->
 
 <?php $this->stop() ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- SECTION JS -->
 <?php $this->start('js') ?>
