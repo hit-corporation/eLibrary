@@ -60,6 +60,7 @@ class Member extends Admin_Controller
     public function store(): void
     {
         $member_name   	= $this->input->post('member_name');
+		$jenis_kelamin 	= $this->input->post('jenis_kelamin');
         $card_number 	= $this->input->post('card_number');
         $no_induk 	= $this->input->post('no_induk');
         $email 		= $this->input->post('email');
@@ -68,6 +69,7 @@ class Member extends Admin_Controller
 
         $this->form_validation->set_rules('no_induk', 'Nomor Induk', 'required');
         $this->form_validation->set_rules('member_name', 'Nama', 'required');
+		$this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required');
 
         if(!$this->form_validation->run())
         {
@@ -78,6 +80,7 @@ class Member extends Admin_Controller
 
         $data = [
             'member_name' 			=> $member_name,
+			'jenis_kelamin' 		=> $jenis_kelamin,
 			'card_number'			=> $card_number,
             'no_induk' 				=> $no_induk,
             'email' 				=> $email,
@@ -107,6 +110,7 @@ class Member extends Admin_Controller
     {
         $id     		= trim($this->input->post('member_id', TRUE));
         $member_name   	= trim($this->input->post('member_name', TRUE));
+		$jenis_kelamin 	= trim($this->input->post('jenis_kelamin', TRUE));
         $card_number 	= trim($this->input->post('card_number', TRUE));
         $no_induk   	= trim($this->input->post('no_induk', TRUE));
         $email   		= trim($this->input->post('email', TRUE));
@@ -115,6 +119,7 @@ class Member extends Admin_Controller
 
 		$this->form_validation->set_rules('no_induk', 'Nomor Induk', 'required');
 		$this->form_validation->set_rules('member_name', 'Nama Member', 'required');
+		$this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required');
 
         if(!$this->form_validation->run())
         {
@@ -125,6 +130,7 @@ class Member extends Admin_Controller
 
         $data = [
             'member_name' => $member_name,
+			'jenis_kelamin' => $jenis_kelamin,
             'no_induk' => $no_induk,
             'email' => $email,
             'address' => $address,
@@ -218,17 +224,18 @@ class Member extends Admin_Controller
 		foreach($excel as $x)
 		{
 			$ls = [
-				'member_name'	=> $x[0],
-				'no_induk'		=> "$x[1]",
-				'kelas'			=> $x[2],
-				'card_number'	=> "$x[3]",
-				'email'			=> $x[4],
-				'phone'			=> "$x[5]",
-				'address'		=> $x[6]
+				'member_name'	=> "$x[0]",
+				'jenis_kelamin'	=> "$x[1]",
+				'no_induk'		=> "$x[2]",
+				'kelas'			=> "$x[3]",
+				'card_number'	=> "$x[4]",
+				'email'			=> "$x[5]",
+				'phone'			=> "$x[6]",
+				'address'		=> "$x[7]"
 			];
 			
-			if($this->db->get_where('members', ['no_induk' => "$x[1]" ])->num_rows() > 0)
-				$this->db->update('members', $ls, ['no_induk' => "$x[1]"]);
+			if($this->db->get_where('members', ['no_induk' => "$x[2]" ])->num_rows() > 0)
+				$this->db->update('members', $ls, ['no_induk' => "$x[2]"]);
 			else
 				$this->db->insert('members', $ls);
 		}

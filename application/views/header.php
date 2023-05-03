@@ -128,7 +128,7 @@
 
 									if ($check_parent > 0) :?>
 										<li class="dropdown">
-											<a href="home" class="dropdown-toggle" data-toggle="dropdown" ><?=$category['category_name']?><i class="ion-ios-arrow-forward"></i></a>
+											<a href="" class="dropdown-toggle" data-toggle="dropdown" ><?=$category['category_name']?><i class="ion-ios-arrow-forward"></i></a>
 											<ul class="dropdown-menu level2">
 												<?php
 												$sub_categories = $this->db->where('parent_category', $category['id'])->get('categories')->result_array();
@@ -151,7 +151,10 @@
 																	$count_sub_sub_category = $this->db->where('parent_category', $sub_sub_category['id'])->get('categories')->num_rows(); 
 																?>
 																	
-																	<li><a href="<?=base_url('book?viewStyle=grid&viewGroup=newest&category_id='.$sub_sub_category['id'])?>"><?=$sub_sub_category['category_name'].$count_sub_sub_category?></a></li>
+																	<li><a href="<?=base_url('book?viewStyle=grid&viewGroup=newest&category_id='.$sub_sub_category['id'])?>"><?=$sub_sub_category['category_name']?>
+																			<i class="" style="opacity:0.4"><?=($count_sub_sub_category!=0) ? '('.$count_sub_sub_category.')' : '' ?></i>
+																		</a>
+																	</li>
 																<?php endforeach; ?>
 															</ul>
 														</li>

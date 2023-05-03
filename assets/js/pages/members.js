@@ -40,6 +40,16 @@ const getAll = async () => {
                 className: 'align-middle pl-2'
             },
             {
+                data: 'jenis_kelamin',
+				render(data, type, row, _meta){
+					if(data === 'l'){
+						return 'Laki-laki';
+					}else{
+						return 'Perempuan';
+					}
+				}
+            },
+            {
                 data: 'card_number'
             },
             {

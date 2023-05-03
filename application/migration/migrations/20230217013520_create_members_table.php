@@ -20,6 +20,7 @@ final class CreateMembersTable extends AbstractMigration
     {
 		$table = $this->table('members');
 		$table->addColumn('member_name', 'string', ['limit' => 100])
+					->addColumn('jenis_kelamin', 'string', ['limit' => 15])
 			    ->addColumn('no_induk', 'string', ['limit' => 100])
 			    ->addColumn('card_number', 'string', ['limit' => 100])
           ->addColumn('kelas', 'string', ['limit' => 100])
