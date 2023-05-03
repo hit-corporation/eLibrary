@@ -123,6 +123,9 @@
 									<!-- query check data has parent -->
 									<?php $check_parent = $this->db->where('parent_category', $category['id'])->get('categories')->num_rows();
 
+									// count data book
+									$count_book = $this->db->where('category_id', $category['id'])->get('books')->num_rows();
+
 									if ($check_parent > 0) :?>
 										<li class="dropdown">
 											<a href="home" class="dropdown-toggle" data-toggle="dropdown" ><?=$category['category_name']?><i class="ion-ios-arrow-forward"></i></a>
@@ -133,6 +136,9 @@
 
 													<!-- query check data has parent -->
 													<?php $check_parent = $this->db->where('parent_category', $sub_category['id'])->get('categories')->num_rows();
+
+													// count data book
+													$count_book = $this->db->where('category_id', $sub_category['id'])->get('books')->num_rows();
 													
 													if ($check_parent > 0) :?>
 														<li class="dropdown">
@@ -140,14 +146,18 @@
 															<ul class="dropdown-menu level3">
 																<?php
 																$sub_sub_categories = $this->db->where('parent_category', $sub_category['id'])->get('categories')->result_array();
-																foreach ($sub_sub_categories as $sub_sub_category) :?>
-																	<li><a href="<?=base_url('book?viewStyle=grid&viewGroup=newest&category_id='.$sub_sub_category['id'])?>"><?=$sub_sub_category['category_name']?></a></li>
+																foreach ($sub_sub_categories as $sub_sub_category) :
+																	//query count sub sub category
+																	$count_sub_sub_category = $this->db->where('parent_category', $sub_sub_category['id'])->get('categories')->num_rows(); 
+																?>
+																	
+																	<li><a href="<?=base_url('book?viewStyle=grid&viewGroup=newest&category_id='.$sub_sub_category['id'])?>"><?=$sub_sub_category['category_name'].$count_sub_sub_category?></a></li>
 																<?php endforeach; ?>
 															</ul>
 														</li>
 
 													<?php else :?>
-														<li><a href="<?=base_url('book?viewStyle=grid&viewGroup=newest&category_id='.$sub_category['id'])?>"><?=$sub_category['category_name']?></a></li>
+														<li><a href="<?=base_url('book?viewStyle=grid&viewGroup=newest&category_id='.$sub_category['id'])?>"><?=$sub_category['category_name']?><i><span class="" style="opacity: 0.4"><?=($count_book!=0) ? '('.$count_book.')' : ''?></span></i></a></li>
 													<?php endif; ?>
 
 												<?php endforeach; ?>
@@ -155,7 +165,7 @@
 										</li>
 
 									<?php else :?>
-										<li><a href="<?=base_url('book?viewStyle=grid&viewGroup=newest&category_id='.$category['id'])?>"><?=$category['category_name']?></a></li>
+										<li><a href="<?=base_url('book?viewStyle=grid&viewGroup=newest&category_id='.$category['id'])?>"><?=$category['category_name']?><i><?=($count_book!=0) ? $count_book : ''?></i></a></li>
 									<?php endif; ?>
 							
 								<?php endforeach; ?>
