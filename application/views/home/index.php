@@ -64,14 +64,14 @@
 												<img src="<?=isset($newBook['cover_img']) ? base_url('assets/img/books/').$newBook['cover_img'] : base_url('assets/img/books/default.png')?>" alt="">
 											</div>
 											<div class="hvr-inner">
-												<a  href="<?=base_url('/home/book_detail?id=').$newBook['id']?>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
-											</div>
-											<div class="hvr-add-to-favorite">
-												<a  href="<?=base_url('/home/book_detail?id=').$newBook['id']?>"> Favorite <i class="ion-heart"></i> </a>
+												<a  href="<?=base_url('home/book_detail?id=').$newBook['id']?>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
 											</div>
 											<div class="title-in">
-												<h6><a href="<?=base_url('/home/book_detail?id=').$newBook['id']?>"><?=$newBook['title']?></a></h6>
+												<h6><a href="<?=base_url('home/book_detail?id=').$newBook['id']?>"><?=$newBook['title']?></a></h6>
 												<!-- <p><i class="ion-android-star"></i><span>4</span> /5</p> -->
+											</div>
+											<div class="hvr-add-to-favorite">
+												<a  href="<?=base_url('book/add_to_favorite?id=').$newBook['id']?>"> Favorite <i class="ion-heart"></i> </a>
 											</div>
 										</div>
 									</div>
