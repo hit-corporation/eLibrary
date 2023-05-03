@@ -280,32 +280,25 @@ class Book extends MY_Controller {
 		$member_id = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 0;
 
 		// check if member not login
-		if(!isset($_SESSION['user']) && empty($_SESSION['user']['user_name']))
-		{
-			$data['heading'] = 'PERINGATAN';
-			$data['message'] = '<p>Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!'.
-								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
-			$this->load->view('errors/html/error_general', $data);
-			return;
+		if(!isset($_SESSION['user']) && empty($_SESSION['user']['user_name'])){
+			// create flashdata
+			$this->session->set_flashdata('error', 'Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!');
+			redirect('home');
 		}
 
 		// check favorite book
 		$check = $this->db->get_where('favorite_books', ['book_id' => $id, 'member_id' => $member_id])->row_array();
 
-		if(isset($check['id']) && !empty($check['id']))
-		{
-			$data['heading'] = 'PERINGATAN';
-			$data['message'] = '<p>Buku ini telah ada di daftar favorit !!!'.
-								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
-			$this->load->view('errors/html/error_general', $data);
-			return;
+		if(isset($check['id']) && !empty($check['id'])){
+			// create flashdata
+			$this->session->set_flashdata('error', 'Buku telah ada di daftar favorit !!!');
+			redirect('home');
 		}
 
 		$insert = $this->db->insert('favorite_books', ['book_id' => $id, 'member_id' => $member_id]);
 
 		// jika berhasil
-		if($insert)
-		{
+		if($insert){
 			// create flashdata
 			$this->session->set_flashdata('success', 'Buku berhasil ditambahkan ke daftar favorit');
 

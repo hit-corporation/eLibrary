@@ -167,3 +167,13 @@
 </div>
 <!--end of latest new v2 section-->
 
+<script>
+	<?php if(!empty($_SESSION['error'])) : ?>
+		Swal.fire({
+			icon: 'error',
+			title: '<h4 class="text-danger"></h4>',
+			html: '<span class="text-danger"><?=$_SESSION['error']?></span>',
+			timer: 5000
+		});
+	<?php endif; ?>
+</script>
