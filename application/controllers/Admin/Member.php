@@ -60,6 +60,8 @@ class Member extends Admin_Controller
     public function store(): void
     {
         $member_name   	= $this->input->post('member_name');
+        $username   	= $this->input->post('username');
+        $password   	= $this->input->post('password');
 		$jenis_kelamin 	= $this->input->post('jenis_kelamin');
         $card_number 	= $this->input->post('card_number');
         $no_induk 	= $this->input->post('no_induk');
@@ -69,6 +71,8 @@ class Member extends Admin_Controller
 
         $this->form_validation->set_rules('no_induk', 'Nomor Induk', 'required');
         $this->form_validation->set_rules('member_name', 'Nama', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
 		$this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required');
 
         if(!$this->form_validation->run())
@@ -80,6 +84,8 @@ class Member extends Admin_Controller
 
         $data = [
             'member_name' 			=> $member_name,
+			'username' 				=> $username,
+			'password' 				=> password_hash($password, PASSWORD_DEFAULT), // default password 123456
 			'jenis_kelamin' 		=> $jenis_kelamin,
 			'card_number'			=> $card_number,
             'no_induk' 				=> $no_induk,
@@ -110,6 +116,8 @@ class Member extends Admin_Controller
     {
         $id     		= trim($this->input->post('member_id', TRUE));
         $member_name   	= trim($this->input->post('member_name', TRUE));
+        $username   	= trim($this->input->post('username', TRUE));
+		$password   	= trim($this->input->post('password', TRUE));
 		$jenis_kelamin 	= trim($this->input->post('jenis_kelamin', TRUE));
         $card_number 	= trim($this->input->post('card_number', TRUE));
         $no_induk   	= trim($this->input->post('no_induk', TRUE));
@@ -119,6 +127,8 @@ class Member extends Admin_Controller
 
 		$this->form_validation->set_rules('no_induk', 'Nomor Induk', 'required');
 		$this->form_validation->set_rules('member_name', 'Nama Member', 'required');
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
 		$this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required');
 
         if(!$this->form_validation->run())
@@ -130,6 +140,8 @@ class Member extends Admin_Controller
 
         $data = [
             'member_name' => $member_name,
+            'username' => $username,
+			'password' => password_hash($password, PASSWORD_DEFAULT), // default password 123456
 			'jenis_kelamin' => $jenis_kelamin,
             'no_induk' => $no_induk,
             'email' => $email,
@@ -225,17 +237,19 @@ class Member extends Admin_Controller
 		{
 			$ls = [
 				'member_name'	=> "$x[0]",
-				'jenis_kelamin'	=> "$x[1]",
-				'no_induk'		=> "$x[2]",
-				'kelas'			=> "$x[3]",
-				'card_number'	=> "$x[4]",
-				'email'			=> "$x[5]",
-				'phone'			=> "$x[6]",
-				'address'		=> "$x[7]"
+				'username'		=> "$x[1]",
+				'password'		=> password_hash('123456', PASSWORD_DEFAULT),
+				'jenis_kelamin'	=> "$x[2]",
+				'no_induk'		=> "$x[3]",
+				'kelas'			=> "$x[4]",
+				'card_number'	=> "$x[5]",
+				'email'			=> "$x[6]",
+				'phone'			=> "$x[7]",
+				'address'		=> "$x[8]"
 			];
 			
-			if($this->db->get_where('members', ['no_induk' => "$x[2]" ])->num_rows() > 0)
-				$this->db->update('members', $ls, ['no_induk' => "$x[2]"]);
+			if($this->db->get_where('members', ['no_induk' => "$x[3]" ])->num_rows() > 0)
+				$this->db->update('members', $ls, ['no_induk' => "$x[3]"]);
 			else
 				$this->db->insert('members', $ls);
 		}

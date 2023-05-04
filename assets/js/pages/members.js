@@ -40,6 +40,13 @@ const getAll = async () => {
                 className: 'align-middle pl-2'
             },
             {
+                data: 'username'
+            },
+			{
+                data: 'password',
+				visible: false
+            },
+            {
                 data: 'jenis_kelamin',
 				render(data, type, row, _meta){
 					if(data === 'l'){
@@ -94,6 +101,9 @@ const getAll = async () => {
         form.reset();
         form['member_id'].value = row.id;
         form['member_name'].value = row.member_name;
+        form['username'].value = row.username;
+		form['password'].value = row.password;
+        form['jenis_kelamin'].value = row.jenis_kelamin;
         form['card_number'].value = row.card_number;
         form['no_induk'].value = row.no_induk;
         form['email'].value = row.email;

@@ -73,6 +73,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nama Member</th>
+                                <th>Username</th>
+                                <th>password</th>
                                 <th>Jenis Kelamin</th>
                                 <th>Nomor Kartu</th>
                                 <th>Nomor Induk</th>
@@ -110,6 +112,26 @@
                         
                         <?php if(!empty($_SESSION['error']['errors']['member_name'])): ?>
                             <small class="text-danger"><?=$_SESSION['error']['errors']['member_name']?></small>
+                        <?php endif ?>
+                    </div>
+                    
+					<div class="form-group">
+                        <label>Username <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control <?php if(!empty($_SESSION['error']['errors']['username'])):?> is-invalid <?php endif ?>" 
+                              name="username" value="<?=$_SESSION['error']['old']['username'] ?? ''?>" required>
+                        
+                        <?php if(!empty($_SESSION['error']['errors']['username'])): ?>
+                            <small class="text-danger"><?=$_SESSION['error']['errors']['username']?></small>
+                        <?php endif ?>
+                    </div>
+
+					<div class="form-group">
+                        <label>Password <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control <?php if(!empty($_SESSION['error']['errors']['password'])):?> is-invalid <?php endif ?>" 
+                              name="password" value="<?=$_SESSION['error']['old']['password'] ?? ''?>" required>
+                        
+                        <?php if(!empty($_SESSION['error']['errors']['password'])): ?>
+                            <small class="text-danger"><?=$_SESSION['error']['errors']['password']?></small>
                         <?php endif ?>
                     </div>
 
