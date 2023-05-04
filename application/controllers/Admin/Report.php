@@ -116,58 +116,6 @@ class Report extends Admin_Controller
 	}
 
 	/**
-     * function for view penalty report
-     *
-     * @return void
-     */
-	public function penalty(): void{
-		$this->render('penalty_report');
-	}
-
-	/**
-	 * get all penalty data
-	 *
-	 * @return void
-	 */
-	public function get_all_penalty(): void{
-		$data = $this->transaction_model->get_all_penalty();
-		echo json_encode($data, JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
-	}
-
-	/**
-	 * get all paginated data and send as json for datatable consume
-	 *
-	 * @return void
-	 */
-	public function get_all_penalty_paginated(): void{
-		$limit  = $this->input->get('length');
-		$offset = $this->input->get('start');
-		$filter = $this->input->get('columns');
-
-		// generate data
-		$data = [];
-		$query = $this->transaction_model->get_all_penalty($filter, $limit, $offset);
-
-		foreach($query as $q)
-        {
-            $denda = (new DateTime('now')) > (new DateTime($q['return_date'])) ? 
-                          ((new DateTime('now'))->diff(new DateTime($q['return_date'])))->days * $this->settings['fines_amount'] : NULL;
-            $q['denda'] = $denda >= $this->settings['fines_maximum'] ? $this->settings['fines_maximum'] : $denda;
-
-			if($q['denda'] != NULL) $data[] = $q;
-        }
-
-		$dataTable = [
-			'draw'            => $this->input->get('draw') ?? NULL,
-			'data'            => $data,
-			'recordsTotal'    => $this->db->count_all_results('transactions'),
-			'recordsFiltered' => $this->transaction_model->count_all_penalty($filter)
-		];
-
-		echo json_encode($dataTable, JSON_HEX_AMP | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT);
-	}
-
-	/**
 	 * Download Transaction REport
 	 *
 	 * @method GET
@@ -289,58 +237,6 @@ class Report extends Admin_Controller
 		}
 	}
 
-	/**
-	 * Export Fines Report
-	 *
-	 * @return void
-	 */
-	public function download_penalty(): void {
-		$filter[1]['search']['value'] = $this->input->get('s_member_name');
-		$filter[2]['search']['value'] = $this->input->get('daterange');
-		$filter[3]['search']['value'] = $this->input->get('s_book_name');
-
-		$type = $this->input->get('type');
-		$records = $this->transaction_model->get_all_penalty($filter, 30000, 0);
-		$data = [];
-
-		foreach($records as $val)
-		{
-			$data[] = [
-				$val['member_name'],
-				$val['title'],
-				$val['trans_timestamp'],
-				$val['return_date'],
-				$val['jumlah_hari_terlambat'],
-				$val['jumlah_hari_pinjam']
-			];
-		}
-
-		$options = [
-			'header' 	=> ['Peminjam', 'Judul Buku', 'Tanggal Pinjam', 'Batas Waktu (Tanggal)', 'Telat (Hari)', 'Durasi Pinjam'],
-			'data'   	=> $data,
-			'title'  	=> 'Laporan Detail Denda<br />'.
-							'Periode '.$this->input->get('daterange'),
-			'filepath'	=> 'assets/files/download/penalty',
-			'filename'	=> 'penalty_report_'.(new DateTime)->format('YmdHis'),
-			'pdf'		=> [
-				'page-size' 	=> 'Legal',
-				'orientation' 	=> 'Portrait'
-			]
-			
-		];
-
-		$this->load->library('export', $options);
-
-		switch($type)
-		{
-			case 'pdf':
-				$this->export->toPDF()->download();
-				break;
-			case 'excel':
-				$this->export->toExcel()->download();
-				break;
-		}
-
-	}
+	
 }
 
