@@ -60,9 +60,18 @@ class Home extends MY_Controller {
 			$this->form_validation->set_rules('username', 'Usernmae', 'required|callback_is_exists', [
 				'is_exists'	=> 'ID Pengguna tidak di temukan'
 			]);
-			$this->form_validation->set_rules('password', 'Password', 'required|callback_valid_password', [
-				'valid_password' => 'Password tidak sama'
+
+			$this->form_validation->set_rules('password', 'Password', 'required', [
+				'required'	=> 'Password tidak boleh kosong'
 			]);
+
+			// check password
+			$checkPassword = $this->valid_password($username, $password);
+			if(!$checkPassword){
+				$return = ['success' => false, 'errors' => ['password' => 'Username atau Password yang anda masukan salah'], 'old' => $_POST];
+				$this->session->set_flashdata('error', $return);
+				redirect($_SERVER['HTTP_REFERER']);
+			}
 
 			if(!$this->form_validation->run())
 			{
@@ -96,7 +105,7 @@ class Home extends MY_Controller {
 
 			
 
-			$return = ['success' => true, 'message' =>  'Data Berhasil Di Simpan'];
+			$return = ['success' => true, 'message' =>  'Login berhasil'];
 			$this->session->set_flashdata('success', $return);
 			redirect('/');
 		}
@@ -131,10 +140,10 @@ class Home extends MY_Controller {
 	 *
 	 * @return boolean
 	 */
-	public function valid_password($str): bool {
-		$members = $this->member_model->login($str);
-		if(isset($membes['username']) && password_verify($str, $members['password']))
-			return false;
-		return true;
+	public function valid_password($username, $password): bool {
+		$members = $this->member_model->login($username);
+		if(isset($members['username']) && password_verify($password, $members['password']))
+			return true;
+		return false;
 	}
 }

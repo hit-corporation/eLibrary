@@ -167,12 +167,28 @@
 </div>
 <!--end of latest new v2 section-->
 
+<script src="<?=base_url('assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js')?>"></script>
+
 <script>
-	<?php if(!empty($_SESSION['error'])) : ?>
+
+	<?php
+		// var_dump($_SESSION);
+	?>
+
+	<?php if(!empty($_SESSION['error']) && $_SESSION['error']['success'] == false) : ?>
 		Swal.fire({
 			icon: 'error',
 			title: '<h4 class="text-danger"></h4>',
-			html: '<span class="text-danger"><?=$_SESSION['error']?></span>',
+			html: '<span class="text-danger"><?=$_SESSION['error']['errors']['password']?></span>',
+			timer: 5000
+		});
+	<?php endif; ?>
+
+	<?php if(!empty($_SESSION['success']) && $_SESSION['success'] == true) : ?>
+		Swal.fire({
+			icon: 'success',
+			title: '<h4 class="text-success"></h4>',
+			html: '<span class="text-success"><?=$_SESSION['success']['message']?></span>',
 			timer: 5000
 		});
 	<?php endif; ?>
