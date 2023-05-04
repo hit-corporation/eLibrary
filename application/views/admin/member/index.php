@@ -220,7 +220,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name="form-input" action="<?=$this->e(base_url('member/import'))?>" class="modal-body" method="POST" enctype="multipart/form-data">
+            <form name="form-input" action="<?=$this->e(base_url('admin/member/import'))?>" class="modal-body" method="POST" enctype="multipart/form-data">
                 <fieldset class="row">
                     <div class="col-12">
 						<span>* Data harus beformat ms. excel / xlsx</span>
