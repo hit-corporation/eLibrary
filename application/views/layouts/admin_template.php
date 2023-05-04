@@ -208,11 +208,6 @@
 							<i class="fa fa-file-alt" aria-hidden="true"> </i>
 							<span>Buku</span>
 						</a>
-						
-						<a class="collapse-item <?=($CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'report' && $CI->uri->segment(3) == 'penalty') ? 'active bg-dark-2 text-light' : '' ?>" href="<?=base_url('admin/report/penalty')?>">
-							<i class="fa fa-file-alt" aria-hidden="true"> </i>
-							<span>Denda</span>
-						</a>
 
                     </div>
                 </div>
