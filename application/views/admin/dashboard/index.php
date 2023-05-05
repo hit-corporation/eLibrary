@@ -73,6 +73,7 @@
 
 	<!-- Begin Page Content -->
 
+
 	<div class="container-fluid">
 
 		<!-- Page Heading -->
@@ -214,16 +215,17 @@
 
 	<script>
 		percentage_book_borrow(<?= json_encode($percentage_book_borrow) ?>);
-		top_book_borrow(<?= json_encode(array_column($top_book_borrow , 'total')) ?>, <?= json_encode(array_column($top_book_borrow , 'title')) ?>);
+	
+
+
+
+		(async () => {
+			const category = await getDataCategory('daily');
+
+			console.log(category);
+		})();
 		
-		// create data for chart top ten member borrow
-		// var dataTopMember = [];
-		// <?php foreach($top_member_borrow as $key => $value) : ?>
-		// 	dataTopMember.push({
-		// 		name: '<?= $value['member_name'] ?>',
-		// 		y: <?= $value['total'] ?>
-		// 	});
-		// <?php endforeach; ?>
+
 
 		// topTenMemberBorrow(dataTopMember);
 
