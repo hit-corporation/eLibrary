@@ -181,26 +181,6 @@ class Member extends Admin_Controller
     }
 
 	/**
-	 * Get data by id
-	 *
-	 * @return void
-	 */
-	public function get_by_card_number(string $card_number): void {
-		$data = $this->member_model->get_by_card_number($card_number);
-		echo json_encode($data, JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
-	}
-
-	/**
-	 * Get data by member name
-	 *
-	 * @return void
-	 */
-	public function get_by_member_name(string $member_name): void {
-		$data = $this->member_model->get_by_member_name($member_name);
-		echo json_encode($data, JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
-	}
-
-	/**
 	 * Import dataa from excel
 	 *
 	 * @return void
