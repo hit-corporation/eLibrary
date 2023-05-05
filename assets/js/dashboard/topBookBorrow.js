@@ -47,7 +47,7 @@ const top_book_borrow = (data, title) => {
 			}
 		},
 		title: {
-			text: 'TOP 5 BUKU TERBANYAK DIPINJAM',
+			text: 'TOP 5 READ BY CATEGORY',
 			align: 'center',
 			floating: true
 		},
@@ -74,3 +74,19 @@ const top_book_borrow = (data, title) => {
 	chart.render();
 }
 
+const getDataCategory = async type => {
+	try
+	{
+		const response = await fetch(`${BASE_URL}admin/dashboard/get_by_category?type=${type}`);
+		const result = await response.json();
+
+		const total = result.map(x => x.count);
+		const label = result.map(x => x.category_name);
+		
+		top_book_borrow(total, label);
+	}
+	catch(err)
+	{
+		console.log(err);
+	}
+}
