@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Dashboard extends Admin_Controller {
 	public function __construct(){
 		parent::__construct();
-		$this->load->model(['user_model', 'member_model', 'book_model', 'dashboard_model']);
+		$this->load->model(['user_model', 'member_model', 'book_model', 'dashboard_model','transaction_model']);
 
 		$this->load->library('form_validation');
 		
@@ -24,6 +24,14 @@ class Dashboard extends Admin_Controller {
 
 		// MENGGUNAKAN TEMPLATE ENGINE PLATES
 		$this->render('index', $data);
+	}
+
+	public function get_by_category(){
+		$type = $this->input->get('type');
+
+		$data = $this->transaction_model->get_by_category('daily', '2023-05-05');
+
+		echo json_encode($data);
 	}
 
 	public function dashboard2(){
