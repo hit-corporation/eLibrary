@@ -169,7 +169,7 @@ class Transaction_model extends CI_Model {
 	public function get_by_category(string $type, string $value): array {
 		$res = [];
 
-		switch($value)
+		switch($type)
 		{
 			case 'daily':
 				$res = $this->get_by_category_daily($value);
@@ -188,9 +188,8 @@ class Transaction_model extends CI_Model {
 	private function get_by_category_daily(string $value): array {
 		$query = "SELECT COUNT(a.member_id), b.category_id, c.category_name
 				  FROM read_log a, books b, categories c, members d 
-				  WHERE a.book_id=b.id AND b.category_id=c.id AND a.member_id=d.id
-				  GROUP BY b.category_id, c.category_name
-				  HAVING a.start_time::date=?";
+				  WHERE a.book_id=b.id AND b.category_id=c.id AND a.member_id=d.id AND a.start_time::date=?
+				  GROUP BY b.category_id, c.category_name";
 		$res = $this->db->query($query, [$value]);
 		return $res->result_array();
 	}
