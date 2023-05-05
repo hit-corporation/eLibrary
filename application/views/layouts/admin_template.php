@@ -153,13 +153,6 @@
                 </div>
             </li>
 
-			<!-- Nav Item - Pengembalian -->
-			<li class="nav-item <?=($CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'order' && $CI->uri->segment(3) == 'return_order') ? 'active bg-dark-2' : '' ?>">
-                <a class="nav-link" href="<?=base_url('admin/order/return_order')?>">
-                    <i class="fa fa-reply-all" aria-hidden="true"></i>
-                    <span>Pengembalian</span></a>
-            </li>
-
             <!-- Nav Item - Book -->
             <li class="nav-item <?=$CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'book' ? 'active bg-dark-2' : '' ?>">
                 <a class="nav-link" href="<?=base_url('admin/book')?>">
