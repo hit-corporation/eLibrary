@@ -78,10 +78,6 @@ const getAll = async () => {
 			{
 				data: 'created_at',
 				className: 'align-middle pl-2'
-			},
-			{
-				data: 'rack_no',
-				className: 'align-middle pl-2'
 			}
 
 		]
@@ -94,7 +90,6 @@ const getAll = async () => {
 		tableMain.columns(2).search(formSearchName['s_author_name'].value).draw();
 		tableMain.columns(3).search(formSearchName['s_publisher_name'].value).draw();
 		tableMain.columns(4).search(formSearchName['stok'].value).draw();
-		tableMain.columns(5).search(formSearchName['s_rack_number'].value).draw();
     });
 
 	// search reset
@@ -108,9 +103,6 @@ const getAll = async () => {
 
 		tableMain.columns(3).search('').draw();
 		formSearchName['s_publisher_name'].value = '';
-
-		tableMain.columns(5).search('').draw();
-		formSearchName['s_rack_number'].value = '';
 	});
 
 	// Download Report
