@@ -21,11 +21,11 @@ class Book_model extends CI_Model {
 	{
 		$this->db->distinct();
 		$this->db->select('a.id, a.title, a.book_code, a.cover_img, a.author, a.isbn, a.publish_year, a.description, a.qty, a.category_id, a.publisher_id, a.author, 
-							s.rack_no, b.category_name, c.publisher_name, TO_CHAR(a.created_at, \'YYYY-MM-DD\') as created_at', FALSE)
+							b.category_name, c.publisher_name, TO_CHAR(a.created_at, \'YYYY-MM-DD\') as created_at, trx.borrow as qty_dipinjam', FALSE)
 				 ->from('books a')
 				 ->join('categories b', 'a.category_id=b.id')
 				 ->join('publishers c', 'a.publisher_id=c.id')
-				 ->join('stocks s', 'a.id=s.book_id', 'left	')
+				 ->join('(select ab.book_id, count(*) as borrow from transactions ab where actual_return is null group by ab.book_id) as trx', 'a.id=trx.book_id', 'left')
 				 ->where('a.deleted_at IS NULL');
 
 		if(!empty($filter[1]['search']['value']))
