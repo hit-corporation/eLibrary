@@ -262,7 +262,7 @@
 								</div>
 								<div class="mv-item-infor">
 									<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title}</a></h6>
-									<a class="btn btn-xs btn-primary" href="<?=base_url('User/delete_favorite_book?id=')?>${value.id}">Delete Favorite</a>
+									<a class="btn btn-xs btn-primary" href="<?=base_url('book/return_book?id=')?>${value.id}">Kembalikan Buku</a>
 									<!-- <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p> -->
 								</div>`);
 						});
