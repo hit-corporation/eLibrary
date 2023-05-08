@@ -102,7 +102,6 @@
 									<th>ISBN</th>
 									<th>Stok</th>
 									<th>Tanggal Input</th>
-									<th>No Rak</th>
 									<th>Operation</th>
 								</tr>
 							</thead>
