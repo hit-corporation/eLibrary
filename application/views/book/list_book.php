@@ -239,6 +239,9 @@
 								<div class="mv-item-infor">
 									<h6><a href="${base_url}/home/book_detail?id=${value.id}">${value.title}</a></h6>
 									<!-- <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p> -->
+								</div>
+								<div class="hvr-add-to-favorite">
+									<a  href="<?=base_url('book/add_to_favorite?id=')?>${value.id}"> Favorite <i class="ion-heart"></i> </a>
 								</div>`);
 						});
 					}
