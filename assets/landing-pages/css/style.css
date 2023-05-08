@@ -8579,8 +8579,9 @@ label {
 
 .flex-wrap-movielist .movie-item-style-1:hover .hvr-add-to-favorite {
   opacity: 1;
-	top: 10%;
-  -moz-opacity: 5;
+	position: absolute;
+	top: 50px;
+  -moz-opacity: 5; 	
   -khtml-opacity: 5;
   -webkit-opacity: 5;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);
