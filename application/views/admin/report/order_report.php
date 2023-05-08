@@ -90,8 +90,6 @@
                                 <th>Jumlah Hari</th>
                                 <th>Batas Waktu Pengembalian</th>
                                 <th>Terlambat</th>
-                                <th>Denda</th>
-                                <th>Terbayar</th>
                                 <th>Tanggal Pengembalian</th>
                                 <th>Catatan</th>
                             </tr>

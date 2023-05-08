@@ -26,10 +26,6 @@ class Report_model extends CI_Model {
 			$this->db->where('date(r.loan_date) >=',  date('Y-m-d', strtotime($date_range[0].' 00:00:00')));
 			$this->db->where('date(r.loan_date) <=', date('Y-m-d', strtotime($date_range[1].' 00:00:00')));
 		}
-		// else{
-		// 	$this->db->where('date(r.loan_date) >=',  date('Y-m-d', time() - (60 * 60 * 24 * 30) ));
-		// 	$this->db->where('date(r.loan_date) <=', date('Y-m-d', time()));
-		// }
 
 		if(!empty($filter[3]['search']['value'])){
 			if($filter[3]['search']['value'] == 'belum'){
@@ -46,7 +42,6 @@ class Report_model extends CI_Model {
 		if(!empty($limit) && !is_null($offset))
 			$this->db->limit($limit, $offset);
 			
-        // ['Kode Transaksi', 'Nama Peminjam', 'Nama Buku', 'Tanggal Pinjam', 'Jumlah Hari', 'Batas Waktu Pengembalian', 'Tanggal Kembali', 'Terlambat', 'Denda', 'Terbayar']
 		$this->db->select('r.id, r.trans_code, r.member_name, r.book_code, r.book_title, r.loan_date, r.return_date,
 						   AGE(r.return_date::date, r.loan_date::date) AS loan_days, r.actual_return,
 						   r.late_days,r.fines_amount, r.fines_period, r.fines_total, r.fines_payment, r.notes', FALSE);

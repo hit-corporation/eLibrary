@@ -1,16 +1,19 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 
 
-class Book extends MY_Controller {
+class Book extends MY_Controller
+{
 
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
 		$this->load->model(['home_model', 'publisher_model', 'kategori_model', 'book_model', 'transaction_model']);
 	}
 
-	public function index(){
+	public function index()
+	{
 		$data['viewGroup'] = $_GET['viewGroup'];
 		$data['viewStyle'] = $_GET['viewStyle'];
 		$data['category_id'] = isset($_GET['category_id']) ? $_GET['category_id'] : null;
@@ -23,7 +26,8 @@ class Book extends MY_Controller {
 		$this->load->view('footer');
 	}
 
-	public function get_all(){
+	public function get_all()
+	{
 		$view_group 	= $_GET['view_group'];
 		$page 			= isset($_GET['page']) ? $_GET['page'] : 1;
 		$limit 			= isset($_GET['limit']) ? $_GET['limit'] : 3;
@@ -36,7 +40,7 @@ class Book extends MY_Controller {
 		$data['books'] 	= $this->home_model->get_books($view_group, $limit, $page, $filter, $sort_by);
 		$data['total_records'] = $this->home_model->get_total_books($view_group, $filter);
 		$data['total_pages'] = ceil($data['total_records'] / $limit);
-		
+
 		// create json header	
 		header('Content-Type: application/json');
 		echo json_encode($data);
@@ -47,14 +51,14 @@ class Book extends MY_Controller {
 	 *
 	 * @return void
 	 */
-	public function set_book(): void {
+	public function set_book(): void
+	{
 		$id = $this->input->get('id');
 		// only active member that can read the book
-		if(!isset($_SESSION['user']) && empty($_SESSION['user']['user_name']))
-		{
+		if (!isset($_SESSION['user']) && empty($_SESSION['user']['user_name'])) {
 			$data['heading'] = 'PERINGATAN';
-			$data['message'] = '<p>Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!'.
-								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+			$data['message'] = '<p>Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!' .
+				'<br/> <a href="' . $_SERVER['HTTP_REFERER'] . '">Kembali</a></p>';
 			$this->load->view('errors/html/error_general', $data);
 			return;
 		}
@@ -62,12 +66,12 @@ class Book extends MY_Controller {
 		$transcode = strtoupper(bin2hex(random_bytes(8)));
 		// set cookie for reading time limit and idle time limit
 		$cookie_option = [
-			'expires'	=> strtotime('+'.$this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit']),
+			'expires'	=> strtotime('+' . $this->settings['limit_idle_value'] . ' ' . $this->settings['limit_idle_unit']),
 			'path'		=> '/book',
 			'samesite'	=> 'Lax'
 		];
 
-		if(!isset($_COOKIE['read_book']))
+		if (!isset($_COOKIE['read_book']))
 			setcookie('read_book', base64_encode(json_encode(['key' => $transcode, 'expired' => date('Y-m-d H:i:s', $cookie_option['expires'])])), $cookie_option);
 
 		// get latest transaction book
@@ -86,18 +90,16 @@ class Book extends MY_Controller {
 		$this->db->insert('read_log', $insert);
 
 		// jika end_time dari transaksi sebelumnya lebih besar dari waktu sekarang, maka update actual_return menjadi tanggal sekarang
-		if(isset($latest_transaction['end_time']) && strtotime($latest_transaction['end_time']) < strtotime(date('Y-m-d H:i:s.u')))
-		{
+		if (isset($latest_transaction['end_time']) && strtotime($latest_transaction['end_time']) < strtotime(date('Y-m-d H:i:s.u'))) {
 			// $this->db->update('transactions', ['actual_return' => date('Y-m-d H:i:s.u')], ['id' => $latest_transaction['id']]);
 			$this->db->set('actual_return', date('Y-m-d H:i:s.u'));
 			$this->db->update('transactions');
 			$this->db->where('book_id', $id);
 			$this->db->where('member_id', $_SESSION['user']['id']);
 			$this->db->where('actual_return', NULL);
-			
 		}
-		
-		redirect('book/read_book?id='.$id);
+
+		redirect('book/read_book?id=' . $id);
 	}
 
 	/**
@@ -105,7 +107,8 @@ class Book extends MY_Controller {
 	 *
 	 * @return void
 	 */
-	public function close_book(): void {
+	public function close_book(): void
+	{
 		$id = $this->input->get('id');
 		$lastPage = $this->input->get('last-page');
 		$cookie = json_decode(base64_decode($_COOKIE['read_book']), TRUE);
@@ -120,7 +123,7 @@ class Book extends MY_Controller {
 		$this->db->update('read_log', $update, ['trans_code' => trim($cookie['key'])]);
 
 		setcookie('read_book', NULL, time() - 1000);
-		redirect('home/book_detail?id='.$id);
+		redirect('home/book_detail?id=' . $id);
 	}
 
 	/**
@@ -128,13 +131,13 @@ class Book extends MY_Controller {
 	 *
 	 * @return void
 	 */
-	public function read_book(): void {
-		$id = $this->input->get('id');	
-		
-		if(!isset($_COOKIE['read_book']))
-		{
+	public function read_book(): void
+	{
+		$id = $this->input->get('id');
+
+		if (!isset($_COOKIE['read_book'])) {
 			echo '<script>';
-			echo 'window.location.href="'.base_url('home/book_detail?id='.$id).'"';
+			echo 'window.location.href="' . base_url('home/book_detail?id=' . $id) . '"';
 			echo '</script>';
 			return;
 		}
@@ -144,7 +147,8 @@ class Book extends MY_Controller {
 		$this->load->view('book/read', $data);
 	}
 
-	public function get_favorite_books(){
+	public function get_favorite_books()
+	{
 		$page 			= isset($_GET['page']) ? $_GET['page'] : 1;
 		$limit 			= isset($_GET['limit']) ? $_GET['limit'] : 3;
 		$sort_by = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'id';
@@ -154,7 +158,7 @@ class Book extends MY_Controller {
 		$data['books'] 	= $this->home_model->get_favorite_books($limit, $page, $sort_by);
 		$data['total_records'] = $this->home_model->get_total_favorite_books();
 		$data['total_pages'] = ceil($data['total_records'] / $limit);
-		
+
 		// create json header	
 		header('Content-Type: application/json');
 		echo json_encode($data);
@@ -166,28 +170,27 @@ class Book extends MY_Controller {
 	 * @return void
 	 */
 
-	public function borrow_book(): void {
+	public function borrow_book(): void
+	{
 		$id = $this->input->get('id');
 
 		// get book data
 		$book = $this->book_model->get_one($id);
 
 		// check if book is available
-		if($book['qty'] <= 0)
-		{
+		if ($book['qty'] <= 0) {
 			$data['heading'] = 'PERINGATAN';
-			$data['message'] = '<p>Buku yang anda pilih tidak tersedia. Silahkan pilih buku lain !!!'.
-								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+			$data['message'] = '<p>Buku yang anda pilih tidak tersedia. Silahkan pilih buku lain !!!' .
+				'<br/> <a href="' . $_SERVER['HTTP_REFERER'] . '">Kembali</a></p>';
 			$this->load->view('errors/html/error_general', $data);
 			return;
 		}
 
 		// check if member not login
-		if(!isset($_SESSION['user']) && empty($_SESSION['user']['user_name']))
-		{
+		if (!isset($_SESSION['user']) && empty($_SESSION['user']['user_name'])) {
 			$data['heading'] = 'PERINGATAN';
-			$data['message'] = '<p>Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!'.
-								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+			$data['message'] = '<p>Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!' .
+				'<br/> <a href="' . $_SERVER['HTTP_REFERER'] . '">Kembali</a></p>';
 			$this->load->view('errors/html/error_general', $data);
 			return;
 		}
@@ -206,28 +209,25 @@ class Book extends MY_Controller {
 		// check if member has borrowed the same book
 		$check = $this->transaction_model->check_borrowed($id, $_SESSION['user']['id']);
 
-		if(isset($check['id']) && !empty($check['id']))
-		{
+		if (isset($check['id']) && !empty($check['id'])) {
 			$data['heading'] = 'PERINGATAN';
-			$data['message'] = '<p>Anda telah meminjam buku ini. Silahkan kembalikan buku yang anda pinjam !!!'.
-								'<br/> <a href="'.$_SERVER['HTTP_REFERER'].'">Kembali</a></p>';
+			$data['message'] = '<p>Anda telah meminjam buku ini. Silahkan kembalikan buku yang anda pinjam !!!' .
+				'<br/> <a href="' . $_SERVER['HTTP_REFERER'] . '">Kembali</a></p>';
 			$this->load->view('errors/html/error_general', $data);
 			return;
 		}
-
-
 
 		// set transaction code
 		$transcode = strtoupper(bin2hex(random_bytes(8)));
 
 		// set cookie for reading time limit and idle time limit
 		$cookie_option = [
-			'expires'	=> strtotime('+'.$this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit']),
+			'expires'	=> strtotime('+' . $this->settings['limit_idle_value'] . ' ' . $this->settings['limit_idle_unit']),
 			'path'		=> '/book',
 			'samesite'	=> 'Lax'
 		];
 
-		if(!isset($_COOKIE['read_book']))
+		if (!isset($_COOKIE['read_book']))
 			setcookie('read_book', base64_encode(json_encode(['key' => $transcode, 'expired' => date('Y-m-d H:i:s', $cookie_option['expires'])])), $cookie_option);
 
 		$insert = [
@@ -235,9 +235,9 @@ class Book extends MY_Controller {
 			'start_time' 	=> date('Y-m-d H:i:s.u'),
 			'member_id' 	=> $_SESSION['user']['id'],
 			'book_id'		=> $id,
-			'config_idle'	=> $this->settings['limit_idle_value'].' '.$this->settings['limit_idle_unit'],
+			'config_idle'	=> $this->settings['limit_idle_value'] . ' ' . $this->settings['limit_idle_unit'],
 			'config_borrow_limit' => $this->settings['max_allowed'],
-			'end_time'		=> date('Y-m-d H:i:s.u', strtotime('+'.$this->settings['due_date_value'].' '.$this->settings['due_date_unit'])),
+			'end_time'		=> date('Y-m-d H:i:s.u', strtotime('+' . $this->settings['due_date_value'] . ' ' . $this->settings['due_date_unit'])),
 		];
 
 		// insert transaction
@@ -246,17 +246,34 @@ class Book extends MY_Controller {
 		// update book qty
 		$this->db->update('books', ['qty' => $book['qty'] - 1], ['id' => $id]);
 
-		redirect('book/read_book?id='.$id);
+		
+		$insert_report = [
+			'trans_code' 	=> $transcode,
+			'member_name' 	=> $_SESSION['user']['full_name'],
+			'book_code'		=> $book['book_code'],
+			'book_title'	=> $book['title'],
+			'loan_date'		=> date('Y-m-d H:i:s.u'),
+			'return_date'	=> date('Y-m-d H:i:s.u', strtotime('+' . $this->settings['due_date_value'] . ' ' . $this->settings['due_date_unit'])),
+		];
+
+		// insert report
+		$this->db->insert('reports', $insert_report);
+
+		redirect('book/read_book?id=' . $id);
 	}
 
 	/**
-		* Return a Book
-		* 
-		* 
-		*/
+	 * Return a Book
+	 * 
+	 * 
+	 */
 
-	public function return_book() {
+	public function return_book()
+	{
 		$id = $this->input->get('id');
+
+		// get book
+		$book = $this->book_model->get_one($id);
 
 		// update actual_return
 		$this->db->update('transactions', ['actual_return' => date('Y-m-d H:i:s.u')], ['book_id' => $id, 'member_id' => $_SESSION['user']['id'], 'actual_return' => null]);
@@ -266,8 +283,29 @@ class Book extends MY_Controller {
 		$this->db->set('qty', 'qty+1', FALSE);
 		$this->db->update('books');
 
+		// get report
+		$this->db->where('book_code', $book['book_code']);
+		$this->db->where('actual_return', null);
+		$report = $this->db->get('reports')->row_array();
+
+		$late_days = time() - strtotime($report['return_date']);
+		$late_days = floor($late_days / (60 * 60 * 24));
+
+		if($late_days < 0) 
+			$late_days = 0;
+
+		// update report
+		$data_update = [
+			'actual_return' => date('Y-m-d H:i:s.u'),
+			'late_days'		=> $late_days,
+		];
+
+		$this->db->where('book_code', $book['book_code']);
+		$this->db->where('actual_return', null);
+		$this->db->update('reports', $data_update);
+
 		// return to book detail
-		redirect('home/book_detail?id='.$id);
+		redirect('home/book_detail?id=' . $id);
 	}
 
 	/**
@@ -275,12 +313,13 @@ class Book extends MY_Controller {
 	 *
 	 */
 
-	public function add_to_favorite(){
+	public function add_to_favorite()
+	{
 		$id = $this->input->get('id');
 		$member_id = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 0;
 
 		// check if member not login
-		if(!isset($_SESSION['user']) && empty($_SESSION['user']['user_name'])){
+		if (!isset($_SESSION['user']) && empty($_SESSION['user']['user_name'])) {
 			// create flashdata
 			$this->session->set_flashdata('error', 'Halaman hanya di peruntukan untuk anggota aktif. Silahkan login terlebih dahulu !!!');
 			redirect('home');
@@ -289,21 +328,20 @@ class Book extends MY_Controller {
 		// check favorite book
 		$check = $this->db->get_where('favorite_books', ['book_id' => $id, 'member_id' => $member_id])->row_array();
 
-		if(isset($check['id']) && !empty($check['id'])){
+		if (isset($check['id']) && !empty($check['id'])) {
 			// create flashdata
 			$this->session->set_flashdata('error', 'Buku telah ada di daftar favorit !!!');
 			redirect('home');
 		}
 
 		$insert = $this->db->insert('favorite_books', ['book_id' => $id, 'member_id' => $member_id]);
-		if($insert){
+		if ($insert) {
 			$this->session->set_flashdata('success', 'Buku berhasil ditambahkan ke daftar favorit');
-			redirect('home/book_detail?id='.$id);
-		}else{
+			redirect('home/book_detail?id=' . $id);
+		} else {
 			$this->session->set_flashdata('error', 'Terjadi kesalahan saat menambahkan buku ke daftar favorit !!!');
 			redirect('home');
 		}
-
 	}
 
 	/**
@@ -311,21 +349,19 @@ class Book extends MY_Controller {
 	 *
 	 */
 
-	public function remove_from_favorite(){
+	public function remove_from_favorite()
+	{
 		$id = $this->input->get('id');
 		$member_id = $_SESSION['user']['id'];
 
 		$delete = $this->db->delete('favorite_books', ['book_id' => $id, 'member_id' => $member_id]);
-		if($delete){
+		if ($delete) {
 			$this->session->set_flashdata('success', 'Buku berhasil dihapus dari daftar favorit');
-		}else{
+		} else {
 			$this->session->set_flashdata('error', 'Terjadi kesalahan saat menghapus buku dari daftar favorit !!!');
 		}
 
 		// return to book detail
-		redirect('home/book_detail?id='.$id);
-
+		redirect('home/book_detail?id=' . $id);
 	}
-
-
 }

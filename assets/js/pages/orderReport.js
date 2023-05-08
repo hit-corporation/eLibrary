@@ -97,60 +97,6 @@ const getAll = async () => {
 
             },
 			{
-				// DENDA
-				data: 'fines_total',
-				render(data, type, row, _meta)
-				{
-					// const date1 = new Date(row.return_date);
-					// const date2 = new Date();
-					
-					// if(date2 > date1 && row.updated_at == null)
-					// {
-					// 	const diffTime = Math.abs(date2 - date1);
-					// 	const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-					// 	const denda = diffDays * 500;
-
-					// 	if(denda > 10000){
-					// 		return 'Rp. 10.000';
-					// 	} else {
-					// 		return 'Rp. ' + denda.toLocaleString('id-ID');
-					// 	}
-
-					// } else if (date2 > date1 && row.updated_at != null) {
-					// 	const date3 = new Date(row.updated_at);
-					// 	const diffTime = Math.abs(date3 - date1);
-					// 	const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-					// 	const denda = diffDays * 500;
-
-					// 	if(denda > 10000){
-					// 		return 'Rp. 10.000';
-					// 	} else {
-					// 		return 'Rp. ' + denda.toLocaleString('id-ID');
-					// 	}
-
-					// } else {
-					// 	return 'Rp. 0';
-					// }
-					if(data)
-						return 'Rp ' + data.toLocaleString('id-ID');
-					return 0;
-
-
-				}
-			},
-			{
-				// paid amount
-				data: 'fines_payment',
-				render(data, type, row, _meta)
-				{
-					if (data == null) {
-						return 'Rp. 0';
-					} else {
-						return 'Rp. ' + data.toLocaleString('id-ID');
-					}
-				}
-			},
-			{
 				// tanggal pengembalian
 				data: 'actual_return',
 				render(data, type, row, _meta)
