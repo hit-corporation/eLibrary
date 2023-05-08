@@ -45,10 +45,6 @@
 								</div>
 
 								<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-									<input type="text" class="form-control form-control-sm" name="s_rack_number" placeholder="Nomor Rak">
-								</div>
-
-								<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
 									<input type="text" class="form-control form-control-sm" name="s_book_name" placeholder="Nama Buku">
 								</div>
 
@@ -99,7 +95,6 @@
                                 <th>Year</th>
                                 <th>Kategori</th>
                                 <th>Tanggal Input</th>
-                                <th>No Rak</th>
                             </tr>
                         </thead>
                     </table>
