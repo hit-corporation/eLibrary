@@ -190,12 +190,6 @@ const getBooks = async () => {
                     visible: false
 				},
 				{
-					data: 'rack_no',
-					className: 'align-middle',
-					width: '55px',
-                    visible: false
-				},
-				{
 					data: null,
 					className: 'align-middle',
 					render(data, type, row, _meta)
