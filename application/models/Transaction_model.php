@@ -166,13 +166,25 @@ class Transaction_model extends CI_Model {
 		return $res->num_rows();
 	}
 
-	public function get_by_category(string $type, string $value): array {
+	//=====================================================================================================
+
+	/**
+	 * Get members read By Category 
+	 *
+	 * @param string $type
+	 * @param DateTime $value
+	 * @return array
+	 */
+	public function get_by_category(string $type, DateTime $value): array {
 		$res = [];
 
 		switch($type)
 		{
 			case 'daily':
 				$res = $this->get_by_category_daily($value);
+				break;
+			case 'monthly':
+				$res = $this->get_by_category_monthly($value);
 				break;
 		}
 
@@ -182,17 +194,86 @@ class Transaction_model extends CI_Model {
 	/**
 	 * Get Member By Book Categories Daily 
 	 *
-	 * @param string $value
+	 * @param DateTime $value
 	 * @return array
 	 */
-	private function get_by_category_daily(string $value): array {
-		$query = "SELECT COUNT(a.member_id), b.category_id, c.category_name
+	private function get_by_category_daily(DateTime $value): array {
+
+		$query = "SELECT COUNT(a.member_id) as \"count\", b.category_id, c.category_name
 				  FROM read_log a, books b, categories c, members d 
 				  WHERE a.book_id=b.id AND b.category_id=c.id AND a.member_id=d.id AND a.start_time::date=?
+				  GROUP BY b.category_id, c.category_name
+				  ORDER BY \"count\" DESC LIMIT 5";
+		$res = $this->db->query($query, [$value->format('Y-m-d')]);
+		return $res->result_array();
+	}
+
+	/**
+	 * Get members read by categories monthly
+	 *
+	 * @param DateTime $value
+	 * @return array
+	 */
+	private function get_by_category_monthly(DateTime $value): array {
+		$query = "SELECT COUNT(a.member_id), b.category_id, c.category_name
+				  FROM read_log a, books b, categories c, members d 
+				  WHERE a.book_id=b.id AND b.category_id=c.id AND a.member_id=d.id AND date_part('month', a.start_time)=?
 				  GROUP BY b.category_id, c.category_name";
 		$res = $this->db->query($query, [$value]);
 		return $res->result_array();
 	}
 
 
+	//===================================================================================================================
+
+	/**
+	 * Get all read members by grade
+	 *
+	 * @param string $type
+	 * @param DateTime $value
+	 * @return array
+	 */
+	public function get_by_grade(string $type, DateTime $value): array {
+		$res = [];
+
+		switch($type)
+		{
+			case 'daily':
+				$res = $this->get_by_grade_daily($value);
+				break;
+		}
+
+		return $res;
+	}
+
+	/**
+	 * Get all read members by grade daily
+	 *
+	 * @param DateTime $value
+	 * @return array
+	 */
+	private function get_by_grade_daily(DateTime $value): array {
+		$query = "SELECT COUNT(a.member_id) as \"count\", b.kelas
+				  FROM read_log a, members b 
+				  WHERE a.member_id=b.id AND a.start_time::date=?
+				  GROUP BY b.kelas
+				  ORDER BY \"count\" DESC
+				  LIMIT 5";
+		$res = $this->db->query($query, [$value->format('Y-m-d')]);
+		return $res->result_array();
+	}
+
+	/**
+	 * Count average time reading by date
+	 *
+	 * @return array
+	 */
+	public function get_avg_read_daily(): array {
+		$query = "SELECT AVG(a.end_time - a.start_time) as avg_time, b.tanggal FROM read_log a
+				  JOIN (SELECT m.date as tanggal FROM generate_series('2023-01-01', CURRENT_DATE) m) b ON a.start_time::date=m.tanggal
+				  GROUP BY b.tanggal";
+
+		$res = $this->db->query($query);
+		$res->result_array();
+	}
 }
