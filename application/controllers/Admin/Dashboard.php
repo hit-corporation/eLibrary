@@ -81,7 +81,12 @@ class Dashboard extends Admin_Controller {
 		echo $this->template->render('/dashboard/dashboard_2', $data);
 	}
 
-	public function get_by_categories() {
+	/**
+	 * Get member reader by categories
+	 *
+	 * @return void
+	 */
+	public function get_by_categories(): void {
 		$type = $this->input->get('type') ?? 'daily';
 		$time = new DateTime($this->input->get('value')) ?? new DateTime('now');
 		$data = $this->transaction_model->get_by_category($type, $time);
@@ -89,7 +94,12 @@ class Dashboard extends Admin_Controller {
 		echo json_encode(['data' => $data], JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
 	}
 
-	public function get_by_grades() {
+	/**
+	 * Undocumented function
+	 *
+	 * @return void
+	 */
+	public function get_by_grades(): void {
 		$type = $this->input->get('type') ?? 'daily';
 		$time = new DateTime($this->input->get('value')) ?? new DateTime('now');
 		$data = $this->transaction_model->get_by_grade($type, $time);
