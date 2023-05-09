@@ -264,16 +264,21 @@ class Transaction_model extends CI_Model {
 	}
 
 	/**
-	 * Count average time reading by date
+	 * Count average member's time reading 
 	 *
 	 * @return array
 	 */
-	public function get_avg_read_daily(): array {
-		$query = "SELECT AVG(a.end_time - a.start_time) as avg_time, b.tanggal FROM read_log a
-				  JOIN (SELECT m.date as tanggal FROM generate_series('2023-01-01', CURRENT_DATE) m) b ON a.start_time::date=m.tanggal
-				  GROUP BY b.tanggal";
+	public function get_avg_read_member(int $limit = 5): array {
+		$query = "SELECT AVG(a.summary::interval) as avg_duration, a.member_id, b.member_name 
+				  FROM (SELECT SUM(m.end_time - m.start_time) as summary, m.start_time::date as start_date, m.member_id 
+				  		FROM read_log m 
+						GROUP BY m.start_time::date, m.member_id) a
+				  JOIN members b ON a.member_id=b.id
+				  GROUP BY a.member_id, b.member_name
+				  ORDER BY avg_duration DESC
+				  LIMIT";
 
-		$res = $this->db->query($query);
+		$res = $this->db->query($query, [$limit]);
 		$res->result_array();
 	}
 }
