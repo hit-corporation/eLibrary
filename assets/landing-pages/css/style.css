@@ -4082,6 +4082,7 @@ ul {
   flex-wrap: wrap;
 }
 .movie-items .movie-item {
+	background: #000;
   position: relative;
   margin-right: 30px;
   -webkit-border-radius: 5px;
@@ -4094,6 +4095,11 @@ ul {
     margin-right: 0px;
   }
 }
+
+.slide-it.slick-slide{
+	background: #000;
+}
+
 .movie-items .movie-item .mv-img {
   position: relative;
 }
