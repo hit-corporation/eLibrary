@@ -210,19 +210,19 @@
 <?php $this->start('js') ?>
 
 	<script src="./assets/js/dashboard/percentageBookBorrow.js"></script>
-	<script src="./assets/js/dashboard/topBookBorrow.js"></script>
+	<script src="./assets/js/dashboard/countMembers.js"></script>
 	<script src="./assets/js/dashboard/topTenMemberBorrow.js"></script>
 
 	<script>
-		percentage_book_borrow(<?= json_encode($percentage_book_borrow) ?>);
+		//percentage_book_borrow(<?= json_encode($percentage_book_borrow) ?>);
 	
 
 
 
 		(async () => {
 			const category = await getDataCategory('daily');
-
-			console.log(category);
+			await getDataGrades('daily');
+			
 		})();
 		
 
@@ -232,9 +232,9 @@
 		// // set temout for change font
 		setTimeout(() => {
 			// change font
-			let SvgjsText1005 = document.querySelector('#SvgjsText1005');
-			SvgjsText1005.style.fontSize = '12px';
-			SvgjsText1005.style.fontFamily = '"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"'
+			//let SvgjsText1005 = document.querySelector('#SvgjsText1005');
+			//SvgjsText1005.style.fontSize = '12px';
+			//SvgjsText1005.style.fontFamily = '"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"'
 
 		}, 500);
 	</script>

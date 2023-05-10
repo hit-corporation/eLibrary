@@ -26,14 +26,6 @@ class Dashboard extends Admin_Controller {
 		$this->render('index', $data);
 	}
 
-	public function get_by_category(){
-		$type = $this->input->get('type');
-
-		$data = $this->transaction_model->get_by_category('daily', '2023-05-05');
-
-		echo json_encode($data);
-	}
-
 	public function dashboard2(){
 		$data['fines_this_month'] = $this->dashboard_model->fines_this_month();
 		$data['fines_last_month'] = $this->dashboard_model->fines_last_month();
@@ -89,10 +81,28 @@ class Dashboard extends Admin_Controller {
 		echo $this->template->render('/dashboard/dashboard_2', $data);
 	}
 
-	public function member_by_categories() {
-		$type = $this->input->get('type');
-		$time = $this->input->get('value');
-		$data = $this->transaction_model->get_by_category();
+	/**
+	 * Get member reader by categories
+	 *
+	 * @return void
+	 */
+	public function get_by_categories(): void {
+		$type = $this->input->get('type') ?? 'daily';
+		$time = new DateTime($this->input->get('value')) ?? new DateTime('now');
+		$data = $this->transaction_model->get_by_category($type, $time);
+
+		echo json_encode(['data' => $data], JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @return void
+	 */
+	public function get_by_grades(): void {
+		$type = $this->input->get('type') ?? 'daily';
+		$time = new DateTime($this->input->get('value')) ?? new DateTime('now');
+		$data = $this->transaction_model->get_by_grade($type, $time);
 
 		echo json_encode(['data' => $data], JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
 	}

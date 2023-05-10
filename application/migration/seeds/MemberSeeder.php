@@ -18,7 +18,7 @@ class MemberSeeder extends AbstractSeed
 
         $faker = Faker::create('id_ID');
 
-        for($i=0;$i<=10;$i++)
+        for($i=0;$i<=100;$i++)
         {
             $email = $faker->unique()->email();
 
