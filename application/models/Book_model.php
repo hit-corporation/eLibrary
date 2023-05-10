@@ -102,7 +102,8 @@ class Book_model extends CI_Model {
 	 */
 	public function get_all_borrow(): array
 	{
-		$this->db->select('b.*');
+		$this->db->distinct();
+		$this->db->select('tb.book_id');
 		$this->db->from('transactions tb');
 		$this->db->join('books b', 'tb.book_id=b.id');
 		$this->db->where('tb.actual_return IS NULL');

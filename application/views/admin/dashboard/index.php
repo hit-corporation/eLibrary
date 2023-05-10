@@ -79,8 +79,8 @@
 		<!-- Page Heading -->
 		<div class="d-sm-flex align-items-center mb-4">
 			<div class="btn-group" role="group" aria-label="Basic example">
-				<a href="dashboard" class="btn bg-info text-light">Dashboard 1</a>
-				<a href="dashboard/dashboard2" class="btn btn-secondary">Dashboard 2</a>
+				<a href="admin/dashboard" class="btn bg-info text-light">Dashboard 1</a>
+				<a href="admin/dashboard/dashboard2" class="btn btn-secondary">Dashboard 2</a>
 			</div>
 		</div>
 

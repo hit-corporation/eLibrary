@@ -294,9 +294,9 @@ class Transaction_model extends CI_Model {
 				  JOIN members b ON a.member_id=b.id
 				  GROUP BY a.member_id, b.member_name
 				  ORDER BY avg_duration DESC
-				  LIMIT";
+				  LIMIT {$limit}";
 
-		$res = $this->db->query($query, [$limit]);
+		$res = $this->db->query($query);
 		$res->result_array();
 	}
 }

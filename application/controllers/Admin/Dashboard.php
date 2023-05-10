@@ -78,7 +78,7 @@ class Dashboard extends Admin_Controller {
 		$data['late_return'] = $late_return;
 
 		// MENGGUNAKAN TEMPLATE ENGINE PLATES
-		echo $this->template->render('/dashboard/dashboard_2', $data);
+		$this->render('/admin/dashboard/dashboard_2', $data);
 	}
 
 	/**

@@ -64,9 +64,7 @@
 <!-- SECTION CONTENT -->
 <?php $this->start('contents') ?>
 
-	<!-- highchart  -->
-	<script src="<?=base_url('assets/js/dashboard/highcharts/highcharts.js')?>"></script>
-	<script src="<?=base_url('assets/js/dashboard/highcharts/accessibility.js')?>"></script>
+	
 
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
@@ -74,8 +72,8 @@
 		<!-- Page Heading -->
 		<div class="d-sm-flex align-items-center mb-4">
 			<div class="btn-group" role="group" aria-label="Basic example">
-				<a href="dashboard" class="btn btn-secondary">Dashboard 1</a>
-				<a href="dashboard/dashboard2" class="btn bg-info text-light">Dashboard 2</a>
+				<a href="admin/dashboard" class="btn btn-secondary">Dashboard 1</a>
+				<a href="admin/dashboard/dashboard2" class="btn bg-info text-light">Dashboard 2</a>
 			</div>
 		</div>
 
@@ -188,6 +186,9 @@
 
 <!-- SECTION JS -->
 <?php $this->start('js') ?>
+	<!-- highchart  -->
+	<script src="<?=base_url('assets/js/dashboard/highcharts/highcharts.js')?>"></script>
+	<script src="<?=base_url('assets/js/dashboard/highcharts/accessibility.js')?>"></script>
 
 	<!-- CHART PEMINJAMAN BUKU HARIAN -->
 	<script async>
