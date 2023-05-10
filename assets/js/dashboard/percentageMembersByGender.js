@@ -1,6 +1,6 @@
 // Data retrieved from https://netmarketshare.com
-const percentage_book_borrow = (percentage_book_borrow) => {
-	Highcharts.chart('container', {
+const chartMemberByGender = (percentage_book_borrow) => {
+	Highcharts.chart('pie-gender', {
 		chart: {
 			plotBackgroundColor: null,
 			plotBorderWidth: null,
@@ -9,7 +9,7 @@ const percentage_book_borrow = (percentage_book_borrow) => {
 		},
 		colors: ['#34c38f', '#f46a6a', '#d4526e', '#13d8aa', '#A5978B', '#2b908f', '#f9a3a4', '#90ee7e', '#f48024', '#69d2e7'],
 		title: {
-			text: '<span id="percentageSiswaTitle">Persentase Siswa Meminjam Buku</span>',
+			text: '<span id="percentageSiswaTitle">Persentase Jenis Kelamin Anggota</span>',
 			align: 'left'
 		},
 		tooltip: {
@@ -35,13 +35,26 @@ const percentage_book_borrow = (percentage_book_borrow) => {
 			colorByPoint: true,
 			data: [
 				{
-				name: 'Pernah Meminjam | ' + percentage_book_borrow['has_borrow'],
-				y: percentage_book_borrow['has_borrow'],
+				name: 'Laki - laki',
+				y: parseFloat(percentage_book_borrow['male']),
 				}, {
-				name: 'Belum Pernah Meminjam | ' + percentage_book_borrow['never_borrow'],
-				y: percentage_book_borrow['never_borrow']
+				name: 'Perempuan',
+				y: parseFloat(percentage_book_borrow['female'])
 				}
 			]
 		}]
 	});
+}
+
+const setPieGenderChart = async () => {
+
+	try {
+		
+		const f = await fetch(BASE_URL + 'admin/dashboard/get_member_by_gender');
+		const j = await f.json();
+
+		chartMemberByGender(j);
+	} catch (error) {
+		
+	}
 }

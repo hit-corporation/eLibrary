@@ -214,12 +214,14 @@ class Transaction_model extends CI_Model {
 	 * @param DateTime $value
 	 * @return array
 	 */
-	private function get_by_category_monthly(DateTime $value): array {
-		$query = "SELECT COUNT(a.member_id), b.category_id, c.category_name
+	private function get_by_category_monthly(DateTime $value, int $limit = 5): array {
+		$query = "SELECT COUNT(a.member_id) \"count\", b.category_id, c.category_name
 				  FROM read_log a, books b, categories c, members d 
 				  WHERE a.book_id=b.id AND b.category_id=c.id AND a.member_id=d.id AND date_part('month', a.start_time)=?
-				  GROUP BY b.category_id, c.category_name";
-		$res = $this->db->query($query, [$value]);
+				  GROUP BY b.category_id, c.category_name
+				  ORDER BY \"count\" DESC
+				  LIMIT {$limit}";
+		$res = $this->db->query($query, [$value->format('n')]);
 		return $res->result_array();
 	}
 
@@ -240,6 +242,9 @@ class Transaction_model extends CI_Model {
 		{
 			case 'daily':
 				$res = $this->get_by_grade_daily($value);
+				break;
+			case 'monthly':
+				$res = $this->get_by_grade_monthly($value);
 				break;
 		}
 
@@ -262,6 +267,19 @@ class Transaction_model extends CI_Model {
 		$res = $this->db->query($query, [$value->format('Y-m-d')]);
 		return $res->result_array();
 	}
+
+	private function get_by_grade_monthly(DateTime $value): array {
+		$query = "SELECT COUNT(a.member_id) as \"count\", b.kelas
+				  FROM read_log a, members b 
+				  WHERE a.member_id=b.id AND date_part('month', a.start_time)=?
+				  GROUP BY b.kelas
+				  ORDER BY \"count\" DESC
+				  LIMIT 5";
+		$res = $this->db->query($query, [$value->format('n')]);
+		return $res->result_array();
+	}
+
+	//====================================================================================================
 
 	/**
 	 * Count average member's time reading 

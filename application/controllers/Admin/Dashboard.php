@@ -87,7 +87,7 @@ class Dashboard extends Admin_Controller {
 	 * @return void
 	 */
 	public function get_by_categories(): void {
-		$type = $this->input->get('type') ?? 'daily';
+		$type = $this->input->get('type') ?? 'monthly';
 		$time = new DateTime($this->input->get('value')) ?? new DateTime('now');
 		$data = $this->transaction_model->get_by_category($type, $time);
 
@@ -95,15 +95,30 @@ class Dashboard extends Admin_Controller {
 	}
 
 	/**
-	 * Undocumented function
+	 * get reader by grades
 	 *
 	 * @return void
 	 */
 	public function get_by_grades(): void {
-		$type = $this->input->get('type') ?? 'daily';
+		$type = $this->input->get('type') ?? 'monthly';
 		$time = new DateTime($this->input->get('value')) ?? new DateTime('now');
 		$data = $this->transaction_model->get_by_grade($type, $time);
 
 		echo json_encode(['data' => $data], JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
+	}
+
+	/**
+	 * Get all members classified by sex
+	 *
+	 * @return void
+	 */
+	public function get_member_by_gender(): void {
+		$data = $this->member_model->get_by_gender();
+		$total = $this->db->count_all_results('members');
+
+		$male = number_format((count($data['l']) / $total) * 100, 2);
+		$female = number_format((count($data['p']) / $total) * 100, 2);
+
+		echo json_encode(['male' => $male, 'female' => $female], JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
 	}
 }

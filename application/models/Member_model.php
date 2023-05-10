@@ -165,4 +165,23 @@ class Member_model extends CI_Model
 		$this->db->delete('favorite_books');
 		return true;
 	}
+
+	/**
+	 * Classify members by gender
+	 *
+	 * @return array|null
+	 */
+	public function get_by_gender(): ?array {
+		$members = $this->get_all();
+		$ret = [];
+		// reduce callback
+		function setByGender($curr, $val) {
+			$curr[$val['jenis_kelamin']][] = $val;
+			return $curr;
+		} 
+
+		$ret = array_reduce($members, 'setByGender', []);
+
+		return $ret;
+	}
 }

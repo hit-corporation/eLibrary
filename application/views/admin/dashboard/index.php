@@ -187,7 +187,7 @@
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-2 mt-3">
 				<div class="container border rounded-lg shadow mx-0">
 					<figure class="highcharts-figure">
-						<div id="top-ten-member"></div>
+						<div id="pie-gender"></div>
 					</figure>
 				</div>
 			</div>
@@ -209,20 +209,16 @@
 <!-- SECTION JS -->
 <?php $this->start('js') ?>
 
-	<script src="./assets/js/dashboard/percentageBookBorrow.js"></script>
+	<script src="./assets/js/dashboard/percentageMembersByGender.js"></script>
 	<script src="./assets/js/dashboard/countMembers.js"></script>
 	<script src="./assets/js/dashboard/topTenMemberBorrow.js"></script>
 
 	<script>
-		//percentage_book_borrow(<?= json_encode($percentage_book_borrow) ?>);
-	
-
-
 
 		(async () => {
 			const category = await getDataCategory('daily');
 			await getDataGrades('daily');
-			
+			await setPieGenderChart();
 		})();
 		
 
@@ -238,20 +234,6 @@
 
 		}, 500);
 	</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	<script>
