@@ -170,12 +170,8 @@
 <script src="<?=base_url('assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js')?>"></script>
 
 <script>
-
-	<?php
-		// var_dump($_SESSION);
-	?>
-
-	<?php if(!empty($_SESSION['error']) && $_SESSION['error']['success'] == false) : ?>
+	// alert message login
+	<?php if(!empty($_SESSION['error']) && !empty($_SESSION['error']['success']) && $_SESSION['error']['success'] == false) : ?>
 		Swal.fire({
 			icon: 'error',
 			title: '<h4 class="text-danger"></h4>',
@@ -192,4 +188,5 @@
 			timer: 5000
 		});
 	<?php endif; ?>
+	
 </script>
