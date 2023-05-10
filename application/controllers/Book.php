@@ -330,7 +330,9 @@ class Book extends MY_Controller
 
 		if (isset($check['id']) && !empty($check['id'])) {
 			// create flashdata
-			$this->session->set_flashdata('error', 'Buku telah ada di daftar favorit !!!');
+			$message = ['success' => true, 'message' => 'Buku sudah ada di daftar favorit !!!'];
+
+			$this->session->set_flashdata('success', $message);
 			redirect('home');
 		}
 
