@@ -132,11 +132,7 @@
 			const series1 = [...await getAveragePerson()].map(x => {
 				var hours = x.avg_duration.split(':');
 				var duration = parseFloat(hours[0] + '.' + hours[1]);
-				var data = {
-					'name': x.member_name, 
-					'data': duration
-				}
-				return data;
+				return [x.member_name, duration];
 			});
 			console.log(series1);
 
@@ -152,9 +148,10 @@
 					// text: 'Source: WorldClimate.com'
 				},
 				xAxis: {
-					categories: series1.map(x => x.name),
-					max: 4,
-					crosshair: true
+					type: 'category',
+					labels: {
+						rotation: -45
+					}
 				},
 				yAxis: {
 					min: 0,
@@ -162,21 +159,32 @@
 						text: 'Rata - rata waktu baca (Jam)'
 					}
 				},
+				legend: {
+					enabled: false
+				},
 				tooltip: {
 					headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-					pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-					'<td style="padding:0"><b>{point.y:.0f} Siswa</b></td></tr>',
+					pointFormat: '<tr><td style="color:#333333;padding:0">{series.name} : </td>' +
+					'<td style="padding:0"><b>{point.y:.1f} Jam</b></td></tr>',
 					//footerFormat: '</table>',
 					shared: true,
 					useHTML: true
 				},
 				plotOptions: {
-					column: {
-						pointPadding: 0.2,
-						borderWidth: 0
+					series: {
+						borderWidth: 0,
+						dataLabels: {
+							enabled: true,
+                			format: '{point.y:.1f} Jam'
+						}
 					}
 				},
-				series: series1
+				series: [{
+					name: 'Rata - rata',
+					colors: [ '#9b20d9', '#9215ac', '#861ec9', '#7a17e6', '#7010f9', '#691af3'],
+					colorByPoint: true,
+					data: series1
+				}]
 			});
 
 
