@@ -287,15 +287,35 @@ class Transaction_model extends CI_Model {
 	 * @return array|null
 	 */
 	public function get_avg_read_member(int $limit = 5): ?array {
-		$query = "SELECT AVG(a.summary::interval) as avg_duration, a.member_id, b.member_name 
-				  FROM (SELECT SUM(m.end_time - m.start_time) as summary, m.start_time::date as start_date, m.member_id 
-				  		FROM read_log m 
-						GROUP BY m.start_time::date, m.member_id) a
+		$query = "SELECT AVG(a.end_time - a.start_time) AS avg_duration, b.member_name 
+				  FROM read_log a
 				  JOIN members b ON a.member_id=b.id
-				  GROUP BY a.member_id, b.member_name
+				  GROUP BY b.member_name
 				  ORDER BY avg_duration DESC
 				  LIMIT {$limit}";
 
+		$res = $this->db->query($query);
+		return $res->result_array();
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @return array|null
+	 */
+	public function get_avg_person_by_day(): ?array {
+		$query = "SELECT AVG(m.member_by_date) AS avg_calc, EXTRACT(dow from m.tanggal::DATE) AS minggu
+					FROM (
+						SELECT COUNT(a.member_id) AS member_by_date, l.tanggal 
+						FROM (
+							SELECT k.date AS tanggal 
+							FROM GENERATE_SERIES((CURRENT_DATE - INTERVAL '3 MONTHS')::date, CURRENT_DATE, '1 day') k
+						) l
+						LEFT JOIN read_log a ON a.start_time::DATE=l.tanggal
+						GROUP BY l.tanggal
+						ORDER BY l.tanggal DESC
+					) m
+					GROUP BY minggu";
 		$res = $this->db->query($query);
 		return $res->result_array();
 	}

@@ -132,4 +132,15 @@ class Dashboard extends Admin_Controller {
 
 		echo json_encode(['data' => $data], JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
 	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @return void
+	 */
+	public function get_average_read_dow(): void {
+		$data = $this->transaction_model->get_avg_person_by_day();
+
+		echo json_encode(['data' => $data], JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
+	}
 }

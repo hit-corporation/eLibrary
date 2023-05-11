@@ -116,8 +116,19 @@
 		// get avg per person
 		const getAveragePerson = async () => {
 			try {
-				
 				const f = await fetch(BASE_URL + 'admin/dashboard/get_average_read_member');
+				const j = await f.json();
+
+				return j.data;
+
+			} catch (error) {
+				
+			}
+		}
+		// get avg per PERSON per day
+		const getAverageDow = async () => {
+			try {
+				const f = await fetch(BASE_URL + 'admin/dashboard/get_average_read_dow');
 				const j = await f.json();
 
 				return j.data;
@@ -134,7 +145,8 @@
 				var duration = parseFloat(hours[0] + '.' + hours[1]);
 				return [x.member_name, duration];
 			});
-			console.log(series1);
+			
+			
 
 			Highcharts.chart('avg-person', {
 				chart: {
