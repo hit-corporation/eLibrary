@@ -121,4 +121,15 @@ class Dashboard extends Admin_Controller {
 
 		echo json_encode(['male' => $male, 'female' => $female], JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
 	}
+
+	/**
+	 * Get Average time reading by Members
+	 *
+	 * @return void
+	 */
+	public function get_average_read_member(): void {
+		$data = $this->transaction_model->get_avg_read_member();
+
+		echo json_encode(['data' => $data], JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
+	}
 }

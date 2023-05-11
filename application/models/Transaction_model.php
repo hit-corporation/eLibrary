@@ -284,9 +284,9 @@ class Transaction_model extends CI_Model {
 	/**
 	 * Count average member's time reading 
 	 *
-	 * @return array
+	 * @return array|null
 	 */
-	public function get_avg_read_member(int $limit = 5): array {
+	public function get_avg_read_member(int $limit = 5): ?array {
 		$query = "SELECT AVG(a.summary::interval) as avg_duration, a.member_id, b.member_name 
 				  FROM (SELECT SUM(m.end_time - m.start_time) as summary, m.start_time::date as start_date, m.member_id 
 				  		FROM read_log m 
@@ -297,6 +297,6 @@ class Transaction_model extends CI_Model {
 				  LIMIT {$limit}";
 
 		$res = $this->db->query($query);
-		$res->result_array();
+		return $res->result_array();
 	}
 }
