@@ -218,9 +218,18 @@
 
 			const hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
-			const series2 = [...await getAverageDow()].map(x => [hari[parseInt(x.minggu)], parseFloat(x.avg_calc)]);
+			let series2 = [...await getAverageDow()].map(x => [hari[parseInt(x.minggu)], parseFloat(x.avg_calc)]);
 
-			console.log(series2);
+			// series2.sort(sortFunction);
+
+			// function sortFunction(a, b) {
+			// 	if (a[0] === b[0]) {
+			// 		return 0;
+			// 	}
+			// 	else {
+			// 		return (a[0] < b[0]) ? -1 : 1;
+			// 	}
+			// }
 
 			Highcharts.chart('avg-person-daily', {
 				chart: {
