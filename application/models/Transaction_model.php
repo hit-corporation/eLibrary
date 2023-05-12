@@ -315,7 +315,8 @@ class Transaction_model extends CI_Model {
 						GROUP BY l.tanggal
 						ORDER BY l.tanggal DESC
 					) m
-					GROUP BY minggu";
+					GROUP BY minggu
+					ORDER BY minggu";
 		$res = $this->db->query($query);
 		return $res->result_array();
 	}
