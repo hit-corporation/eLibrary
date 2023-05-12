@@ -96,17 +96,52 @@ class Report_model extends CI_Model {
 		return $results->num_rows();
     }
 
-	public function testQuery() {
+	/**
+	 * read log report
+	 *
+	 * @param array|null $filter
+	 * @param integer|null $limit
+	 * @param integer|null $offset
+	 * @return void
+	 */
+	public function get_read_report(?array $filter = NULL, ?int $limit=NULL, ?int $offset=NULL): Generator {
+		$query = $this->queryString();
+		// buat where nya
 
-		$query = "SELECT r.id, r.trans_code, r.member_name, r.book_code, r.book_title, r.loan_date, r.return_date, r.actual_return, 
-						 r.late_days, r.fines_amount, r.fines_period, r.fines_total, r.fines_payment, r.notes
-					FROM reports r ORDER BY updated_at DESC";
-		$query = $this->db->query($query)->result_array();
+		// abis where baru limit 
+		if(!empty($limit) && !is_null($offset))
+			$query .= " LIMIT {$limit} OFFSET {$offset}";
+		// results
+		$results = $this->db->query($query)->result_array();
 
-		foreach($query as $q => $v) 
-		{
-			yield $q => $v;
-		}
+		foreach($results as $k => $v)
+			yield $k => $v;
+	}
+
+	/**
+	 * Count read log with filter
+	 *
+	 * @param array|null $filter
+	 * @return integer
+	 */
+	public function get_read_count(?array $filter = NULL): int {
+		$query = $this->queryString();
+
+		$res = $this->db->query();
+		return $res->num_rows();
+	}
+
+	/**
+	 * Query For read log
+	 *
+	 * @return string
+	 */
+	private function queryString(): string 
+	{
+		$query = "SELECT a.member_id, a.book_id, a.trans_code,  a.start_time::date as tanggal, b.member_name, c.title
+						 a.start_time::time, a.end_time::time, a.end_time::time - a.start_time::time as duration 
+				  FROM read_log a, members b, books c
+				  WHERE a.member_id=b.id AND a.book_id=c.id";
 	}
 
 }
