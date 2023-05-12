@@ -16,7 +16,7 @@
 <div class="container-fluid vh-75">
     <nav class="btn-group btn-group-sm">
         <a class="btn btn-sm btn-purple" href="<?=base_url('admin/setting/loan')?>"><i class="fas fa-calendar-times"></i> Peminjaman</a>
-        <a class="btn btn-sm btn-purple" href="<?=base_url('admin/fines')?>"><i class="fas fa-coins"></i> Denda</a>
+        <a hidden class="btn btn-sm btn-purple" href="<?=base_url('admin/fines')?>"><i class="fas fa-coins"></i> Denda</a>
     </nav>
     <?=$this->section('setting_pages')?>
 </div>
