@@ -93,7 +93,7 @@
 			<div class="col-6 mb-3 mt-2">
 				<div class="container border rounded-lg shadow mx-0">
 					<figure class="highcharts-figure">
-						<div id="book-borrow-barchart"></div>
+						<div id="avg-person-daily"></div>
 					</figure>
 				</div>
 			</div>
@@ -138,6 +138,7 @@
 			}
 		}
 
+		// chart
 		(async () => {
 
 			const series1 = [...await getAveragePerson()].map(x => {
@@ -146,7 +147,11 @@
 				return [x.member_name, duration];
 			});
 			
-			
+			const hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+
+			// const series2 = [...await getAverageDow()].map(x => [hari[parseInt(x.minggu)], parseFloat(x.avg_calc)]);
+
+			// console.log(series2);
 
 			Highcharts.chart('avg-person', {
 				chart: {
@@ -201,6 +206,75 @@
 
 
 		})();
+
+		// chart 2
+		(async () => {
+
+			// const series2 = [...await getAveragePerson()].map(x => {
+			// 	var hours = x.avg_duration.split(':');
+			// 	var duration = parseFloat(hours[0] + '.' + hours[1]);
+			// 	return [x.member_name, duration];
+			// });
+
+			const hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+
+			const series2 = [...await getAverageDow()].map(x => [hari[parseInt(x.minggu)], parseFloat(x.avg_calc)]);
+
+			console.log(series2);
+
+			Highcharts.chart('avg-person-daily', {
+				chart: {
+					type: 'column'
+				},
+				colors: ['#34c38f', '#f46a6a', '#d4526e', '#13d8aa', '#A5978B', '#2b908f', '#f9a3a4', '#90ee7e', '#f48024', '#69d2e7'],
+				title: {
+					text: 'Jumlah Rata - rata siswa membaca harian'
+				},
+				subtitle: {
+					// text: 'Source: WorldClimate.com'
+				},
+				xAxis: {
+					type: 'category',
+					labels: {
+						rotation: -45
+					}
+				},
+				yAxis: {
+					min: 0,
+					title: {
+						text: 'Jumlah Rata - rata siswa membaca harian'
+					}
+				},
+				legend: {
+					enabled: false
+				},
+				tooltip: {
+					headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+					pointFormat: '<tr><td style="color:#333333;padding:0">{series.name} : </td>' +
+					'<td style="padding:0"><b>{point.y:.1f} Siswa</b></td></tr>',
+					//footerFormat: '</table>',
+					shared: true,
+					useHTML: true
+				},
+				plotOptions: {
+					series: {
+						borderWidth: 0,
+						dataLabels: {
+							enabled: true,
+							format: '{point.y:.1f} Siswa'
+						}
+					}
+				},
+				series: [{
+					name: 'Rata - rata',
+					colors: [ '#9b20d9', '#9215ac', '#861ec9', '#7a17e6', '#7010f9', '#691af3'],
+					colorByPoint: true,
+					data: series2
+				}]
+			});
+
+
+			})();
 	
 	</script>
 
