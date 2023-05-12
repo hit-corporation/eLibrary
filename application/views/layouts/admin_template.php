@@ -161,7 +161,7 @@
             </li>
 
 			<!-- Nav Item - Peminjaman buku harian -->
-			<li class="nav-item <?=($CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'order' && $CI->uri->segment(3) == 'daily_order') ? 'active bg-dark-2' : '' ?>">
+			<li class="nav-item <?=($CI->uri->segment(1) == 'admin' && $CI->uri->segment(2) == 'order' && $CI->uri->segment(3) == 'daily_order') ? 'active bg-dark-2' : '' ?> d-none">
                 <a class="nav-link" href="<?=base_url('admin/order/daily_order')?>">
                     <i class="fa fa-clipboard-list" aria-hidden="true"></i>
                     <span>Peminjaman Buku Harian</span></a>
