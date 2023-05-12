@@ -210,26 +210,9 @@
 		// chart 2
 		(async () => {
 
-			// const series2 = [...await getAveragePerson()].map(x => {
-			// 	var hours = x.avg_duration.split(':');
-			// 	var duration = parseFloat(hours[0] + '.' + hours[1]);
-			// 	return [x.member_name, duration];
-			// });
-
 			const hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
-			let series2 = [...await getAverageDow()].map(x => [hari[parseInt(x.minggu)], parseFloat(x.avg_calc)]);
-
-			// series2.sort(sortFunction);
-
-			// function sortFunction(a, b) {
-			// 	if (a[0] === b[0]) {
-			// 		return 0;
-			// 	}
-			// 	else {
-			// 		return (a[0] < b[0]) ? -1 : 1;
-			// 	}
-			// }
+			const series2 = [...await getAverageDow()].map(x => [hari[parseInt(x.minggu)], parseFloat(x.avg_calc)]);
 
 			Highcharts.chart('avg-person-daily', {
 				chart: {
@@ -276,7 +259,7 @@
 				},
 				series: [{
 					name: 'Rata - rata',
-					colors: [ '#9b20d9', '#9215ac', '#861ec9', '#7a17e6', '#7010f9', '#691af3'],
+					colors: [ '#f46a6a', '#f1b44c', '#34c38f', '#e83e8c', '#556ee6', '#80DCFF'],
 					colorByPoint: true,
 					data: series2
 				}]

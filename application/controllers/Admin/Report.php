@@ -235,6 +235,25 @@ class Report extends Admin_Controller
 		}
 	}
 
+	/**
+	 * Lists of read log
+	 *
+	 * @return void
+	 */
+	public function readlog_report(): void {
+		$limit  = $this->input->get('length');
+		$offset = $this->input->get('start');
+        $filter = $this->input->get('columns');
+
+		$data = $this->report_model->get_read_report($filter, $offset, $limit);
+
+		$dataTable = [
+            'draw'            => $this->input->get('draw') ?? NULL,
+            'data'            => $data,
+            'recordsTotal'    => $this->db->count_all_results('read_log'),
+            'recordsFiltered' => $this->report_model->get_read_count($filter)
+        ];
+	}
 	
 }
 
