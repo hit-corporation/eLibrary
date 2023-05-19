@@ -8668,9 +8668,13 @@ label {
 @media (max-width: 480px){
 	.movie-items .movie-item {
 		width: 150px;
-		margin-right: -200px;
+		/* margin-right: -200px; */
 	}
 	div.slide-it.slick-slide {
 		width: 175px !important;
+	}
+
+	.movie-items .slick-multiItem .slick-dots, .movie-items .slick-multiItem2 .slick-dots{
+		display: none !important;
 	}
 }
