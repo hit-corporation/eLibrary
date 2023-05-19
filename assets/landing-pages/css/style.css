@@ -7278,8 +7278,21 @@ p.ceb-single {
   margin-right: 30px;
 }
 @media (max-width: 991px) {
+  .sliderv2 .movie-item .title-in{
+    width: 400px;
+    float: left;
+    position: absolute;
+  }
+
+  .sliderv2 .movie-item .title-in h1 a {
+    font-size: 30px;
+    line-height: 30px;
+  }
+
   .sliderv2 .movie-item .mv-img-2 {
-    display: none;
+    /* display: none; */
+    width: 200px;
+    float: right;
   }
 }
 .sliderv2 .slick-dots {
@@ -7289,15 +7302,69 @@ p.ceb-single {
   .sliderv2 {
     padding-top: 100px;
   }
+
+	.slider.sliderv2 .container {
+		margin: 20px;
+		width: 400px;
+	}
+
   .sliderv2 .slider-single-item {
-    max-width: 300px;
+    max-width: 500px;
     padding-top: 0;
+    margin-left: 10px;
+    margin-right: 10px;
   }
   .sliderv2 .slider-single-item .movie-item .title-in {
     margin-left: 10px;
     margin-bottom: 15px;
   }
+
+  .sliderv2 .movie-item .title-in {
+    width: 200px;
+    float: left;
+    position: absolute;
+  }
+
+	.sliderv2 .movie-item .title-in h1 a {
+		font-size: 12px;
+		line-height: 12px;
+	}
+
+	.sliderv2 .movie-item .title-in h1 a span {
+		font-size: 24px;
+	}
+
+  .sliderv2 .movie-item .title-in .btn-detail {
+    margin-top: 20px;
+    font-size: 10px;
+    height: 20px;
+    padding-top: 3px;
+    width: 110px
+  }
+
+	.sliderv2 .movie-item .title-in .hvrbtn {
+		margin-top: 20px;
+    font-size: 10px;
+    height: 20px;
+    padding-top: 3px;
+    width: 110px
+	}
+
+  .sliderv2 .slick-list {
+    height: 200px;
+  }
+
+	.sliderv2 .movie-item .mv-img-2 a img{
+		width: 100px;
+    float: right;
+	}
+
+	.movie-items.full-width, .trailers.full-width, .latestnew.full-width, .full-width {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
 }
+
 .slider-single-item .slick-next {
   right: -100px;
 }
