@@ -8677,4 +8677,20 @@ label {
 	.movie-items .slick-multiItem .slick-dots, .movie-items .slick-multiItem2 .slick-dots{
 		display: none !important;
 	}
+
+	.blog-item-style-3 .blog-it-infor {
+		padding: 10px;
+	}
+
+	.blog-item-style-3 img {
+		width: 100px;
+	}
+
+	.blog-it-infor h3 a {
+		font-size: 14px;
+	}
+
+	.blog-it-infor p {
+		font-size: 12px;
+	}
 }
