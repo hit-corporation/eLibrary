@@ -8664,3 +8664,13 @@ label {
   -o-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
+
+@media (max-width: 480px){
+	.movie-items .movie-item {
+		width: 150px;
+		margin-right: -200px;
+	}
+	div.slide-it.slick-slide {
+		width: 175px !important;
+	}
+}
