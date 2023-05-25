@@ -8501,6 +8501,22 @@ footer.full-width-ft .ft-copyright {
 	transition: all 0.3s ease;
 
 }
+
+.btn-white {
+  color: #000;
+  background-color: #fff;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 20px;
+	font-size: 14px;
+	text-transform: uppercase;
+	-webkit-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+
+}
+
+
 .btn-secondary:hover {
   color: #fff;
   background-color: #717384;
@@ -8754,3 +8770,24 @@ label {
 	color: white;
 }
 
+.btn-bottom-group-mobile-view .fa-plus {
+	font-size: 20px; 
+	display: block;
+	margin-bottom: 5px;
+}
+
+.btn-bottom-group-mobile-view .fa-list {
+	font-size: 20px; 
+	display: block;
+	margin-bottom: 5px;
+}
+
+.btn-bottom-group-mobile-view .fa-play {
+	font-size: 15px;
+	color: #000;
+}
+
+.btn-bottom-group-mobile-view .text-dark{
+	color: #000;
+	margin-left: 10px;
+}

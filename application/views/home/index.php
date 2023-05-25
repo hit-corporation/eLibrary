@@ -31,15 +31,15 @@
 										<div class="btn-bottom-group-mobile-view">
 											<div class="row">
 												<a href="<?=base_url('/book/add_to_favorite?id=').$newBook['id']?>" style="text-align: center;">
-													<i class="fa fa-plus" style="font-size: 20px; display: block"></i>
+													<i class="fa fa-plus"></i>
 													<span>Favorite Saya</span>
 												</a>
-												<a href="<?=base_url('/book/read_book?id=').$newBook['id']?>" class="btn btn-lg btn-secondary">
+												<a href="<?=base_url('/book/read_book?id=').$newBook['id']?>" class="btn btn-lg btn-white">
 													<i class="fa fa-play" style="font-size: 15px;"> </i>
-													<span> Baca</span>
+													<span class="text-dark"> Baca</span>
 												</a>
 												<a href="<?=base_url('/user/book_list')?>" style="text-align: center;">
-													<i class="fa fa-list" style="font-size: 20px; display: block"></i>
+													<i class="fa fa-list"></i>
 													<span>Peminjaman Saya</span>
 												</a>
 											</div>
