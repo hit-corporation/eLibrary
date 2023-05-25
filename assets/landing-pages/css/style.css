@@ -121,6 +121,10 @@
     width: 970px;
   }
 
+	.btn-bottom-group-mobile-view{
+		display: none;
+	}
+
 	.image-hero-mobile-view {
 		display: none;
 	}
@@ -8733,3 +8737,20 @@ label {
 	top: 0px;
 	background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 90%); 
 }
+
+.btn-bottom-group-mobile-view{
+	width: 170%;
+	margin-top: 230px;
+}
+
+.btn-bottom-group-mobile-view .row{
+	text-align: justify;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-bottom-group-mobile-view span{
+	color: white;
+}
+

@@ -21,12 +21,29 @@
 											<span class="yell"><a href="#">Culture</a></span>
 											<!-- <span class="orange"><a href="#">advanture</a></span> -->
 										</div>
-										<h1><a href="#"><?=$newBook['title']?> <span><?=$newBook['publish_year']?></span></a></h1>
+										<h1><a href="#"><?=substr($newBook['title'], 0,50)?> <span> <?=$newBook['publish_year']?></span></a></h1>
 										
 										<div class="btn-transform transform-vertical">
 											<div><a href="<?=base_url('/home/book_detail?id=').$newBook['id']?>" class="item item-1 redbtn btn-detail">more detail</a></div>
 											<div><a href= "<?=base_url('/home/book_detail?id=').$newBook['id']?>" class="item item-2 redbtn hvrbtn">more detail</a></div>
-										</div>		
+										</div>
+										
+										<div class="btn-bottom-group-mobile-view">
+											<div class="row">
+												<a href="<?=base_url('/book/add_to_favorite?id=').$newBook['id']?>" style="text-align: center;">
+													<i class="fa fa-plus" style="font-size: 20px; display: block"></i>
+													<span>Favorite Saya</span>
+												</a>
+												<a href="<?=base_url('/book/read_book?id=').$newBook['id']?>" class="btn btn-lg btn-secondary">
+													<i class="fa fa-play" style="font-size: 15px;"> </i>
+													<span> Baca</span>
+												</a>
+												<a href="<?=base_url('/user/book_list')?>" style="text-align: center;">
+													<i class="fa fa-list" style="font-size: 20px; display: block"></i>
+													<span>Peminjaman Saya</span>
+												</a>
+											</div>
+										</div>
 									</div>
 								</div>
 								<div class="col-md-4 col-sm-12 col-xs-12">
