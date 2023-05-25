@@ -10,7 +10,10 @@
 							<div class="row">
 								<div class="col-md-8 col-sm-12 col-xs-12">
 									<div class="image-hero-mobile-view" style="position: absolute;">
-										<a href="#"><img src="<?=base_url('assets/img/books/').$newBook['cover_img']?>" alt=""></a>
+										<a href="#">
+											<img src="<?=base_url('assets/img/books/').$newBook['cover_img']?>" alt="">
+											<div class="darken-image"></div>
+										</a>
 									</div>
 									<div class="title-in">
 										<div class="cate">
