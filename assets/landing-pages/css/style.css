@@ -5746,7 +5746,7 @@ ul {
     height: 500px;
   }
   .user-hero .hero-ct {
-    padding-top: 100px;
+    padding-top: 0px;
     text-align: center;
   }
   .user-hero .hero-ct h1 {
@@ -5757,6 +5757,29 @@ ul {
     text-align: center;
   }
 }
+
+@media (max-width: 480px) {
+  .user-hero {
+    height: 150px;
+  }
+
+	.user-hero .hero-ct {
+    padding-top: 125px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .user-hero {
+    height: 150px;
+  }
+
+	.user-hero .hero-ct {
+    padding-top: 175px;
+    text-align: center;
+  }
+}
+
 .user-hero:before {
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -7341,7 +7364,7 @@ p.ceb-single {
   .sliderv2 .slider-single-item .movie-item .title-in {
     margin-left: 30px;
     margin-bottom: 15px;
-		filter: drop-shadow(0 0 0.3rem black);
+		/* filter: drop-shadow(0 0 0.1rem black); */
   }
 
   .sliderv2 .movie-item .title-in {
@@ -7387,6 +7410,26 @@ p.ceb-single {
 	.movie-items.full-width, .trailers.full-width, .latestnew.full-width, .full-width {
 		padding-top: 20px;
 		padding-bottom: 20px;
+	}
+
+	.movie-items.full-width .tab-links li, 
+	.movie-items.full-width .tab-links-2 li{
+		display: none;
+	}
+
+	.movie-items.full-width .title-hd h2, 
+	.movie-items.full-width .title-hd a {
+		font-size: 12px;
+	}
+
+	.latestnew.full-width .title-hd h2,
+	.latestnew.full-width .title-hd a{
+		font-size: 12px;
+	}
+
+	.movie-items.full-width .tabs {
+		margin-bottom: 0px;
+		overflow: hidden;
 	}
 }
 
@@ -8714,6 +8757,11 @@ label {
 		width: 150px;
 		/* margin-right: -200px; */
 	}
+
+	.movie-items .movie-item .mv-img img{
+		border-radius: 10px;
+	}
+
 	div.slide-it.slick-slide {
 		width: 175px !important;
 	}
@@ -8776,15 +8824,27 @@ label {
 	margin-bottom: 5px;
 }
 
+.btn-bottom-group-mobile-view .fa-plus:hover {
+	color: #fff;
+}
+
 .btn-bottom-group-mobile-view .fa-list {
 	font-size: 20px; 
 	display: block;
 	margin-bottom: 5px;
 }
 
+.btn-bottom-group-mobile-view .fa-list:hover {
+	color: #fff;
+}
+
 .btn-bottom-group-mobile-view .fa-play {
 	font-size: 15px;
 	color: #000;
+}
+
+.btn-bottom-group-mobile-view .fa-play:hover {
+	color: gray;
 }
 
 .btn-bottom-group-mobile-view .text-dark{
