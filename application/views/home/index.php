@@ -194,7 +194,7 @@
 
 <script>
 	// alert message login
-	<?php if(!empty($_SESSION['error']) && !empty($_SESSION['error']['success']) && $_SESSION['error']['success'] == false) : ?>
+	<?php if(!empty($_SESSION['error'])) : ?>
 		Swal.fire({
 			icon: 'error',
 			title: '<h4 class="text-danger"></h4>',
@@ -210,6 +210,6 @@
 			html: '<span class="text-success"><?=$_SESSION['success']['message']?></span>',
 			timer: 5000
 		});
-	<?php endif; ?>
+	<?php endif; ?>	
 	
 </script>
