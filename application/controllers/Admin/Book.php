@@ -143,7 +143,7 @@ class Book extends Admin_Controller
 			
 			$img_conf = [
 				'upload_path'	=> 'assets/img/books/',
-				'allowed_types'	=> ['jpg','jpeg','png'],
+				'allowed_types'	=> ['jpg','jpeg','png', 'svg'],
 				'file_name'		=> str_replace(' ', '_', $title).'_'.$category.'.jpg',
 				'file_ext_tolower'	=> true,
 				'encrypt_name'	=> true
@@ -247,7 +247,6 @@ class Book extends Admin_Controller
 			redirect($_SERVER['HTTP_REFERER']);
 		}
 
-		$filepdf = NULL;
 		if(intval($file_1['size']) > 0)
 		{
 			$ext = pathinfo(basename($file_1['name']), PATHINFO_EXTENSION);
@@ -269,6 +268,7 @@ class Book extends Admin_Controller
 			}
 
 			$filepdf = $this->upload->data('file_name');
+			$data['file_1'] = $filepdf;
 		}
 
 		// Image
@@ -276,7 +276,7 @@ class Book extends Admin_Controller
 			
 			$img_conf = [
 				'upload_path'	=> 'assets/img/books/',
-				'allowed_types'	=> ['jpg','png','jpeg'],
+				'allowed_types'	=> ['jpg','png','jpeg', 'svg'],
 				'file_name'		=> str_replace(' ', '_', $title).'_'.$category.'.jpg',
 				'file_ext_tolower'	=> true,
 				'encrypt_name'	=> true
@@ -318,7 +318,7 @@ class Book extends Admin_Controller
 			'publisher_id'	=> $publisher,
 			'description'	=> $description,
 			'cover_img'		=> $filename,
-			'file_1'		=> $filepdf,
+			//'file_1'		=> $filepdf,
 			'qty'			=> $qty
 		];
 
