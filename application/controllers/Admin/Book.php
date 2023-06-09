@@ -276,7 +276,7 @@ class Book extends Admin_Controller
 			
 			$img_conf = [
 				'upload_path'	=> 'assets/img/books/',
-				'allowed_types'	=> 'jpg|png|jpeg',
+				'allowed_types'	=> ['jpg','png','jpeg'],
 				'file_name'		=> str_replace(' ', '_', $title).'_'.$category.'.jpg',
 				'file_ext_tolower'	=> true,
 				'encrypt_name'	=> true
@@ -292,12 +292,12 @@ class Book extends Admin_Controller
 
 			$filename = $this->upload->data('file_name');
 
-			$config['image_library'] = 'gd2';
-			$config['source_image'] = $this->upload->data('full_path');
-			$config['create_thumb'] = TRUE;
-			$config['maintain_ratio'] = TRUE;
-			$config['width']         = 128 - 50;
-			$config['height']       = 165 - 50;
+			$config['image_library'] 	= 'gd2';
+			$config['source_image'] 	= $this->upload->data('full_path');
+			$config['create_thumb'] 	= TRUE;
+			$config['maintain_ratio'] 	= TRUE;
+			$config['width']         	= 128 - 50;
+			$config['height']       	= 165 - 50;
 
 			$this->load->library('image_lib', $config);
 			if(!$this->image_lib->resize())
