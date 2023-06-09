@@ -151,8 +151,6 @@ class Book extends Admin_Controller
 
 			$this->upload->initialize($img_conf);
 
-			file_put_contents('assets/files/text.txt', $this->upload->file_type);
-
 			if(!$this->upload->do_upload('book-image'))
 			{
 				$resp = ['success' => false, 'message' => $this->upload->display_errors(), 'old' => $_POST];
@@ -284,7 +282,7 @@ class Book extends Admin_Controller
 				'encrypt_name'	=> true
 			];
 
-			$this->load->library('upload', $img_conf);
+			$this->upload->initialize($img_conf);
 			if(!$this->upload->do_upload('book-image'))
 			{
 				$resp = ['success' => false, 'message' => $this->upload->display_errors(), 'old' => $_POST];

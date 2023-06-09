@@ -178,7 +178,7 @@ class Book extends MY_Controller
 		$book = $this->book_model->get_one($id);
 
 		// check if book is available
-		if ($book['qty'] <= 0) {
+		if ((empty($book['file_1']) && empty($book['file_2']) && empty($book['file_3']))  || $book['qty'] <= 0) {
 			$data['heading'] = 'PERINGATAN';
 			$data['message'] = '<p>Buku yang anda pilih tidak tersedia. Silahkan pilih buku lain !!!' .
 				'<br/> <a href="' . $_SERVER['HTTP_REFERER'] . '">Kembali</a></p>';
