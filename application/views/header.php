@@ -17,8 +17,12 @@
 	<meta name="format-detection" content="telephone-no">
 
 	<!-- CSS files -->
+	<link rel="stylesheet" href="<?=base_url()?>assets/landing-pages/css/semantic-ui.min.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/landing-pages/css/plugins.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/landing-pages/css/style.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" integrity="sha512-ZV9KawG2Legkwp3nAlxLIVFudTauWuBpC10uEafMHYL0Sarrz5A7G79kXh5+5+woxQ5HM559XX2UZjMJ36Wplg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.0/css/ionicons.min.css" integrity="sha512-JApjWRnfonFeGBY7t4yq8SWr1A6xVYEJgO/UMIYONxaR3C9GETKUg0LharbJncEzJF5Nmiv+Pr5QNulr81LjGQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 	<!-- JQUERY -->
 	<script src="<?=base_url()?>assets/js/jquery-3.5.1.min.js"></script>
