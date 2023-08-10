@@ -12,6 +12,30 @@ $(window).on('load', function() { // makes sure the whole site is loaded
 			vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
 		} 
 	}
+
+	// JALANKAN AJAX UNTUK MENDAPATKAN DATA BOOK MUST RETURN
+	$.ajax({
+		type: "GET",
+		url: BASE_URL + 'book/check_must_return',
+		dataType: "JSON",
+		success: function (response) {
+			if(response.total_data == 0){
+				$('#warning-icon').css('display', 'none');
+				return;
+			}
+			
+			// FILL TOTAL DATA TO BADGE
+			$('#warning-icon')[0].parentElement.children[1].innerText = response.total_data;
+			
+			// KETIKA WARNING ICON DI HOVER
+			$('#warning-icon').on( "mouseenter", function(){
+				$(this).append(`<div class="floating-notif-warning">${response.total_data} Buah buku harus segera di kembalikan</div>`);
+			} ).on( "mouseleave", function(){
+				$( ".floating-notif-warning" ).remove();
+			});
+		}
+	});
+
 })
 $(function(){
 	'use strict';
