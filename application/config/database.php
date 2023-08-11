@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'pgsql:host=localhost;port=65432;dbname=perpustakaan',
+	'hostname' => 'pgsql:host=localhost;port=5432;dbname=perpustakaan-digital',
 	'username' => 'postgres',
-	'password' => 'postgroow',
-	'database' => '',
+	'password' => 'postgres',
+	'database' => 'perpustakaan-digital',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

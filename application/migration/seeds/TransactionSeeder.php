@@ -28,7 +28,7 @@ class TransactionSeeder extends AbstractSeed
 
         for($i=0;$i<100;$i++)
         {
-            $date_start = $faker->dateTimeBetween('-3 hours', 'now')->format('Y-m-d H:i:s');
+            $date_start = $faker->dateTimeBetween('-5 hours', 'now')->format('Y-m-d H:i:s');
 
             $data[] = [
                 'trans_code' => bin2hex(random_bytes(6)),
@@ -36,7 +36,7 @@ class TransactionSeeder extends AbstractSeed
                 'book_id'       => $faker->numberBetween(1, 13),
                 'trans_timestamp' => $date_start,
                 'start_time' => $date_start,
-                'end_time' => $faker->dateTimeBetween('now', '+ 3 hours')->format('Y-m-d H:i:s'),
+                'end_time' => $faker->dateTimeBetween('now', '+ 5 hours')->format('Y-m-d H:i:s'),
                 'config_idle' => '15 minutes',
                 'config_borrow_limit' => 2
             ];

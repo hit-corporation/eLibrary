@@ -24,7 +24,7 @@ class ReadlogSeeder extends AbstractSeed
                 'trans_code'    => strtoupper(bin2hex(random_bytes(10))),
                 'member_id'     => $faker->numberBetween(1, 50),
                 'book_id'       => $faker->numberBetween(1, 13),
-                'start_time'    => $faker->dateTimeBetween('-3 months', 'now')->format('Y-m-d H:i:s'),
+                'start_time'    => $faker->dateTimeBetween('-3 hours', 'now')->format('Y-m-d H:i:s'),
                 'end_time'      => $faker->dateTimeBetween('now', '+3 hours')->format('Y-m-d H:i:s'),
                 'last_page'     => $faker->numberBetween(1, 30)
             ];

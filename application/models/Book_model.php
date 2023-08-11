@@ -255,4 +255,18 @@ class Book_model extends CI_Model {
 		$this->db->where('book_id', $book_id);
 		return $this->db->get('transactions')->num_rows();
 	}
+
+	/**
+	 * GET get_rate_by_user_id
+	 * 
+	 * @param int $user_id
+	 * @param int $book_id
+	 * 
+	 * @return int
+	 */
+	public function get_rate_by_user_id($user_id, $book_id): int{
+		$this->db->where('book_id', $book_id);
+		$this->db->where('member_id', $user_id);
+		return $this->db->get('rate_books')->num_rows();
+	}
 }

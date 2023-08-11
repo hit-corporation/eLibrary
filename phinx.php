@@ -23,10 +23,10 @@ return
             'development' => [
                 'adapter' => 'pgsql',
                 'host' => 'localhost',
-                'name' => 'perpustakaan',
+                'name' => 'perpustakaan-digital',
                 'user' => 'postgres',
-                'pass' => 'postgroow',
-                'port' => '65432',
+                'pass' => 'postgres',
+                'port' => '5432',
                 'charset' => 'utf8',
             ],
             'testing' => [
