@@ -114,6 +114,26 @@
 	</div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="modal-give-rate" tabindex="-1" aria-labelledby="giveRateModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		
+		<div class="modal-content">
+			<!-- <div class="modal-header"> -->
+				<h5 class="modal-title" id="giveRateModalLabel">Beri Ulasan & Rating Buku</h5>
+			<!-- </div> -->
+			<div class="modal-body-give-rate">
+				
+			</div>
+			<!-- <div class="modal-footer"> -->
+				<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal(this)">Close</button>
+				<button type="submit" class="btn btn-primary" name="simpan-ulasan">Save changes</button>
+			<!-- </div> -->
+		</div>
+		
+	</div>
+</div>
+
 <script>
 	// create swall alert
 	<?php if(!empty($_SESSION['success'])) : ?>
@@ -239,6 +259,7 @@
 									<div class="mv-item-infor">
 										<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title} <span>(${value.publish_year})</span></a></h6>
 										<a class="btn btn-xs btn-primary" href="<?=base_url('book/return_book?id=')?>${value.id}">Kembalikan Buku</a>
+										<span class="btn btn-xs btn-success" onclick="ulas(this)" data="${value.id}">Ulas</span>
 										<p class="describe">${desc}</p>
 										<p class="run-time">Pengarang: ${value.author}.</p>
 										<p>Kategori: <a href="#">${value.category_name}</a></p>
@@ -263,6 +284,7 @@
 								<div class="mv-item-infor">
 									<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title}</a></h6>
 									<a class="btn btn-xs btn-primary" href="<?=base_url('book/return_book?id=')?>${value.id}">Kembalikan Buku</a>
+									<span class="btn btn-xs btn-success mt-1 d-inline-block" onclick="ulas(this)" data="${value.id}">Ulas</span>
 									<!-- <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p> -->
 								</div>`);
 						});
@@ -318,5 +340,88 @@
 		});
 
 	});
+
+	// BUTTON ULAS DI KLIK
+	function ulas(e){
+		let image = e.parentElement.parentElement.children[0].attributes.src.value;
+		let title = e.parentElement.children[0].children[0].innerText;
+		let bookId = e.attributes.data.value;
+		// console.log(title); return;
+
+		$('.modal-body-give-rate').html('');
+
+		$('#modal-give-rate').modal('show');
+		$('#modal-give-rate').css('margin-top', '100px');
+		$('#modal-give-rate').modal({backdrop: 'static', keyboard: true});
+
+		$('.modal-body-give-rate').append(`
+			<table class="table-auto" cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						<img class="mt-3 mb-3" src="${image}" width="150px">
+					</td>
+
+					<td>
+						<p>${title}</p>
+
+						<div id="rating">
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+
+						<textarea placeholder="Yuk, ceritain kepuasanmu tentang kualitas buku ini." class="mt-1"></textarea>
+						
+					</td>
+				</tr>
+			</table>
+		`);
+
+		// KETIKA RATING STAR DI KLIK
+		document.querySelector('#rating').addEventListener('click', function (e) {
+			let action = 'add';
+			for (const span of this.children) {
+				span.classList[action]('active');
+				if (span === e.target) action = 'remove';
+			}
+		});
+
+		// TOMBOL SIMPAN ULASAN DI KLIK
+		document.getElementsByName('simpan-ulasan')[0].addEventListener('click', function(){
+			// HITUNG JUMLAH BINTANG
+			let rating = document.querySelector('#rating');
+			var counterRate = 0;
+			for(const rate of rating.children){
+				if(rate.className == 'active') counterRate++;
+			}
+
+			let notes = document.querySelector('.modal-body-give-rate textarea').value;
+
+			// JALANKAN AJAX POST KE book/save_rating
+			$.ajax({
+				type: "POST",
+				url: BASE_URL + "book/save_rating",
+				data: {
+					bookId: bookId,
+					rating: counterRate,
+					notes: notes
+				},
+				dataType: "JSON",
+				success: function (response) {
+					if(response.success == true){
+						
+					}
+				}
+			});
+		});
+
+	}
+
+	// CLOSE MODAL GIVE RATING
+	function closeModal(e){
+		$('#modal-give-rate').modal('hide');
+	}
 
 </script>
