@@ -5,7 +5,7 @@ class User extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model(['member_model', 'transaction_model']);
+		$this->load->model(['member_model', 'transaction_model', 'book_model']);
 
 		// form validation library
 		$this->load->library('form_validation');
@@ -114,6 +114,12 @@ class User extends MY_Controller {
 		$data['books'] = $this->transaction_model->get_users_loan($userId, $filter);
 		$data['total_records'] = $this->transaction_model->get_users_loan_count($userId);
 		$data['total_pages'] = ceil($data['total_records'] / $filter['limit']);
+
+		$i = 0;
+		foreach ($data['books'] as $key => $val) {
+			$rate = $this->book_model->get_rate_by_user_id($userId, $val['id']);
+			$data['books'][$i]['has_rate'] = ($rate != 0 ) ? true : false;
+		}
 
 		header('Content-Type: application/json');
 		echo json_encode($data);
