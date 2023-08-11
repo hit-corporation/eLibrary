@@ -56,6 +56,9 @@ class Home_model extends CI_Model {
 		elseif ($sortBy == 'title-desc')
 			$this->db->order_by('title', 'DESC');
 
+		if ($sortBy == null)
+			$this->db->order_by('created_at', 'DESC');
+
 		$this->db->limit($limit, $offset);
 		$query = $this->db->get('books');
 		return $query->result_array();
