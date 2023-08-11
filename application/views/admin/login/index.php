@@ -74,7 +74,7 @@
                                         <a class="small" href="<?=base_url('login/forgot_password')?>">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="<?=base_url('login/register')?>">Create an Account!</a>
+                                        <!-- <a class="small" href="<?//=base_url('login/register')?>">Create an Account!</a> -->
                                     </div>
                                 </div>
                             </div>
