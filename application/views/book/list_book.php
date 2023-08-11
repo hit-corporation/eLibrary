@@ -215,6 +215,7 @@
 				
 									<div class="mv-item-infor">
 										<h6><a href="${base_url}/home/book_detail?id=${value.id}">${value.title} <span>(${value.publish_year})</span></a></h6>
+										${(value.rating != null) ? `<p><i class="fs-25 fa fa-star text-yellow"></i><span>` + value.rating + `</span> /5 | Terbaca ` + value.total_read + `</p>` : `<p>Terbaca ` + value.total_read + `</p>`}
 										<p class="describe">${desc}</p>
 										<p class="run-time">Pengarang: ${value.author}.</p>
 										<p>Kategori: <a href="#">${value.category_name}</a></p>
@@ -239,6 +240,7 @@
 								<div class="mv-item-infor">
 									<h6><a href="${base_url}/home/book_detail?id=${value.id}">${value.title}</a></h6>
 									<!-- <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p> -->
+									${(value.rating != null) ? `<p><i class="fs-25 fa fa-star text-yellow"></i><span>` + value.rating + `</span> /5 | Terbaca ` + value.total_read + `</p>` : `<p>Terbaca ` + value.total_read + `</p>`}
 								</div>
 								<div class="hvr-add-to-favorite">
 									<a  href="<?=base_url('book/add_to_favorite?id=')?>${value.id}"> Favorite <i class="ion-heart"></i> </a>
