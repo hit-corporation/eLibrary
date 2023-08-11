@@ -216,4 +216,43 @@ class Book_model extends CI_Model {
 		return $this->db->get()->row_array();
 	}
 
+	/**
+	 * get list book must return 2 days before due date
+	 */
+	public function check_must_return($member_id = null): ?array {
+		$this->db->select('*');
+		$this->db->from('transactions');
+		$this->db->where('member_id', $member_id);
+		$this->db->where('actual_return is null', null, false);
+		$this->db->where('date(end_time) >=', date('Y-m-d', time()));
+		$this->db->where('date(end_time) <=', date('Y-m-d',strtotime(' + 2 day', time())));
+
+		return $this->db->get()->result_array();
+	}
+
+	/**
+	 * GET Averate Rating Book
+	 * 
+	 * @param int $book_id
+	 * 
+	 * @return array
+	 */
+	public function rating($book_id): array{
+		$this->db->select('ROUND(AVG(rating), 1) as rating');
+		$this->db->where('book_id', $book_id);
+		return $this->db->get('rate_books')->row_array();
+	}
+
+	/**
+	 * GET Total read by book_id
+	 * 
+	 * @param int $book_id
+	 * 
+	 * @return array
+	 */
+	public function total_read($book_id): int{
+		$this->db->select('*');
+		$this->db->where('book_id', $book_id);
+		return $this->db->get('transactions')->num_rows();
+	}
 }
