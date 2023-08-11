@@ -9,6 +9,7 @@
             <li class="<?=(isset($active) && $active == 'profile') ? 'active' : '' ?>"><a href="<?=base_url('user')?>#user-profile">Profile</a></li>
             <li class="<?=(isset($active) && $active == 'user_favorite') ? 'active' : '' ?>"><a href="<?=base_url('user/user_favorite_list')?>">Favorite Books</a></li>
             <li class="<?=(isset($active) && $active == 'user_loan') ? 'active' : '' ?>"><a href="<?=base_url('user/book_list')?>">Books On Loan</a></li>
+            <li class="<?=(isset($active) && $active == 'user_loan_history') ? 'active' : '' ?>"><a href="<?=base_url('user/loan_history')?>">Loan History</a></li>
         </ul>
     </div>
     <div class="user-fav">
