@@ -10,6 +10,7 @@ class Book extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model(['home_model', 'publisher_model', 'kategori_model', 'book_model', 'transaction_model']);
+		$this->load->library('session');
 	}
 
 	public function index()
@@ -41,6 +42,13 @@ class Book extends MY_Controller
 		$data['total_records'] = $this->home_model->get_total_books($view_group, $filter);
 		$data['total_pages'] = ceil($data['total_records'] / $limit);
 
+		$i = 0;
+		foreach ($data['books'] as $key => $val) {
+			$data['books'][$i]['rating'] = $this->book_model->rating($val['id'])['rating'];
+			$data['books'][$i]['total_read'] = $this->book_model->total_read($val['id']);
+			$i++;
+		}
+
 		// create json header	
 		header('Content-Type: application/json');
 		echo json_encode($data);
@@ -66,13 +74,15 @@ class Book extends MY_Controller
 		$transcode = strtoupper(bin2hex(random_bytes(8)));
 		// set cookie for reading time limit and idle time limit
 		$cookie_option = [
-			'expires'	=> strtotime('+' . $this->settings['limit_idle_value'] . ' ' . $this->settings['limit_idle_unit']),
-			'path'		=> '/book',
+			'expires'	=> strtotime('+' . $this->settings['limit_idle_value'] . ' ' . $this->settings['limit_idle_unit']) + 86400,
+			'path'		=> '/',
+			'secure'	=> true,
 			'samesite'	=> 'Lax'
 		];
 
 		if (!isset($_COOKIE['read_book']))
 			setcookie('read_book', base64_encode(json_encode(['key' => $transcode, 'expired' => date('Y-m-d H:i:s', $cookie_option['expires'])])), $cookie_option);
+			// setcookie('read_book', base64_encode(json_encode(['key' => $transcode, 'expired' => date('Y-m-d H:i:s', $cookie_option['expires'])])), $cookie_option['expires']);
 
 		// get latest transaction book
 		$latest_transaction = $this->transaction_model->get_latest_transaction($id, $_SESSION['user']['id']);
@@ -366,4 +376,55 @@ class Book extends MY_Controller
 		// return to book detail
 		redirect('home/book_detail?id=' . $id);
 	}
+
+	/**
+	 * Check Book Must Return 2 Day Before Due Date
+	 */
+
+	 public function check_must_return(){
+		$member_id = isset($this->session->user['id']) ? $this->session->user['id'] : null;
+		
+		$data = $this->book_model->check_must_return($member_id);
+
+		$response = [
+			'success' 	=> true,
+			'total_data'=> count($data),
+			'data' 		=> $data
+		];
+
+		header('Content-Type: application/json; charset=utf-8');
+		echo json_encode($response);
+	 }
+
+	 /**
+	  * POST Book Rate
+	  *
+	  */
+	public function save_rating(){
+		$post = $this->input->post();
+		$data = [
+			'member_id' => $this->session->user['id'],
+			'book_id' => $post['bookId'],
+			'rating' => $post['rating'],
+			'notes' => $post['notes']
+		];
+
+		$res = $this->db->insert('rate_books', $data);
+
+		if($res){
+			$response = [
+				'success' => true,
+				'message' => 'Data berhasil di simpan!'
+			];
+		}else{
+			$response = [
+				'success' => false,
+				'message' => 'Data gagal di simpan!'
+			];
+		}
+
+		header('Content-Type: application/json; charset=utf-8');
+		echo json_encode($response);
+	}
+	  
 }
