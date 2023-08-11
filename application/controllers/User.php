@@ -89,6 +89,14 @@ class User extends MY_Controller {
 		$this->load->view('footer');
 	}
 
+	public function loan_history(){
+		$data['user'] 	= $this->member_model->get_user($_SESSION['user']['id']);
+
+		$this->load->view('header');
+		$this->load->view('home/user_loan_history', $data);
+		$this->load->view('footer');
+	}
+
 	/**
 	 * Get all loaned books by users
 	 *
@@ -105,6 +113,30 @@ class User extends MY_Controller {
 
 		$data['books'] = $this->transaction_model->get_users_loan($userId, $filter);
 		$data['total_records'] = $this->transaction_model->get_users_loan_count($userId);
+		$data['total_pages'] = ceil($data['total_records'] / $filter['limit']);
+
+		header('Content-Type: application/json');
+		echo json_encode($data);
+	}
+
+	/**
+	 * GET history book loan by users
+	 * 
+	 * @return void
+	 */
+	public function get_user_loan_history(): void{
+		// $filter = [];
+		// $data = $this->transaction_model->get_user_loan_history($_SESSION['user']['id'], $filter);
+		// var_dump($data);die;
+
+		$userId 			= $_SESSION['user']['id'];
+		$filter['sort_by'] 	= $this->input->get('sort_by');
+		$filter['limit'] 	= $this->input->get('limit');
+		$page 				= $this->input->get('page');
+		$filter['offset'] 	= ($page - 1) * $filter['limit'];
+
+		$data['books'] = $this->transaction_model->get_users_loan_history($userId, $filter);
+		$data['total_records'] = $this->transaction_model->get_users_loan_history_count($userId);
 		$data['total_pages'] = ceil($data['total_records'] / $filter['limit']);
 
 		header('Content-Type: application/json');
