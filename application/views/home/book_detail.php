@@ -24,7 +24,7 @@
 				<div class="movie-img sticky-sb">
 					<img src="<?php
 						if (isset($book['cover_img'])){
-							if(file_exists($_SERVER['DOCUMENT_ROOT'].'/assets/img/books/'.$book['cover_img'])){
+							if(file_exists(FCPATH.'/assets/img/books/'.$book['cover_img'])){
 								echo base_url('assets/img/books/').$book['cover_img'];
 							}else{
 								echo base_url('assets/img/books/default.png');
