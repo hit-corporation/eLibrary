@@ -320,4 +320,52 @@ class Transaction_model extends CI_Model {
 		$res = $this->db->query($query);
 		return $res->result_array();
 	}
+
+	/**
+	 * GET User Load / Borrow book history
+	 * 
+	 * @return array
+	 */
+	public function get_users_loan_history(int $member_id, $filter): array{
+		$this->db->select('books.id, books.book_code, books.title, books.cover_img, books.author, books.isbn, books.publish_year, books.description, publisher_name, category_name');
+		$this->db->from('transactions');
+		$this->db->join('books', 'transactions.book_id = books.id');
+		$this->db->join('publishers', 'books.publisher_id = publishers.id');
+		$this->db->join('categories', 'books.category_id = categories.id');
+		$this->db->where('member_id', $member_id);
+		$this->db->group_by('books.id, publisher_name, category_name');
+
+		// sort by
+		if ($filter['sort_by'] == 'title-asc')
+			$this->db->order_by('books.title', 'ASC');
+
+		if ($filter['sort_by'] == 'title-desc')
+			$this->db->order_by('books.title', 'DESC');
+		
+		// filter limit offset
+		$this->db->limit($filter['limit'], $filter['offset']);
+
+		$res = $this->db->get();
+
+		if($res->num_rows() == 0) {
+			return [];
+		}
+
+		return $res->result_array();
+	}
+
+	/** 
+	 * Query for get get_users_loan_history_count
+	 * 
+	 * @param int $member_id
+	 * @return int
+	 */
+
+	 public function get_users_loan_history_count(int $member_id): int {
+		$this->db->from('transactions');
+		$this->db->where('member_id', $member_id);
+
+		$res = $this->db->get();
+		return $res->num_rows();
+	}
 }
