@@ -92,10 +92,18 @@
 											<div class="title-in">
 												<h6><a href="<?=base_url('home/book_detail?id=').$newBook['id']?>"><?=$newBook['title']?></a></h6>
 												<!-- <p><i class="ion-android-star"></i><span>4</span> /5</p> -->
+
+												<?php if($newBook['rating'] != null) { ?>
+													<p><i class="fs-25 fa fa-star text-yellow"></i><span><?=$newBook['rating']?></span> /5 | Terbaca <?=$newBook['total_read']?></p>
+												<?php } else { ?>
+													<p>Terbaca <?=$newBook['total_read']?></p>
+												<?php } ?>
+
 											</div>
 											<div class="hvr-add-to-favorite">
 												<a  href="<?=base_url('book/add_to_favorite?id=').$newBook['id']?>"> Favorite <i class="ion-heart"></i> </a>
 											</div>
+
 										</div>
 									</div>
 								
@@ -136,6 +144,13 @@
 											<div class="title-in">
 												<h6><a href="<?=base_url('/home/book_detail?id=').$popularBook['id']?>"><?=$popularBook['title']?></a></h6>
 												<!-- <p><i class="ion-android-star"></i><span>4</span> /5</p> -->
+
+												<?php if($popularBook['rating'] != null) { ?>
+													<p><i class="fs-25 fa fa-star text-yellow"></i><span><?=$popularBook['rating']?></span> /5 | Terbaca <?=$popularBook['total_read']?></p>
+												<?php } else { ?>
+													<p>Terbaca <?=$popularBook['total_read']?></p>
+												<?php } ?>
+
 											</div>
 											<div class="hvr-add-to-favorite">
 												<a  href="<?=base_url('book/add_to_favorite?id=').$popularBook['id']?>"> Favorite <i class="ion-heart"></i> </a>
