@@ -25,7 +25,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.0/css/ionicons.min.css" integrity="sha512-JApjWRnfonFeGBY7t4yq8SWr1A6xVYEJgO/UMIYONxaR3C9GETKUg0LharbJncEzJF5Nmiv+Pr5QNulr81LjGQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 	<!-- JQUERY -->
-	<!-- <script src="<? //=base_url()?>assets/js/jquery-3.5.1.min.js"></script> -->
+	<script src="<?=base_url()?>assets/js/jquery-3.5.1.min.js"></script>
 	<script>
 		BASE_URL = document.querySelector('base').href;
 	</script>
@@ -191,7 +191,15 @@
 							</ul>
 						</li>                
 						<?php if(isset($_SESSION['user']['user_name'])): ?>
-						<li><a href="<?=base_url('user')?>">Profile</a></li>
+							<a href="<?=base_url('user/book_list')?>">
+								<div class="button-notif">
+									<i id="warning-icon" class="fa fa-bell"></i>
+									<span class="button-badge"></span>
+								</div>
+							</a>
+						<li>
+							<a href="<?=base_url('user')?>">Profile </a>
+						</li>
 						<li><a href="<?=base_url('user/logout')?>">Logout</a></li>
 						<?php else: ?>
 						<li class="loginLink"><a href="#">Login</a></li>
