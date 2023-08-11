@@ -12,6 +12,20 @@ class Home extends MY_Controller {
 		$data['newBooks'] 		= $this->home_model->get_new_books();
 		$data['popularBooks'] 	= $this->home_model->get_popular_books();
 		$data['recomendBooks'] 	= $this->home_model->get_recomend_books();
+
+		$i = 0;
+		foreach ($data['newBooks'] as $key => $val) {
+			$data['newBooks'][$i]['rating'] = $this->book_model->rating($val['id'])['rating'];
+			$data['newBooks'][$i]['total_read'] = $this->book_model->total_read($val['id']);
+			$i++;
+		}
+
+		$i = 0;
+		foreach ($data['popularBooks'] as $key => $val) {
+			$data['popularBooks'][$i]['rating'] = $this->book_model->rating($val['id'])['rating'];
+			$data['popularBooks'][$i]['total_read'] = $this->book_model->total_read($val['id']);
+			$i++;
+		}
 		
 		$this->load->view('header');
 		$this->load->view('home/index', $data);
