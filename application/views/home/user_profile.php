@@ -59,7 +59,7 @@
 						<h4>01. Profile details</h4>
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>Nama Lengkap</label>
+								<label>Full Name</label>
 								<input type="hidden" name="id" value="<?=$user['id']?>">
 								<input type="text" placeholder="Masukan Nama Lengkap" name="member_name" value="<?=$user['member_name']?>">
 								<!-- error -->
@@ -86,7 +86,7 @@
 								<?php endif; ?>
 							</div>
 							<div class="col-md-6 form-it">
-								<label>Nomor Kartu</label>
+								<label>Card Number</label>
 								<input type="text" placeholder="Masukan Nomor Kartu" name="card_number" value="<?=$user['card_number']?>">
 								<!-- error -->
 								<?php if(!empty($_SESSION['error'])) : ?>
@@ -96,7 +96,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>Kelas</label>
+								<label>Class</label>
 								<select name="kelas">
 								  <option value="">-- Pilih --</option>
 								  <?php for($i=1; $i<=12; $i++): ?>
@@ -115,11 +115,11 @@
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>Telp</label>
+								<label>Phone</label>
 								<input type="text" placeholder="Masukan Nomor Telepon" name="phone" value="<?=$user['phone']?>">
 							</div>
 							<div class="col-md-6 form-it">
-								<label>Alamat</label>
+								<label>Address</label>
 								<textarea type="text" rows="3" placeholder="Masukan Alamat" name="address"><?=$user['address']?></textarea>
 							</div>
 						</div>
