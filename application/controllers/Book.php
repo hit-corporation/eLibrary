@@ -426,5 +426,27 @@ class Book extends MY_Controller
 		header('Content-Type: application/json; charset=utf-8');
 		echo json_encode($response);
 	}
-	  
+
+	/**
+	 * GET Rating BY book_id
+	 * 
+	 */
+	public function rating_by_book_id(){
+		$post = $this->input->post();
+		$page 			= isset($post['page']) ? $post['page'] : 1;
+		$limit 			= isset($post['limit']) ? $post['limit'] : 5;
+		$sort_by 		= isset($post['sort_by']) ? $post['sort_by'] : 'id';
+
+		$page = ($page - 1) * $limit;
+
+		$data['data'] 	= $this->book_model->get_rating_by_book_id($limit, $page, $sort_by, $post['book_id']);
+		$data['total_records'] = $this->book_model->get_total_rating_by_book_id($post['book_id']);
+		$data['total_pages'] = ceil($data['total_records'] / $limit);
+		$data['page'] = $page;
+		$data['success'] = true;
+
+		// create json header	
+		header('Content-Type: application/json');
+		echo json_encode($data);
+	}
 }
