@@ -123,112 +123,50 @@
 						            	</div>
 						            </div>
 						        </div>
-						        <div id="reviews" class="tab review">
-						           <div class="row">
-						            	<div class="rv-hd">
+
+						        <div id="reviews" class="tab review active">
+						           <div class="row" style="margin-left:0px">
+						            	<!-- <div class="rv-hd">
 						            		<div class="div">
 							            	</div>
 											
 							            	<a href="#" class="redbtn">Write Review</a>
-						            	</div>
+						            	</div> -->
 						            	<div class="topbar-filter">
-											<p>Found <span>56 reviews</span> in total</p>
+											<p>Found <span id="total-review"></span> in total</p>
 											<label>Filter by:</label>
-											<select>
-												<option value="popularity">Popularity Descending</option>
-												<option value="popularity">Popularity Ascending</option>
-												<option value="rating">Rating Descending</option>
-												<option value="rating">Rating Ascending</option>
-												<option value="date">Release date Descending</option>
-												<option value="date">Release date Ascending</option>
+											<select id="order-by-rating">
+												<option value="create-at-desc">Created Desc</option>
+												<option value="create-at-asc">Created Asc</option>
+												<option value="rating-asc">Rating Asc</option>
+												<option value="rating-desc">Rating Desc</option>
 											</select>
 										</div>
-										<div class="mv-user-review-item">
-											<div class="user-infor">
-												<img src="<?=base_url()?>assets/landing-pages/images/uploads/userava1.jpg" alt="">
-												<div>
-													<h3>Best Marvel movie in my opinion</h3>
-													<div class="no-star">
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star last"></i>
-													</div>
-													<p class="time">
-														17 December 2016 by <a href="#"> hawaiipierson</a>
-													</p>
-												</div>
-											</div>
-											<p>This is by far one of my favorite movies from the MCU. The introduction of new Characters both good and bad also makes the movie more exciting. giving the characters more of a back story can also help audiences relate more to different characters better, and it connects a bond between the audience and actors or characters. Having seen the movie three times does not bother me here as it is as thrilling and exciting every time I am watching it. In other words, the movie is by far better than previous movies (and I do love everything Marvel), the plotting is splendid (they really do out do themselves in each film, there are no problems watching it more than once.</p>
-										</div>
-										<div class="mv-user-review-item">
-											<div class="user-infor">
-												<img src="<?=base_url()?>assets/landing-pages/images/uploads/userava2.jpg" alt="">
-												<div>
-													<h3>Just about as good as the first one!</h3>
-													<div class="no-star">
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-													</div>
-													<p class="time">
-														17 December 2016 by <a href="#"> hawaiipierson</a>
-													</p>
-												</div>
-											</div>
-											<p>Avengers Age of Ultron is an excellent sequel and a worthy MCU title! There are a lot of good and one thing that feels off in my opinion. </p>
 
-											<p>THE GOOD:</p>
+										<div class="user-review-content"></div>
 
-											<p>First off the action in this movie is amazing, to buildings crumbling, to evil blue eyed robots tearing stuff up, this movie has the action perfectly handled. And with that action comes visuals. The visuals are really good, even though you can see clearly where they are through the movie, but that doesn't detract from the experience. While all the CGI glory is taking place, there are lovable characters that are in the mix. First off the original characters, Iron Man, Captain America, Thor, Hulk, Black Widow, and Hawkeye, are just as brilliant as they are always. And Joss Whedon fixed my main problem in the first Avengers by putting in more Hawkeye and him more fleshed out. Then there is the new Avengers, Quicksilver, Scarletwich, and Vision, they are pretty cool in my opinion. Vision in particular is pretty amazing in all his scenes.</p>
-
-											<p>THE BAD:</p>
-
-											<p>The beginning of the film it's fine until towards the second act and there is when it starts to feel a little rushed. Also I do feel like there are scenes missing but there was talk of an extended version on Blu-Ray so that's cool.</p>
-										</div>
-										
-										
-										<div class="mv-user-review-item last">
-											<div class="user-infor">
-												<img src="<?=base_url()?>assets/landing-pages/images/uploads/userava5.jpg" alt="">
-												<div>
-													<h3>Impressive Special Effects and Cast</h3>
-													<div class="no-star">
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star last"></i>
-														<i class="ion-android-star last"></i>
-													</div>
-													<p class="time">
-														26 March 2017 by <a href="#"> johnnylee</a>
-													</p>
-												</div>
-											</div>
-											<p>The Avengers raid a Hydra base in Sokovia commanded by Strucker and they retrieve Loki's scepter. They also discover that Strucker had been conducting experiments with the orphan twins Pietro Maximoff (Aaron Taylor-Johnson), who has super speed, and Wanda Maximoff (Elizabeth Olsen), who can control minds and project energy. Tony Stark (Robert Downey Jr.) discovers an Artificial Intelligence in the scepter and convinces Bruce Banner (Mark Ruffalo) to secretly help him to transfer the A.I. to his Ultron defense system. However, the Ultron understands that is necessary to annihilate mankind to save the planet, attacks the Avengers and flees to Sokovia with the scepter. He builds an armature for self-protection and robots for his army and teams up with the twins. The Avengers go to Clinton Barton's house to recover, but out of the blue, Nick Fury (Samuel L. Jackson) arrives and convinces them to fight against Ultron. Will they succeed? </p>
-
-											<p>"Avengers: Age of Ultron" is an entertaining adventure with impressive special effects and cast. The storyline might be better, since most of the characters do not show any chemistry. However, it is worthwhile watching this film since the amazing special effects are not possible to be described in words. Why Pietro has to die is also not possible to be explained. My vote is eight.</p>
-										</div>
 										<div class="topbar-filter">
 											<label>Reviews per page:</label>
-											<select>
-												<option value="range">5 Reviews</option>
-												<option value="saab">10 Reviews</option>
+											<select class="view-per-page">
+												<option value="5">	5 Reviews</option>
+												<option value="10">10 Reviews</option>
+												<option value="25">25 Reviews</option>
+												<option value="50">50 Reviews</option>
 											</select>
 											<div class="pagination2">
-												<span>Page 1 of 6:</span>
-												<a class="active" href="#">1</a>
-												<a href="#">2</a>
-												<a href="#">3</a>
-												<a href="#">4</a>
-												<a href="#">5</a>
-												<a href="#">6</a>
-												<a href="#"><i class="ion-arrow-right-b"></i></a>
+												<span>Page 0 of 0:</span>
+												<div class="page-number" style="display: inline;">
+													<!-- <a class="active" href="#">1</a> -->
+													<!-- <a href="#">2</a>
+													<a href="#">3</a>
+													<a href="#">4</a>
+													<a href="#">5</a>
+													<a href="#">6</a> -->
+													<!-- <a href="#"><i class="ion-arrow-right-b"></i></a> -->
+												</div>
 											</div>
 										</div>
+
 						            </div>
 						        </div>
 						        
@@ -254,5 +192,105 @@
 		
 		<?php unset($_SESSION['success']); ?>
 		<?php endif; ?>
+
+		
+		rating_by_book_id(1, 5, 'create-at-desc', bookId);
 	});
+
+	var bookId = <?=$book['id']?>;
+
+	function rating_by_book_id(page, limit = '', sort_by = '', book_id){
+		$.ajax({
+			type: "POST",
+			url: BASE_URL + "book/rating_by_book_id",
+			data: {
+				sort_by: sort_by,
+				page: page,
+				limit: limit,
+				book_id, book_id
+			},
+			dataType: "JSON",
+			success: function (response) {
+				if(response.success == true){
+					// DELETE CONTENT USER REVIEW, PAGE NUMBER
+					$('.user-review-content').html('');
+					$('.page-number').html('');
+
+					$.each(response.data, function (i, val) {
+						// LOOPING CONTENT REVIEW
+						$('.user-review-content').append(`
+							<div class="mv-user-review-item">
+								<div class="user-infor">
+									<img src="${(val.profile_img != undefined) ? val.profile_img : BASE_URL+`assets/landing-pages/images/uploads/user-img.png` }" alt="">
+									<div>
+										<h3>${val.member_name}</h3>
+										<div class="no-star">
+											${star(val.rating)}
+										</div>
+										<p class="time">
+											${val.created_at}
+										</p>
+									</div>
+								</div>
+								<p>${val.notes}</p>
+							</div>
+						`);
+					});
+
+					// UBAH ANGKA TOTAL REVIEW
+					$('#total-review').text(response.total_records);
+						// UBAH SPAN PAGINATION12
+						$('.pagination2')[0].firstElementChild.innerHTML = `Page ${page} of ${response.total_pages}`;
+
+					// LOOPING page-number
+					for(let i = 0; i < response.total_pages; i++){
+						$('.page-number').append(`
+							<a onclick="pageNumberClick(this)">${i+1}</a>
+						`);
+					}
+					// append terakhir di class page number untuk menampilan arrow right
+					$('.page-number').append(`
+						<a href="#"><i class="ion-arrow-right-b"></i></a>
+					`);
+
+				}
+			}
+		});
+	}
+
+	// CREATE STAR RATING ICON
+	function star(rating){
+		let ratingStar = '';
+		for(let i = 1; i <= 5; i++){
+			if(i <= rating){
+				ratingStar += `<i class="ion-android-star"></i>`;
+			}else{
+				ratingStar += `<i class="ion-android-star last"></i>`;
+			}
+		}
+
+		return ratingStar
+	}
+
+	// PAGE NUMBER DI KLIK
+	function pageNumberClick(e){
+		let viewPerPage = $('.view-per-page').val();
+		rating_by_book_id(e.text, viewPerPage, 'create-at-desc', bookId);
+	}
+
+	// VIEW PER PAGE DI UBAH
+	$('.view-per-page').on('change', function(e){
+		let viewPerPage = e.currentTarget.value;
+		let orderByRating = $('#order-by-rating').val();
+		rating_by_book_id(1, viewPerPage, orderByRating, bookId);
+	});
+
+	// ORDER BY RATING
+	$('#order-by-rating').on('change', function(e){
+		let orderBy = e.currentTarget.value;
+		let viewPerPage = $('.view-per-page').val();
+
+		rating_by_book_id(1, viewPerPage, orderBy, bookId);
+	});
+
 </script>
