@@ -217,7 +217,7 @@
 					limit: limit,
 				},
 				success: function (response) {
-					console.log(response);
+					// console.log(response);
 					
 					var defaultImg = "<?=base_url('assets/img/books/default.png')?>";
 
