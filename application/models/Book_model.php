@@ -269,4 +269,41 @@ class Book_model extends CI_Model {
 		$this->db->where('member_id', $user_id);
 		return $this->db->get('rate_books')->num_rows();
 	}
+
+	/**
+	 * GET rating by book_id
+	 * 
+	 * @param int book_id
+	 */
+	public function get_rating_by_book_id($limit = null, $offset = null, $sort_by = null, $book_id = null): array{
+		if ($sort_by == 'create-at-asc')
+			$this->db->order_by('created_at', 'ASC');
+
+		if ($sort_by == 'create-at-desc')
+			$this->db->order_by('created_at', 'DESC');
+
+		if ($sort_by == 'rating-asc')
+			$this->db->order_by('rating', 'ASC');
+		
+		if ($sort_by == 'rating-desc')
+			$this->db->order_by('rating', 'DESC');
+
+		$this->db->select('rb.*, m.member_name');
+		$this->db->where('rb.book_id', $book_id);
+		$this->db->limit($limit, $offset);
+		$this->db->join('members m', 'm.id = rb.member_id');
+		$query = $this->db->get('rate_books rb');
+		return $query->result_array();
+	}
+
+	/**
+	 * GET Total Rating per books
+	 * 
+	 * @param int book_id
+	 */
+	public function get_total_rating_by_book_id($book_id = null): int{	
+		$this->db->where('book_id', $book_id);
+		$query = $this->db->get('rate_books');
+		return $query->num_rows();
+	}
 }
