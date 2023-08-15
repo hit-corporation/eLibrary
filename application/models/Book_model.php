@@ -288,7 +288,7 @@ class Book_model extends CI_Model {
 		if ($sort_by == 'rating-desc')
 			$this->db->order_by('rating', 'DESC');
 
-		$this->db->select('rb.*, m.member_name');
+		$this->db->select('rb.*, m.member_name, m.profile_img');
 		$this->db->where('rb.book_id', $book_id);
 		$this->db->limit($limit, $offset);
 		$this->db->join('members m', 'm.id = rb.member_id');
@@ -305,5 +305,45 @@ class Book_model extends CI_Model {
 		$this->db->where('book_id', $book_id);
 		$query = $this->db->get('rate_books');
 		return $query->num_rows();
+	}
+
+	/**
+	 * GET Total Rating per books
+	 * 
+	 * @param int member_id
+	 */
+	public function get_users_review_history($limit = null, $offset = null, $sort_by = null, $member_id = null): array{
+		if ($sort_by == 'create-at-asc')
+			$this->db->order_by('created_at', 'ASC');
+
+		if ($sort_by == 'create-at-desc')
+			$this->db->order_by('created_at', 'DESC');
+
+		if ($sort_by == 'rating-asc')
+			$this->db->order_by('rating', 'ASC');
+		
+		if ($sort_by == 'rating-desc')
+			$this->db->order_by('rating', 'DESC');
+
+		$this->db->select('rb.*, b.title, b.publish_year, b.cover_img');
+		$this->db->where('rb.member_id', $member_id);
+		$this->db->limit($limit, $offset);
+		$this->db->join('books b', 'b.id = rb.book_id');
+		$query = $this->db->get('rate_books rb');
+		return $query->result_array();
+	}
+
+	/**
+	 * GET count user review history
+	 * 
+	 * @param int $member_id
+	 * @return int
+	 */
+	public function get_users_review_history_count(int $member_id): int{
+		$this->db->from('rate_books rb');
+		$this->db->where('rb.member_id', $member_id);
+
+		$res = $this->db->get();
+		return $res->num_rows();
 	}
 }
