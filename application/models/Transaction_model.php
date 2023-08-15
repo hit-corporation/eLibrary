@@ -362,8 +362,10 @@ class Transaction_model extends CI_Model {
 	 */
 
 	 public function get_users_loan_history_count(int $member_id): int {
-		$this->db->from('transactions');
+		$this->db->select('t.book_id');
+		$this->db->from('transactions t');
 		$this->db->where('member_id', $member_id);
+		$this->db->group_by('book_id');
 
 		$res = $this->db->get();
 		return $res->num_rows();
