@@ -131,7 +131,8 @@
 			            <div class="row">
 			            	<div class="slick-multiItem2">
 
-								<?php foreach ($popularBooks as $key => $popularBook) : ?>
+								<?php usort($popularBooks, fn($a, $b) => $b['total_read'] <=> $a['total_read']); // sort desc total_read
+									foreach ($popularBooks as $key => $popularBook) : ?>
 
 									<div class="slide-it">
 										<div class="movie-item">
