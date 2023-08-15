@@ -126,7 +126,8 @@ class Home_model extends CI_Model {
 	}
 
 	public function get_favorite_books($limit = null, $page = null, $sort_by = null){
-		$user_id = $this->get_user_id()['id'];
+		// $user_id = $this->get_user_id()['id'];
+		$user_id = $_SESSION['user']['id'];
 
 		if($sort_by == 'title-asc')
 			$this->db->order_by('title', 'ASC');
@@ -147,7 +148,8 @@ class Home_model extends CI_Model {
 	}
 
 	public function get_total_favorite_books(){
-		$user_id = $this->get_user_id()['id'];
+		// $user_id = $this->get_user_id()['id'];
+		$user_id = $_SESSION['user']['id'];
 
 		$this->db->where('member_id', $user_id);
 		$query = $this->db->get('favorite_books');
