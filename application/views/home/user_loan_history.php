@@ -258,7 +258,7 @@
 				
 									<div class="mv-item-infor">
 										<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title} <span>(${value.publish_year})</span></a></h6>
-										<span class="btn btn-xs btn-success" onclick="ulas(this)" data="${value.id}">Ulas</span>
+										${(value.rating == 0 ) ? `<span class="btn btn-xs btn-success" onclick="ulas(this)" data="${value.id}">Ulas</span>` : ``}
 										<p class="describe mt-1">${desc}</p>
 										<p class="run-time">Pengarang: ${value.author}.</p>
 										<p>Kategori: <a href="#">${value.category_name}</a></p>
@@ -282,7 +282,8 @@
 								</div>
 								<div class="mv-item-infor">
 									<h6><a href="<?=base_url('/home/book_detail?id=')?>${value.id}">${value.title}</a></h6>
-									<a class="btn btn-xs btn-success" href="<?=base_url('book/rate?id=')?>${value.id}">Ulasan</a>
+									<!-- a class="btn btn-xs btn-success" href="<?=base_url('book/rate?id=')?>${value.id}">Ulasan</a -->
+									${(value.rating == 0 ) ? `<span class="btn btn-xs btn-success" onclick="ulas(this)" data="${value.id}">Ulas</span>` : ``}
 									<!-- <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p> -->
 								</div>`);
 						});
@@ -410,7 +411,7 @@
 				dataType: "JSON",
 				success: function (response) {
 					if(response.success == true){
-						
+						location.reload();
 					}
 				}
 			});
