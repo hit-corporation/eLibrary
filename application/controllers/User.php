@@ -142,6 +142,14 @@ class User extends MY_Controller {
 		$filter['offset'] 	= ($page - 1) * $filter['limit'];
 
 		$data['books'] = $this->transaction_model->get_users_loan_history($userId, $filter);
+
+		$i = 0;
+		foreach ($data['books'] as $key => $val) {
+			$rating = $this->book_model->get_rate_by_user_id($userId, $val['id']);
+			$data['books'][$i]['rating'] =  $rating;
+			$i++;
+		}
+
 		$data['total_records'] = $this->transaction_model->get_users_loan_history_count($userId);
 		$data['total_pages'] = ceil($data['total_records'] / $filter['limit']);
 
@@ -308,7 +316,8 @@ class User extends MY_Controller {
 
 	public function user_favorite_list(){
 		// get user data
-		$userId 				= $this->member_model->get_user_by_username($this->session->userdata('user')['user_name'])['id'];
+		// $userId 				= $this->member_model->get_user_by_username($this->session->userdata('user')['user_name'])['id'];
+		$userId 				= $_SESSION['user']['id'];
 		$data['user'] 			= $this->member_model->get_user($userId);
 		$data['favorite_books'] = $this->member_model->get_favorite_books($userId);
 
