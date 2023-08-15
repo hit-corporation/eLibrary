@@ -250,7 +250,7 @@ class User extends MY_Controller {
 
 			// upload images
 			$config['upload_path']          = './assets/landing-pages/images/avatar/';
-			$config['allowed_types']        = 'gif|jpg|png';
+			$config['allowed_types']        = 'gif|jpg|jpeg|png';
 			$config['max_size']             = 2048;
 			$config['encrypt_name']         = true;
 
@@ -328,4 +328,33 @@ class User extends MY_Controller {
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 
+	public function review_history(){
+		$data['user'] 	= $this->member_model->get_user($_SESSION['user']['id']);
+
+		$this->load->view('header');
+		$this->load->view('home/user_review_history', $data);
+		$this->load->view('footer');
+	}
+
+	/**
+	 * GET history book loan by users
+	 * 
+	 * @return void
+	 */
+	public function get_user_review_history(): void{
+		$post = $this->input->post();
+		$userId 			= $_SESSION['user']['id'];
+		$filter['sort_by'] 	= $post['sort_by'];
+		$filter['limit'] 	= $post['limit'];
+		$page 				= $post['page'];
+		$filter['offset'] 	= ($page - 1) * $filter['limit'];
+
+		$data['books'] = $this->book_model->get_users_review_history($filter['limit'], $filter['offset'], $filter['sort_by'], $userId);
+		$data['total_records'] = $this->book_model->get_users_review_history_count($userId);
+		$data['total_pages'] = ceil($data['total_records'] / $filter['limit']);
+		$data['success'] = true;
+
+		header('Content-Type: application/json');
+		echo json_encode($data);
+	}
 }
