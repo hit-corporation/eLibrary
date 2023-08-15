@@ -221,14 +221,14 @@
 						$('.user-review-content').append(`
 							<div class="mv-user-review-item">
 								<div class="user-infor">
-									<img src="${(val.profile_img != undefined) ? val.profile_img : BASE_URL+`assets/landing-pages/images/uploads/user-img.png` }" alt="">
+									<img src="${(val.profile_img != undefined) ? BASE_URL+`assets/landing-pages/images/avatar/`+val.profile_img : BASE_URL+`assets/landing-pages/images/uploads/user-img.png` }" alt="">
 									<div>
 										<h3>${val.member_name}</h3>
 										<div class="no-star">
 											${star(val.rating)}
 										</div>
 										<p class="time">
-											${val.created_at}
+											${formatDateTime(val.created_at,1)}
 										</p>
 									</div>
 								</div>
@@ -292,5 +292,68 @@
 
 		rating_by_book_id(1, viewPerPage, orderBy, bookId);
 	});
+	
+	// CREATE DATE FORMAT
+	function formatDateTime(sDate,FormatType) {
+		var lDate = new Date(sDate)
+
+		var month=new Array(12);
+		month[0]="Januari";
+		month[1]="Februari";
+		month[2]="Maret";
+		month[3]="April";
+		month[4]="Mey";
+		month[5]="Juni";
+		month[6]="Juli";
+		month[7]="Agustus";
+		month[8]="September";
+		month[9]="Oktober";
+		month[10]="November";
+		month[11]="Desember";
+
+		var weekday=new Array(7);
+		weekday[0]="Minggu";
+		weekday[1]="Senin";
+		weekday[2]="Selasa";
+		weekday[3]="Rabu";
+		weekday[4]="Kamis";
+		weekday[5]="Jumat";
+		weekday[6]="Sabtu";
+
+		var hh = lDate.getHours() < 10 ? '0' + 
+			lDate.getHours() : lDate.getHours();
+		var mi = lDate.getMinutes() < 10 ? '0' + 
+			lDate.getMinutes() : lDate.getMinutes();
+		var ss = lDate.getSeconds() < 10 ? '0' + 
+			lDate.getSeconds() : lDate.getSeconds();
+
+		var d = lDate.getDate();
+		var dd = d < 10 ? '0' + d : d;
+		var yyyy = lDate.getFullYear();
+		var mon = eval(lDate.getMonth()+1);
+		var mm = (mon<10?'0'+mon:mon);
+		var monthName=month[lDate.getMonth()];
+		var weekdayName=weekday[lDate.getDay()];
+
+		if(FormatType==1) {
+		return dd+' '+monthName+' '+yyyy+' '+hh+':'+mi;
+		} else if(FormatType==2) {
+		return weekdayName+', '+monthName+' '+ 
+				dd +', ' + yyyy;
+		} else if(FormatType==3) {
+		return mm+'/'+dd+'/'+yyyy; 
+		} else if(FormatType==4) {
+		var dd1 = lDate.getDate();    
+		return dd1+'-'+Left(monthName,3)+'-'+yyyy;    
+		} else if(FormatType==5) {
+			return mm+'/'+dd+'/'+yyyy+' '+hh+':'+mi+':'+ss;
+		} else if(FormatType == 6) {
+			return mon + '/' + d + '/' + yyyy + ' ' + 
+				hh + ':' + mi + ':' + ss;
+		} else if(FormatType == 7) {
+			return  dd + '-' + monthName.substring(0,3) + 
+				'-' + yyyy + ' ' + hh + ':' + mi + ':' + ss;
+		}
+	}
 
 </script>
