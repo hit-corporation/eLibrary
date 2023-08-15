@@ -332,7 +332,7 @@ class Transaction_model extends CI_Model {
 		$this->db->join('books', 'transactions.book_id = books.id');
 		$this->db->join('publishers', 'books.publisher_id = publishers.id');
 		$this->db->join('categories', 'books.category_id = categories.id');
-		$this->db->where('member_id', $member_id);
+		$this->db->where('transactions.member_id', $member_id);
 		$this->db->group_by('books.id, publisher_name, category_name');
 
 		// sort by
