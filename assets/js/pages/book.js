@@ -321,7 +321,7 @@ const getBooks = async () => {
 
             let row = table.row($(e.target).parents('tr')[0]).data();
             loading();
-            window.location.href = BASE_URL + 'book/erase/' + row.id;
+            window.location.href = BASE_URL + 'admin/book/erase/' + row.id;
         });
 	});
 
